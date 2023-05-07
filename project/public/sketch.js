@@ -153,7 +153,6 @@ function draw() {
   if (frameCount == 1) {
     pixelDensity(CURRENTPIXELDENS);
   }
-
   // background(color("#e8ecee"));
   background(color("#ffffff"));
 

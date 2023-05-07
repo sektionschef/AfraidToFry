@@ -1194,44 +1194,64 @@ class Grid2 {
             // console.log(colorList.length - 1);
             // console.log(colorSelect);
 
-            buffer.push();
-            buffer.noFill();
-            buffer.strokeWeight(strokeWeighty);
-            buffer.strokeCap(SQUARE);
+            if (1 == 0) {
+                buffer.push();
+                buffer.noFill();
+                buffer.strokeWeight(strokeWeighty);
+                buffer.strokeCap(SQUARE);
 
-            buffer.beginShape();
+                buffer.beginShape();
 
-            let oldAdder = center;
-            let newAdder = oldAdder;
-            let strokeColor = colorList[colorSelect]; // distortColorSuperNew(colorList[colorSelect], 10); //
-            buffer.vertex(oldAdder.x, oldAdder.y)
+                let oldAdder = center;
+                let newAdder = oldAdder;
+                let strokeColor = colorList[colorSelect]; // distortColorSuperNew(colorList[colorSelect], 10); //
+                buffer.vertex(oldAdder.x, oldAdder.y)
 
-            for (var i = 0; i < loopCount; i++) {
-                oldAdder = newAdder;
+                for (var i = 0; i < loopCount; i++) {
+                    oldAdder = newAdder;
 
-                if (data.noiseAngle) {
-                    angle = map(noiseValueEff, 0, 1, 0, 2 * PI) + getRandomFromInterval(-0.5, 0.5);
-                } else {
-                    angle = getRandomFromInterval(angleMin, angleMax);
-                }
-
-                // make spots not lines
-                if (data.revert) {
-                    if (i % 2 != 0) {
-                        angle = angle - PI;
+                    if (data.noiseAngle) {
+                        angle = map(noiseValueEff, 0, 1, 0, 2 * PI) + getRandomFromInterval(-0.5, 0.5);
+                    } else {
+                        angle = getRandomFromInterval(angleMin, angleMax);
                     }
+
+                    // make spots not lines
+                    if (data.revert) {
+                        if (i % 2 != 0) {
+                            angle = angle - PI;
+                        }
+                    }
+
+                    let v = p5.Vector.fromAngle(angle, vertexLength * getRandomFromInterval(0.9, 1.1));
+
+                    newAdder = p5.Vector.add(oldAdder, v);
+                    strokeColor = distortColorSuperNew(colorList[colorSelect], vertexColorDistort);
+                    buffer.stroke(strokeColor);
+                    buffer.vertex(newAdder.x, newAdder.y);
                 }
 
-                let v = p5.Vector.fromAngle(angle, vertexLength * getRandomFromInterval(0.9, 1.1));
+                buffer.endShape();
+                buffer.pop();
+            } else {
 
-                newAdder = p5.Vector.add(oldAdder, v);
-                strokeColor = distortColorSuperNew(colorList[colorSelect], vertexColorDistort);
-                buffer.stroke(strokeColor);
-                buffer.vertex(newAdder.x, newAdder.y);
+                // DEBUG - COLORING
+
+                this.buffer.push();
+                this.buffer.fill(colorList[colorSelect]);
+                this.buffer.noStroke();
+
+                this.buffer.rectMode(CENTER);
+                this.buffer.rect(center.x + getRandomFromInterval(-5, 5), center.y + getRandomFromInterval(-5, 5), 10, 10);
+
+                // this.buffer.beginShape();
+                // this.buffer.vertex(center.x - getRandomFromInterval(min, max), center.y - getRandomFromInterval(min, max));
+                // this.buffer.vertex(center.x + getRandomFromInterval(min, max), center.y - getRandomFromInterval(min, max));
+                // this.buffer.vertex(center.x + getRandomFromInterval(min, max), center.y + getRandomFromInterval(min, max));
+                // this.buffer.vertex(center.x - getRandomFromInterval(min, max), center.y + getRandomFromInterval(min, max));
+                // this.buffer.endShape(CLOSE);
+                this.buffer.pop();
             }
-
-            buffer.endShape();
-            buffer.pop();
         }
     }
 
@@ -1352,17 +1372,17 @@ class Grid2 {
     draw() {
         // DEPRECATED
         // this.drawBackdrop();
-        this.drawShape();
+        // this.drawShape();
 
         // LAYER
-        // this.drawfullGround();
-        // this.drawCutOutCloudsV();
-        // this.drawEverywhereSome1();
-        // this.drawSection();
+        this.drawfullGround();
+        this.drawCutOutCloudsV();
+        this.drawEverywhereSome1();
+        this.drawSection();
         // this.drawZigZag();
-        // this.drawCutOutClouds();
-        // this.drawCutOutClouds2();
-        // this.drawCutOutClouds3();
+        this.drawCutOutClouds();
+        this.drawCutOutClouds2();
+        this.drawCutOutClouds3();
     }
 
     show() {

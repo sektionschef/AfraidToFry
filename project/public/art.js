@@ -98,7 +98,7 @@ SVG.on(document, 'DOMContentLoaded', function () {
 
     for (var i = 0; i <= 30; i++) {
 
-        var vectorMagnitude = 25;
+        var vectorMagnitude = 20;
         var newPoint = vectorAdd(newPoint, vectorFromAngle(getRandomFromInterval(0, 2 * Math.PI), vectorMagnitude));
 
         polyLineString = polyLineString.concat(" ", createCoordString(newPoint));

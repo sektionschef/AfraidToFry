@@ -33,12 +33,12 @@ body {
 	justify-content: center;
 }
 
-#badAssCanvas {
+/* #badAssCanvas {
 	object-fit: contain;
 	max-height: 100%;
 	max-width: 100%;
 	background: hsl(0, 18%, 57%);
-}
+} */
 
 svg {
 	width: 100%;

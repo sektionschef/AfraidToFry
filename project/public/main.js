@@ -1,18 +1,38 @@
-// let svg = SVG("#badAssCanvas");
-// let svg = SVG().addTo('#badAssCanvas')
 
-// console.log(svg);
+canvasFormats = [
+    // {
+    //   "name": "1:1",
+    //   "canvasWidth": 800,
+    //   "canvasHeight": 800,
+    // },
+    {
+        "name": "16:9",
+        "canvasWidth": 1600,
+        "canvasHeight": 900,
+    },
+]
 
-// draw pink square
-// svg.rect(100, 100).move(100, 50).fill('#f06')
-// svg.rect(100, 100).fill('#f06')
+canvasFormatChosen = getRandomFromList(canvasFormats);
+console.log("Canvas Format: " + canvasFormatChosen.name);
 
-// Do your thing! 🚀
+rescaling_width = canvasFormatChosen.canvasWidth;
+rescaling_height = canvasFormatChosen.canvasHeight;
+
+if (rescaling_width <= rescaling_height) {
+    SHORTSIDE = rescaling_width;
+    LONGSIDE = rescaling_height;
+} else {
+    SHORTSIDE = rescaling_height;
+    LONGSIDE = rescaling_width;
+}
 
 
 SVG.on(document, 'DOMContentLoaded', function () {
     // for (var i = 0; i < 30000; i++) {
-    var drawing = SVG().addTo('#badAssCanvas')
+
+    // var drawing = SVG().addTo('body')
+    var drawing = SVG().viewbox(0, 0, rescaling_width, rescaling_height).addTo('#badAssCanvas')
+
 
     // noise
     // noise.seed(Math.random());
@@ -66,7 +86,12 @@ SVG.on(document, 'DOMContentLoaded', function () {
 
     var polyline = drawing.polyline(polyLineString).fill('none').stroke({ width: 1, color: '#3d7e83' });
 
-
+    let grid = new Grid({
+        drawing: drawing,
+        marginBoxCount: 5,
+        shortBoxCount: 80,
+        DEBUG: true,
+    });
 
 
 })

@@ -58,18 +58,6 @@ SVG.on(document, 'DOMContentLoaded', function () {
     // var polyline = draw.polyline('0,0 100,50 50,100').fill('none').stroke({ width: 1, color: '#c01b1b' });
     // drawing.rect(100, 100).move(100, 50).fill('#f06')
 
-    var pointA = { x: 0, y: 0 };
-    var pointB = { x: 100, y: 50 };
-    var pointC = { x: 50, y: 100 };
-
-    var pointAString = pointA.x + "," + pointA.y;
-    var pointBString = pointB.x + "," + pointB.y;
-    var pointCString = pointC.x + "," + pointC.y;
-    var coords = pointAString.concat(' ', pointBString, " ", pointCString);
-
-    var polyline = drawing.polyline(coords).fill('none').stroke({ width: 1, color: '#c01b1b' });
-
-
 
     // point and add new point
     var oldPoint = { x: 600, y: 400 };

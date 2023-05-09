@@ -36,11 +36,11 @@ class Grid {
             this.heightMargin = this.shortMargin;
         }
 
-        this.columns = new Set();
-        this.rows = new Set();
+        // this.columns = new Set();
+        // this.rows = new Set();
         this.boxes = [];
-        this.stripes = [];
-        this.stripeLines = [];
+        // this.stripes = [];
+        // this.stripeLines = [];
 
         // this.buffer = createGraphics(width, height, SVG);
         // this.bufferNoise = createGraphics(width, height, SVG);
@@ -96,9 +96,6 @@ class Grid {
 
                 // corners of the box
                 var A = { x: this.widthMargin + w * this.boxSize, y: this.heightMargin + h * this.boxSize };
-                // var B = p5.Vector.add(A, createVector(this.boxSize, 0));
-                // var C = p5.Vector.add(A, createVector(this.boxSize, this.boxSize));
-                // var D = p5.Vector.add(A, createVector(0, this.boxSize));
                 var B = vectorAdd(A, { x: this.boxSize, y: 0 });
                 var C = vectorAdd(A, { x: this.boxSize, y: this.boxSize });
                 var D = vectorAdd(A, { x: 0, y: this.boxSize });
@@ -133,6 +130,7 @@ class Grid {
                     "width": w,
                     "index": index,
                     "mask": false,
+                    "noiseValue1": noise.simplex2(w / 100, h / 100),
                     // "noiseValue1": noiseValue1,
                     // "noiseValue2": noiseValue2,
                     // "noiseValue3": noiseValue3,
@@ -195,13 +193,15 @@ class Grid {
 
     showDebug() {
 
-        for (var i = 0; i < this.boxes.length; i++) {
-            //     this.buffer.rect(this.boxes[i].A.x, this.boxes[i].A.y, this.boxes[i].C.x, this.boxes[i].C.y);
-            //     // this.buffer.point(this.boxes[i].center.x, this.boxes[i].center.y);
 
-            // this.drawing.rect(100, 100).move(100, 50).fill('#f06')
-            // this.drawing.rect(this.boxes[i].A.x, this.boxes[i].A.y).move(this.boxes[i].center.x, this.boxes[i].center.y).fill(getRandomFromList(['#f06', "#37ad37ff", "#528bd6ff"]))
-            this.drawing.rect(this.boxSize, this.boxSize).move(this.boxes[i].center.x, this.boxes[i].center.y).fill(getRandomFromList(['#f06', "#37ad37ff", "#528bd6ff"]))
+
+        for (var i = 0; i < this.boxes.length; i++) {
+            // this.drawing.rect(this.boxSize, this.boxSize).move(this.boxes[i].A.x, this.boxes[i].A.y).fill(getRandomFromList(['#f06', "#37ad37ff", "#528bd6ff"]))
+
+            // only stroke
+            this.drawing.rect(this.boxSize, this.boxSize).move(this.boxes[i].A.x, this.boxes[i].A.y).stroke({ color: '#f06', opacity: 1, width: 0.5 }).fill("#ffffff00");
+            //  draw noise
+            this.drawing.rect(this.boxSize, this.boxSize).move(this.boxes[i].A.x, this.boxes[i].A.y).stroke({ color: '#f06', opacity: 1, width: 0.5 }).fill({ color: hslToHex(120, map(this.boxes[i].noiseValue1, -1, 1, 0, 100), 50) })
         }
 
     }

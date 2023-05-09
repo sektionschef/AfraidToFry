@@ -21,9 +21,11 @@ rescaling_height = canvasFormatChosen.canvasHeight;
 if (rescaling_width <= rescaling_height) {
     SHORTSIDE = rescaling_width;
     LONGSIDE = rescaling_height;
+    LANDSCAPE = false;
 } else {
     SHORTSIDE = rescaling_height;
     LONGSIDE = rescaling_width;
+    LANDSCAPE = true;
 }
 
 

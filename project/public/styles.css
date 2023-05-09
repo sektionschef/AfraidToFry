@@ -40,6 +40,11 @@ body {
 	background: hsl(0, 18%, 57%);
 } */
 
+#badAssCanvas {
+	margin: 0px;
+	padding: 0px;
+}
+
 svg {
 	width: 100%;
 	height: auto;

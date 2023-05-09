@@ -1,9 +1,9 @@
 
 class Grid {
     constructor(data) {
-        this.horizonRatio = 1 / 7 * 4;
+        this.horizonRatio = 4 / 7;
 
-        this.OK = true;
+        this.OK = true;  // time limit reached
         this.finished = false;  // flag for completely drawn
 
         this.DEBUG = data.DEBUG;
@@ -12,8 +12,6 @@ class Grid {
         this.drawing = data.drawing;
 
         this.horizonRow = Math.round(this.shortBoxCount * this.horizonRatio);
-
-
         this.boxSize = SHORTSIDE / this.shortBoxCount;
         this.longBoxCount = Math.floor(LONGSIDE / this.boxSize);
 
@@ -26,7 +24,7 @@ class Grid {
         this.longMargin = (LONGSIDE % this.boxSize) / 2;
         // console.log("longMargin: " + this.longMargin);
 
-        if (this.drawing.width < this.drawing.height) {
+        if (LANDSCAPE == false) {
             this.widthBoxCount = this.shortBoxCount;
             this.heightBoxCount = this.longBoxCount;
             this.widthMargin = this.shortMargin;
@@ -94,7 +92,6 @@ class Grid {
 
             for (var w = 0; w < (this.widthBoxCount); w++) {
 
-                // var center = createVector(this.widthMargin + w * this.boxSize + this.boxSize / 2, this.heightMargin + h * this.boxSize + this.boxSize / 2);
                 var center = { x: this.widthMargin + w * this.boxSize + this.boxSize / 2, y: this.heightMargin + h * this.boxSize + this.boxSize / 2 };
 
                 // corners of the box

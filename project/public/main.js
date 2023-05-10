@@ -59,29 +59,50 @@ SVG.on(document, 'DOMContentLoaded', function () {
     // drawing.rect(100, 100).move(100, 50).fill('#f06')
 
 
-    // point and add new point
-    var oldPoint = { x: 600, y: 400 };
-    var newPoint = oldPoint;
-    // console.log(angleBetweenPoints(pointA, pointB));
+    // // point and add new point
+    // var oldPoint = { x: 600, y: 400 };
+    // var newPoint = oldPoint;
+    // // console.log(angleBetweenPoints(pointA, pointB));
 
-    var polyLineString = createCoordString(oldPoint);
+    // var polyLineString = createCoordString(oldPoint);
 
-    for (var i = 0; i <= 30; i++) {
+    // for (var i = 0; i <= 30; i++) {
 
-        var vectorMagnitude = 20;
-        var newPoint = vectorAdd(newPoint, vectorFromAngle(getRandomFromInterval(0, 2 * Math.PI), vectorMagnitude));
+    //     var vectorMagnitude = 20;
+    //     var newPoint = vectorAdd(newPoint, vectorFromAngle(getRandomFromInterval(0, 2 * Math.PI), vectorMagnitude));
 
-        polyLineString = polyLineString.concat(" ", createCoordString(newPoint));
-    }
+    //     polyLineString = polyLineString.concat(" ", createCoordString(newPoint));
+    // }
 
-    var polyline = drawing.polyline(polyLineString).fill('none').stroke({ width: 1, color: '#3d7e83' });
+    // var polyline = drawing.polyline(polyLineString).fill('none').stroke({ width: 1, color: '#3d7e83' });
 
     let grid = new Grid({
         drawing: drawing,
         marginBoxCount: 5,
         shortBoxCount: 80,
-        DEBUG: true,
+        DEBUG: false,
     });
+
+    grid.digndag(
+        {
+            centerX: 500, // this.boxes[i].A.x + this.boxes[i].offset.x,  // nicht center?
+            centerY: 500, // this.boxes[i].A.y + this.boxes[i].offset.y, // nicht center?
+            noiseNumber: 11,
+            noiseNumberB: 12,
+            noiseValue: 0.5, // this.boxes[i].noiseValue12,
+            vertexLength: 20, // map(this.boxes[i].noiseValue12, this.noise12.noiseValueMin, this.noise12.noiseValueMax, 5, 15),
+            strokeWeighty: 1, // map(this.boxes[i].noiseValue12, this.noise11.noiseValueMin, this.noise11.noiseValueMax, 0.3, 0.6),
+            angleMin: 2 * Math.PI / 12 * 1,
+            angleMax: 2 * Math.PI / 12 * 3,
+            revert: true,
+            cutOutValue: 0,
+            loopCount: 20,
+            colorList: ["#000000", "#524444", "#8a7878", "#ccb3b3"],
+            noiseAngle: false,
+            normIt: false,
+            group: "",
+        }
+    );
 
 
 })

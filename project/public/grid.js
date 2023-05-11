@@ -107,7 +107,7 @@ class Grid {
                     "width": w,
                     "index": index,
                     "mask": false,
-                    "noiseValue1": noise.simplex2(w / 10, h / 50),
+                    "noiseValue": noise.simplex2(w / 10, h / 50),
                     // "noiseValue1": noiseValue1,
                     // "noiseValue2": noiseValue2,
                     // "noiseValue3": noiseValue3,
@@ -137,13 +137,16 @@ class Grid {
             // only stroke
             this.drawing.rect(this.boxSize, this.boxSize).move(this.boxes[i].A.x, this.boxes[i].A.y).stroke({ color: '#f06', opacity: 1, width: 0.5 }).fill("none");
             //  draw noise
-            this.drawing.rect(this.boxSize, this.boxSize).move(this.boxes[i].A.x, this.boxes[i].A.y).stroke({ color: '#f06', opacity: 1, width: 0.5 }).fill({ color: hslToHex(120, map(this.boxes[i].noiseValue1, -1, 1, 0, 100), 50) })
+            // this.drawing.rect(this.boxSize, this.boxSize).move(this.boxes[i].A.x, this.boxes[i].A.y).stroke({ color: '#f06', opacity: 1, width: 0.5 }).fill({ color: hslToHex(120, map(this.boxes[i].noiseValue1, -1, 1, 0, 100), 50) })
+            this.drawing.rect(this.boxSize, this.boxSize).move(this.boxes[i].A.x, this.boxes[i].A.y).stroke({ color: '#f06', opacity: 1, width: 0.5 }).fill({
+                // color: tinycolor({ h: 100, s: map(this.boxes[i].noiseValue1, -1, 1, 0, 1), l: 0.5 }).toHexString()
+                color: tinycolor({ h: 100, s: 50, l: 50 }).lighten(map(this.boxes[i].noiseValue1, -1, 1, -10, 10)).toHexString()
+            });
             // draw differnt colors
             // this.drawing.rect(this.boxSize, this.boxSize).move(this.boxes[i].A.x, this.boxes[i].A.y).fill(getRandomFromList(['#f06', "#37ad37ff", "#528bd6ff"]))
         }
 
     }
-
 
     drawSkipMargin(box) {
         if (rescaling_width < rescaling_height) {
@@ -224,8 +227,10 @@ class Grid {
 
             }
 
-            // which stroke cap?
-            this.drawing.polyline(polyLineString).fill('none').stroke({ width: strokeWeighty, color: colorList[colorSelect] });
+            // which stroke cap? - sau
+            let _color = tinycolor({ h: 100, s: 50, l: 50 }).lighten(map(noiseValue, -1, 1, -10, 10)).toHexString()
+            // this.drawing.polyline(polyLineString).fill('none').stroke({ width: strokeWeighty, color: colorList[colorSelect] });
+            this.drawing.polyline(polyLineString).fill('none').stroke({ width: strokeWeighty, color: _color });
         }
 
 
@@ -258,13 +263,13 @@ class Grid {
                         centerY: this.boxes[i].center.y + this.boxes[i].offset.y, // nicht center?
                         noiseNumber: 11,
                         noiseNumberB: 12,
-                        noiseValue: 0.5, // this.boxes[i].noiseValue12,
+                        noiseValue: this.boxes[i].noiseValue, // this.boxes[i].noiseValue12,
                         vertexLength: 20, // map(this.boxes[i].noiseValue12, this.noise12.noiseValueMin, this.noise12.noiseValueMax, 5, 15),
                         strokeWeighty: 1, // map(this.boxes[i].noiseValue12, this.noise11.noiseValueMin, this.noise11.noiseValueMax, 0.3, 0.6),
                         angleMin: 2 * Math.PI / 12 * 1,
                         angleMax: 2 * Math.PI / 12 * 3,
                         revert: true,
-                        cutOutValue: 0,
+                        cutOutValue: -1,
                         loopCount: 20,
                         colorList: ["#000000", "#524444", "#8a7878", "#ccb3b3"],
                         noiseAngle: false,

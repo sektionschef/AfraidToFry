@@ -65,6 +65,8 @@ class Grid {
         if (this.DEBUG) {
             this.showDebug();
         }
+
+        this.loopsy();
     }
 
     createBoxes() {
@@ -143,6 +145,21 @@ class Grid {
     }
 
 
+    drawSkipMargin(box) {
+        if (rescaling_width < rescaling_height) {
+            return box.height < (this.marginBoxCount) ||
+                box.width < (this.marginBoxCount) ||
+                box.width >= (this.shortBoxCount - this.marginBoxCount) ||
+                box.height >= (this.longBoxCount - this.marginBoxCount);
+        } else {
+            return box.height < (this.marginBoxCount) ||
+                box.width < (this.marginBoxCount) ||
+                box.width >= (this.longBoxCount - this.marginBoxCount) ||
+                box.height >= (this.shortBoxCount - this.marginBoxCount);
+        }
+    }
+
+
     digndag(data) {
 
 
@@ -215,6 +232,50 @@ class Grid {
 
 
 
+
+    }
+
+
+    loopsy() {
+        let randomIndex = getRandomIndex(this.boxes.length);
+
+        let i = 0;
+
+        for (var v = 0; v < randomIndex.length; v++) {
+
+            i = randomIndex[v];
+
+            if (this.drawSkipMargin(this.boxes[i])) {
+                continue;
+            }
+
+            // big but sparse
+            if (this.boxes[i].aboveHorizon) {
+
+                this.digndag(
+                    {
+                        centerX: this.boxes[i].center.x + this.boxes[i].offset.x,  // nicht center?
+                        centerY: this.boxes[i].center.y + this.boxes[i].offset.y, // nicht center?
+                        noiseNumber: 11,
+                        noiseNumberB: 12,
+                        noiseValue: 0.5, // this.boxes[i].noiseValue12,
+                        vertexLength: 20, // map(this.boxes[i].noiseValue12, this.noise12.noiseValueMin, this.noise12.noiseValueMax, 5, 15),
+                        strokeWeighty: 1, // map(this.boxes[i].noiseValue12, this.noise11.noiseValueMin, this.noise11.noiseValueMax, 0.3, 0.6),
+                        angleMin: 2 * Math.PI / 12 * 1,
+                        angleMax: 2 * Math.PI / 12 * 3,
+                        revert: true,
+                        cutOutValue: 0,
+                        loopCount: 20,
+                        colorList: ["#000000", "#524444", "#8a7878", "#ccb3b3"],
+                        noiseAngle: false,
+                        normIt: false,
+                        group: "",
+                    }
+                );
+            } else {
+
+            }
+        }
 
     }
 

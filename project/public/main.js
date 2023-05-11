@@ -83,27 +83,5 @@ SVG.on(document, 'DOMContentLoaded', function () {
         DEBUG: false,
     });
 
-    grid.digndag(
-        {
-            centerX: 500, // this.boxes[i].A.x + this.boxes[i].offset.x,  // nicht center?
-            centerY: 500, // this.boxes[i].A.y + this.boxes[i].offset.y, // nicht center?
-            noiseNumber: 11,
-            noiseNumberB: 12,
-            noiseValue: 0.5, // this.boxes[i].noiseValue12,
-            vertexLength: 20, // map(this.boxes[i].noiseValue12, this.noise12.noiseValueMin, this.noise12.noiseValueMax, 5, 15),
-            strokeWeighty: 1, // map(this.boxes[i].noiseValue12, this.noise11.noiseValueMin, this.noise11.noiseValueMax, 0.3, 0.6),
-            angleMin: 2 * Math.PI / 12 * 1,
-            angleMax: 2 * Math.PI / 12 * 3,
-            revert: true,
-            cutOutValue: 0,
-            loopCount: 20,
-            colorList: ["#000000", "#524444", "#8a7878", "#ccb3b3"],
-            noiseAngle: false,
-            normIt: false,
-            group: "",
-        }
-    );
-
-
 })
 

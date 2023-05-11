@@ -26,7 +26,7 @@ function hslToHex(h, s, l) {
     return `#${f(0)}${f(8)}${f(4)}`;
 }
 
-
+// VECTOR
 // angle between two points - https://gist.github.com/conorbuck/2606166 
 function angleBetweenPoints(p1, p2) {
     // angle in radians
@@ -51,3 +51,10 @@ function vectorAdd(p1, p2) {
 function createCoordString(p) {
     return p.x + "," + p.y;
 }
+
+function getRandomIndex(lengthy) {
+    let randomIndex = Array.from({ length: lengthy }, (x, i) => i);
+    randomIndex.sort(() => fxrand() - 0.5);
+    return randomIndex
+}
+

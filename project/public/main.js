@@ -83,7 +83,7 @@ SVG.on(document, 'DOMContentLoaded', function () {
         DEBUG: false,
     });
 
-    let palette = new dynamicPalette(drawing, tinycolor("#3d3d8bff"));
+    let palette = new dynamicPalette(drawing, "#6363b1");
     palette.show();
 
 })

@@ -76,6 +76,7 @@ SVG.on(document, 'DOMContentLoaded', function () {
 
     // var polyline = drawing.polyline(polyLineString).fill('none').stroke({ width: 1, color: '#3d7e83' });
 
+
     let grid = new Grid({
         drawing: drawing,
         marginBoxCount: 5,

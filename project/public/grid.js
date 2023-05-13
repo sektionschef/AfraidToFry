@@ -42,6 +42,8 @@ class Grid {
         // this.stripes = [];
         // this.stripeLines = [];
 
+        this.palette = new dynamicPalette(this.drawing, "#6363b1");
+
         // this.buffer = createGraphics(width, height, SVG);
         // this.bufferNoise = createGraphics(width, height, SVG);
 
@@ -194,7 +196,8 @@ class Grid {
         if (noiseValueEff > data.cutOutValue) {
 
             // let colorSelect = constrain(Math.round(map(noiseValue, noiseVars.noiseValueMin, noiseVars.noiseValueMax, 0, (colorList.length - 1))), 0, (colorList.length - 1));
-            let colorSelect = 1;
+            // let colorSelect = 1;
+            let colorSelect = Math.round(map(noiseValueEff, -1, 1, 0, (colorList.length - 1)));
             // console.log(noiseVars.noiseValueMin);
             // console.log(noiseVars.noiseValueMax);
             // console.log(colorList.length - 1);
@@ -227,10 +230,10 @@ class Grid {
 
             }
 
-            // which stroke cap? - sau
-            let _color = tinycolor({ h: 100, s: 50, l: 50 }).lighten(map(noiseValue, -1, 1, -10, 10)).toHexString()
-            // this.drawing.polyline(polyLineString).fill('none').stroke({ width: strokeWeighty, color: colorList[colorSelect] });
-            this.drawing.polyline(polyLineString).fill('none').stroke({ width: strokeWeighty, color: _color });
+            // which stroke cap?
+            // let _color = tinycolor({ h: 100, s: 50, l: 50 }).lighten(map(noiseValue, -1, 1, -10, 10)).toHexString()
+            // this.drawing.polyline(polyLineString).fill('none').stroke({ width: strokeWeighty, color: _color });
+            this.drawing.polyline(polyLineString).fill('none').stroke({ width: strokeWeighty, color: colorList[colorSelect] });
         }
 
 
@@ -271,7 +274,8 @@ class Grid {
                         revert: true,
                         cutOutValue: -1,
                         loopCount: 20,
-                        colorList: ["#000000", "#524444", "#8a7878", "#ccb3b3"],
+                        // colorList: ["#000000", "#524444", "#8a7878", "#ccb3b3"],
+                        colorList: this.palette.palette,
                         noiseAngle: false,
                         normIt: false,
                         group: "",

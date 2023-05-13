@@ -1,43 +1,38 @@
 // create a palette with 9 tones - 4 down 4 up and base color in the middel
 class dynamicPalette {
     constructor(drawing, baseColor) {
+
+        this.lChange = 2;
+        this.sChange = 1;
+
         this.drawing = drawing;
         this.baseColor = tinycolor(baseColor);
         let _color_beginning = tinycolor(baseColor);
         let _color_end = tinycolor(baseColor);
-        console.log(this.baseColor);
 
         this.length = 9;
         this.upAndDown = 4;
 
-        // this.palette = [];
         this.palette = Array(this.length);
-
-        // 4 down
-        // for (var i = this.upAndDown - 1; i >= 0; i--) {
-        // _color.darken(2 * i);
-        // _color.desaturate(2 * i)
-        // this.palette.push(_color.toHexString())
-        // }
 
         // base color in the middle
         this.palette[this.upAndDown] = this.baseColor.toHexString();
 
-
         for (var i = 1; i < (this.upAndDown + 1); i++) {
-            _color_beginning.darken(4 * i);
-            // // _color_beginning.desaturate(4 * i);
-            // console.log(this.upAndDown - 1 - i);
+            _color_end.lighten(this.lChange * i);
+            _color_beginning.darken(this.lChange * i);
+
+            // _color_beginning.saturate(this.sChange * i);
+            // _color_end.saturate(this.sChange * i);
+
+            _color_beginning.desaturate(this.sChange * i);
+            _color_end.desaturate(this.sChange * i);
+
             this.palette[this.upAndDown - i] = _color_beginning.toHexString();
-        }
-
-        for (var i = 1; i < (this.upAndDown + 1); i++) {
-            _color_end.lighten(4 * i);
-            // _color_end.saturate(4 * i);
             this.palette[(this.upAndDown + i)] = _color_end.toHexString();
         }
 
-        console.log(this.palette);
+        // console.log(this.palette);
     }
 
     show() {

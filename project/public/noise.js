@@ -14,12 +14,12 @@ class noiseArea {
     createNoiseValue(w, h) {
         let noiseValue = noise.simplex2(w / this.x, h / this.y);
 
-        if (this.noiseValue > this.noiseValueMax) {
-            this.noiseValueMax = this.noiseValue;
-        }
-        if (this.noiseValue < this.noiseValueMin) {
-            this.noiseValueMin = this.noiseValue;
-        }
+        // if (this.noiseValue > this.noiseValueMax) {
+        //     this.noiseValueMax = this.noiseValue;
+        // }
+        // if (this.noiseValue < this.noiseValueMin) {
+        //     this.noiseValueMin = this.noiseValue;
+        // }
 
         return noiseValue
     }
@@ -43,31 +43,5 @@ class noiseArea {
             }
         }
 
-
-        // let noiseVars = this.getNoiseVars(number);
-        // // console.log(noiseVars.noiseValueName);
-        // // console.log(noiseVars.noiseValueMin);
-        // // console.log(noiseVars.noiseValueMax);
-
-        // this.buffer.push();
-        // this.buffer.noStroke();
-        // this.buffer.rectMode(CORNERS);
-
-        // for (var i = 0; i < this.boxes.length; i++) {
-        //     if (this.drawSkipMargin(this.boxes[i])) {
-        //         continue;
-        //     }
-
-        //     let noiseValueLoop = this.boxes[i][noiseVars.noiseValueName];
-        //     // let noiseValueNorm = map(noiseValueLoop, noiseVars.noiseValueMin, noiseVars.noiseValueMax, 0, 1);
-        //     let noiseValueColor = Math.round(map(noiseValueLoop, noiseVars.noiseValueMin, noiseVars.noiseValueMax, 0, 255));
-
-        //     // console.log(noiseValueColor);
-        //     this.buffer.fill(noiseValueColor);
-
-        //     // this.buffer.fill("red");
-        //     this.buffer.rect(this.boxes[i].A.x, this.boxes[i].A.y, this.boxes[i].C.x, this.boxes[i].C.y);
-        // }
-        // this.buffer.pop();
     }
 }

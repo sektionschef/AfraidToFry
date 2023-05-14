@@ -42,9 +42,23 @@ class Grid {
         // this.stripes = [];
         // this.stripeLines = [];
 
-        this.palette = new dynamicPalette(this.drawing, "#6363b1");
+        this.palette1 = new dynamicPalette(this.drawing, "#6363b1");
+        this.palette2 = new dynamicPalette(this.drawing, "#63b181");
+        this.palette3 = new dynamicPalette(this.drawing, "#6363b1");
+        this.palette4 = new dynamicPalette(this.drawing, "#63b181");
+        this.palette5 = new dynamicPalette(this.drawing, "#6363b1");
+        this.palette6 = new dynamicPalette(this.drawing, "#63b181");
+        this.palette7 = new dynamicPalette(this.drawing, "#6363b1");
+        this.palette8 = new dynamicPalette(this.drawing, "#63b181");
 
-        this.noise1 = new noiseArea(50, 100);
+        this.noise1 = new noiseArea(150, 10);
+        this.noise2 = new noiseArea(140, 4);
+        this.noise3 = new noiseArea(150, 10);
+        this.noise4 = new noiseArea(140, 9);
+        this.noise5 = new noiseArea(150, 10);
+        this.noise6 = new noiseArea(140, 9);
+        this.noise7 = new noiseArea(150, 10);
+        this.noise8 = new noiseArea(40, 90);
 
         // this.buffer = createGraphics(width, height, SVG);
         // this.bufferNoise = createGraphics(width, height, SVG);
@@ -70,7 +84,19 @@ class Grid {
             this.showDebug();
         }
 
-        this.loopsy();
+
+        // setTimeout(() => {
+        //     this.loop1();
+        // }, 0);
+
+        this.loop1()
+        // this.loop2();
+        // this.loop3();
+        // this.loop4();
+        // this.loop5();
+        // this.loop6();
+        // this.loop7();
+        this.loop8();
     }
 
     createBoxes() {
@@ -112,18 +138,15 @@ class Grid {
                     "index": index,
                     "mask": false,
                     "noiseValue1": this.noise1.createNoiseValue(w, h),
-                    // "noiseValue1": noiseValue1,
-                    // "noiseValue2": noiseValue2,
-                    // "noiseValue3": noiseValue3,
-                    // "noiseValue4": noiseValue4,
-                    // "noiseValue5": noiseValue5,
-                    // "noiseValue6": noiseValue6,
-                    // "noiseValue7": noiseValue7,
-                    // "noiseValue8": noiseValue8,
-                    // "noiseValue9": noiseValue9,
-                    // "noiseValue10": noiseValue10,
-                    // "noiseValue11": noiseValue11,
-                    // "noiseValue12": noiseValue12,
+                    "noiseValue2": this.noise2.createNoiseValue(w, h),
+                    "noiseValue3": this.noise3.createNoiseValue(w, h),
+                    "noiseValue4": this.noise4.createNoiseValue(w, h),
+                    "noiseValue5": this.noise5.createNoiseValue(w, h),
+                    "noiseValue6": this.noise6.createNoiseValue(w, h),
+                    "noiseValue7": this.noise7.createNoiseValue(w, h),
+                    "noiseValue8": this.noise8.createNoiseValue(w, h),
+                    // "noiseValue9": this.noise9.createNoiseValue(w, h),
+                    // "noiseValue10": this.noise10.createNoiseValue(w, h),
                     // "polygonA": polygonA,
                     // "polygonLeft": polygonLeft,
                     "horizon": horizon,
@@ -169,41 +192,24 @@ class Grid {
 
     digndag(data) {
 
-
         let center = { x: data.centerX, y: data.centerY };
         let vertexLength = data.vertexLength;
         let strokeWeighty = data.strokeWeighty;
         let angleMin = data.angleMin;
         let angleMax = data.angleMax;
         let loopCount = data.loopCount;
-        let normIt = data.normIt;
         let group = data.group;
 
         let noiseValue = 0;
-        let noiseValueEff = 0;
         let angle = 0;
         let colorList = [];
-        // let noiseVars = {};
 
-        // noiseVars = this.getNoiseVars(data.noiseNumber);
         noiseValue = data.noiseValue;
         colorList = data.colorList;
 
-        if (normIt) {
-            noiseValueEff = map(noiseValue, noiseVars.noiseValueMin, noiseVars.noiseValueMax, 0, 1);
-        } else {
-            noiseValueEff = noiseValue;
-        }
+        if (noiseValue > data.cutOutValue) {
 
-        if (noiseValueEff > data.cutOutValue) {
-
-            // let colorSelect = constrain(Math.round(map(noiseValue, noiseVars.noiseValueMin, noiseVars.noiseValueMax, 0, (colorList.length - 1))), 0, (colorList.length - 1));
-            // let colorSelect = 1;
-            let colorSelect = Math.round(map(noiseValueEff, -1, 1, 0, (colorList.length - 1)));
-            // console.log(noiseVars.noiseValueMin);
-            // console.log(noiseVars.noiseValueMax);
-            // console.log(colorList.length - 1);
-            // console.log(colorSelect);
+            let colorSelect = Math.round(map(noiseValue, -1, 1, 0, (colorList.length - 1)));
 
             // point and add new point
             var oldPoint = center;
@@ -214,7 +220,7 @@ class Grid {
             for (var i = 0; i < loopCount; i++) {
 
                 if (data.noiseAngle) {
-                    angle = map(noiseValueEff, -1, 1, 0, 2 * Math.PI) + getRandomFromInterval(-0.5, 0.5);
+                    angle = map(noiseValue, -1, 1, 0, 2 * Math.PI) + getRandomFromInterval(-0.5, 0.5);
                 } else {
                     angle = getRandomFromInterval(angleMin, angleMax);
                 }
@@ -233,20 +239,47 @@ class Grid {
             }
 
             // which stroke cap?
-            // let _color = tinycolor({ h: 100, s: 50, l: 50 }).lighten(map(noiseValue, -1, 1, -10, 10)).toHexString()
-            // this.drawing.polyline(polyLineString).fill('none').stroke({ width: strokeWeighty, color: _color });
             this.drawing.polyline(polyLineString).fill('none').stroke({ width: strokeWeighty, color: colorList[colorSelect] });
         }
 
+    }
 
+    zignzag(data) {
+        let center = { x: data.centerX, y: data.centerY };
+        let vertexLength = data.vertexLength;
+        let strokeWeighty = data.strokeWeighty;
+        let angleMin = data.angleMin;
+        let angleMax = data.angleMax;
+        let loopCount = data.loopCount;
+        let group = data.group;
 
+        let noiseValue = 0;
+        let angle = 0;
+        let colorList = [];
 
+        noiseValue = data.noiseValue;
+        colorList = data.colorList;
 
+        if (noiseValue > data.cutOutValue) {
 
+            let colorSelect = Math.round(map(noiseValue, -1, 1, 0, (colorList.length - 1)));
+
+            var polyLineString = createCoordString(center);
+
+            for (var i = 0; i < loopCount; i++) {
+
+                angle = getRandomFromInterval(angleMin, angleMax);
+
+                var newPoint = vectorAdd(center, vectorFromAngle(angle, vertexLength * getRandomFromInterval(0.9, 1.1)));
+                polyLineString = polyLineString.concat(" ", createCoordString(newPoint));
+            }
+
+            this.drawing.polyline(polyLineString).fill('none').stroke({ width: strokeWeighty, color: colorList[colorSelect] });
+        }
     }
 
 
-    loopsy() {
+    loop1() {
         let randomIndex = getRandomIndex(this.boxes.length);
 
         let i = 0;
@@ -266,8 +299,6 @@ class Grid {
                     {
                         centerX: this.boxes[i].center.x + this.boxes[i].offset.x,
                         centerY: this.boxes[i].center.y + this.boxes[i].offset.y,
-                        noiseNumber: 11,
-                        noiseNumberB: 12,
                         noiseValue: this.boxes[i].noiseValue1,
                         vertexLength: 20, // map(this.boxes[i].noiseValue12, this.noise12.noiseValueMin, this.noise12.noiseValueMax, 5, 15),
                         strokeWeighty: 1, // map(this.boxes[i].noiseValue12, this.noise11.noiseValueMin, this.noise11.noiseValueMax, 0.3, 0.6),
@@ -277,15 +308,420 @@ class Grid {
                         cutOutValue: -1,
                         loopCount: 20,
                         // colorList: ["#000000", "#524444", "#8a7878", "#ccb3b3"],
-                        colorList: this.palette.palette,
+                        colorList: this.palette1.palette,
                         noiseAngle: false,
                         normIt: false,
                         group: "",
                     }
                 );
             } else {
+                this.digndag(
+                    {
+                        centerX: this.boxes[i].center.x + this.boxes[i].offset.x,
+                        centerY: this.boxes[i].center.y + this.boxes[i].offset.y,
+                        noiseValue: this.boxes[i].noiseValue2,
+                        vertexLength: 20, // map(this.boxes[i].noiseValue2, -1, 1, 5, 15),
+                        strokeWeighty: 0.4, // map(this.boxes[i].noiseValue9, this.noise9.noiseValueMin, this.noise9.noiseValueMax, 0.3, 1), //0.5,
+                        angleMin: 2 * Math.PI / 12 * 5,
+                        angleMax: 2 * Math.PI / 12 * 7,
+                        revert: true,
+                        cutOutValue: -1,
+                        loopCount: 20, // map(this.boxes[i].noiseValue9, this.noise9.noiseValueMin, this.noise9.noiseValueMax, 10, 20), // 10,
+                        colorList: this.palette2.palette,
+                        noiseAngle: false,
+                        normIt: false,
+                        group: "",
+                    }
+                )
 
             }
+        }
+
+    }
+    loop2() {
+        let randomIndex = getRandomIndex(this.boxes.length);
+
+        let i = 0;
+
+        for (var v = 0; v < randomIndex.length; v++) {
+
+            i = randomIndex[v];
+
+            if (this.drawSkipMargin(this.boxes[i])) {
+                continue;
+            }
+
+            // big but sparse
+            if (this.boxes[i].aboveHorizon) {
+
+                this.digndag(
+                    {
+                        centerX: this.boxes[i].center.x + this.boxes[i].offset.x,
+                        centerY: this.boxes[i].center.y + this.boxes[i].offset.y,
+                        noiseValue: this.boxes[i].noiseValue1,
+                        vertexLength: 20, // map(this.boxes[i].noiseValue12, this.noise12.noiseValueMin, this.noise12.noiseValueMax, 5, 15),
+                        strokeWeighty: 1, // map(this.boxes[i].noiseValue12, this.noise11.noiseValueMin, this.noise11.noiseValueMax, 0.3, 0.6),
+                        angleMin: 2 * Math.PI / 12 * 1,
+                        angleMax: 2 * Math.PI / 12 * 3,
+                        revert: true,
+                        cutOutValue: -1,
+                        loopCount: 20,
+                        // colorList: ["#000000", "#524444", "#8a7878", "#ccb3b3"],
+                        colorList: this.palette1.palette,
+                        noiseAngle: false,
+                        normIt: false,
+                        group: "",
+                    }
+                );
+            } else {
+                this.digndag(
+                    {
+                        centerX: this.boxes[i].center.x + this.boxes[i].offset.x,
+                        centerY: this.boxes[i].center.y + this.boxes[i].offset.y,
+                        noiseValue: this.boxes[i].noiseValue2,
+                        vertexLength: 20, // map(this.boxes[i].noiseValue2, -1, 1, 5, 15),
+                        strokeWeighty: 0.4, // map(this.boxes[i].noiseValue9, this.noise9.noiseValueMin, this.noise9.noiseValueMax, 0.3, 1), //0.5,
+                        angleMin: 2 * Math.PI / 12 * 5,
+                        angleMax: 2 * Math.PI / 12 * 7,
+                        revert: true,
+                        cutOutValue: -1,
+                        loopCount: 20, // map(this.boxes[i].noiseValue9, this.noise9.noiseValueMin, this.noise9.noiseValueMax, 10, 20), // 10,
+                        colorList: this.palette2.palette,
+                        noiseAngle: false,
+                        normIt: false,
+                        group: "",
+                    }
+                )
+
+            }
+        }
+
+    }
+    loop3() {
+        let randomIndex = getRandomIndex(this.boxes.length);
+
+        let i = 0;
+
+        for (var v = 0; v < randomIndex.length; v++) {
+
+            i = randomIndex[v];
+
+            if (this.drawSkipMargin(this.boxes[i])) {
+                continue;
+            }
+
+            // big but sparse
+            if (this.boxes[i].aboveHorizon) {
+
+                this.digndag(
+                    {
+                        centerX: this.boxes[i].center.x + this.boxes[i].offset.x,
+                        centerY: this.boxes[i].center.y + this.boxes[i].offset.y,
+                        noiseValue: this.boxes[i].noiseValue1,
+                        vertexLength: 20, // map(this.boxes[i].noiseValue12, this.noise12.noiseValueMin, this.noise12.noiseValueMax, 5, 15),
+                        strokeWeighty: 1, // map(this.boxes[i].noiseValue12, this.noise11.noiseValueMin, this.noise11.noiseValueMax, 0.3, 0.6),
+                        angleMin: 2 * Math.PI / 12 * 1,
+                        angleMax: 2 * Math.PI / 12 * 3,
+                        revert: true,
+                        cutOutValue: -1,
+                        loopCount: 20,
+                        // colorList: ["#000000", "#524444", "#8a7878", "#ccb3b3"],
+                        colorList: this.palette1.palette,
+                        noiseAngle: false,
+                        normIt: false,
+                        group: "",
+                    }
+                );
+            } else {
+                this.digndag(
+                    {
+                        centerX: this.boxes[i].center.x + this.boxes[i].offset.x,
+                        centerY: this.boxes[i].center.y + this.boxes[i].offset.y,
+                        noiseValue: this.boxes[i].noiseValue2,
+                        vertexLength: 20, // map(this.boxes[i].noiseValue2, -1, 1, 5, 15),
+                        strokeWeighty: 0.4, // map(this.boxes[i].noiseValue9, this.noise9.noiseValueMin, this.noise9.noiseValueMax, 0.3, 1), //0.5,
+                        angleMin: 2 * Math.PI / 12 * 5,
+                        angleMax: 2 * Math.PI / 12 * 7,
+                        revert: true,
+                        cutOutValue: -1,
+                        loopCount: 20, // map(this.boxes[i].noiseValue9, this.noise9.noiseValueMin, this.noise9.noiseValueMax, 10, 20), // 10,
+                        colorList: this.palette2.palette,
+                        noiseAngle: false,
+                        normIt: false,
+                        group: "",
+                    }
+                )
+
+            }
+        }
+
+    }
+    loop4() {
+        let randomIndex = getRandomIndex(this.boxes.length);
+
+        let i = 0;
+
+        for (var v = 0; v < randomIndex.length; v++) {
+
+            i = randomIndex[v];
+
+            if (this.drawSkipMargin(this.boxes[i])) {
+                continue;
+            }
+
+            // big but sparse
+            if (this.boxes[i].aboveHorizon) {
+
+                this.digndag(
+                    {
+                        centerX: this.boxes[i].center.x + this.boxes[i].offset.x,
+                        centerY: this.boxes[i].center.y + this.boxes[i].offset.y,
+                        noiseValue: this.boxes[i].noiseValue1,
+                        vertexLength: 20, // map(this.boxes[i].noiseValue12, this.noise12.noiseValueMin, this.noise12.noiseValueMax, 5, 15),
+                        strokeWeighty: 1, // map(this.boxes[i].noiseValue12, this.noise11.noiseValueMin, this.noise11.noiseValueMax, 0.3, 0.6),
+                        angleMin: 2 * Math.PI / 12 * 1,
+                        angleMax: 2 * Math.PI / 12 * 3,
+                        revert: true,
+                        cutOutValue: -1,
+                        loopCount: 20,
+                        // colorList: ["#000000", "#524444", "#8a7878", "#ccb3b3"],
+                        colorList: this.palette1.palette,
+                        noiseAngle: false,
+                        normIt: false,
+                        group: "",
+                    }
+                );
+            } else {
+                this.digndag(
+                    {
+                        centerX: this.boxes[i].center.x + this.boxes[i].offset.x,
+                        centerY: this.boxes[i].center.y + this.boxes[i].offset.y,
+                        noiseValue: this.boxes[i].noiseValue2,
+                        vertexLength: 20, // map(this.boxes[i].noiseValue2, -1, 1, 5, 15),
+                        strokeWeighty: 0.4, // map(this.boxes[i].noiseValue9, this.noise9.noiseValueMin, this.noise9.noiseValueMax, 0.3, 1), //0.5,
+                        angleMin: 2 * Math.PI / 12 * 5,
+                        angleMax: 2 * Math.PI / 12 * 7,
+                        revert: true,
+                        cutOutValue: -1,
+                        loopCount: 20, // map(this.boxes[i].noiseValue9, this.noise9.noiseValueMin, this.noise9.noiseValueMax, 10, 20), // 10,
+                        colorList: this.palette2.palette,
+                        noiseAngle: false,
+                        normIt: false,
+                        group: "",
+                    }
+                )
+
+            }
+        }
+
+    }
+    loop5() {
+        let randomIndex = getRandomIndex(this.boxes.length);
+
+        let i = 0;
+
+        for (var v = 0; v < randomIndex.length; v++) {
+
+            i = randomIndex[v];
+
+            if (this.drawSkipMargin(this.boxes[i])) {
+                continue;
+            }
+
+            // big but sparse
+            if (this.boxes[i].aboveHorizon) {
+
+                this.digndag(
+                    {
+                        centerX: this.boxes[i].center.x + this.boxes[i].offset.x,
+                        centerY: this.boxes[i].center.y + this.boxes[i].offset.y,
+                        noiseValue: this.boxes[i].noiseValue1,
+                        vertexLength: 20, // map(this.boxes[i].noiseValue12, this.noise12.noiseValueMin, this.noise12.noiseValueMax, 5, 15),
+                        strokeWeighty: 1, // map(this.boxes[i].noiseValue12, this.noise11.noiseValueMin, this.noise11.noiseValueMax, 0.3, 0.6),
+                        angleMin: 2 * Math.PI / 12 * 1,
+                        angleMax: 2 * Math.PI / 12 * 3,
+                        revert: true,
+                        cutOutValue: -1,
+                        loopCount: 20,
+                        // colorList: ["#000000", "#524444", "#8a7878", "#ccb3b3"],
+                        colorList: this.palette1.palette,
+                        noiseAngle: false,
+                        normIt: false,
+                        group: "",
+                    }
+                );
+            } else {
+                this.digndag(
+                    {
+                        centerX: this.boxes[i].center.x + this.boxes[i].offset.x,
+                        centerY: this.boxes[i].center.y + this.boxes[i].offset.y,
+                        noiseValue: this.boxes[i].noiseValue2,
+                        vertexLength: 20, // map(this.boxes[i].noiseValue2, -1, 1, 5, 15),
+                        strokeWeighty: 0.4, // map(this.boxes[i].noiseValue9, this.noise9.noiseValueMin, this.noise9.noiseValueMax, 0.3, 1), //0.5,
+                        angleMin: 2 * Math.PI / 12 * 5,
+                        angleMax: 2 * Math.PI / 12 * 7,
+                        revert: true,
+                        cutOutValue: -1,
+                        loopCount: 20, // map(this.boxes[i].noiseValue9, this.noise9.noiseValueMin, this.noise9.noiseValueMax, 10, 20), // 10,
+                        colorList: this.palette2.palette,
+                        noiseAngle: false,
+                        normIt: false,
+                        group: "",
+                    }
+                )
+
+            }
+        }
+
+    }
+    loop6() {
+        let randomIndex = getRandomIndex(this.boxes.length);
+
+        let i = 0;
+
+        for (var v = 0; v < randomIndex.length; v++) {
+
+            i = randomIndex[v];
+
+            if (this.drawSkipMargin(this.boxes[i])) {
+                continue;
+            }
+
+            // big but sparse
+            if (this.boxes[i].aboveHorizon) {
+
+                this.digndag(
+                    {
+                        centerX: this.boxes[i].center.x + this.boxes[i].offset.x,
+                        centerY: this.boxes[i].center.y + this.boxes[i].offset.y,
+                        noiseValue: this.boxes[i].noiseValue1,
+                        vertexLength: 20, // map(this.boxes[i].noiseValue12, this.noise12.noiseValueMin, this.noise12.noiseValueMax, 5, 15),
+                        strokeWeighty: 1, // map(this.boxes[i].noiseValue12, this.noise11.noiseValueMin, this.noise11.noiseValueMax, 0.3, 0.6),
+                        angleMin: 2 * Math.PI / 12 * 1,
+                        angleMax: 2 * Math.PI / 12 * 3,
+                        revert: true,
+                        cutOutValue: -1,
+                        loopCount: 20,
+                        // colorList: ["#000000", "#524444", "#8a7878", "#ccb3b3"],
+                        colorList: this.palette1.palette,
+                        noiseAngle: false,
+                        normIt: false,
+                        group: "",
+                    }
+                );
+            } else {
+                this.digndag(
+                    {
+                        centerX: this.boxes[i].center.x + this.boxes[i].offset.x,
+                        centerY: this.boxes[i].center.y + this.boxes[i].offset.y,
+                        noiseValue: this.boxes[i].noiseValue2,
+                        vertexLength: 20, // map(this.boxes[i].noiseValue2, -1, 1, 5, 15),
+                        strokeWeighty: 0.4, // map(this.boxes[i].noiseValue9, this.noise9.noiseValueMin, this.noise9.noiseValueMax, 0.3, 1), //0.5,
+                        angleMin: 2 * Math.PI / 12 * 5,
+                        angleMax: 2 * Math.PI / 12 * 7,
+                        revert: true,
+                        cutOutValue: -1,
+                        loopCount: 20, // map(this.boxes[i].noiseValue9, this.noise9.noiseValueMin, this.noise9.noiseValueMax, 10, 20), // 10,
+                        colorList: this.palette2.palette,
+                        noiseAngle: false,
+                        normIt: false,
+                        group: "",
+                    }
+                )
+
+            }
+        }
+
+    }
+    loop7() {
+        let randomIndex = getRandomIndex(this.boxes.length);
+
+        let i = 0;
+
+        for (var v = 0; v < randomIndex.length; v++) {
+
+            i = randomIndex[v];
+
+            if (this.drawSkipMargin(this.boxes[i])) {
+                continue;
+            }
+
+            // big but sparse
+            if (this.boxes[i].aboveHorizon) {
+
+                this.digndag(
+                    {
+                        centerX: this.boxes[i].center.x + this.boxes[i].offset.x,
+                        centerY: this.boxes[i].center.y + this.boxes[i].offset.y,
+                        noiseValue: this.boxes[i].noiseValue1,
+                        vertexLength: 20, // map(this.boxes[i].noiseValue12, this.noise12.noiseValueMin, this.noise12.noiseValueMax, 5, 15),
+                        strokeWeighty: 1, // map(this.boxes[i].noiseValue12, this.noise11.noiseValueMin, this.noise11.noiseValueMax, 0.3, 0.6),
+                        angleMin: 2 * Math.PI / 12 * 1,
+                        angleMax: 2 * Math.PI / 12 * 3,
+                        revert: true,
+                        cutOutValue: -1,
+                        loopCount: 20,
+                        // colorList: ["#000000", "#524444", "#8a7878", "#ccb3b3"],
+                        colorList: this.palette1.palette,
+                        noiseAngle: false,
+                        normIt: false,
+                        group: "",
+                    }
+                );
+            } else {
+                this.digndag(
+                    {
+                        centerX: this.boxes[i].center.x + this.boxes[i].offset.x,
+                        centerY: this.boxes[i].center.y + this.boxes[i].offset.y,
+                        noiseValue: this.boxes[i].noiseValue2,
+                        vertexLength: 20, // map(this.boxes[i].noiseValue2, -1, 1, 5, 15),
+                        strokeWeighty: 0.4, // map(this.boxes[i].noiseValue9, this.noise9.noiseValueMin, this.noise9.noiseValueMax, 0.3, 1), //0.5,
+                        angleMin: 2 * Math.PI / 12 * 5,
+                        angleMax: 2 * Math.PI / 12 * 7,
+                        revert: true,
+                        cutOutValue: -1,
+                        loopCount: 20, // map(this.boxes[i].noiseValue9, this.noise9.noiseValueMin, this.noise9.noiseValueMax, 10, 20), // 10,
+                        colorList: this.palette2.palette,
+                        noiseAngle: false,
+                        normIt: false,
+                        group: "",
+                    }
+                )
+
+            }
+        }
+
+    }
+    loop8() {
+        let randomIndex = getRandomIndex(this.boxes.length);
+
+        let i = 0;
+
+        for (var v = 0; v < randomIndex.length; v++) {
+
+            i = randomIndex[v];
+
+            if (this.drawSkipMargin(this.boxes[i])) {
+                continue;
+            }
+
+            this.zignzag(
+                {
+                    centerX: this.boxes[i].center.x + this.boxes[i].offset.x,
+                    centerY: this.boxes[i].center.y + this.boxes[i].offset.y,
+                    noiseValue: this.boxes[i].noiseValue8,
+                    vertexLength: map(this.boxes[i].noiseValue8, -1, 1, 5, 20), // 15,
+                    strokeWeighty: map(this.boxes[i].noiseValue8, -1, 1, 0.05, 0.3), // 1,
+                    angleMin: 0,
+                    angleMax: Math.PI,
+                    cutOutValue: -1,
+                    loopCount: 20,
+                    // colorList: ["#000000", "#524444", "#8a7878", "#ccb3b3"],
+                    colorList: ["#444444"],
+                    group: "",
+                }
+            );
+
         }
 
     }

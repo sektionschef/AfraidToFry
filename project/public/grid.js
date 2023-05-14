@@ -44,6 +44,8 @@ class Grid {
 
         this.palette = new dynamicPalette(this.drawing, "#6363b1");
 
+        this.noise1 = new noiseArea(50, 100);
+
         // this.buffer = createGraphics(width, height, SVG);
         // this.bufferNoise = createGraphics(width, height, SVG);
 
@@ -96,7 +98,7 @@ class Grid {
                 // var polygonLeft = insidePolygon([center.x, center.y], polyPointsLeft);
 
                 var horizon = h == this.horizonRow;
-                var aboveHorizon = h <= this.horizonRow;
+                var aboveHorizon = h <= this.horizonRow;;
 
                 this.boxes.push({
                     "center": center,
@@ -109,7 +111,7 @@ class Grid {
                     "width": w,
                     "index": index,
                     "mask": false,
-                    "noiseValue": noise.simplex2(w / 10, h / 50),
+                    "noiseValue1": this.noise1.createNoiseValue(w, h),
                     // "noiseValue1": noiseValue1,
                     // "noiseValue2": noiseValue2,
                     // "noiseValue3": noiseValue3,
@@ -262,11 +264,11 @@ class Grid {
 
                 this.digndag(
                     {
-                        centerX: this.boxes[i].center.x + this.boxes[i].offset.x,  // nicht center?
-                        centerY: this.boxes[i].center.y + this.boxes[i].offset.y, // nicht center?
+                        centerX: this.boxes[i].center.x + this.boxes[i].offset.x,
+                        centerY: this.boxes[i].center.y + this.boxes[i].offset.y,
                         noiseNumber: 11,
                         noiseNumberB: 12,
-                        noiseValue: this.boxes[i].noiseValue, // this.boxes[i].noiseValue12,
+                        noiseValue: this.boxes[i].noiseValue1,
                         vertexLength: 20, // map(this.boxes[i].noiseValue12, this.noise12.noiseValueMin, this.noise12.noiseValueMax, 5, 15),
                         strokeWeighty: 1, // map(this.boxes[i].noiseValue12, this.noise11.noiseValueMin, this.noise11.noiseValueMax, 0.3, 0.6),
                         angleMin: 2 * Math.PI / 12 * 1,

@@ -65,10 +65,11 @@ SVG.on(document, 'DOMContentLoaded', function () {
         DEBUG: false,
     });
 
-    // let palette = new dynamicPalette(drawing, "#6363b1");
+
+    // let palette = new dynamicPalette(drawing, "#6363b1", 2, 1);
     // palette.show();
 
-    // let noiseDebug = new noiseArea(10, 50);
+    // let noiseDebug = new noiseArea(120, 4);
     // noiseDebug.drawNoise(drawing, 80);
 
 })

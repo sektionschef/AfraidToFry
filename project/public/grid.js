@@ -42,16 +42,16 @@ class Grid {
         // this.stripes = [];
         // this.stripeLines = [];
 
-        this.palette1 = new dynamicPalette(this.drawing, "#6363b1");
-        this.palette2 = new dynamicPalette(this.drawing, "#63b181");
-        this.palette3 = new dynamicPalette(this.drawing, "#6363b1");
-        this.palette4 = new dynamicPalette(this.drawing, "#63b181");
-        this.palette5 = new dynamicPalette(this.drawing, "#6363b1");
-        this.palette6 = new dynamicPalette(this.drawing, "#63b181");
-        this.palette7 = new dynamicPalette(this.drawing, "#6363b1");
-        this.palette8 = new dynamicPalette(this.drawing, "#63b181");
+        this.palette1 = new dynamicPalette(this.drawing, "#6bb9ee", 2, 5);
+        this.palette2 = new dynamicPalette(this.drawing, "#367939", 2, 5);
+        // this.palette3 = new dynamicPalette(this.drawing, "#6363b1");
+        // this.palette4 = new dynamicPalette(this.drawing, "#63b181");
+        // this.palette5 = new dynamicPalette(this.drawing, "#6363b1");
+        // this.palette6 = new dynamicPalette(this.drawing, "#63b181");
+        // this.palette7 = new dynamicPalette(this.drawing, "#6363b1");
+        // this.palette8 = new dynamicPalette(this.drawing, "#63b181");
 
-        this.noise1 = new noiseArea(150, 10);
+        this.noise1 = new noiseArea(120, 4);
         this.noise2 = new noiseArea(140, 4);
         this.noise3 = new noiseArea(150, 10);
         this.noise4 = new noiseArea(140, 9);
@@ -96,7 +96,7 @@ class Grid {
         // this.loop5();
         // this.loop6();
         // this.loop7();
-        this.loop8();
+        // this.loop8();
     }
 
     createBoxes() {
@@ -301,12 +301,12 @@ class Grid {
                         centerY: this.boxes[i].center.y + this.boxes[i].offset.y,
                         noiseValue: this.boxes[i].noiseValue1,
                         vertexLength: 20, // map(this.boxes[i].noiseValue12, this.noise12.noiseValueMin, this.noise12.noiseValueMax, 5, 15),
-                        strokeWeighty: 1, // map(this.boxes[i].noiseValue12, this.noise11.noiseValueMin, this.noise11.noiseValueMax, 0.3, 0.6),
+                        strokeWeighty: 5, // map(this.boxes[i].noiseValue12, this.noise11.noiseValueMin, this.noise11.noiseValueMax, 0.3, 0.6),
                         angleMin: 2 * Math.PI / 12 * 1,
                         angleMax: 2 * Math.PI / 12 * 3,
                         revert: true,
                         cutOutValue: -1,
-                        loopCount: 20,
+                        loopCount: 5,
                         // colorList: ["#000000", "#524444", "#8a7878", "#ccb3b3"],
                         colorList: this.palette1.palette,
                         noiseAngle: false,
@@ -319,14 +319,14 @@ class Grid {
                     {
                         centerX: this.boxes[i].center.x + this.boxes[i].offset.x,
                         centerY: this.boxes[i].center.y + this.boxes[i].offset.y,
-                        noiseValue: this.boxes[i].noiseValue2,
+                        noiseValue: this.boxes[i].noiseValue1,
                         vertexLength: 20, // map(this.boxes[i].noiseValue2, -1, 1, 5, 15),
-                        strokeWeighty: 0.4, // map(this.boxes[i].noiseValue9, this.noise9.noiseValueMin, this.noise9.noiseValueMax, 0.3, 1), //0.5,
+                        strokeWeighty: 5, // map(this.boxes[i].noiseValue9, this.noise9.noiseValueMin, this.noise9.noiseValueMax, 0.3, 1), //0.5,
                         angleMin: 2 * Math.PI / 12 * 5,
                         angleMax: 2 * Math.PI / 12 * 7,
                         revert: true,
                         cutOutValue: -1,
-                        loopCount: 20, // map(this.boxes[i].noiseValue9, this.noise9.noiseValueMin, this.noise9.noiseValueMax, 10, 20), // 10,
+                        loopCount: 5, // map(this.boxes[i].noiseValue9, this.noise9.noiseValueMin, this.noise9.noiseValueMax, 10, 20), // 10,
                         colorList: this.palette2.palette,
                         noiseAngle: false,
                         normIt: false,

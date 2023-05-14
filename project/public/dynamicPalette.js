@@ -1,9 +1,10 @@
 // create a palette with 9 tones - 4 down 4 up and base color in the middel
 class dynamicPalette {
-    constructor(drawing, baseColor) {
+    constructor(drawing, baseColor, lChange, sChange) {
 
-        this.lChange = 2;
-        this.sChange = 1;
+        // change in lightness and in saturation
+        this.lChange = lChange;
+        this.sChange = sChange;
 
         this.drawing = drawing;
         this.baseColor = tinycolor(baseColor);

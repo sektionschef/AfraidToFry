@@ -30,9 +30,7 @@ if (rescaling_width <= rescaling_height) {
 
 
 SVG.on(document, 'DOMContentLoaded', function () {
-    // for (var i = 0; i < 30000; i++) {
 
-    // var drawing = SVG().addTo('body')
     var drawing = SVG().viewbox(0, 0, rescaling_width, rescaling_height).addTo('#badAssCanvas')
 
 

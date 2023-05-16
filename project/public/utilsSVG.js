@@ -136,3 +136,21 @@ function getRandomIndex(lengthy) {
     return randomIndex
 }
 
+
+// eport svg - https://stackoverflow.com/questions/60921718/save-generated-svg-with-svg-js-as-svg-file 
+function downloadString(text, fileType, fileName) {
+    var blob = new Blob([text], { type: fileType });
+
+    var a = document.createElement('a');
+    a.download = fileName;
+    a.href = URL.createObjectURL(blob);
+    a.dataset.downloadurl = [fileType, a.download, a.href].join(':');
+    a.style.display = "none";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 1500);
+}
+
+
+

@@ -70,5 +70,21 @@ SVG.on(document, 'DOMContentLoaded', function () {
     // let noiseDebug = new noiseArea(120, 4);
     // noiseDebug.drawNoise(drawing, 80);
 
+
+
+    // Add event listener on keydown -  https://www.section.io/engineering-education/keyboard-events-in-javascript/ 
+    document.addEventListener('keydown', (event) => {
+        var name = event.key;
+        var code = event.code;
+
+        if (event.code == "KeyE") {
+            downloadString(drawing.svg(), "image/svg+xml", "oida.svg");
+        }
+
+        // Alert the key name and key code on keydown
+        // alert(`Key pressed ${name} \r\n Key code value: ${code}`);
+
+    }, false);
+
 })
 

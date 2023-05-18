@@ -58,8 +58,10 @@ SVG.on(document, 'DOMContentLoaded', function () {
 
     let grid = new Grid({
         drawing: drawing,
-        marginBoxCount: 5,
-        shortBoxCount: 80,
+        // marginBoxCount: 5,
+        marginBoxCount: 10,
+        // shortBoxCount: 80,
+        shortBoxCount: 160,
         DEBUG: false,
     });
 

@@ -31,8 +31,10 @@ if (rescaling_width <= rescaling_height) {
 
 SVG.on(document, 'DOMContentLoaded', function () {
 
-    var drawing = SVG().viewbox(0, 0, rescaling_width, rescaling_height).addTo('#badAssCanvas')
+    var drawing = SVG().viewbox(0, 0, rescaling_width, rescaling_height).addTo('#badAssCanvas');
 
+    // background
+    drawing.rect(rescaling_width, rescaling_height).fill("#ffffff");
 
     // var polyline = draw.polyline('0,0 100,50 50,100').fill('none').stroke({ width: 1, color: '#c01b1b' });
     // drawing.rect(100, 100).move(100, 50).fill('#f06')

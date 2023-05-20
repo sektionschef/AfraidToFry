@@ -3,7 +3,7 @@ class Grid {
     constructor(data) {
         this.horizonRatio = 4 / 7;
 
-        this.OK = true;  // time limit reached
+        this.overshoot = data.overshoot;  // time limit reached
         this.finished = false;  // flag for completely drawn
 
         this.DEBUG = data.DEBUG;
@@ -76,14 +76,22 @@ class Grid {
         // this.palette15 = new dynamicPalette(this.drawing, "#6286a0", 2, 0, 0);
         // this.palette16 = new dynamicPalette(this.drawing, "#6286a0", 2, 0, 0);
 
-        // this.aboveTone = "#6286a0";
-        // this.underneathTone = "#548155";
-        this.aboveTone = "#cdd7df";
-        this.underneathTone = "#6e8578";
-        // this.vogerl1 = new dynamicPalette(this.drawing, "#3d4a66", -2, 0);
-        this.vogerl1 = { palette: ["#a0a8be"] };
-        // this.vogerl2 = new dynamicPalette(this.drawing, "#374736", 5, -2);
-        this.vogerl2 = { palette: ["#94a595"] };
+        if (this.overshoot == true) {
+            this.aboveTone = "#cec9b1";
+            this.underneathTone = "#869290";
+
+            this.vogerl1 = { palette: ["#a0a8be"] };
+            this.vogerl2 = { palette: ["#94a595"] };
+        } else {
+            this.aboveTone = "#cdd7df";
+            this.underneathTone = "#6e8578";
+            // this.vogerl1 = new dynamicPalette(this.drawing, "#3d4a66", -2, 0);
+            this.vogerl1 = { palette: ["#a0a8be"] };
+            // this.vogerl1 = { palette: [this.underneathTone] };
+            // this.vogerl2 = new dynamicPalette(this.drawing, "#374736", 5, -2);
+            this.vogerl2 = { palette: ["#94a595"] };
+            // this.vogerl2 = { palette: [this.aboveTone] };
+        }
 
 
         this.palette1 = new dynamicPalette(this.drawing, this.aboveTone, 3, 4, -2);
@@ -111,7 +119,7 @@ class Grid {
         this.noise5 = new noiseArea(5, 15);
         this.noise6 = new noiseArea(120, 15);
         this.noise7 = new noiseArea(150, 10);
-        this.noise8 = new noiseArea(190, 2);
+        this.noise8 = new noiseArea(120, 60);
 
         // this.buffer = createGraphics(width, height, SVG);
         // this.bufferNoise = createGraphics(width, height, SVG);
@@ -152,7 +160,7 @@ class Grid {
         // this.loop6();  // empty
         // this.loop7();  // empty
 
-        // this.loop8();
+        this.loop8();
     }
 
     createBoxes() {
@@ -468,48 +476,6 @@ class Grid {
                         }
                     )
                 }
-
-
-                // if (this.boxes[i].aboveHorizon) {
-                //     this.digndag(
-                //         {
-                //             centerX: this.boxes[i].center.x + this.boxes[i].offset.x,
-                //             centerY: this.boxes[i].center.y + this.boxes[i].offset.y,
-                //             noiseValue: this.boxes[i].noiseValue1,
-                //             vertexLength: 20,
-                //             strokeWeighty: 0.4,
-                //             // angleMin: 2 * Math.PI / 12 * 1,
-                //             // angleMax: 2 * Math.PI / 12 * 3,
-                //             angleMin: 2 * Math.PI / 12 * 5.5,
-                //             angleMax: 2 * Math.PI / 12 * 6.5,
-                //             revert: true,
-                //             cutOutValue: -1,
-                //             loopCount: 20,
-                //             colorList: this.palette1.palette,
-                //             noiseAngle: false,
-                //             group: "",
-                //         }
-                //     );
-                // } else {
-                //     this.digndag(
-                //         {
-                //             centerX: this.boxes[i].center.x + this.boxes[i].offset.x,
-                //             centerY: this.boxes[i].center.y + this.boxes[i].offset.y,
-                //             noiseValue: this.boxes[i].noiseValue1,
-                //             vertexLength: 20, // map(this.boxes[i].noiseValue2, -1, 1, 5, 15),
-                //             strokeWeighty: 0.4, // map(this.boxes[i].noiseValue9, this.noise9.noiseValueMin, this.noise9.noiseValueMax, 0.3, 1), //0.5,
-                //             angleMin: 2 * Math.PI / 12 * 5.5,
-                //             angleMax: 2 * Math.PI / 12 * 6.5,
-                //             revert: true,
-                //             cutOutValue: -1,
-                //             loopCount: 20,
-                //             colorList: this.palette2.palette,
-                //             noiseAngle: false,
-                //             normIt: false,
-                //             group: "",
-                //         }
-                //     )
-                // }
 
                 if (this.boxes[i].aboveHorizon) {
                     this.digndag(
@@ -955,12 +921,12 @@ class Grid {
                         centerX: this.boxes[i].center.x + this.boxes[i].offset.x,
                         centerY: this.boxes[i].center.y + this.boxes[i].offset.y,
                         noiseValue: this.boxes[i].noiseValue8,
-                        vertexLength: map(this.boxes[i].noiseValue8, -1, 1, 1, 10), // 15,
+                        vertexLength: 5, // map(this.boxes[i].noiseValue8, -1, 1, 5, 10), // 15,
                         strokeWeighty: 0.1, // map(this.boxes[i].noiseValue8, -1, 1, 0.1, 0.3), // 1,
                         angleMin: 0,
                         angleMax: Math.PI,
-                        cutOutValue: 0,
-                        loopCount: map(this.boxes[i].noiseValue8, -1, 1, 1, 16),
+                        cutOutValue: -1,
+                        loopCount: map(this.boxes[i].noiseValue8, -1, 1, 1, 15),
                         colorList: this.vogerl1.palette,
                         group: "",
                     }
@@ -971,12 +937,12 @@ class Grid {
                         centerX: this.boxes[i].center.x + this.boxes[i].offset.x,
                         centerY: this.boxes[i].center.y + this.boxes[i].offset.y,
                         noiseValue: this.boxes[i].noiseValue8,
-                        vertexLength: map(this.boxes[i].noiseValue8, -1, 1, 1, 10), // 15,
+                        vertexLength: 5, // map(this.boxes[i].noiseValue8, -1, 1, 5, 10), // 15,
                         strokeWeighty: 0.1, // map(this.boxes[i].noiseValue8, -1, 1, 0.1, 0.3), // 1,
                         angleMin: 0,
                         angleMax: Math.PI,
-                        cutOutValue: 0,
-                        loopCount: map(this.boxes[i].noiseValue8, -1, 1, 1, 16),
+                        cutOutValue: -1,
+                        loopCount: map(this.boxes[i].noiseValue8, -1, 1, 1, 15),
                         colorList: this.vogerl2.palette,
                         group: "",
                     }

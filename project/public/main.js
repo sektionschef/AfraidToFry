@@ -7,7 +7,7 @@ let YEAR = "2023";
 let PRICE = "ꜩ 4";
 let EDITIONS = "100 editions";
 
-let STATE = "cool";
+let OVERSHOOT = true;
 
 setTagsHTML();
 
@@ -78,6 +78,7 @@ SVG.on(document, 'DOMContentLoaded', function () {
         marginBoxCount: 15,
         // shortBoxCount: 80,
         shortBoxCount: 160,
+        overshoot: OVERSHOOT,
         DEBUG: false,
     });
 
@@ -119,6 +120,7 @@ function triggerDings() {
     grid2 = new Grid2({
         marginBoxCount: 5,  // 5
         shortBoxCount: 80,
+        overshoot: OVERSHOOT,
         DEBUG: false,
     });
 
@@ -138,18 +140,18 @@ function timeChecker() {
 
     if (today.getHours() >= switchHour && today.getMinutes() >= switchMinute) {
         // return true;
-        if (STATE == "cool") {
-            STATE = "hot";
+        if (OVERSHOOT == false) {
+            OVERSHOOT = true;
             triggerDings();
         }
     } else {
-        if (STATE == "hot") {
-            STATE = "cool";
+        if (OVERSHOOT == true) {
+            OVERSHOOT = false;
             triggerDings();
         }
     }
 
-    console.log(STATE);
+    console.log(OVERSHOOT);
 }
 
 

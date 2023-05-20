@@ -1,4 +1,18 @@
 
+let TITLE = "afraid to fry";
+let ARTIST = "Stefan Schwaha, @sektionschef";
+let DESCRIPTION = "Javascript on html canvas";
+let URL = "https://digitalitility.com";
+let YEAR = "2023";
+let PRICE = "ꜩ 4";
+let EDITIONS = "100 editions";
+
+let STATE = "cool";
+
+setTagsHTML();
+
+let BULK = false;  // bulk export images
+
 canvasFormats = [
     // {
     //   "name": "1:1",
@@ -68,7 +82,8 @@ SVG.on(document, 'DOMContentLoaded', function () {
     });
 
 
-    // let palette = new dynamicPalette(drawing, "#6363b1", 2, 1);
+    // let palette = new dynamicPalette(drawing, "#6363b1", 0, 2, 1);
+    // let palette = new dynamicPalette(drawing, "#6363b1", 3, 1, 1);
     // palette.show();
 
     // let noiseDebug = new noiseArea(120, 4);

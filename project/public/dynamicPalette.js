@@ -1,8 +1,9 @@
 // create a palette with 9 tones - 4 down 4 up and base color in the middel
 class dynamicPalette {
-    constructor(drawing, baseColor, lChange, sChange) {
+    constructor(drawing, baseColor, cChange, lChange, sChange) {
 
         // change in lightness and in saturation
+        this.cChange = cChange;
         this.lChange = lChange;
         this.sChange = sChange;
 
@@ -20,14 +21,19 @@ class dynamicPalette {
         this.palette[this.upAndDown] = this.baseColor.toHexString();
 
         for (var i = 1; i < (this.upAndDown + 1); i++) {
-            _color_end.lighten(this.lChange * i);
-            _color_beginning.darken(this.lChange * i);
+            _color_end.spin(this.cChange * i).lighten(this.lChange * i).desaturate(this.sChange * i);
+            _color_beginning.spin(-this.cChange * i).darken(this.lChange * i).saturate(this.sChange * i);
+
+            // _color_end.spin(this.cChange * i);
+            // _color_end.lighten(this.lChange * i);
+            // _color_beginning.darken(this.lChange * i);
 
             // _color_beginning.saturate(this.sChange * i);
             // _color_end.saturate(this.sChange * i);
 
-            _color_beginning.desaturate(this.sChange * i);
-            _color_end.desaturate(this.sChange * i);
+            // _color_beginning.spin(-this.cChange * i);
+            // _color_beginning.desaturate(this.sChange * i);
+            // _color_end.desaturate(this.sChange * i);
 
             this.palette[this.upAndDown - i] = _color_beginning.toHexString();
             this.palette[(this.upAndDown + i)] = _color_end.toHexString();

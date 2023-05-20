@@ -59,27 +59,50 @@ class Grid {
         // this.palette15 = new dynamicPalette(this.drawing, "#6eb179", 0, 0);
         // this.palette16 = new dynamicPalette(this.drawing, "#a2bfe0", 0, 0);
 
-        this.palette1 = new dynamicPalette(this.drawing, "#6286a0", 3, 4, -2);
-        this.palette2 = new dynamicPalette(this.drawing, "#548155", 3, 4, 2);
-        this.palette3 = new dynamicPalette(this.drawing, "#6286a0", 2, -2, 0);
-        this.palette4 = new dynamicPalette(this.drawing, "#548155", 2, -2, 0);
-        this.palette5 = new dynamicPalette(this.drawing, "#6286a0", 2, 0, 0);
-        this.palette6 = new dynamicPalette(this.drawing, "#6286a0", 2, 0, 0);
-        this.palette7 = new dynamicPalette(this.drawing, "#6286a0", 2, 2, 2);
-        this.palette8 = new dynamicPalette(this.drawing, "#6286a0", 2, 2, 0);
-        this.palette9 = new dynamicPalette(this.drawing, "#6286a0", 2, 1, 1);
-        this.palette10 = new dynamicPalette(this.drawing, "#6286a0", 2, 1, 1);
-        this.palette11 = new dynamicPalette(this.drawing, "#6286a0", 2, 2, 0);
-        this.palette12 = new dynamicPalette(this.drawing, "#548155", 2, 2, 0);
-        this.palette13 = new dynamicPalette(this.drawing, "#6286a0", 2, 2, 0);
-        this.palette14 = new dynamicPalette(this.drawing, "#6286a0", 2, 2, 0);
-        this.palette15 = new dynamicPalette(this.drawing, "#6286a0", 2, 0, 0);
-        this.palette16 = new dynamicPalette(this.drawing, "#6286a0", 2, 0, 0);
+        // this.palette1 = new dynamicPalette(this.drawing, "#6286a0", 3, 4, -2);
+        // this.palette2 = new dynamicPalette(this.drawing, "#548155", 3, 4, 2);
+        // this.palette3 = new dynamicPalette(this.drawing, "#6286a0", 1, -2, 1);
+        // this.palette4 = new dynamicPalette(this.drawing, "#548155", 1, -2, 1);
+        // this.palette5 = new dynamicPalette(this.drawing, "#6286a0", 2, 0, 0);
+        // this.palette6 = new dynamicPalette(this.drawing, "#6286a0", 2, 0, 0);
+        // this.palette7 = new dynamicPalette(this.drawing, "#6286a0", 2, 2, 2);
+        // this.palette8 = new dynamicPalette(this.drawing, "#6286a0", 2, 2, 0);
+        // this.palette9 = new dynamicPalette(this.drawing, "#6286a0", 2, 1, 1);
+        // this.palette10 = new dynamicPalette(this.drawing, "#6286a0", 2, 1, 1);
+        // this.palette11 = new dynamicPalette(this.drawing, "#6286a0", 2, 2, 0);
+        // this.palette12 = new dynamicPalette(this.drawing, "#548155", 2, 2, 0);
+        // this.palette13 = new dynamicPalette(this.drawing, "#6286a0", 2, 2, 0);
+        // this.palette14 = new dynamicPalette(this.drawing, "#6286a0", 2, 2, 0);
+        // this.palette15 = new dynamicPalette(this.drawing, "#6286a0", 2, 0, 0);
+        // this.palette16 = new dynamicPalette(this.drawing, "#6286a0", 2, 0, 0);
 
+        // this.aboveTone = "#6286a0";
+        // this.underneathTone = "#548155";
+        this.aboveTone = "#cdd7df";
+        this.underneathTone = "#6e8578";
         // this.vogerl1 = new dynamicPalette(this.drawing, "#3d4a66", -2, 0);
-        this.vogerl1 = { palette: ["#383d4b"] };
+        this.vogerl1 = { palette: ["#a0a8be"] };
         // this.vogerl2 = new dynamicPalette(this.drawing, "#374736", 5, -2);
         this.vogerl2 = { palette: ["#2b3a2c"] };
+
+
+        this.palette1 = new dynamicPalette(this.drawing, this.aboveTone, 3, 4, -2);
+        this.palette2 = new dynamicPalette(this.drawing, this.underneathTone, 3, 4, 2);
+        this.palette3 = new dynamicPalette(this.drawing, this.aboveTone, 1, -2, 1);
+        this.palette4 = new dynamicPalette(this.drawing, this.underneathTone, 1, -2, 1);
+        this.palette5 = new dynamicPalette(this.drawing, this.aboveTone, 2, 0, 0);
+        this.palette6 = new dynamicPalette(this.drawing, this.underneathTone, 2, 0, 0);
+        this.palette7 = new dynamicPalette(this.drawing, this.aboveTone, 2, 2, 2);
+        this.palette8 = new dynamicPalette(this.drawing, this.underneathTone, 2, 2, 0);
+        this.palette9 = new dynamicPalette(this.drawing, this.aboveTone, 2, 1, 1);
+        this.palette10 = new dynamicPalette(this.drawing, this.underneathTone, 2, 1, 1);
+        this.palette11 = new dynamicPalette(this.drawing, this.aboveTone, 2, 2, 0);
+        this.palette12 = new dynamicPalette(this.drawing, this.underneathTone, 2, 2, 0);
+        this.palette13 = new dynamicPalette(this.drawing, this.aboveTone, 2, 2, 0);
+        this.palette14 = new dynamicPalette(this.drawing, this.underneathTone, 2, 2, 0);
+        this.palette15 = new dynamicPalette(this.drawing, this.aboveTone, 2, 0, 0);
+        this.palette16 = new dynamicPalette(this.drawing, this.underneathTone, 2, 0, 0);
+
 
         this.noise1 = new noiseArea(120, 1);
         this.noise2 = new noiseArea(140, 15);
@@ -129,7 +152,7 @@ class Grid {
         // this.loop6();  // empty
         // this.loop7();  // empty
 
-        // this.loop8();
+        this.loop8();
     }
 
     createBoxes() {

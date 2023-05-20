@@ -2,7 +2,7 @@
 let TITLE = "afraid to fry";
 let ARTIST = "Stefan Schwaha, @sektionschef";
 let DESCRIPTION = "Javascript on html canvas";
-let URL = "https://digitalitility.com";
+let WEBSITE = "https://digitalitility.com";
 let YEAR = "2023";
 let PRICE = "ꜩ 4";
 let EDITIONS = "100 editions";
@@ -75,7 +75,7 @@ SVG.on(document, 'DOMContentLoaded', function () {
     let grid = new Grid({
         drawing: drawing,
         // marginBoxCount: 5,
-        marginBoxCount: 10,
+        marginBoxCount: 15,
         // shortBoxCount: 80,
         shortBoxCount: 160,
         DEBUG: false,
@@ -93,17 +93,64 @@ SVG.on(document, 'DOMContentLoaded', function () {
 
     // Add event listener on keydown -  https://www.section.io/engineering-education/keyboard-events-in-javascript/ 
     document.addEventListener('keydown', (event) => {
-        var name = event.key;
-        var code = event.code;
+
+        var filename = TITLE + "_" + fxhash + "_" + getTimestamp() + ".svg";
 
         if (event.code == "KeyE") {
-            downloadString(drawing.svg(), "image/svg+xml", "oida.svg");
+            // alert("oida is going down");
+            downloadString(drawing.svg(), "image/svg+xml", filename);
         }
 
         // Alert the key name and key code on keydown
+        // var name = event.key;
+        // var code = event.code;
         // alert(`Key pressed ${name} \r\n Key code value: ${code}`);
 
     }, false);
 
 })
 
+
+function triggerDings() {
+    console.log("trigger initiated");
+
+    // MAYBE CLEAR EVERYTHING ON CANVAS
+
+    grid2 = new Grid2({
+        marginBoxCount: 5,  // 5
+        shortBoxCount: 80,
+        DEBUG: false,
+    });
+
+    // restart loop
+    loop();
+}
+
+
+function timeChecker() {
+
+    let switchHour = 21;
+    let switchMinute = 18;
+
+    var today = new Date();
+    // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    // console.log(time);
+
+    if (today.getHours() >= switchHour && today.getMinutes() >= switchMinute) {
+        // return true;
+        if (STATE == "cool") {
+            STATE = "hot";
+            triggerDings();
+        }
+    } else {
+        if (STATE == "hot") {
+            STATE = "cool";
+            triggerDings();
+        }
+    }
+
+    console.log(STATE);
+}
+
+
+// setInterval(timeChecker, 1000 * 60 * 1); // every minute check

@@ -11,75 +11,86 @@ const sp = new URLSearchParams(window.location.search);
 // this is how to define parameters
 $fx.params([
   {
-    id: "city_id",
-    name: "City",
+    id: "country_id",
+    name: "Country",
     type: "select",
-    //default: "bear",
+    default: "Austria",
     options: {
-      options: ["Vienna", "Chicago", "Bangkok"],
+      options: ["Austria"],
     }
   },
-  {
-    id: "number_id",
-    name: "A number/float64",
-    type: "number",
-    //default: Math.PI,
-    options: {
-      min: 1,
-      max: 10,
-      step: 0.00000000000001,
-    },
-  },
-  {
-    id: "bigint_id",
-    name: "A bigint",
-    type: "bigint",
-    //default: BigInt(Number.MAX_SAFE_INTEGER * 2),
-    options: {
-      min: Number.MIN_SAFE_INTEGER * 4,
-      max: Number.MAX_SAFE_INTEGER * 4,
-      step: 1,
-    },
-  },
-  {
-    id: "select_id",
-    name: "A selection",
-    type: "select",
-    //default: "pear",
-    options: {
-      options: ["apple", "orange", "pear"],
-    }
-  },
-  {
-    id: "color_id",
-    name: "A color",
-    type: "color",
-    //default: "ff0000",
-  },
-  {
-    id: "boolean_id",
-    name: "A boolean",
-    type: "boolean",
-    //default: true,
-  },
-  {
-    id: "string_id",
-    name: "A string",
-    type: "string",
-    //default: "hello",
-    options: {
-      minLength: 1,
-      maxLength: 64
-    }
-  },
+  // {
+  //   id: "number_id",
+  //   name: "A number/float64",
+  //   type: "number",
+  //   //default: Math.PI,
+  //   options: {
+  //     min: 1,
+  //     max: 10,
+  //     step: 0.00000000000001,
+  //   },
+  // },
+  // {
+  //   id: "bigint_id",
+  //   name: "A bigint",
+  //   type: "bigint",
+  //   //default: BigInt(Number.MAX_SAFE_INTEGER * 2),
+  //   options: {
+  //     min: Number.MIN_SAFE_INTEGER * 4,
+  //     max: Number.MAX_SAFE_INTEGER * 4,
+  //     step: 1,
+  //   },
+  // },
+  // {
+  //   id: "select_id",
+  //   name: "A selection",
+  //   type: "select",
+  //   //default: "pear",
+  //   options: {
+  //     options: ["apple", "orange", "pear"],
+  //   }
+  // },
+  // {
+  //   id: "color_id",
+  //   name: "A color",
+  //   type: "color",
+  //   //default: "ff0000",
+  // },
+  // {
+  //   id: "boolean_id",
+  //   name: "A boolean",
+  //   type: "boolean",
+  //   //default: true,
+  // },
+  // {
+  //   id: "string_id",
+  //   name: "A string",
+  //   type: "string",
+  //   //default: "hello",
+  //   options: {
+  //     minLength: 1,
+  //     maxLength: 64
+  //   }
+  // },
 ]);
+
+// https://docs.google.com/spreadsheets/d/1vFmPb0Q7fCb5MWL4NTcCh001ABJR2qvu2umFBYY2tfU/edit#gid=0
+var overshootStats = {
+  "Austria": {
+    overshootDay: "6. April",
+    overshootTime: "6:19",
+    timeSwitchHour: 6,
+    timeSwitchMinute: 19,
+  }
+}
 
 // this is how features can be defined
 $fx.features({
-  "A random feature": Math.floor($fx.rand() * 10),
-  "A random boolean": $fx.rand() > 0.5,
-  "A random string": ["A", "B", "C", "D"].at(Math.floor($fx.rand() * 4)),
-  "Feature from params, its a number": $fx.getParam("number_id"),
+  // "A random feature": Math.floor($fx.rand() * 10),
+  // "A random boolean": $fx.rand() > 0.5,
+  // "A random string": ["A", "B", "C", "D"].at(Math.floor($fx.rand() * 4)),
+  // "Feature from params, its a number": $fx.getParam("number_id"),
+  "Overshoot Time": overshootStats[$fx.getParam("country_id")].overshootTime,
 })
 
 // log the parameters, for debugging purposes, artists won't have to do that

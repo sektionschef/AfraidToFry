@@ -74,24 +74,17 @@ $fx.params([
   // },
 ]);
 
-// https://docs.google.com/spreadsheets/d/1vFmPb0Q7fCb5MWL4NTcCh001ABJR2qvu2umFBYY2tfU/edit#gid=0
-var overshootStats = {
-  "Austria": {
-    overshootDay: "6. April",
-    overshootTime: "6:19",
-    timeSwitchHour: 6,
-    timeSwitchMinute: 19,
-  }
-}
-
 // this is how features can be defined
 $fx.features({
   // "A random feature": Math.floor($fx.rand() * 10),
   // "A random boolean": $fx.rand() > 0.5,
   // "A random string": ["A", "B", "C", "D"].at(Math.floor($fx.rand() * 4)),
   // "Feature from params, its a number": $fx.getParam("number_id"),
-  "Overshoot Time": overshootStats[$fx.getParam("country_id")].overshootTime,
+  // "Overshoot Time": overshootStats[$fx.getParam("country_id")].overshootTime,
 })
+
+// console.log(OVERSHOOTHOUR);
+// console.log(OVERSHOOTMINUTE);
 
 // log the parameters, for debugging purposes, artists won't have to do that
 // console.log("Current param values:")

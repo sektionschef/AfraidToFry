@@ -7,7 +7,8 @@ let YEAR = "2023";
 let PRICE = "ꜩ 4";
 let EDITIONS = "100 editions";
 
-let OVERSHOOT = true;
+let OVERSHOOT = "start";
+var drawing = "";
 
 setTagsHTML();
 
@@ -45,10 +46,7 @@ if (rescaling_width <= rescaling_height) {
 
 SVG.on(document, 'DOMContentLoaded', function () {
 
-    var drawing = SVG().viewbox(0, 0, rescaling_width, rescaling_height).addTo('#badAssCanvas');
-
-    // background
-    drawing.rect(rescaling_width, rescaling_height).fill("#ffffff");
+    drawing = SVG().viewbox(0, 0, rescaling_width, rescaling_height).addTo('#badAssCanvas');
 
     // var polyline = draw.polyline('0,0 100,50 50,100').fill('none').stroke({ width: 1, color: '#c01b1b' });
     // drawing.rect(100, 100).move(100, 50).fill('#f06')
@@ -71,17 +69,7 @@ SVG.on(document, 'DOMContentLoaded', function () {
 
     // var polyline = drawing.polyline(polyLineString).fill('none').stroke({ width: 1, color: '#3d7e83' });
 
-
-    let grid = new Grid({
-        drawing: drawing,
-        // marginBoxCount: 5,
-        marginBoxCount: 15,
-        // shortBoxCount: 80,
-        shortBoxCount: 160,
-        overshoot: OVERSHOOT,
-        DEBUG: false,
-    });
-
+    timeChecker();
 
     // let palette = new dynamicPalette(drawing, "#6363b1", 0, 2, 1);
     // let palette = new dynamicPalette(drawing, "#6363b1", 3, 1, 1);
@@ -112,47 +100,71 @@ SVG.on(document, 'DOMContentLoaded', function () {
 })
 
 
-function triggerDings() {
+function fireTrigger(drawing) {
     console.log("trigger initiated");
 
-    // MAYBE CLEAR EVERYTHING ON CANVAS
+    drawing.clear();
 
-    grid2 = new Grid2({
-        marginBoxCount: 5,  // 5
-        shortBoxCount: 80,
+    // background
+    drawing.rect(rescaling_width, rescaling_height).fill("#ffffff");
+
+    let grid = new Grid({
+        drawing: drawing,
+        // marginBoxCount: 5,
+        marginBoxCount: 15,
+        // shortBoxCount: 80,
+        shortBoxCount: 160,
         overshoot: OVERSHOOT,
         DEBUG: false,
     });
 
-    // restart loop
-    loop();
 }
 
 
 function timeChecker() {
 
-    let switchHour = 21;
-    let switchMinute = 18;
+    // https://docs.google.com/spreadsheets/d/1vFmPb0Q7fCb5MWL4NTcCh001ABJR2qvu2umFBYY2tfU/edit#gid=0
+    var overshootStats = {
+        "Austria": {
+            overshootDay: "6. April",
+            overshootTime: "6:19",
+            timeSwitchHour: 6,
+            timeSwitchMinute: 19,
+        }
+    }
+
+    // let switchHour = OVERSHOOTHOUR;
+    // let switchMinute = OVERSHOOTMINUTE;
+
+    let switchHour = overshootStats[$fx.getParam("country_id")].timeSwitchHour;
+    let switchMinute = overshootStats[$fx.getParam("country_id")].timeSwitchMinute;
 
     var today = new Date();
     // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     // console.log(time);
 
     if (today.getHours() >= switchHour && today.getMinutes() >= switchMinute) {
-        // return true;
-        if (OVERSHOOT == false) {
+        if (OVERSHOOT == false || OVERSHOOT == "start") {
+            console.log("overshoot!")
             OVERSHOOT = true;
-            triggerDings();
+            fireTrigger(drawing);
+        }
+        else {
+            console.log("nothing to do");
         }
     } else {
-        if (OVERSHOOT == true) {
+        if (OVERSHOOT == true || OVERSHOOT == "start") {
+            console.log("no overshoot!")
             OVERSHOOT = false;
-            triggerDings();
+            fireTrigger(drawing);
+        }
+        else {
+            // console.log("nothing to do");
         }
     }
-
-    console.log(OVERSHOOT);
+    // console.log("Overshoot: " + OVERSHOOT);
 }
 
 
-// setInterval(timeChecker, 1000 * 60 * 1); // every minute check
+setInterval(timeChecker, 1000 * 60 * 1); // every minute check
+// setInterval(timeChecker, 1000); // every second

@@ -203,8 +203,8 @@ function triggerDings() {
 
 function timeChecker() {
 
-  let switchHour = 21;
-  let switchMinute = 18;
+  // let switchHour = 21;
+  // let switchMinute = 18;
 
   var today = new Date();
   // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();

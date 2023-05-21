@@ -156,7 +156,7 @@ class Grid {
         // this.loop3();  // combined two
         // this.loop4();  // noisy space
 
-        // this.loop5();  // empty
+        // this.loop5();  // canvas dots
         // this.loop6();  // empty
         // this.loop7();  // empty
 
@@ -862,9 +862,12 @@ class Grid {
 
             i = randomIndex[v];
 
-            if (this.drawSkipMargin(this.boxes[i])) {
-                continue;
-            }
+            // if (this.drawSkipMargin(this.boxes[i])) {
+            //     continue;
+            // }
+
+            // sau
+            drawing.rect(2 + getRandomFromInterval(0, 1), 2 + getRandomFromInterval(0, 1)).move(this.boxes[i].center.x + getRandomFromInterval(0, 3), this.boxes[i].center.y + getRandomFromInterval(0, 3)).fill('#8f8f8f17')
 
 
         }

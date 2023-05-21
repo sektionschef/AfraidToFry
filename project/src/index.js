@@ -1,6 +1,7 @@
 // console.log(fxhash)
 // console.log(fxrand())
 
+
 console.log('');
 console.info(`fxhash: %c${fxhash}`, 'font-weight: bold');
 console.log('');
@@ -80,11 +81,10 @@ $fx.features({
   // "A random boolean": $fx.rand() > 0.5,
   // "A random string": ["A", "B", "C", "D"].at(Math.floor($fx.rand() * 4)),
   // "Feature from params, its a number": $fx.getParam("number_id"),
-  // "Overshoot Time": overshootStats[$fx.getParam("country_id")].overshootTime,
+  "Overshoot Time": OVERSHOOTSTATS[$fx.getParam("country_id")].overshootTime,
 })
 
-// console.log(OVERSHOOTHOUR);
-// console.log(OVERSHOOTMINUTE);
+console.log($fx.getFeatures());
 
 // log the parameters, for debugging purposes, artists won't have to do that
 // console.log("Current param values:")

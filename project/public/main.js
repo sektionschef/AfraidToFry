@@ -1,4 +1,14 @@
 
+// https://docs.google.com/spreadsheets/d/1vFmPb0Q7fCb5MWL4NTcCh001ABJR2qvu2umFBYY2tfU/edit#gid=0
+var OVERSHOOTSTATS = {
+    "Austria": {
+        overshootDay: "6. April",
+        overshootTime: "6:19",
+        timeSwitchHour: 6,
+        timeSwitchMinute: 19,
+    }
+}
+
 let TITLE = "afraid to fry";
 let ARTIST = "Stefan Schwaha, @sektionschef";
 let DESCRIPTION = "Javascript on html canvas";
@@ -123,34 +133,25 @@ function fireTrigger(drawing) {
 
 function timeChecker() {
 
-    // https://docs.google.com/spreadsheets/d/1vFmPb0Q7fCb5MWL4NTcCh001ABJR2qvu2umFBYY2tfU/edit#gid=0
-    var overshootStats = {
-        "Austria": {
-            overshootDay: "6. April",
-            overshootTime: "6:19",
-            timeSwitchHour: 6,
-            timeSwitchMinute: 19,
-        }
-    }
-
-    // let switchHour = OVERSHOOTHOUR;
-    // let switchMinute = OVERSHOOTMINUTE;
-
-    let switchHour = overshootStats[$fx.getParam("country_id")].timeSwitchHour;
-    let switchMinute = overshootStats[$fx.getParam("country_id")].timeSwitchMinute;
+    let switchHour = OVERSHOOTSTATS[$fx.getParam("country_id")].timeSwitchHour;
+    let switchMinute = OVERSHOOTSTATS[$fx.getParam("country_id")].timeSwitchMinute;
 
     var today = new Date();
-    // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    // console.log(time);
+    let currentHour = today.getHours();
+    let currentMinute = today.getMinutes();
+    // console.log(today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds());
 
-    if (today.getHours() >= switchHour && today.getMinutes() >= switchMinute) {
+    // console.log("listening to: " + switchHour + ":" + switchMinute);
+
+
+    if (currentHour >= switchHour || (currentHour == switchHour && currentMinute >= switchMinute)) {
         if (OVERSHOOT == false || OVERSHOOT == "start") {
             console.log("overshoot!")
             OVERSHOOT = true;
             fireTrigger(drawing);
         }
         else {
-            console.log("nothing to do");
+            // console.log("nothing to do");
         }
     } else {
         if (OVERSHOOT == true || OVERSHOOT == "start") {

@@ -108,7 +108,7 @@ class Grid {
         this.palette12 = new dynamicPalette(this.drawing, this.underneathTone, 2, 2, 0);
         this.palette13 = new dynamicPalette(this.drawing, this.aboveTone, 2, 2, 0);
         this.palette14 = new dynamicPalette(this.drawing, this.underneathTone, 2, 2, 0);
-        this.palette15 = new dynamicPalette(this.drawing, this.aboveTone, 2, 0, 0);
+        this.palette15 = new dynamicPalette(this.drawing, this.aboveTone, 2, -2, 0);
         this.palette16 = new dynamicPalette(this.drawing, this.underneathTone, 2, 0, 0);
 
 
@@ -150,17 +150,17 @@ class Grid {
         //     this.loop1();
         // }, 0);
 
-        this.loop1()  // initial one with up and down
+        // this.loop1()  // initial one with up and down
 
         // this.loop2(); // combined two
         // this.loop3();  // combined two
         // this.loop4();  // noisy space
 
         // this.loop5();  // canvas dots
-        // this.loop6();  // empty
+        this.loop6();  // empty
         // this.loop7();  // empty
 
-        this.loop8();
+        // this.loop8();
     }
 
     createBoxes() {
@@ -274,6 +274,8 @@ class Grid {
         if (noiseValue > data.cutOutValue) {
 
             let colorSelect = Math.round(map(noiseValue, -1, 1, 0, (colorList.length - 1)));
+            let color_d = colorList[colorSelect];
+            // let color_d = tinycolor(colorList[colorSelect]).spin(getRandomFromInterval(-20, 20)).darken(getRandomFromInterval(-5, 5)).desaturate(getRandomFromInterval(-10, 10)).toHexString();
 
             // point and add new point
             var oldPoint = center;
@@ -303,7 +305,7 @@ class Grid {
             }
 
             // which stroke cap?
-            this.drawing.polyline(polyLineString).fill('none').stroke({ width: strokeWeighty, color: colorList[colorSelect] });
+            this.drawing.polyline(polyLineString).fill('none').stroke({ width: strokeWeighty, color: color_d });
         }
 
     }
@@ -515,8 +517,28 @@ class Grid {
                             group: "",
                         }
                     )
-
                 }
+            }
+
+            if (this.boxes[i].horizon) {
+                this.digndag(
+                    {
+                        centerX: this.boxes[i].center.x,
+                        centerY: this.boxes[i].center.y,
+                        noiseValue: this.boxes[i].noiseValue1,
+                        vertexLength: 20, // map(this.boxes[i].noiseValue2, -1, 1, 5, 15),
+                        strokeWeighty: 2.4, // map(this.boxes[i].noiseValue9, this.noise9.noiseValueMin, this.noise9.noiseValueMax, 0.3, 1), //0.5,
+                        angleMin: 2 * Math.PI / 12 * 2.5,
+                        angleMax: 2 * Math.PI / 12 * 3.5,
+                        revert: true,
+                        cutOutValue: -1,
+                        loopCount: 120,
+                        colorList: ["#383838"],
+                        noiseAngle: false,
+                        group: "",
+                    }
+                )
+
             }
 
         }
@@ -866,7 +888,6 @@ class Grid {
             //     continue;
             // }
 
-            // sau
             drawing.rect(2 + getRandomFromInterval(0, 1), 2 + getRandomFromInterval(0, 1)).move(this.boxes[i].center.x + getRandomFromInterval(0, 3), this.boxes[i].center.y + getRandomFromInterval(0, 3)).fill('#8f8f8f17')
 
 
@@ -884,6 +905,141 @@ class Grid {
 
             if (this.drawSkipMargin(this.boxes[i])) {
                 continue;
+            }
+
+            if (this.boxes[i].aboveHorizon) {
+                for (var o = 0; o <= map(this.boxes[i].noiseValue7, -1, 1, 1, 10); o++) {
+
+                    this.digndag(
+                        {
+                            centerX: this.boxes[i].center.x + getRandomFromInterval(0, 5),
+                            centerY: this.boxes[i].center.y + getRandomFromInterval(0, 5),
+                            noiseValue: this.boxes[i].noiseValue7,
+                            vertexLength: map(this.boxes[i].noiseValue7, -1, 1, 5, 10),
+                            strokeWeighty: 0.1, // map(this.boxes[i].noiseValue12, this.noise11.noiseValueMin, this.noise11.noiseValueMax, 0.3, 0.6),
+                            angleMin: 2 * Math.PI / 12 * 0.85,
+                            angleMax: 2 * Math.PI / 12 * 3.15,
+                            revert: true,
+                            cutOutValue: -1,
+                            loopCount: 5, // map(this.boxes[i].noiseValue7, -1, 1, 1, 5),
+                            // colorList: ["#000000", "#524444", "#8a7878", "#ccb3b3"],
+                            colorList: this.palette15.palette,
+                            noiseAngle: false,
+                            group: "",
+                        }
+                    );
+                }
+            } else {
+
+
+
+                // OLD
+                if (this.boxes[i].noiseValue2 > 0.5) {
+
+                    this.digndag(
+                        {
+                            centerX: this.boxes[i].center.x + this.boxes[i].offset.x,
+                            centerY: this.boxes[i].center.y + this.boxes[i].offset.y,
+                            noiseValue: this.boxes[i].noiseValue2,
+                            vertexLength: 10, // map(this.boxes[i].noiseValue2, -1, 1, 3, 7),
+                            strokeWeighty: 0.4, //map(this.boxes[i].noiseValue2, -1, 1, 0.1, 0.3),
+                            angleMin: 2 * Math.PI / 12 * 5.75,
+                            angleMax: 2 * Math.PI / 12 * 6.25,
+                            revert: true,
+                            cutOutValue: -1,
+                            loopCount: 40, //map(this.boxes[i].noiseValue2, -1, 1, 5, 20), // map(this.boxes[i].noiseValue9, this.noise9.noiseValueMin, this.noise9.noiseValueMax, 10, 20), // 10,
+                            colorList: this.palette4.palette,
+                            noiseAngle: true,
+                            group: "",
+                        }
+                    )
+
+
+                } else if (this.boxes[i].noiseValue2 > 0) {
+
+                    this.digndag(
+                        {
+                            centerX: this.boxes[i].center.x + this.boxes[i].offset.x,
+                            centerY: this.boxes[i].center.y + this.boxes[i].offset.y,
+                            noiseValue: this.boxes[i].noiseValue6,
+                            vertexLength: 20, // map(this.boxes[i].noiseValue2, -1, 1, 3, 7),
+                            strokeWeighty: 0.4, // map(this.boxes[i].noiseValue6, -1, 1, 0.1, 0.3),
+                            angleMin: 2 * Math.PI / 12 * 2.5,
+                            angleMax: 2 * Math.PI / 12 * 3.5,
+                            revert: true,
+                            cutOutValue: -1,
+                            loopCount: 40, // map(this.boxes[i].noiseValue6, -1, 1, 5, 10), // map(this.boxes[i].noiseValue9, this.noise9.noiseValueMin, this.noise9.noiseValueMax, 10, 20), // 10,
+                            colorList: this.palette12.palette,
+                            noiseAngle: false,
+                            group: "",
+                        }
+                    )
+
+
+                    // old loop1
+                } else {
+
+                    this.digndag(
+                        {
+                            centerX: this.boxes[i].center.x + this.boxes[i].offset.x,
+                            centerY: this.boxes[i].center.y + this.boxes[i].offset.y,
+                            noiseValue: this.boxes[i].noiseValue1,
+                            vertexLength: 30, // map(this.boxes[i].noiseValue2, -1, 1, 5, 15),
+                            strokeWeighty: 0.4, // map(this.boxes[i].noiseValue9, this.noise9.noiseValueMin, this.noise9.noiseValueMax, 0.3, 1), //0.5,
+                            angleMin: 2 * Math.PI / 12 * 5.75,
+                            angleMax: 2 * Math.PI / 12 * 6.25,
+                            revert: true,
+                            cutOutValue: -1,
+                            loopCount: 20,
+                            colorList: this.palette2.palette,
+                            noiseAngle: false,
+                            normIt: false,
+                            group: "",
+                        }
+                    )
+
+
+
+                    this.digndag(
+                        {
+                            centerX: this.boxes[i].center.x + getRandomFromInterval(-10, 10),
+                            centerY: this.boxes[i].center.y + getRandomFromInterval(-10, 10),
+                            noiseValue: this.boxes[i].noiseValue1,
+                            vertexLength: 20, // map(this.boxes[i].noiseValue2, -1, 1, 5, 15),
+                            strokeWeighty: 0.4, // map(this.boxes[i].noiseValue9, this.noise9.noiseValueMin, this.noise9.noiseValueMax, 0.3, 1), //0.5,
+                            angleMin: 2 * Math.PI / 12 * 2.5,
+                            angleMax: 2 * Math.PI / 12 * 3.5,
+                            revert: true,
+                            cutOutValue: -1,
+                            loopCount: 20,
+                            colorList: this.palette2.palette,
+                            noiseAngle: false,
+                            group: "",
+                        }
+                    )
+
+                }
+            }
+
+            if (this.boxes[i].horizon) {
+                this.digndag(
+                    {
+                        centerX: this.boxes[i].center.x,
+                        centerY: this.boxes[i].center.y,
+                        noiseValue: this.boxes[i].noiseValue1,
+                        vertexLength: 20, // map(this.boxes[i].noiseValue2, -1, 1, 5, 15),
+                        strokeWeighty: 2.4, // map(this.boxes[i].noiseValue9, this.noise9.noiseValueMin, this.noise9.noiseValueMax, 0.3, 1), //0.5,
+                        angleMin: 2 * Math.PI / 12 * 2.5,
+                        angleMax: 2 * Math.PI / 12 * 3.5,
+                        revert: true,
+                        cutOutValue: -1,
+                        loopCount: 120,
+                        colorList: ["#383838"],
+                        noiseAngle: false,
+                        group: "",
+                    }
+                )
+
             }
 
 

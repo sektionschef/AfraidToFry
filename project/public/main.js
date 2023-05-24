@@ -58,36 +58,40 @@ SVG.on(document, 'DOMContentLoaded', function () {
 
     drawing = SVG().viewbox(0, 0, rescaling_width, rescaling_height).addTo('#badAssCanvas');
 
-    // var polyline = draw.polyline('0,0 100,50 50,100').fill('none').stroke({ width: 1, color: '#c01b1b' });
-    // drawing.rect(100, 100).move(100, 50).fill('#f06')
-
-
-    // // point and add new point
-    // var oldPoint = { x: 600, y: 400 };
-    // var newPoint = oldPoint;
-    // // console.log(angleBetweenPoints(pointA, pointB));
-
-    // var polyLineString = createCoordString(oldPoint);
-
-    // for (var i = 0; i <= 30; i++) {
-
-    //     var vectorMagnitude = 20;
-    //     var newPoint = vectorAdd(newPoint, vectorFromAngle(getRandomFromInterval(0, 2 * Math.PI), vectorMagnitude));
-
-    //     polyLineString = polyLineString.concat(" ", createCoordString(newPoint));
-    // }
-
-    // var polyline = drawing.polyline(polyLineString).fill('none').stroke({ width: 1, color: '#3d7e83' });
-
     timeChecker();
+
+    // ELEMENTS
 
     // let palette = new dynamicPalette(drawing, "#6363b1", 0, 2, 1);
     // let palette = new dynamicPalette(drawing, "#6363b1", 3, 1, 1);
     // palette.show();
 
     // let noiseDebug = new noiseArea(120, 4);
-    // noiseDebug.drawNoise(drawing, 80);
+    // noiseDebug.drawNoise(drawing);
+    // noiseDebug.getStartingPoint(drawing);
+    // noiseDebug.getIsland(drawing);
+    // noiseDebug.drawIsland(drawing);
 
+
+    // dig = new dig({
+    //     x: 500,
+    //     y: 500,
+    //     noiseValue: 0,
+    //     vertexLength: 160,
+    //     strokeWeighty: 4,
+    //     // angleMin: 2 * Math.PI / 12 * 5.75,
+    //     // angleMax: 2 * Math.PI / 12 * 6.25,
+    //     angleMin: 2 * Math.PI / 12 * 0.5,
+    //     angleMax: 2 * Math.PI / 12 * 1.25,
+    //     revert: true,
+    //     cutOutValue: -1,
+    //     loopCount: 160,
+    //     colorList: ["#222222"],
+    //     noiseAngle: false,
+    //     group: "",
+    //     drawing: drawing,
+    // });
+    // dig.draw();
 
 
     // Add event listener on keydown -  https://www.section.io/engineering-education/keyboard-events-in-javascript/ 
@@ -167,5 +171,5 @@ function timeChecker() {
 }
 
 
-setInterval(timeChecker, 1000 * 60 * 1); // every minute check
+// setInterval(timeChecker, 1000 * 60 * 1); // every minute check
 // setInterval(timeChecker, 1000); // every second

@@ -111,6 +111,10 @@ class Grid {
         this.palette15 = new dynamicPalette(this.drawing, this.aboveTone, 2, -2, 0);
         this.palette16 = new dynamicPalette(this.drawing, this.underneathTone, 2, 0, 0);
 
+        this.paletteRA = { palette: ["#7c7c7c", "#899b9c", "#d6e2db"] };
+        this.paletteRB = { palette: ["#666161", "#9eb6b8", "#c4cac7"] };
+        this.paletteSA = { palette: ["#F4F4F2", "#c7bebe", "#8f9299", "#6b6f75"] };
+        this.paletteSB = { palette: ["#F4F4F2", "#E8E8E8", "#BBBFCA", "#95989e"] };
 
         this.noise1 = new noiseArea(120, 1);
         this.noise2 = new noiseArea(120, 3);
@@ -120,6 +124,9 @@ class Grid {
         this.noise6 = new noiseArea(120, 15);
         this.noise7 = new noiseArea(150, 10);
         this.noise8 = new noiseArea(120, 60);
+
+        this.noiseRA = new noiseArea(50, 1);
+        this.noiseSA = new noiseArea(50, 50);
 
         // this.buffer = createGraphics(width, height, SVG);
         // this.bufferNoise = createGraphics(width, height, SVG);
@@ -158,7 +165,7 @@ class Grid {
 
         // this.loop5();  // canvas dots
         // this.loop6();  // half - ganz nicer effect
-        this.loop7();  // neuer grid
+        // this.loop7();  // neuer grid - 20230529
 
         // this.loop8();
     }
@@ -209,6 +216,8 @@ class Grid {
                     "noiseValue6": this.noise6.createNoiseValue(w, h),
                     "noiseValue7": this.noise7.createNoiseValue(w, h),
                     "noiseValue8": this.noise8.createNoiseValue(w, h),
+                    "noiseValueRA": this.noiseRA.createNoiseValue(w, h),
+                    "noiseValueSA": this.noiseSA.createNoiseValue(w, h),
                     // "noiseValue9": this.noise9.createNoiseValue(w, h),
                     // "noiseValue10": this.noise10.createNoiseValue(w, h),
                     // "polygonA": polygonA,
@@ -970,24 +979,79 @@ class Grid {
                 continue;
             }
 
-            new digi({
-                x: this.boxes[i].center.x,
-                y: this.boxes[i].center.y,
-                noiseValue: 0,
-                vertexLength: 30,
-                strokeWeighty: 0.1,
-                // angleMin: 2 * Math.PI / 12 * 5.75,
-                // angleMax: 2 * Math.PI / 12 * 6.25,
-                angleMin: 2 * Math.PI / 12 * 0.5,
-                angleMax: 2 * Math.PI / 12 * 1.25,
-                revert: true,
-                cutOutValue: -1,
-                loopCount: 20,
-                colorList: ["#222222"],
-                noiseAngle: false,
-                group: "",
-                drawing: drawing,
-            }).draw();
+
+
+            if (this.boxes[i].aboveHorizon) {
+                new digi({
+                    x: this.boxes[i].center.x,
+                    y: this.boxes[i].center.y,
+                    noiseValue: this.boxes[i].noiseValueRA,
+                    vertexLength: map(this.boxes[i].noiseValueRA, -1, 1, 30, 50), // 30,
+                    strokeWeighty: map(this.boxes[i].noiseValueRA, -1, 1, 0.05, 0.25), // 0.1,
+                    angleMean: Math.PI / 1,
+                    angleSTD: Math.PI / 56,
+                    revert: true,
+                    cutOutValue: -1,
+                    loopCount: 20,
+                    colorList: this.paletteRA.palette,
+                    noiseAngle: false,
+                    group: "",
+                    drawing: drawing,
+                }).draw();
+            } else {
+                new digi({
+                    x: this.boxes[i].center.x,
+                    y: this.boxes[i].center.y,
+                    noiseValue: this.boxes[i].noiseValueRA,
+                    vertexLength: map(this.boxes[i].noiseValueRA, -1, 1, 30, 50), // 30,
+                    strokeWeighty: map(this.boxes[i].noiseValueRA, -1, 1, 0.05, 0.25), // 0.1,
+                    angleMean: Math.PI / 1,
+                    angleSTD: Math.PI / 56,
+                    revert: true,
+                    cutOutValue: -1,
+                    loopCount: 20,
+                    colorList: this.paletteRB.palette,
+                    noiseAngle: false,
+                    group: "",
+                    drawing: drawing,
+                }).draw();
+            }
+
+            if (this.boxes[i].aboveHorizon) {
+                new digi({
+                    x: this.boxes[i].center.x + getNormallyDistributedRandomNumber(10, 2),
+                    y: this.boxes[i].center.y + getNormallyDistributedRandomNumber(10, 2),
+                    noiseValue: this.boxes[i].noiseValueSA,
+                    vertexLength: 30, // map(this.boxes[i].noiseValueRA, -1, 1, 30, 50), // 30,
+                    strokeWeighty: map(this.boxes[i].noiseValueRA, -1, 1, 0.05, 0.25), // 0.1,
+                    angleMean: Math.PI / 1,
+                    angleSTD: Math.PI / 56,
+                    revert: true,
+                    cutOutValue: -1,
+                    loopCount: 20,
+                    colorList: this.paletteSA.palette,
+                    noiseAngle: false,
+                    group: "",
+                    drawing: drawing,
+                }).draw();
+            } else {
+                new digi({
+                    x: this.boxes[i].center.x + getNormallyDistributedRandomNumber(10, 2),
+                    y: this.boxes[i].center.y + getNormallyDistributedRandomNumber(10, 2),
+                    noiseValue: this.boxes[i].noiseValueSA,
+                    vertexLength: 30, // map(this.boxes[i].noiseValueRA, -1, 1, 30, 50), // 30,
+                    strokeWeighty: map(this.boxes[i].noiseValueRA, -1, 1, 0.05, 0.25), // 0.1,
+                    angleMean: Math.PI / 1,
+                    angleSTD: Math.PI / 56,
+                    revert: true,
+                    cutOutValue: -1,
+                    loopCount: 20,
+                    colorList: this.paletteSB.palette,
+                    noiseAngle: false,
+                    group: "",
+                    drawing: drawing,
+                }).draw();
+            }
 
         }
 

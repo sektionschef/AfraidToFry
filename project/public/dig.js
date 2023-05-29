@@ -15,7 +15,8 @@ class digi {
         this.noiseValue = data.noiseValue;
         this.cutOutValue = data.cutOutValue;
         this.colorList = data.colorList;
-
+        this.angleMean = data.angleMean;
+        this.angleSTD = data.angleSTD;
     }
 
     draw() {
@@ -37,7 +38,7 @@ class digi {
                     this.angle = map(this.noiseValue, -1, 1, 0, 2 * Math.PI) + getRandomFromInterval(-0.5, 0.5);
                 } else {
                     // this.angle = getRandomFromInterval(this.angleMin, this.angleMax);
-                    this.angle = getNormallyDistributedRandomNumber(Math.PI / 1, Math.PI / 56);
+                    this.angle = getNormallyDistributedRandomNumber(this.angleMean, this.angleSTD);
                 }
 
                 // make spots not lines

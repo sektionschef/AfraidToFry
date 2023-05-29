@@ -68,9 +68,19 @@ SVG.on(document, 'DOMContentLoaded', function () {
 
     // let noiseDebug = new noiseArea(120, 4);
     // noiseDebug.drawNoise(drawing);
+
     // noiseDebug.getStartingPoint(drawing);
     // noiseDebug.getIsland(drawing);
     // noiseDebug.drawIsland(drawing);
+
+    noiseAggy = new noiseAggregator();
+    // noiseAggy.drawNoise1(drawing);
+    // noiseAggy.drawNoise2(drawing);
+    // noiseAggy.drawNoise3(drawing);
+    // noiseAggy.drawNoise4(drawing);
+
+    noiseAggy.combineNoises();
+    noiseAggy.drawAgg(drawing);
 
 
     // dig = new dig({

@@ -37,6 +37,8 @@ canvasFormats = [
     },
 ]
 
+// NOT WORKING WITH HARDCODED SVG
+
 canvasFormatChosen = getRandomFromList(canvasFormats);
 console.log("Canvas Format: " + canvasFormatChosen.name);
 
@@ -53,16 +55,38 @@ if (rescaling_width <= rescaling_height) {
     LANDSCAPE = true;
 }
 
+window.addEventListener("DOMContentLoaded", (event) => {
+    // console.log("DOM fully loaded and parsed");
+
+    const targetDiv = document.getElementById('badAssCanvas');
+    const svgNode = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svgNode.setAttributeNS(null, 'viewBox', '0 0 1600 900');
+    svgNode.setAttributeNS(null, 'id', 'svgNode');
+    targetDiv.appendChild(svgNode);
+
+    // const circleNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    // circleNode.setAttributeNS(null, 'cx', '50');
+    // circleNode.setAttributeNS(null, 'cy', '50');
+    // circleNode.setAttributeNS(null, 'r', '40');
+    // circleNode.setAttributeNS(null, 'fill', 'blue');
+    // svgNode.appendChild(circleNode);
+
+    // const poly = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+    // poly.setAttributeNS(null, 'points', '0,40 40,40 40,80 80,80 80,120 120,120 120,160');
+    // poly.setAttributeNS(null, 'fill', 'none');
+    // poly.setAttributeNS(null, 'stroke', 'black');
+    // svgNode.appendChild(poly);
+
+    timeChecker();
+});
+
+
 
 SVG.on(document, 'DOMContentLoaded', function () {
 
-    drawing = SVG().viewbox(0, 0, rescaling_width, rescaling_height).addTo('#badAssCanvas');
-
-    timeChecker();
-
-    // drawing.filterWith(function (add) {
-    //     add.gaussianBlur(30)
-    // })
+    // drawing = SVG().viewbox(0, 0, rescaling_width, rescaling_height).addTo('#badAssCanvas');
+    // drawing = SVG().viewbox(0, 0, rescaling_width, rescaling_height).addTo('#nono');
+    // timeChecker();
 
     // ELEMENTS
 
@@ -129,10 +153,10 @@ SVG.on(document, 'DOMContentLoaded', function () {
 function fireTrigger(drawing) {
     console.log("trigger initiated");
 
-    drawing.clear();
+    // drawing.clear();
 
     // background
-    drawing.rect(rescaling_width, rescaling_height).fill("#ffffff");
+    // drawing.rect(rescaling_width, rescaling_height).fill("#ffffff");
 
     let grid = new Grid({
         drawing: drawing,

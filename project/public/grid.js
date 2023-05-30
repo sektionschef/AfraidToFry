@@ -319,7 +319,15 @@ class Grid {
             }
 
             // which stroke cap?
-            this.drawing.polyline(polyLineString).fill('none').stroke({ width: strokeWeighty, color: color_d });
+            // with svg.js
+            // this.drawing.polyline(polyLineString).fill('none').stroke({ width: strokeWeighty, color: color_d });
+
+            // without svg.js
+            const polyNode = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+            polyNode.setAttributeNS(null, 'points', polyLineString);
+            polyNode.setAttributeNS(null, 'fill', 'none');
+            polyNode.setAttributeNS(null, 'stroke', 'black');
+            svgNode.appendChild(polyNode);
         }
 
     }

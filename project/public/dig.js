@@ -55,7 +55,18 @@ class digi {
             }
 
             // which stroke cap?
-            this.drawing.polyline(polyLineString).fill('none').stroke({ width: this.strokeWeighty, color: color_d });
+            // with svg.js
+            // this.drawing.polyline(polyLineString).fill('none').stroke({ width: this.strokeWeighty, color: color_d });
+
+            // without svg.js
+            const svgNode = document.getElementById('svgNode');
+            const polyNode = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+            polyNode.setAttributeNS(null, 'points', polyLineString);
+            polyNode.setAttributeNS(null, 'fill', 'none');
+            polyNode.setAttributeNS(null, 'stroke', color_d);
+            polyNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
+            // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
+            svgNode.appendChild(polyNode);
         }
 
     }

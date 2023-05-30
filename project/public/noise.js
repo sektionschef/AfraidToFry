@@ -10,8 +10,6 @@ class noiseArea {
 
         this.noiseValueMax = -1;
         this.noiseValueMin = 1;
-
-        this.createBoxes();
     }
 
     // for use in loop
@@ -56,6 +54,8 @@ class noiseArea {
 
     // for DEBUGGING Noise
     drawNoise(drawing) {
+
+        this.createBoxes();
 
         for (var i = 0; i < this.boxes.length; i++) {
 

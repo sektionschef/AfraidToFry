@@ -60,6 +60,10 @@ SVG.on(document, 'DOMContentLoaded', function () {
 
     timeChecker();
 
+    // drawing.filterWith(function (add) {
+    //     add.gaussianBlur(30)
+    // })
+
     // ELEMENTS
 
     // let palette = new dynamicPalette(drawing, "#6363b1", 0, 2, 1);
@@ -73,14 +77,12 @@ SVG.on(document, 'DOMContentLoaded', function () {
     // noiseDebug.getIsland(drawing);
     // noiseDebug.drawIsland(drawing);
 
-    noiseAggy = new noiseAggregator();
+    // noiseAggy = new noiseAggregator(135, 50, 110, 10, 4, 5);
     // noiseAggy.drawNoise1(drawing);
     // noiseAggy.drawNoise2(drawing);
     // noiseAggy.drawNoise3(drawing);
-    // noiseAggy.drawNoise4(drawing);
 
-    noiseAggy.combineNoises();
-    noiseAggy.drawAgg(drawing);
+    // noiseAggy.drawAgg(drawing);
 
 
     // dig = new dig({

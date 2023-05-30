@@ -60,9 +60,15 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
     const targetDiv = document.getElementById('badAssCanvas');
     const svgNode = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svgNode.setAttributeNS(null, 'viewBox', '0 0 1600 900');
+    svgNode.setAttributeNS(null, 'viewBox', '0 0 ' + canvasFormatChosen.canvasWidth + " " + canvasFormatChosen.canvasHeight);
     svgNode.setAttributeNS(null, 'id', 'svgNode');
     targetDiv.appendChild(svgNode);
+
+    // draw RECT as background !!
+    var backgroundObj = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    backgroundObj.setAttribute("width", canvasFormatChosen.canvasWidth);
+    backgroundObj.setAttribute("height", canvasFormatChosen.canvasHeight);
+    backgroundObj.setAttribute("fill", "white");
 
     // const circleNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
     // circleNode.setAttributeNS(null, 'cx', '50');
@@ -77,7 +83,44 @@ window.addEventListener("DOMContentLoaded", (event) => {
     // poly.setAttributeNS(null, 'stroke', 'black');
     // svgNode.appendChild(poly);
 
+    // filter know how: https://stackoverflow.com/questions/10867282/how-can-i-add-a-filter-to-a-svg-object-in-javascript 
+    var defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+
+    var filter = document.createElementNS("http://www.w3.org/2000/svg", "filter");
+    filter.setAttribute("id", "f1");
+    filter.setAttribute("x", "0");
+    filter.setAttribute("y", "0");
+
+    // var gaussianFilter = document.createElementNS("http://www.w3.org/2000/svg", "feGaussianBlur");
+    // gaussianFilter.setAttribute("in", "SourceGraphic");
+    // gaussianFilter.setAttribute("stdDeviation", "1");
+
+    var turbo = document.createElementNS("http://www.w3.org/2000/svg", "feTurbulence");
+    turbo.setAttribute("type", "fractalNoise");
+    turbo.setAttribute("baseFrequency", "0.86");
+    turbo.setAttribute("numOctaves", "1");
+    turbo.setAttribute("stitchTiles", "stitch");
+    turbo.setAttribute("result", "NOISE");
+
+    var blender = document.createElementNS("http://www.w3.org/2000/svg", "feBlend");
+    blender.setAttribute("in", "SourceGraphic");
+    blender.setAttribute("in2", "NOISE");
+    blender.setAttribute("mode", "overlay");
+    blender.setAttribute("result", "BLEND");
+
+
+    // filter.appendChild(gaussianFilter);
+    filter.appendChild(turbo);
+    filter.appendChild(blender);
+    defs.appendChild(filter);
+    svgNode.appendChild(defs);
+
+    backgroundObj.setAttribute("filter", "url(#f1)");
+    svgNode.appendChild(backgroundObj);
+
     timeChecker();
+
+    // svgNode.setAttribute("filter", "url(#f1)");
 });
 
 

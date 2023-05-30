@@ -172,18 +172,33 @@ function getTimestamp() {
 }
 
 // eport svg - https://stackoverflow.com/questions/60921718/save-generated-svg-with-svg-js-as-svg-file 
-function downloadString(text, fileType, fileName) {
-    var blob = new Blob([text], { type: fileType });
+// function downloadString(text, fileType, fileName) {
+//     var blob = new Blob([text], { type: fileType });
 
-    var a = document.createElement('a');
-    a.download = fileName;
-    a.href = URL.createObjectURL(blob);
-    a.dataset.downloadurl = [fileType, a.download, a.href].join(':');
-    a.style.display = "none";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    setTimeout(function () { URL.revokeObjectURL(a.href); }, 1500);
+//     var a = document.createElement('a');
+//     a.download = fileName;
+//     a.href = URL.createObjectURL(blob);
+//     a.dataset.downloadurl = [fileType, a.download, a.href].join(':');
+//     a.style.display = "none";
+//     document.body.appendChild(a);
+//     a.click();
+//     document.body.removeChild(a);
+//     setTimeout(function () { URL.revokeObjectURL(a.href); }, 1500);
+// }
+
+// https://stackoverflow.com/questions/23218174/how-do-i-save-export-an-svg-file-after-creating-an-svg-with-d3-js-ie-safari-an
+function saveSvg(svgEl, name) {
+    svgEl.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    var svgData = svgEl.outerHTML;
+    var preface = '<?xml version="1.0" standalone="no"?>\r\n';
+    var svgBlob = new Blob([preface, svgData], { type: "image/svg+xml;charset=utf-8" });
+    var svgUrl = URL.createObjectURL(svgBlob);
+    var downloadLink = document.createElement("a");
+    downloadLink.href = svgUrl;
+    downloadLink.download = name;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
 }
 
 

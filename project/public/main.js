@@ -68,20 +68,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
     var backgroundObj = document.createElementNS("http://www.w3.org/2000/svg", "rect");
     backgroundObj.setAttribute("width", canvasFormatChosen.canvasWidth);
     backgroundObj.setAttribute("height", canvasFormatChosen.canvasHeight);
-    backgroundObj.setAttribute("fill", "white");
+    backgroundObj.setAttribute("fill", "#ffffff");
 
-    // const circleNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    // circleNode.setAttributeNS(null, 'cx', '50');
-    // circleNode.setAttributeNS(null, 'cy', '50');
-    // circleNode.setAttributeNS(null, 'r', '40');
-    // circleNode.setAttributeNS(null, 'fill', 'blue');
-    // svgNode.appendChild(circleNode);
-
-    // const poly = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
-    // poly.setAttributeNS(null, 'points', '0,40 40,40 40,80 80,80 80,120 120,120 120,160');
-    // poly.setAttributeNS(null, 'fill', 'none');
-    // poly.setAttributeNS(null, 'stroke', 'black');
-    // svgNode.appendChild(poly);
 
     // filter know how: https://stackoverflow.com/questions/10867282/how-can-i-add-a-filter-to-a-svg-object-in-javascript 
     var defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
@@ -115,7 +103,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     defs.appendChild(filter);
     svgNode.appendChild(defs);
 
-    backgroundObj.setAttribute("filter", "url(#f1)");
+    // backgroundObj.setAttribute("filter", "url(#f1)");
     svgNode.appendChild(backgroundObj);
 
     timeChecker();
@@ -180,7 +168,10 @@ SVG.on(document, 'DOMContentLoaded', function () {
 
         if (event.code == "KeyE") {
             // alert("oida is going down");
-            downloadString(drawing.svg(), "image/svg+xml", filename);
+            // downloadString(drawing.svg(), "image/svg+xml", filename);
+
+            saveSvg(svgNode, filename);
+
         }
 
         // Alert the key name and key code on keydown

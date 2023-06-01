@@ -40,7 +40,7 @@ canvasFormats = [
 // NOT WORKING WITH HARDCODED SVG
 
 canvasFormatChosen = getRandomFromList(canvasFormats);
-console.log("Canvas Format: " + canvasFormatChosen.name);
+// console.log("Canvas Format: " + canvasFormatChosen.name);
 
 rescaling_width = canvasFormatChosen.canvasWidth;
 rescaling_height = canvasFormatChosen.canvasHeight;

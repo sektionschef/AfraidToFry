@@ -9,6 +9,8 @@ class digi {
         this.group = data.group;
         this.noiseAngle = data.noiseAngle;
         this.drawing = data.drawing;
+        this.noiseValueMin = data.noiseValueMin;
+        this.noiseValueMax = data.noiseValueMax;
 
         this.angle = 0;
         this.revert = data.revert;
@@ -20,10 +22,22 @@ class digi {
     }
 
     draw() {
+
         if (this.noiseValue > this.cutOutValue) {
 
-            let colorSelect = Math.round(map(this.noiseValue, -1, 1, 0, (this.colorList.length - 1)));
-            let color_d = this.colorList[colorSelect];
+            // let colorSelect = Math.round(map(this.noiseValue, this.noiseValueMin, this.noiseValueMax, 0, (this.colorList.length - 1)));
+            // let color_d = this.colorList[colorSelect];
+
+            // var colorDistance = (this.noiseValueMax - this.noiseValueMin) / this.colorList.length;
+            let colorSelect = 0;
+            for (var i = 0; i < this.colorList.length; i++) {
+                if (this.noiseValue < (this.noiseValueMax - this.noiseValueMin) / this.colorList.length * i + this.noiseValueMin) {
+                    colorSelect = i;
+                    break;
+                }
+            }
+
+            let color_d = this.colorList[colorSelect]
             // let color_d = tinycolor(colorList[colorSelect]).spin(getRandomFromInterval(-20, 20)).darken(getRandomFromInterval(-5, 5)).desaturate(getRandomFromInterval(-10, 10)).toHexString();
 
             // point and add new point
@@ -35,7 +49,7 @@ class digi {
             for (var i = 0; i < this.loopCount; i++) {
 
                 if (this.noiseAngle) {
-                    this.angle = map(this.noiseValue, -1, 1, 0, 2 * Math.PI) + getRandomFromInterval(-0.5, 0.5);
+                    this.angle = map(this.noiseValue, this.noiseValueMin, this.noiseValueMax, 0, 2 * Math.PI) + getRandomFromInterval(-0.5, 0.5);
                 } else {
                     // this.angle = getRandomFromInterval(this.angleMin, this.angleMax);
                     this.angle = getNormallyDistributedRandomNumber(this.angleMean, this.angleSTD);

@@ -10,11 +10,23 @@ class noiseAggregator {
 
     // for use in loop
     createNoiseValue(w, h) {
+        // let noiseValue = (
+        //     this.noise1.createNoiseValue(w, h) +
+        //     this.noise2.createNoiseValue(w, h) +
+        //     this.noise3.createNoiseValue(w, h)
+        // ) / 3;
+
+        var amplitude1 = 1;
+        var amplitude2 = 0.75;
+        var amplitude3 = 0.25;
+
         let noiseValue = (
-            this.noise1.createNoiseValue(w, h) +
-            this.noise2.createNoiseValue(w, h) +
-            this.noise3.createNoiseValue(w, h)
-        ) / 3;
+            this.noise1.createNoiseValue(w, h) * amplitude1 +
+            this.noise2.createNoiseValue(w, h) * amplitude2 +
+            this.noise3.createNoiseValue(w, h) * amplitude3
+        ) / (amplitude1 + amplitude2 + amplitude3);
+
+        // noiseValue = Math.pow(noiseValue, 2);
 
         return noiseValue
     }

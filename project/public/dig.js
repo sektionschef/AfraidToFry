@@ -19,6 +19,11 @@ class digi {
         this.colorList = data.colorList;
         this.angleMean = data.angleMean;
         this.angleSTD = data.angleSTD;
+
+        this.noiseDistance = this.noiseValueMax - this.noiseValueMin;
+        // console.log(this.noiseDistance);
+        this.colorStep = this.noiseDistance / this.colorList.length;
+        // console.log(this.colorStep);
     }
 
     draw() {
@@ -28,10 +33,12 @@ class digi {
             // let colorSelect = Math.round(map(this.noiseValue, this.noiseValueMin, this.noiseValueMax, 0, (this.colorList.length - 1)));
             // let color_d = this.colorList[colorSelect];
 
-            // var colorDistance = (this.noiseValueMax - this.noiseValueMin) / this.colorList.length;
-            let colorSelect = 0;
-            for (var i = 0; i < this.colorList.length; i++) {
-                if (this.noiseValue < (this.noiseValueMax - this.noiseValueMin) / this.colorList.length * i + this.noiseValueMin) {
+            let colorSelect = 0
+
+            // console.log("noisevalue:" + this.noiseValue);
+            for (var i = 1; i < (this.colorList.length + 1); i++) {
+                // console.log("step: " + (this.noiseValueMin + this.colorStep * i))
+                if (this.noiseValue < this.noiseValueMin + this.colorStep * i) {
                     colorSelect = i;
                     break;
                 }

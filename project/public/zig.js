@@ -8,33 +8,32 @@ class zigi {
         this.loopCount = data.loopCount;
         this.group = data.group;
         this.noiseValue = data.noiseValue;
+        this.noiseValueMin = data.noiseValueMin;
+        this.noiseValueMax = data.noiseValueMax;
         this.colorList = data.colorList;
         this.angle = 0;
 
-        // this.noiseAngle = data.noiseAngle;
-        // this.drawing = data.drawing;
-        // this.noiseValueMin = data.noiseValueMin;
-        // this.noiseValueMax = data.noiseValueMax;
+        this.noiseDistance = this.noiseValueMax - this.noiseValueMin;
+        // console.log(this.noiseDistance);
+        this.colorStep = this.noiseDistance / this.colorList.length;
+        // console.log(this.colorStep);
 
-        // this.revert = data.revert;
-
-
-        // this.cutOutValue = data.cutOutValue;
-        // this.angleMean = data.angleMean;
-        // this.angleSTD = data.angleSTD;
     }
 
     draw() {
 
         // if (this.noiseValue > this.cutOutValue) {
 
-        let colorSelect = 0;
-        // for (var i = 0; i < this.colorList.length; i++) {
-        //     if (this.noiseValue < (this.noiseValueMax - this.noiseValueMin) / this.colorList.length * i + this.noiseValueMin) {
-        //         colorSelect = i;
-        //         break;
-        //     }
-        // }
+        let colorSelect = 0
+
+        // console.log("noisevalue:" + this.noiseValue);
+        for (var i = 1; i < (this.colorList.length + 1); i++) {
+            // console.log("step: " + (this.noiseValueMin + this.colorStep * i))
+            if (this.noiseValue < this.noiseValueMin + this.colorStep * i) {
+                colorSelect = i;
+                break;
+            }
+        }
         let color_d = this.colorList[colorSelect]
 
         var polyLineString = createCoordString(this.center);
@@ -54,8 +53,8 @@ class zigi {
         const polyNode = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
         polyNode.setAttributeNS(null, 'points', polyLineString);
         polyNode.setAttributeNS(null, 'fill', 'none');
-        // polyNode.setAttributeNS(null, 'stroke', color_d);
-        polyNode.setAttributeNS(null, 'stroke', "black");
+        polyNode.setAttributeNS(null, 'stroke', color_d);
+        // polyNode.setAttributeNS(null, 'stroke', "black");
         polyNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
         // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
         svgNode.appendChild(polyNode);

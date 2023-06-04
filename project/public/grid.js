@@ -110,14 +110,22 @@ class Grid {
         this.palette15 = new dynamicPalette(this.drawing, this.aboveTone, 2, -2, 0);
         this.palette16 = new dynamicPalette(this.drawing, this.underneathTone, 2, 0, 0);
 
-        this.paletteRA = {
-            palette: [
-                "#7d8a9c",
-                "#7b94a8",
-                "#9DB2BF",
-                "#DDE6ED",
-            ]
-        };
+        this.paletteRA = new dynamicPalette(this.drawing, "#ABC6DE", 3, -10, 6);
+        this.paletteRAbby = new dynamicPalette(this.drawing, "#ABC6DE", 5, -15, 10);
+        // this.paletteRA = {
+        //     palette: [
+        //         // "#7d8a9c",
+        //         // "#7b94a8",
+        //         // "#9DB2BF",
+        //         // "#DDE6ED",
+
+        //         "#ABC6DE",
+        //         "#6BABE3",
+        //         "#49545E",
+        //         "#8296A8",
+        //         "#3E5060",
+        //     ]
+        // };
 
         // this.paletteRB = new dynamicPalette(this.drawing, this.underneathTone, 53, 4, -2);
         this.paletteRB = {
@@ -170,6 +178,9 @@ class Grid {
         if (this.DEBUG) {
             this.showDebug();
         }
+
+
+        // this.loopDEBUG();
 
 
         // setTimeout(() => {
@@ -275,15 +286,29 @@ class Grid {
         for (var i = 0; i < this.boxes.length; i++) {
 
             // only stroke
-            this.drawing.rect(this.boxSize, this.boxSize).move(this.boxes[i].A.x, this.boxes[i].A.y).stroke({ color: '#f06', opacity: 1, width: 0.5 }).fill("none");
+            // this.drawing.rect(this.boxSize, this.boxSize).move(this.boxes[i].A.x, this.boxes[i].A.y).stroke({ color: '#f06', opacity: 1, width: 0.5 }).fill("none");
+
             //  draw noise
             // this.drawing.rect(this.boxSize, this.boxSize).move(this.boxes[i].A.x, this.boxes[i].A.y).stroke({ color: '#f06', opacity: 1, width: 0.5 }).fill({ color: hslToHex(120, map(this.boxes[i].noiseValue1, -1, 1, 0, 100), 50) })
-            this.drawing.rect(this.boxSize, this.boxSize).move(this.boxes[i].A.x, this.boxes[i].A.y).stroke({ color: '#f06', opacity: 1, width: 0.5 }).fill({
-                // color: tinycolor({ h: 100, s: map(this.boxes[i].noiseValue1, -1, 1, 0, 1), l: 0.5 }).toHexString()
-                color: tinycolor({ h: 100, s: 50, l: 50 }).lighten(map(this.boxes[i].noiseValue1, -1, 1, -10, 10)).toHexString()
-            });
+            // this.drawing.rect(this.boxSize, this.boxSize).move(this.boxes[i].A.x, this.boxes[i].A.y).stroke({ color: '#f06', opacity: 1, width: 0.5 }).fill({
+            // color: tinycolor({ h: 100, s: map(this.boxes[i].noiseValue1, -1, 1, 0, 1), l: 0.5 }).toHexString()
+            // color: tinycolor({ h: 100, s: 50, l: 50 }).lighten(map(this.boxes[i].noiseValue1, -1, 1, -10, 10)).toHexString()
+            // });
             // draw differnt colors
             // this.drawing.rect(this.boxSize, this.boxSize).move(this.boxes[i].A.x, this.boxes[i].A.y).fill(getRandomFromList(['#f06', "#37ad37ff", "#528bd6ff"]))
+
+
+            const svgNode = document.getElementById('svgNode');
+
+            var rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            rect.setAttributeNS(null, 'x', this.boxes[i].A.x);
+            rect.setAttributeNS(null, 'y', this.boxes[i].A.y);
+            rect.setAttributeNS(null, 'height', this.boxSize);
+            rect.setAttributeNS(null, 'width', this.boxSize);
+            rect.setAttributeNS(null, 'stroke', '#f06');
+            rect.setAttributeNS(null, 'stroke-width', '0.5');
+
+            svgNode.appendChild(rect);
         }
 
     }
@@ -951,6 +976,39 @@ class Grid {
         }
 
     }
+
+
+    loopDEBUG() {
+        let randomIndex = getRandomIndex(this.boxes.length);
+
+        let i = 0;
+
+        for (var v = 0; v < randomIndex.length; v++) {
+
+            i = randomIndex[v];
+
+            if (this.drawSkipMargin(this.boxes[i])) {
+                continue;
+            }
+
+            if (this.boxes[i].aboveHorizon) {
+                new deugy({
+                    x: this.boxes[i].A.x,
+                    y: this.boxes[i].A.y,
+                    width: this.boxSize,
+                    height: this.boxSize,
+                    colorList: this.paletteRA.palette,
+                    noiseValue: this.boxes[i].noiseValueRA,
+                    noiseValueMin: this.noiseRAMin,
+                    noiseValueMax: this.noiseRAMax,
+                }).draw();
+            }
+
+
+        }
+
+    }
+
     loop6() {
         let randomIndex = getRandomIndex(this.boxes.length);
 
@@ -1059,6 +1117,7 @@ class Grid {
         }
 
     }
+
     loop7() {
         let randomIndex = getRandomIndex(this.boxes.length);
 
@@ -1086,7 +1145,7 @@ class Grid {
                     revert: true,
                     cutOutValue: -1,
                     loopCount: 20,
-                    colorList: this.paletteRA.palette,
+                    colorList: this.paletteRAbby.palette,
                     noiseAngle: true,
                     group: "",
                     drawing: drawing,
@@ -1133,14 +1192,16 @@ class Grid {
                     {
                         x: this.boxes[i].center.x,
                         y: this.boxes[i].center.y,
-                        noiseValue: this.boxes[i].noiseValue8,
+                        noiseValue: this.boxes[i].noiseValueRA,
+                        noiseValueMin: this.noiseRAMin,
+                        noiseValueMax: this.noiseRAMax,
                         vertexLength: 5, // map(this.boxes[i].noiseValue8, -1, 1, 5, 10), // 15,
-                        strokeWeighty: 0.05, // map(this.boxes[i].noiseValue8, -1, 1, 0.1, 0.3), // 1,
+                        strokeWeighty: 0.2, // map(this.boxes[i].noiseValue8, -1, 1, 0.1, 0.3), // 1,
                         angleMin: 0,
                         angleMax: Math.PI,
                         cutOutValue: -1,
-                        loopCount: map(this.boxes[i].noiseValue8, -1, 1, 1, 10),
-                        colorList: this.vogerl1.palette,
+                        loopCount: map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, 1, 10),
+                        colorList: this.paletteRA.palette,
                         group: "",
                     }
                 ).draw();
@@ -1150,6 +1211,8 @@ class Grid {
                         x: this.boxes[i].center.x,
                         y: this.boxes[i].center.y,
                         noiseValue: this.boxes[i].noiseValue8,
+                        noiseValueMin: this.noiseRAMin,
+                        noiseValueMax: this.noiseRAMax,
                         vertexLength: 5, // map(this.boxes[i].noiseValue8, -1, 1, 5, 10), // 15,
                         strokeWeighty: 0.05, // map(this.boxes[i].noiseValue8, -1, 1, 0.1, 0.3), // 1,
                         angleMin: 0,

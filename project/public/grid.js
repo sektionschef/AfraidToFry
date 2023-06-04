@@ -186,7 +186,7 @@ class Grid {
         this.loop6();  // half - ganz nicer effect
         this.loop7();  // neuer grid - 20230529
 
-        // this.loop8();
+        this.loop8();
     }
 
     createBoxes() {
@@ -956,11 +956,11 @@ class Grid {
 
         let i = 0;
 
-        console.log(this.noiseRAMin);
-        console.log(this.noiseRAMax);
+        console.log("RAMin: " + this.noiseRAMin);
+        console.log("RAMax: " + this.noiseRAMax);
 
-        console.log(this.noiseSAMin);
-        console.log(this.noiseSAMax);
+        console.log("SAMin: " + this.noiseSAMin);
+        console.log("SAMax: " + this.noiseSAMax);
 
         for (var v = 0; v < randomIndex.length; v++) {
 
@@ -1129,10 +1129,10 @@ class Grid {
             }
 
             if (this.boxes[i].aboveHorizon) {
-                this.zignzag(
+                new zigi(
                     {
-                        centerX: this.boxes[i].center.x + this.boxes[i].offset.x,
-                        centerY: this.boxes[i].center.y + this.boxes[i].offset.y,
+                        x: this.boxes[i].center.x,
+                        y: this.boxes[i].center.y,
                         noiseValue: this.boxes[i].noiseValue8,
                         vertexLength: 5, // map(this.boxes[i].noiseValue8, -1, 1, 5, 10), // 15,
                         strokeWeighty: 0.05, // map(this.boxes[i].noiseValue8, -1, 1, 0.1, 0.3), // 1,
@@ -1143,12 +1143,12 @@ class Grid {
                         colorList: this.vogerl1.palette,
                         group: "",
                     }
-                );
+                ).draw();
             } else {
-                this.zignzag(
+                new zigi(
                     {
-                        centerX: this.boxes[i].center.x + this.boxes[i].offset.x,
-                        centerY: this.boxes[i].center.y + this.boxes[i].offset.y,
+                        x: this.boxes[i].center.x,
+                        y: this.boxes[i].center.y,
                         noiseValue: this.boxes[i].noiseValue8,
                         vertexLength: 5, // map(this.boxes[i].noiseValue8, -1, 1, 5, 10), // 15,
                         strokeWeighty: 0.05, // map(this.boxes[i].noiseValue8, -1, 1, 0.1, 0.3), // 1,
@@ -1159,7 +1159,7 @@ class Grid {
                         colorList: this.vogerl2.palette,
                         group: "",
                     }
-                );
+                ).draw();
             }
 
         }

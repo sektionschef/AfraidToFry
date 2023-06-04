@@ -9,24 +9,42 @@ class noiseAggregator {
     }
 
     // for use in loop
-    createNoiseValue(w, h) {
+    createNoiseValue(w, h, startRow, endRow) {
         // let noiseValue = (
         //     this.noise1.createNoiseValue(w, h) +
         //     this.noise2.createNoiseValue(w, h) +
         //     this.noise3.createNoiseValue(w, h)
         // ) / 3;
 
-        var amplitude1 = 1;
-        var amplitude2 = 0.75;
-        var amplitude3 = 0.25;
+        // console.log(startRow);
+        // console.log(endRow);
+
+        // var amplitude1 = 1;
+        // var amplitude2 = 0.75;
+        // var amplitude3 = 0.5;
+        var amplitude1 = map(h, startRow, endRow, 1, 0);
+        var amplitude2 = map(h, startRow, endRow, 0, 1);
+        var amplitude3 = map(h, startRow, endRow, 0, 1);
+
+        // map - makes it a difference
+        // let noiseValue1 = map(this.noise1.createNoiseValue(w, h), -1, 1, 0, 1);
+        // let noiseValue2 = map(this.noise2.createNoiseValue(w, h), -1, 1, 0, 1);
+        // let noiseValue3 = map(this.noise3.createNoiseValue(w, h), -1, 1, 0, 1);
+
+        let noiseValue1 = this.noise1.createNoiseValue(w, h);
+        let noiseValue2 = this.noise2.createNoiseValue(w, h);
+        let noiseValue3 = this.noise3.createNoiseValue(w, h);
+
 
         let noiseValue = (
-            this.noise1.createNoiseValue(w, h) * amplitude1 +
-            this.noise2.createNoiseValue(w, h) * amplitude2 +
-            this.noise3.createNoiseValue(w, h) * amplitude3
-        ) / (amplitude1 + amplitude2 + amplitude3);
+            noiseValue1 * amplitude1 +
+            noiseValue2 * amplitude2 +
+            noiseValue3 * amplitude3
+        )
+        // ) / (amplitude1 + amplitude2 + amplitude3);
 
-        // noiseValue = Math.pow(noiseValue, 2);
+
+        // noiseValue = Math.pow(noiseValue, 1.3);
 
         return noiseValue
     }

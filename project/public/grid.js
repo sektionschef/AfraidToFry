@@ -1,4 +1,3 @@
-
 class Grid {
     constructor(data) {
         this.horizonRatio = 4 / 7;
@@ -113,19 +112,22 @@ class Grid {
 
         this.paletteRA = {
             palette: [
-                "#303055",
-                "#4C4C6D",
-                "#0f7764",
-                "#1B9C85",
-                "#FFE194",
-                "#b8cec3",
-                "#E8F6EF",
+                "#7d8a9c",
+                "#7b94a8",
+                "#9DB2BF",
+                "#DDE6ED",
             ]
         };
 
-        // this.paletteRA = new dynamicPalette(this.drawing, this.aboveTone, 33, 4, -2);
-        // this.paletteRB = { palette: ["#666161", "#9eb6b8", "#c4cac7"] };
-        this.paletteRB = new dynamicPalette(this.drawing, this.underneathTone, 53, 4, -2);
+        // this.paletteRB = new dynamicPalette(this.drawing, this.underneathTone, 53, 4, -2);
+        this.paletteRB = {
+            palette: [
+                "#506350",
+                "#728871",
+                "#9ebd9c",
+                "#b9d8b7",
+            ]
+        };
         this.paletteSA = { palette: ["#F4F4F2", "#c7bebe", "#8f9299", "#6b6f75"] };
         this.paletteSB = { palette: ["#F4F4F2", "#E8E8E8", "#BBBFCA", "#95989e"] };
 
@@ -141,7 +143,8 @@ class Grid {
         // this.noiseRA = new noiseArea(50, 1);
         this.noiseRA = new noiseAggregator(135, 50, 110, 10, 4, 5);
         // this.noiseSA = new noiseArea(50, 50);
-        this.noiseSA = new noiseAggregator(155, 50, 80, 10, 20, 50);
+        // this.noiseSA = new noiseAggregator(155, 50, 80, 10, 20, 50);
+        this.noiseSA = new noiseAggregator(135, 50, 110, 10, 4, 5);
 
 
         // this.buffer = createGraphics(width, height, SVG);
@@ -218,8 +221,8 @@ class Grid {
                 var horizon = h == this.horizonRow;
                 var aboveHorizon = h <= this.horizonRow;
 
-                var noiseValueRA = this.noiseRA.createNoiseValue(w, h);
-                var noiseValueSA = this.noiseSA.createNoiseValue(w, h);
+                var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow);
+                var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount);
 
                 if (noiseValueRA < this.noiseRAMin) {
                     this.noiseRAMin = noiseValueRA;
@@ -227,7 +230,7 @@ class Grid {
                 if (noiseValueRA > this.noiseRAMax) {
                     this.noiseRAMax = noiseValueRA;
                 }
-                if (noiseValueSA < this.noiseRAMin) {
+                if (noiseValueSA < this.noiseSAMin) {
                     this.noiseSAMin = noiseValueSA;
                 }
                 if (noiseValueSA > this.noiseSAMax) {
@@ -254,7 +257,7 @@ class Grid {
                     "noiseValue7": this.noise7.createNoiseValue(w, h),
                     "noiseValue8": this.noise8.createNoiseValue(w, h),
                     "noiseValueRA": noiseValueRA,
-                    "noiseValueSA": this.noiseSA.createNoiseValue(w, h),
+                    "noiseValueSA": noiseValueSA,
                     // "noiseValue9": this.noise9.createNoiseValue(w, h),
                     // "noiseValue10": this.noise10.createNoiseValue(w, h),
                     // "polygonA": polygonA,
@@ -953,8 +956,11 @@ class Grid {
 
         let i = 0;
 
-        // console.log(this.noiseRAMin);
-        // console.log(this.noiseRAMax);
+        console.log(this.noiseRAMin);
+        console.log(this.noiseRAMax);
+
+        console.log(this.noiseSAMin);
+        console.log(this.noiseSAMax);
 
         for (var v = 0; v < randomIndex.length; v++) {
 
@@ -1025,7 +1031,6 @@ class Grid {
                     cutOutValue: -1,
                     loopCount: map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, 20, 50), // 20,
                     colorList: this.paletteRA.palette,
-                    // colorList: ["#76768b", "#6262b3", "#925c1e", "#5e5ee2",],
                     noiseAngle: false,
                     group: "",
                     drawing: drawing,
@@ -1037,8 +1042,8 @@ class Grid {
                     noiseValue: this.boxes[i].noiseValueSA,
                     noiseValueMin: this.noiseSAMin,
                     noiseValueMax: this.noiseSAMax,
-                    vertexLength: map(this.boxes[i].noiseValueSA, -1, 1, 30, 50), // 30,
-                    strokeWeighty: map(this.boxes[i].noiseValueSA, -1, 1, 0.05, 0.25), // 0.1,
+                    vertexLength: 30, // map(this.boxes[i].noiseValueSA, -1, 1, 30, 50), // 30,
+                    strokeWeighty: map(this.boxes[i].noiseValueSA, this.noiseSAMin, this.noiseSAMax, 0.05, 0.25), // 0.1,
                     angleMean: Math.PI / 1,
                     angleSTD: Math.PI / 56,
                     revert: true,

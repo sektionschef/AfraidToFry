@@ -139,8 +139,8 @@ class Grid {
         //         "#b9d8b7",
         //     ]
         // };
-        this.paletteRB = new dynamicPalette(this.drawing, "#9bbeae", 3, -10, 6);
-        this.paletteRBbby = new dynamicPalette(this.drawing, "#9bbeaf", 3, -10, 6);
+        this.paletteRB = new dynamicPalette(this.drawing, "#7f9189", 3, -10, 6);
+        this.paletteRBbby = new dynamicPalette(this.drawing, "#7e9189", 3, -10, 6);
         this.paletteSA = { palette: ["#F4F4F2", "#c7bebe", "#8f9299", "#6b6f75"] };
         this.paletteSB = { palette: ["#F4F4F2", "#E8E8E8", "#BBBFCA", "#95989e"] };
 
@@ -156,7 +156,7 @@ class Grid {
         // this.noiseRA = new noiseAggregator(135, 50, 110, 10, 4, 5);
         this.noiseRA = new noiseAggregator(235, 50, 110, 4, 4, 5);
         // this.noiseSA = new noiseAggregator(155, 50, 80, 10, 20, 50);
-        this.noiseSA = new noiseAggregator(105, 70, 90, 2, 3, 5);
+        this.noiseSA = new noiseAggregator(230, 48, 108, 4, 4, 5);
 
 
         // this.buffer = createGraphics(width, height, SVG);
@@ -237,8 +237,8 @@ class Grid {
                 var aboveHorizon = h <= this.horizonRow;
 
                 // REDUCE NOISE TO AREA NOT WHOLE CANVAS
-                var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 1, 0, 0, 1, 0, 1);
-                var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 1, 1, 0, 1, 0);
+                var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 1, 0, 0, 1, 0, 0.5);
+                var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 1, 1, 0, 0.5, 0);
 
                 if (noiseValueRA < this.noiseRAMin) {
                     this.noiseRAMin = noiseValueRA;
@@ -1221,7 +1221,8 @@ class Grid {
                         angleMax: Math.PI,
                         cutOutValue: -1,
                         loopCount: map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, 1, 10),
-                        colorList: this.paletteRA.palette,
+                        // colorList: this.paletteRA.palette,
+                        colorList: new dynamicPalette(this.drawing, "#979797", 3, -10, 6).palette,
                         group: "",
                     }
                 ).draw();
@@ -1230,16 +1231,17 @@ class Grid {
                     {
                         x: this.boxes[i].center.x,
                         y: this.boxes[i].center.y,
-                        noiseValue: this.boxes[i].noiseValue8,
-                        noiseValueMin: this.noiseRAMin,
-                        noiseValueMax: this.noiseRAMax,
+                        noiseValue: this.boxes[i].noiseValueSA,
+                        noiseValueMin: this.noiseSAMin,
+                        noiseValueMax: this.noiseSAMax,
                         vertexLength: 5, // map(this.boxes[i].noiseValue8, -1, 1, 5, 10), // 15,
                         strokeWeighty: 0.05, // map(this.boxes[i].noiseValue8, -1, 1, 0.1, 0.3), // 1,
                         angleMin: 0,
                         angleMax: Math.PI,
                         cutOutValue: -1,
-                        loopCount: map(this.boxes[i].noiseValue8, -1, 1, 1, 10),
-                        colorList: this.vogerl2.palette,
+                        loopCount: map(this.boxes[i].noiseValueSA, this.noiseSAMin, this.noiseSAMax, 1, 10),
+                        // colorList: this.paletteRB.palette,
+                        colorList: new dynamicPalette(this.drawing, "#979797", 3, -10, 6).palette,
                         group: "",
                     }
                 ).draw();

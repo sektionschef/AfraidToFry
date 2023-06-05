@@ -53,8 +53,22 @@ class dynamicPalette {
     }
 
     show() {
+        var boxWidth = 20;
+
         for (var i = 0; i < this.palette.length; i++) {
-            this.drawing.rect(50, 50).move(rescaling_width / 4 + 50 * i, 300).fill({ color: this.palette[i] });
+            // this.drawing.rect(50, 50).move(rescaling_width / 4 + 50 * i, 300).fill({ color: this.palette[i] });
+
+            const svgNode = document.getElementById('svgNode');
+
+            var rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            rect.setAttributeNS(null, 'x', rescaling_width / 10 + boxWidth * i);
+            rect.setAttributeNS(null, 'y', 300);
+            rect.setAttributeNS(null, 'height', 50);
+            rect.setAttributeNS(null, 'width', boxWidth);
+            // rect.setAttributeNS(null, 'fill', '#' + Math.round(0xffffff * Math.random()).toString(16));
+            rect.setAttributeNS(null, 'fill', this.palette[i]);
+
+            svgNode.appendChild(rect);
         }
     }
 }

@@ -109,6 +109,10 @@ window.addEventListener("DOMContentLoaded", (event) => {
     timeChecker();
 
     // svgNode.setAttribute("filter", "url(#f1)");
+
+    // ELEMENTS
+    new dynamicPalette(this.drawing, "#b7c6d4", 3, -10, 6).show();
+    new dynamicPalette(this.drawing, "#7f9189", 3, -10, 6).show();
 });
 
 
@@ -119,11 +123,7 @@ SVG.on(document, 'DOMContentLoaded', function () {
     // drawing = SVG().viewbox(0, 0, rescaling_width, rescaling_height).addTo('#nono');
     // timeChecker();
 
-    // ELEMENTS
 
-    // let palette = new dynamicPalette(drawing, "#6363b1", 0, 2, 1);
-    // let palette = new dynamicPalette(drawing, "#6363b1", 3, 1, 1);
-    // palette.show();
 
     // let noiseDebug = new noiseArea(120, 4);
     // noiseDebug.drawNoise(drawing);

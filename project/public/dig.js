@@ -11,6 +11,9 @@ class digi {
         this.drawing = data.drawing;
         this.noiseValueMin = data.noiseValueMin;
         this.noiseValueMax = data.noiseValueMax;
+        this.horizonRow = data.horizonRow;
+        this.i = data.i;
+        this.longBoxCount = data.longBoxCount;
 
         this.angle = 0;
         this.revert = data.revert;
@@ -79,12 +82,28 @@ class digi {
             // with svg.js
             // this.drawing.polyline(polyLineString).fill('none').stroke({ width: this.strokeWeighty, color: color_d });
 
+            // color_d = tinycolor(color_d);
+
+            var h = Math.floor(this.i / this.longBoxCount);
+            var distanceFromHorizon = Math.abs(this.horizonRow - h);
+
+            var criticalDistance = 35;
+            var darknessBoost = 25;
+            var desaturationBoost = 20;
+
+            if (distanceFromHorizon < criticalDistance) {
+                var color_ = tinycolor(color_d).clone().darken(map(distanceFromHorizon, 0, criticalDistance, darknessBoost, 0)).desaturate(map(distanceFromHorizon, 0, criticalDistance, desaturationBoost, 0)).toHexString();
+            } else {
+                var color_ = color_d;
+            }
+
             // without svg.js
             const svgNode = document.getElementById('svgNode');
             const polyNode = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
             polyNode.setAttributeNS(null, 'points', polyLineString);
             polyNode.setAttributeNS(null, 'fill', 'none');
-            polyNode.setAttributeNS(null, 'stroke', color_d);
+            // polyNode.setAttributeNS(null, 'stroke', color_d);
+            polyNode.setAttributeNS(null, 'stroke', color_);
             polyNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
             // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
             svgNode.appendChild(polyNode);

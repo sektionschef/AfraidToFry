@@ -1000,6 +1000,9 @@ class Grid {
                     noiseAngle: false,
                     group: "",
                     drawing: drawing,
+                    horizonRow: this.horizonRow,
+                    i: i,
+                    longBoxCount: this.longBoxCount,
                 }).draw();
             }
 
@@ -1023,6 +1026,9 @@ class Grid {
                     noiseAngle: false,
                     group: "",
                     drawing: drawing,
+                    horizonRow: this.horizonRow,
+                    i: i,
+                    longBoxCount: this.longBoxCount,
                 }).draw();
             } else {
                 new digi({
@@ -1042,6 +1048,9 @@ class Grid {
                     noiseAngle: false,
                     group: "",
                     drawing: drawing,
+                    horizonRow: this.horizonRow,
+                    i: i,
+                    longBoxCount: this.longBoxCount,
                 }).draw();
             }
 
@@ -1080,6 +1089,9 @@ class Grid {
                     noiseAngle: true,
                     group: "",
                     drawing: drawing,
+                    horizonRow: this.horizonRow,
+                    i: i,
+                    longBoxCount: this.longBoxCount,
                 }).draw();
             } else {
                 new digi({
@@ -1099,6 +1111,9 @@ class Grid {
                     noiseAngle: true,
                     group: "",
                     drawing: drawing,
+                    horizonRow: this.horizonRow,
+                    i: i,
+                    longBoxCount: this.longBoxCount,
                 }).draw();
             }
 

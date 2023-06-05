@@ -20,24 +20,34 @@ class dynamicPalette {
         // base color in the middle
         this.palette[this.upAndDown] = this.baseColor.toHexString();
 
-        for (var i = 1; i < (this.upAndDown + 1); i++) {
-            _color_end.spin(this.cChange * i).lighten(this.lChange * i).desaturate(this.sChange * i);
-            _color_beginning.spin(-this.cChange * i).darken(this.lChange * i).saturate(this.sChange * i);
+        // UP AND DOWN METHOD
+        // for (var i = 1; i < (this.upAndDown + 1); i++) {
+        //     _color_end.spin(this.cChange * i).lighten(this.lChange * i).desaturate(this.sChange * i);
+        //     _color_beginning.spin(-this.cChange * i).darken(this.lChange * i).saturate(this.sChange * i);
 
-            // _color_end.spin(this.cChange * i);
-            // _color_end.lighten(this.lChange * i);
-            // _color_beginning.darken(this.lChange * i);
+        //     // _color_end.spin(this.cChange * i);
+        //     // _color_end.lighten(this.lChange * i);
+        //     // _color_beginning.darken(this.lChange * i);
 
-            // _color_beginning.saturate(this.sChange * i);
-            // _color_end.saturate(this.sChange * i);
+        //     // _color_beginning.saturate(this.sChange * i);
+        //     // _color_end.saturate(this.sChange * i);
 
-            // _color_beginning.spin(-this.cChange * i);
-            // _color_beginning.desaturate(this.sChange * i);
-            // _color_end.desaturate(this.sChange * i);
+        //     // _color_beginning.spin(-this.cChange * i);
+        //     // _color_beginning.desaturate(this.sChange * i);
+        //     // _color_end.desaturate(this.sChange * i);
 
-            this.palette[this.upAndDown - i] = _color_beginning.toHexString();
-            this.palette[(this.upAndDown + i)] = _color_end.toHexString();
+        //     this.palette[this.upAndDown - i] = _color_beginning.toHexString();
+        //     this.palette[(this.upAndDown + i)] = _color_end.toHexString();
+        // }
+
+        // console.log(getNormallyDistributedRandomNumber(0, 10));
+
+        for (var i = 0; i < 60; i++) {
+            this.palette.push(this.baseColor.clone().spin(getNormallyDistributedRandomNumber(0, 5)).lighten(getNormallyDistributedRandomNumber(0, 25)).desaturate(getNormallyDistributedRandomNumber(0, 10)).toHexString());
         }
+
+
+        this.palette.sort(function (a, b) { return tinycolor(a).getBrightness() - tinycolor(b).getBrightness() });
 
         // console.log(this.palette);
     }

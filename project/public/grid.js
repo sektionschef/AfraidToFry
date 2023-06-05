@@ -110,8 +110,11 @@ class Grid {
         this.palette15 = new dynamicPalette(this.drawing, this.aboveTone, 2, -2, 0);
         this.palette16 = new dynamicPalette(this.drawing, this.underneathTone, 2, 0, 0);
 
-        this.paletteRA = new dynamicPalette(this.drawing, "#ABC6DE", 3, -10, 6);
-        this.paletteRAbby = new dynamicPalette(this.drawing, "#ABC6DE", 5, -15, 10);
+        // this.paletteRA = new dynamicPalette(this.drawing, "#ABC6DE", 3, -10, 6);
+        this.paletteRA = new dynamicPalette(this.drawing, "#b7c6d4", 3, -10, 6);
+        this.paletteRAprot = new dynamicPalette(this.drawing, "#abccaa", 3, -10, 6);
+        // this.paletteRAbby = new dynamicPalette(this.drawing, "#ABC6DE", 5, -15, 10);
+        this.paletteRAbby = new dynamicPalette(this.drawing, "#b7c6d4", 5, -15, 10);
         // this.paletteRA = {
         //     palette: [
         //         // "#7d8a9c",
@@ -128,14 +131,16 @@ class Grid {
         // };
 
         // this.paletteRB = new dynamicPalette(this.drawing, this.underneathTone, 53, 4, -2);
-        this.paletteRB = {
-            palette: [
-                "#506350",
-                "#728871",
-                "#9ebd9c",
-                "#b9d8b7",
-            ]
-        };
+        // this.paletteRB = {
+        //     palette: [
+        //         "#506350",
+        //         "#728871",
+        //         "#9ebd9c",
+        //         "#b9d8b7",
+        //     ]
+        // };
+        this.paletteRB = new dynamicPalette(this.drawing, "#9bbeae", 3, -10, 6);
+        this.paletteRBbby = new dynamicPalette(this.drawing, "#9bbeaf", 3, -10, 6);
         this.paletteSA = { palette: ["#F4F4F2", "#c7bebe", "#8f9299", "#6b6f75"] };
         this.paletteSB = { palette: ["#F4F4F2", "#E8E8E8", "#BBBFCA", "#95989e"] };
 
@@ -148,11 +153,10 @@ class Grid {
         this.noise7 = new noiseArea(150, 10);
         this.noise8 = new noiseArea(120, 60);
 
-        // this.noiseRA = new noiseArea(50, 1);
-        this.noiseRA = new noiseAggregator(135, 50, 110, 10, 4, 5);
-        // this.noiseSA = new noiseArea(50, 50);
+        // this.noiseRA = new noiseAggregator(135, 50, 110, 10, 4, 5);
+        this.noiseRA = new noiseAggregator(235, 50, 110, 4, 4, 5);
         // this.noiseSA = new noiseAggregator(155, 50, 80, 10, 20, 50);
-        this.noiseSA = new noiseAggregator(135, 50, 110, 10, 4, 5);
+        this.noiseSA = new noiseAggregator(105, 70, 90, 2, 3, 5);
 
 
         // this.buffer = createGraphics(width, height, SVG);
@@ -195,9 +199,9 @@ class Grid {
 
         // this.loop5();  // canvas dots
         this.loop6();  // half - ganz nicer effect
-        this.loop7();  // neuer grid - 20230529
+        // this.loop7();  // neuer grid - 20230529
 
-        this.loop8();
+        // this.loop8();
     }
 
     createBoxes() {
@@ -232,8 +236,9 @@ class Grid {
                 var horizon = h == this.horizonRow;
                 var aboveHorizon = h <= this.horizonRow;
 
-                var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow);
-                var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount);
+                // REDUCE NOISE TO AREA NOT WHOLE CANVAS
+                var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 1, 0, 0, 1, 0, 1);
+                var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 1, 1, 0, 1, 0);
 
                 if (noiseValueRA < this.noiseRAMin) {
                     this.noiseRAMin = noiseValueRA;
@@ -1002,6 +1007,17 @@ class Grid {
                     noiseValueMin: this.noiseRAMin,
                     noiseValueMax: this.noiseRAMax,
                 }).draw();
+            } else {
+                new deugy({
+                    x: this.boxes[i].A.x,
+                    y: this.boxes[i].A.y,
+                    width: this.boxSize,
+                    height: this.boxSize,
+                    colorList: this.paletteRB.palette,
+                    noiseValue: this.boxes[i].noiseValueSA,
+                    noiseValueMin: this.noiseSAMin,
+                    noiseValueMax: this.noiseSAMax,
+                }).draw();
             }
 
 
@@ -1014,11 +1030,11 @@ class Grid {
 
         let i = 0;
 
-        console.log("RAMin: " + this.noiseRAMin);
-        console.log("RAMax: " + this.noiseRAMax);
+        // console.log("RAMin: " + this.noiseRAMin);
+        // console.log("RAMax: " + this.noiseRAMax);
 
-        console.log("SAMin: " + this.noiseSAMin);
-        console.log("SAMax: " + this.noiseSAMax);
+        // console.log("SAMin: " + this.noiseSAMin);
+        // console.log("SAMax: " + this.noiseSAMax);
 
         for (var v = 0; v < randomIndex.length; v++) {
 
@@ -1053,28 +1069,31 @@ class Grid {
             // }
 
 
-            // if (this.boxes[i].horizon) {
-            //     this.digndag(
-            //         {
-            //             centerX: this.boxes[i].center.x,
-            //             centerY: this.boxes[i].center.y,
-            //             noiseValue: this.boxes[i].noiseValue1,
-            //             vertexLength: 20, // map(this.boxes[i].noiseValue2, -1, 1, 5, 15),
-            //             strokeWeighty: 2.4, // map(this.boxes[i].noiseValue9, this.noise9.noiseValueMin, this.noise9.noiseValueMax, 0.3, 1), //0.5,
-            //             angleMin: 2 * Math.PI / 12 * 2.5,
-            //             angleMax: 2 * Math.PI / 12 * 3.5,
-            //             revert: true,
-            //             cutOutValue: -1,
-            //             loopCount: 120,
-            //             colorList: ["#383838"],
-            //             noiseAngle: false,
-            //             group: "",
-            //         }
-            //     )
-
-            // }
+            if (this.boxes[i].horizon) {
+                new digi({
+                    x: this.boxes[i].center.x,
+                    y: this.boxes[i].center.y,
+                    noiseValue: this.boxes[i].noiseValueRA,
+                    noiseValueMin: this.noiseRAMin,
+                    noiseValueMax: this.noiseRAMax,
+                    vertexLength: 20, // map(this.boxes[i].noiseValue2, -1, 1, 5, 15),
+                    strokeWeighty: 0.5, // map(this.boxes[i].noiseValue9, this.noise9.noiseValueMin, this.noise9.noiseValueMax, 0.3, 1), //0.5,
+                    // angleMin: 2 * Math.PI / 12 * 2.5,
+                    // angleMax: 2 * Math.PI / 12 * 3.5,
+                    angleMean: Math.PI / 1,
+                    angleSTD: Math.PI / 56,
+                    revert: true,
+                    cutOutValue: -1,
+                    loopCount: 20,
+                    colorList: new dynamicPalette(this.drawing, "#979797", 3, -10, 6).palette,
+                    noiseAngle: false,
+                    group: "",
+                    drawing: drawing,
+                }).draw();
+            }
 
             if (this.boxes[i].aboveHorizon) {
+                // if (fxrand() > 0.05) { var patty = this.paletteRA.palette } else { var patty = this.paletteRAprot.palette };
                 new digi({
                     x: this.boxes[i].center.x,
                     y: this.boxes[i].center.y,
@@ -1089,6 +1108,7 @@ class Grid {
                     cutOutValue: -1,
                     loopCount: map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, 20, 50), // 20,
                     colorList: this.paletteRA.palette,
+                    // colorList: patty,
                     noiseAngle: false,
                     group: "",
                     drawing: drawing,
@@ -1138,13 +1158,13 @@ class Grid {
                     noiseValue: this.boxes[i].noiseValueRA,
                     noiseValueMin: this.noiseRAMin,
                     noiseValueMax: this.noiseRAMax,
-                    vertexLength: 20, // map(this.boxes[i].noiseValueRA, -1, 1, 30, 50), // 30,
+                    vertexLength: 15, // map(this.boxes[i].noiseValueRA, -1, 1, 30, 50), // 30,
                     strokeWeighty: 0.075, //map(this.boxes[i].noiseValueRA, -1, 1, 0.05, 0.25), // 0.1,
                     angleMean: Math.PI / 1,
                     angleSTD: Math.PI / 56,
                     revert: true,
                     cutOutValue: -1,
-                    loopCount: 20,
+                    loopCount: 25,
                     colorList: this.paletteRAbby.palette,
                     noiseAngle: true,
                     group: "",
@@ -1157,14 +1177,14 @@ class Grid {
                     noiseValue: this.boxes[i].noiseValueSA,
                     noiseValueMin: this.noiseSAMin,
                     noiseValueMax: this.noiseSAMax,
-                    vertexLength: 20, // map(this.boxes[i].noiseValueRA, -1, 1, 30, 50), // 30,
+                    vertexLength: 15, // map(this.boxes[i].noiseValueRA, -1, 1, 30, 50), // 30,
                     strokeWeighty: 0.075, // map(this.boxes[i].noiseValueSA, -1, 1, 0.05, 0.25), // 0.1,
                     angleMean: Math.PI / 1,
                     angleSTD: Math.PI / 56,
                     revert: true,
                     cutOutValue: -1,
-                    loopCount: 20,
-                    colorList: this.paletteRB.palette,
+                    loopCount: 25,
+                    colorList: this.paletteRBbby.palette,
                     noiseAngle: true,
                     group: "",
                     drawing: drawing,

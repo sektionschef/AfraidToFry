@@ -9,7 +9,7 @@ class noiseAggregator {
     }
 
     // for use in loop
-    createNoiseValue(w, h, startRow, endRow) {
+    createNoiseValue(w, h, startRow, endRow, a1min, a1max, a2min, a2max, a3min, a3max) {
         // let noiseValue = (
         //     this.noise1.createNoiseValue(w, h) +
         //     this.noise2.createNoiseValue(w, h) +
@@ -22,9 +22,9 @@ class noiseAggregator {
         // var amplitude1 = 1;
         // var amplitude2 = 0.75;
         // var amplitude3 = 0.5;
-        var amplitude1 = map(h, startRow, endRow, 1, 0);
-        var amplitude2 = map(h, startRow, endRow, 0, 1);
-        var amplitude3 = map(h, startRow, endRow, 0, 1);
+        var amplitude1 = map(h, startRow, endRow, a1min, a1max); // 1,0
+        var amplitude2 = map(h, startRow, endRow, a2min, a2max); // 0,1
+        var amplitude3 = map(h, startRow, endRow, a3min, a3max); // 0,1
 
         // map - makes it a difference
         // let noiseValue1 = map(this.noise1.createNoiseValue(w, h), -1, 1, 0, 1);

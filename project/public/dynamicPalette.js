@@ -1,24 +1,25 @@
 // create a palette with 9 tones - 4 down 4 up and base color in the middel
 class dynamicPalette {
-    constructor(drawing, baseColor, cChange, lChange, sChange) {
+    // constructor(drawing, baseColor, cChange, lChange, sChange) {
+    constructor(baseColor, cSTD, lSTD, sSTD) {
 
         // change in lightness and in saturation
-        this.cChange = cChange;
-        this.lChange = lChange;
-        this.sChange = sChange;
+        // this.cChange = cChange;
+        // this.lChange = lChange;
+        // this.sChange = sChange;
 
-        this.drawing = drawing;
+        // this.drawing = drawing;
         this.baseColor = tinycolor(baseColor);
-        let _color_beginning = tinycolor(baseColor);
-        let _color_end = tinycolor(baseColor);
+        // let _color_beginning = tinycolor(baseColor);
+        // let _color_end = tinycolor(baseColor);
 
-        this.length = 9;
-        this.upAndDown = 4;
+        // this.length = 9;
+        // this.upAndDown = 4;
 
-        this.palette = Array(this.length);
+        // this.palette = Array(this.length);
 
         // base color in the middle
-        this.palette[this.upAndDown] = this.baseColor.toHexString();
+        // this.palette[this.upAndDown] = this.baseColor.toHexString();
 
         // UP AND DOWN METHOD
         // for (var i = 1; i < (this.upAndDown + 1); i++) {
@@ -40,10 +41,17 @@ class dynamicPalette {
         //     this.palette[(this.upAndDown + i)] = _color_end.toHexString();
         // }
 
+
+        // DYNAMIC
+        this.length = 60;
+        this.palette = [];
+        // this.palette = Array(this.length);
         // console.log(getNormallyDistributedRandomNumber(0, 10));
 
-        for (var i = 0; i < 60; i++) {
-            this.palette.push(this.baseColor.clone().spin(getNormallyDistributedRandomNumber(0, 5)).lighten(getNormallyDistributedRandomNumber(0, 25)).desaturate(getNormallyDistributedRandomNumber(0, 10)).toHexString());
+
+
+        for (var i = 0; i < this.length; i++) {
+            this.palette.push(this.baseColor.clone().spin(getNormallyDistributedRandomNumber(0, cSTD)).lighten(getNormallyDistributedRandomNumber(0, lSTD)).desaturate(getNormallyDistributedRandomNumber(0, sSTD)).toHexString());
         }
 
 

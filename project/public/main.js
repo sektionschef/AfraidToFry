@@ -111,8 +111,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
     // svgNode.setAttribute("filter", "url(#f1)");
 
     // ELEMENTS
-    new dynamicPalette(this.drawing, "#b7c6d4", 3, -10, 6).show();
-    new dynamicPalette(this.drawing, "#7f9189", 3, -10, 6).show();
+    // new dynamicPalette("#617061", 5, 10, 10).show();
+    // new dynamicPalette("#7f9189", 5, 25, 10).show();
 });
 
 
@@ -199,7 +199,6 @@ function fireTrigger(drawing) {
         // shortBoxCount: 80,
         shortBoxCount: 160,
         overshoot: OVERSHOOT,
-        DEBUG: false,
     });
 
 }

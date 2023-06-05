@@ -5,7 +5,7 @@ class Grid {
         this.overshoot = data.overshoot;  // time limit reached
         this.finished = false;  // flag for completely drawn
 
-        this.DEBUG = data.DEBUG;
+        this.DEBUG = false;
         this.marginBoxCount = data.marginBoxCount;
         this.shortBoxCount = data.shortBoxCount; // boxes on the shorter side
         this.drawing = data.drawing;
@@ -41,40 +41,6 @@ class Grid {
         // this.stripes = [];
         // this.stripeLines = [];
 
-        // this.palette1 = new dynamicPalette(this.drawing, "#6286a0", 4, 4);
-        // this.palette2 = new dynamicPalette(this.drawing, "#48794a", 2, 4);
-        // this.palette3 = new dynamicPalette(this.drawing, "#74a0bd", -2, 0);
-        // this.palette4 = new dynamicPalette(this.drawing, "#537955", -3, 1);
-        // this.palette5 = new dynamicPalette(this.drawing, "#438aa1", 0, 0);
-        // this.palette6 = new dynamicPalette(this.drawing, "#469e6e", 0, 0);
-        // this.palette7 = new dynamicPalette(this.drawing, "#6c93ad", 2, 2);
-        // this.palette8 = new dynamicPalette(this.drawing, "#467a5a", 2, 4);
-        // this.palette9 = new dynamicPalette(this.drawing, "#8ab8ec", 1, 1);
-        // this.palette10 = new dynamicPalette(this.drawing, "#5aa066", 1, 1);
-        // this.palette11 = new dynamicPalette(this.drawing, "#6a9bd4", 2, 5);
-        // this.palette12 = new dynamicPalette(this.drawing, "#7ac486", 2, 5);
-        // this.palette13 = new dynamicPalette(this.drawing, "#25568f", 2, 5);
-        // this.palette14 = new dynamicPalette(this.drawing, "#1d6329", 2, 5);
-        // this.palette15 = new dynamicPalette(this.drawing, "#6eb179", 0, 0);
-        // this.palette16 = new dynamicPalette(this.drawing, "#a2bfe0", 0, 0);
-
-        // this.palette1 = new dynamicPalette(this.drawing, "#6286a0", 3, 4, -2);
-        // this.palette2 = new dynamicPalette(this.drawing, "#548155", 3, 4, 2);
-        // this.palette3 = new dynamicPalette(this.drawing, "#6286a0", 1, -2, 1);
-        // this.palette4 = new dynamicPalette(this.drawing, "#548155", 1, -2, 1);
-        // this.palette5 = new dynamicPalette(this.drawing, "#6286a0", 2, 0, 0);
-        // this.palette6 = new dynamicPalette(this.drawing, "#6286a0", 2, 0, 0);
-        // this.palette7 = new dynamicPalette(this.drawing, "#6286a0", 2, 2, 2);
-        // this.palette8 = new dynamicPalette(this.drawing, "#6286a0", 2, 2, 0);
-        // this.palette9 = new dynamicPalette(this.drawing, "#6286a0", 2, 1, 1);
-        // this.palette10 = new dynamicPalette(this.drawing, "#6286a0", 2, 1, 1);
-        // this.palette11 = new dynamicPalette(this.drawing, "#6286a0", 2, 2, 0);
-        // this.palette12 = new dynamicPalette(this.drawing, "#548155", 2, 2, 0);
-        // this.palette13 = new dynamicPalette(this.drawing, "#6286a0", 2, 2, 0);
-        // this.palette14 = new dynamicPalette(this.drawing, "#6286a0", 2, 2, 0);
-        // this.palette15 = new dynamicPalette(this.drawing, "#6286a0", 2, 0, 0);
-        // this.palette16 = new dynamicPalette(this.drawing, "#6286a0", 2, 0, 0);
-
         if (this.overshoot == true) {
             this.aboveTone = "#cec9b1";
             this.underneathTone = "#869290";
@@ -92,116 +58,60 @@ class Grid {
             // this.vogerl2 = { palette: [this.aboveTone] };
         }
 
-
-        this.palette1 = new dynamicPalette(this.drawing, this.aboveTone, 3, 4, -2);
-        this.palette2 = new dynamicPalette(this.drawing, this.underneathTone, 3, 4, 2);
-        this.palette3 = new dynamicPalette(this.drawing, this.aboveTone, 1, -2, 1);
-        this.palette4 = new dynamicPalette(this.drawing, this.underneathTone, 1, -2, 1);
-        this.palette5 = new dynamicPalette(this.drawing, this.aboveTone, 2, 0, 0);
-        this.palette6 = new dynamicPalette(this.drawing, this.underneathTone, 2, 0, 0);
-        this.palette7 = new dynamicPalette(this.drawing, this.aboveTone, 2, 2, 2);
-        this.palette8 = new dynamicPalette(this.drawing, this.underneathTone, 2, 2, 0);
-        this.palette9 = new dynamicPalette(this.drawing, this.aboveTone, 2, 1, 1);
-        this.palette10 = new dynamicPalette(this.drawing, this.underneathTone, 2, 1, 1);
-        this.palette11 = new dynamicPalette(this.drawing, this.aboveTone, 2, 2, 0);
-        this.palette12 = new dynamicPalette(this.drawing, this.underneathTone, 2, 2, 0);
-        this.palette13 = new dynamicPalette(this.drawing, this.aboveTone, 2, 2, 0);
-        this.palette14 = new dynamicPalette(this.drawing, this.underneathTone, 2, 2, 0);
-        this.palette15 = new dynamicPalette(this.drawing, this.aboveTone, 2, -2, 0);
-        this.palette16 = new dynamicPalette(this.drawing, this.underneathTone, 2, 0, 0);
-
         // this.paletteRA = new dynamicPalette(this.drawing, "#ABC6DE", 3, -10, 6);
-        this.paletteRA = new dynamicPalette(this.drawing, "#b7c6d4", 3, -10, 6);
-        this.paletteRAprot = new dynamicPalette(this.drawing, "#abccaa", 3, -10, 6);
+        // this.paletteRA = new dynamicPalette(this.drawing, "#b7c6d4", 3, -10, 6);
+        this.paletteRA = new dynamicPalette("#b7c6d4", 15, 25, 10);
+        this.paletteRAbby = new dynamicPalette("#b7c6d4", 15, 25, 10);
+
         // this.paletteRAbby = new dynamicPalette(this.drawing, "#ABC6DE", 5, -15, 10);
-        this.paletteRAbby = new dynamicPalette(this.drawing, "#b7c6d4", 5, -15, 10);
-        // this.paletteRA = {
-        //     palette: [
-        //         // "#7d8a9c",
-        //         // "#7b94a8",
-        //         // "#9DB2BF",
-        //         // "#DDE6ED",
 
-        //         "#ABC6DE",
-        //         "#6BABE3",
-        //         "#49545E",
-        //         "#8296A8",
-        //         "#3E5060",
-        //     ]
-        // };
+        this.paletteRB = new dynamicPalette("#899c89", 25, 35, 10);
+        this.paletteRBbby = new dynamicPalette("#a4cca4", 25, 35, 10);
 
-        // this.paletteRB = new dynamicPalette(this.drawing, this.underneathTone, 53, 4, -2);
-        // this.paletteRB = {
-        //     palette: [
-        //         "#506350",
-        //         "#728871",
-        //         "#9ebd9c",
-        //         "#b9d8b7",
-        //     ]
-        // };
-        this.paletteRB = new dynamicPalette(this.drawing, "#7f9189", 3, -10, 6);
-        this.paletteRBbby = new dynamicPalette(this.drawing, "#7e9189", 3, -10, 6);
-        this.paletteSA = { palette: ["#F4F4F2", "#c7bebe", "#8f9299", "#6b6f75"] };
-        this.paletteSB = { palette: ["#F4F4F2", "#E8E8E8", "#BBBFCA", "#95989e"] };
+        // this.paletteSA = { palette: ["#F4F4F2", "#c7bebe", "#8f9299", "#6b6f75"] };
+        // this.paletteSB = { palette: ["#F4F4F2", "#E8E8E8", "#BBBFCA", "#95989e"] };
 
-        this.noise1 = new noiseArea(120, 1);
-        this.noise2 = new noiseArea(120, 3);
-        this.noise3 = new noiseArea(250, 10);
-        this.noise4 = new noiseArea(140, 4);
-        this.noise5 = new noiseArea(5, 15);
-        this.noise6 = new noiseArea(120, 15);
-        this.noise7 = new noiseArea(150, 10);
-        this.noise8 = new noiseArea(120, 60);
+        // this.noise1 = new noiseArea(120, 1);
+        // this.noise2 = new noiseArea(120, 3);
+        // this.noise3 = new noiseArea(250, 10);
+        // this.noise4 = new noiseArea(140, 4);
+        // this.noise5 = new noiseArea(5, 15);
+        // this.noise6 = new noiseArea(120, 15);
+        // this.noise7 = new noiseArea(150, 10);
+        // this.noise8 = new noiseArea(120, 60);
 
         // this.noiseRA = new noiseAggregator(135, 50, 110, 10, 4, 5);
         this.noiseRA = new noiseAggregator(235, 50, 110, 4, 4, 5);
         // this.noiseSA = new noiseAggregator(155, 50, 80, 10, 20, 50);
-        this.noiseSA = new noiseAggregator(230, 48, 108, 4, 4, 5);
+        this.noiseSA = new noiseAggregator(230, 38, 90, 4, 4, 5);
 
-
-        // this.buffer = createGraphics(width, height, SVG);
-        // this.bufferNoise = createGraphics(width, height, SVG);
-
-        // this.bufferFullGround = createGraphics(width, height, SVG);
-        // this.bufferCutOutClouds = createGraphics(width, height, SVG);
-        // this.bufferEverywhereSome1 = createGraphics(width, height, SVG);
-        // this.bufferSection = createGraphics(width, height, SVG);
-        // this.bufferCutOutClouds2 = createGraphics(width, height, SVG);
-        // this.bufferCutOutClouds3 = createGraphics(width, height, SVG);
-        // this.bufferCutOutCloudsV = createGraphics(width, height, SVG);
-        // this.buffer8 = createGraphics(width, height, SVG);
-        // this.buffer9 = createGraphics(width, height, SVG);
-        // this.buffer10 = createGraphics(width, height, SVG);
-        // this.buffer11 = createGraphics(width, height, SVG);
-        // this.buffer12 = createGraphics(width, height, SVG);
-
-        // this.bufferZigZag = createGraphics(width, height, SVG);
 
         this.createBoxes();
 
         if (this.DEBUG) {
-            this.showDebug();
+            // this.showDebug();
+            this.loopDEBUG();
+        } else {
+
+            // setTimeout(() => {
+            //     this.loop1();
+            // }, 0);
+
+            // this.loop1()  // initial one with up and down
+
+            // this.loop2(); // combined two
+            // this.loop3();  // combined two
+            // this.loop4();  // noisy space
+
+            // this.loop5();  // canvas dots
+            this.loop6();  // half - ganz nicer effect
+            this.loop7();  // neuer grid - 20230529
+
+            // this.loop8();
         }
 
 
-        // this.loopDEBUG();
 
-
-        // setTimeout(() => {
-        //     this.loop1();
-        // }, 0);
-
-        // this.loop1()  // initial one with up and down
-
-        // this.loop2(); // combined two
-        // this.loop3();  // combined two
-        // this.loop4();  // noisy space
-
-        // this.loop5();  // canvas dots
-        this.loop6();  // half - ganz nicer effect
-        // this.loop7();  // neuer grid - 20230529
-
-        // this.loop8();
     }
 
     createBoxes() {
@@ -237,8 +147,9 @@ class Grid {
                 var aboveHorizon = h <= this.horizonRow;
 
                 // REDUCE NOISE TO AREA NOT WHOLE CANVAS
-                var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 1, 0, 0, 1, 0, 0.5);
-                var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 1, 1, 0, 0.5, 0);
+                var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 1, 0, 0, 1, 0.5, 0.5);
+                // var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 1, 1, 0, 0.5, 0);
+                var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 1, 1, 0, 0.5, 0.5);
 
                 if (noiseValueRA < this.noiseRAMin) {
                     this.noiseRAMin = noiseValueRA;
@@ -264,14 +175,14 @@ class Grid {
                     "width": w,
                     "index": index,
                     "mask": false,
-                    "noiseValue1": this.noise1.createNoiseValue(w, h),
-                    "noiseValue2": this.noise2.createNoiseValue(w, h),
-                    "noiseValue3": this.noise3.createNoiseValue(w, h),
-                    "noiseValue4": this.noise4.createNoiseValue(w, h),
-                    "noiseValue5": this.noise5.createNoiseValue(w, h),
-                    "noiseValue6": this.noise6.createNoiseValue(w, h),
-                    "noiseValue7": this.noise7.createNoiseValue(w, h),
-                    "noiseValue8": this.noise8.createNoiseValue(w, h),
+                    // "noiseValue1": this.noise1.createNoiseValue(w, h),
+                    // "noiseValue2": this.noise2.createNoiseValue(w, h),
+                    // "noiseValue3": this.noise3.createNoiseValue(w, h),
+                    // "noiseValue4": this.noise4.createNoiseValue(w, h),
+                    // "noiseValue5": this.noise5.createNoiseValue(w, h),
+                    // "noiseValue6": this.noise6.createNoiseValue(w, h),
+                    // "noiseValue7": this.noise7.createNoiseValue(w, h),
+                    // "noiseValue8": this.noise8.createNoiseValue(w, h),
                     "noiseValueRA": noiseValueRA,
                     "noiseValueSA": noiseValueSA,
                     // "noiseValue9": this.noise9.createNoiseValue(w, h),
@@ -1085,7 +996,7 @@ class Grid {
                     revert: true,
                     cutOutValue: -1,
                     loopCount: 20,
-                    colorList: new dynamicPalette(this.drawing, "#979797", 3, -10, 6).palette,
+                    colorList: new dynamicPalette("#979797", 5, 25, 10).palette,
                     noiseAngle: false,
                     group: "",
                     drawing: drawing,

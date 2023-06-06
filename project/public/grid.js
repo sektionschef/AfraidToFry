@@ -62,11 +62,14 @@ class Grid {
         // this.paletteRA = new dynamicPalette(this.drawing, "#b7c6d4", 3, -10, 6);
         this.paletteRA = new dynamicPalette("#b7c6d4", 15, 25, 10);
         this.paletteRAbby = new dynamicPalette("#b7c6d4", 15, 25, 10);
+        this.paletteLoop8A = new dynamicPalette("#9aa9b8", 55, 15, 10);
 
         // this.paletteRAbby = new dynamicPalette(this.drawing, "#ABC6DE", 5, -15, 10);
 
         this.paletteRB = new dynamicPalette("#899c89", 25, 35, 10);
         this.paletteRBbby = new dynamicPalette("#a4cca4", 25, 35, 10);
+        this.paletteLoop8B = new dynamicPalette("#718571", 55, 15, 10);
+
 
         // this.paletteSA = { palette: ["#F4F4F2", "#c7bebe", "#8f9299", "#6b6f75"] };
         // this.paletteSB = { palette: ["#F4F4F2", "#E8E8E8", "#BBBFCA", "#95989e"] };
@@ -1141,14 +1144,14 @@ class Grid {
                         noiseValue: this.boxes[i].noiseValueRA,
                         noiseValueMin: this.noiseRAMin,
                         noiseValueMax: this.noiseRAMax,
-                        vertexLength: 5, // map(this.boxes[i].noiseValue8, -1, 1, 5, 10), // 15,
-                        strokeWeighty: 0.2, // map(this.boxes[i].noiseValue8, -1, 1, 0.1, 0.3), // 1,
+                        vertexLength: 10, // map(this.boxes[i].noiseValue8, -1, 1, 5, 10), // 15,
+                        strokeWeighty: 0.05, // map(this.boxes[i].noiseValue8, -1, 1, 0.1, 0.3), // 1,
                         angleMin: 0,
                         angleMax: Math.PI,
                         cutOutValue: -1,
                         loopCount: map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, 1, 10),
                         // colorList: this.paletteRA.palette,
-                        colorList: new dynamicPalette(this.drawing, "#979797", 3, -10, 6).palette,
+                        colorList: this.paletteLoop8A.palette,
                         group: "",
                     }
                 ).draw();
@@ -1160,14 +1163,14 @@ class Grid {
                         noiseValue: this.boxes[i].noiseValueSA,
                         noiseValueMin: this.noiseSAMin,
                         noiseValueMax: this.noiseSAMax,
-                        vertexLength: 5, // map(this.boxes[i].noiseValue8, -1, 1, 5, 10), // 15,
+                        vertexLength: 10, // map(this.boxes[i].noiseValue8, -1, 1, 5, 10), // 15,
                         strokeWeighty: 0.05, // map(this.boxes[i].noiseValue8, -1, 1, 0.1, 0.3), // 1,
                         angleMin: 0,
                         angleMax: Math.PI,
                         cutOutValue: -1,
                         loopCount: map(this.boxes[i].noiseValueSA, this.noiseSAMin, this.noiseSAMax, 1, 10),
                         // colorList: this.paletteRB.palette,
-                        colorList: new dynamicPalette(this.drawing, "#979797", 3, -10, 6).palette,
+                        colorList: this.paletteLoop8B.palette,
                         group: "",
                     }
                 ).draw();

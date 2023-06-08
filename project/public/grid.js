@@ -38,13 +38,13 @@ class Grid {
         this.boxes = [];
 
         // COLOR 
-        // if (this.overshoot == true) {
-        //     this.aboveTone = "#cec9b1";
-        //     this.underneathTone = "#869290";
-        // } else {
-        //     this.aboveTone = "#cdd7df";
-        //     this.underneathTone = "#6e8578";
-        // }
+        if (this.overshoot == true) {
+            this.aboveTone = "#b7c6d4";
+            this.underneathTone = "#a0b4a0";
+        } else {
+            this.aboveTone = "#cdd7df";
+            this.underneathTone = "#6e8578";
+        }
 
         // this.paletteRA = new dynamicPalette("#b7c6d4", 15, 25, 10);  // klaas
         // this.paletteRAbby = new dynamicPalette("#b7c6d4", 15, 25, 10);  // klaas
@@ -54,13 +54,11 @@ class Grid {
         // this.paletteRBbby = new dynamicPalette("#a4cca4", 15, 25, 10);  // klaas
         // this.paletteLoop8B = new dynamicPalette("#718571", 55, 15, 10);  // klaas
 
-        this.paletteRA = new dynamicPalette("#b7c6d4", 15, 10, 10);
-        this.paletteRAbby = new dynamicPalette("#b7c6d4", 15, 10, 10);
-        // this.paletteLoop8A = new dynamicPalette("#9aa9b8", 55, 10, 10);
+        this.paletteRA = new dynamicPalette(this.aboveTone, 15, 8, 8);
+        this.paletteRB = new dynamicPalette(this.underneathTone, 15, 8, 8);
+        this.paletteOne = new dynamicPalette("#bebdbd", 15, 8, 8);
 
-        this.paletteRB = new dynamicPalette("#899c89", 15, 10, 10);
-        this.paletteRBbby = new dynamicPalette("#a4cca4", 15, 10, 10);
-        // this.paletteLoop8B = new dynamicPalette("#718571", 55, 10, 10);
+        // if (fxrand() > 0.2) {this.paletteA = this.paletteRA} else {this.paletteB = this.paletteRB}
 
         // this.noiseRA = new noiseAggregator(135, 50, 110, 10, 4, 5);
         // this.noiseRA = new noiseAggregator(235, 50, 110, 4, 4, 5);  // klaas
@@ -876,6 +874,9 @@ class Grid {
             //     }
             // }
 
+            if (fxrand() > 0.2) { this.paletteA = this.paletteRA } else { this.paletteA = this.paletteOne }
+            if (fxrand() > 0.2) { this.paletteB = this.paletteRB } else { this.paletteB = this.paletteOne }
+
 
             if (this.boxes[i].horizon) {
                 new digi({
@@ -924,7 +925,7 @@ class Grid {
                     revert: true,
                     cutOutValue: -1,
                     loopCount: map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, 20, 50), // 20,
-                    colorList: this.paletteRA.palette,
+                    colorList: this.paletteA.palette,
                     // colorList: patty,
                     noiseAngle: false,
                     group: "",
@@ -950,7 +951,7 @@ class Grid {
                     revert: true,
                     cutOutValue: -1,
                     loopCount: map(this.boxes[i].noiseValueSA, this.noiseSAMin, this.noiseSAMax, 20, 50), // 20,
-                    colorList: this.paletteRB.palette,
+                    colorList: this.paletteB.palette,
                     noiseAngle: false,
                     group: "",
                     drawing: drawing,
@@ -977,6 +978,9 @@ class Grid {
                 continue;
             }
 
+            if (fxrand() > 0.2) { this.paletteA = this.paletteRA } else { this.paletteA = this.paletteOne }
+            if (fxrand() > 0.2) { this.paletteB = this.paletteRB } else { this.paletteB = this.paletteOne }
+
             if (this.boxes[i].aboveHorizon) {
                 new digi({
                     x: this.boxes[i].center.x + getNormallyDistributedRandomNumber(3, 1),
@@ -994,7 +998,7 @@ class Grid {
                     revert: true,
                     cutOutValue: -1,
                     loopCount: 25,
-                    colorList: this.paletteRAbby.palette,
+                    colorList: this.paletteA.palette,
                     noiseAngle: true,
                     group: "",
                     drawing: drawing,
@@ -1019,7 +1023,7 @@ class Grid {
                     revert: true,
                     cutOutValue: -1,
                     loopCount: 25,
-                    colorList: this.paletteRBbby.palette,
+                    colorList: this.paletteB.palette,
                     noiseAngle: true,
                     group: "",
                     drawing: drawing,
@@ -1063,7 +1067,7 @@ class Grid {
                         cutOutValue: -1,
                         loopCount: map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, 1, 10),
                         // colorList: this.paletteRA.palette,
-                        colorList: this.paletteLoop8A.palette,
+                        colorList: this.paletteRA.palette,
                         group: "",
                     }
                 ).draw();
@@ -1085,7 +1089,7 @@ class Grid {
                         cutOutValue: -1,
                         loopCount: map(this.boxes[i].noiseValueSA, this.noiseSAMin, this.noiseSAMax, 1, 10),
                         // colorList: this.paletteRB.palette,
-                        colorList: this.paletteLoop8B.palette,
+                        colorList: this.paletteRB.palette,
                         group: "",
                     }
                 ).draw();

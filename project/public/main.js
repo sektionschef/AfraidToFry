@@ -83,7 +83,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
     var turbo = document.createElementNS("http://www.w3.org/2000/svg", "feTurbulence");
     turbo.setAttribute("type", "fractalNoise");
-    turbo.setAttribute("baseFrequency", "0.86");
+    turbo.setAttribute("baseFrequency", "0.75");
     turbo.setAttribute("numOctaves", "1");
     turbo.setAttribute("stitchTiles", "stitch");
     turbo.setAttribute("result", "NOISE");

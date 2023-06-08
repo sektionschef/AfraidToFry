@@ -37,8 +37,6 @@ canvasFormats = [
     },
 ]
 
-// NOT WORKING WITH HARDCODED SVG
-
 canvasFormatChosen = getRandomFromList(canvasFormats);
 // console.log("Canvas Format: " + canvasFormatChosen.name);
 
@@ -110,7 +108,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
     // svgNode.setAttribute("filter", "url(#f1)");
 
-    // ELEMENTS
+    // ELEMENT
     // new dynamicPalette("#617061", 5, 10, 10).show();
     // new dynamicPalette("#7f9189", 5, 25, 10).show();
 });
@@ -119,59 +117,15 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
 SVG.on(document, 'DOMContentLoaded', function () {
 
-    // drawing = SVG().viewbox(0, 0, rescaling_width, rescaling_height).addTo('#badAssCanvas');
-    // drawing = SVG().viewbox(0, 0, rescaling_width, rescaling_height).addTo('#nono');
-    // timeChecker();
-
-
-
-    // let noiseDebug = new noiseArea(120, 4);
-    // noiseDebug.drawNoise(drawing);
-
-    // noiseDebug.getStartingPoint(drawing);
-    // noiseDebug.getIsland(drawing);
-    // noiseDebug.drawIsland(drawing);
-
-    // noiseAggy = new noiseAggregator(135, 50, 110, 10, 4, 5);
-    // noiseAggy.drawNoise1(drawing);
-    // noiseAggy.drawNoise2(drawing);
-    // noiseAggy.drawNoise3(drawing);
-
-    // noiseAggy.drawAgg(drawing);
-
-
-    // dig = new dig({
-    //     x: 500,
-    //     y: 500,
-    //     noiseValue: 0,
-    //     vertexLength: 160,
-    //     strokeWeighty: 4,
-    //     // angleMin: 2 * Math.PI / 12 * 5.75,
-    //     // angleMax: 2 * Math.PI / 12 * 6.25,
-    //     angleMin: 2 * Math.PI / 12 * 0.5,
-    //     angleMax: 2 * Math.PI / 12 * 1.25,
-    //     revert: true,
-    //     cutOutValue: -1,
-    //     loopCount: 160,
-    //     colorList: ["#222222"],
-    //     noiseAngle: false,
-    //     group: "",
-    //     drawing: drawing,
-    // });
-    // dig.draw();
-
-
     // Add event listener on keydown -  https://www.section.io/engineering-education/keyboard-events-in-javascript/ 
     document.addEventListener('keydown', (event) => {
 
-        var filename = TITLE + "_" + fxhash + "_" + getTimestamp() + ".svg";
-
         if (event.code == "KeyE") {
+            var filename = TITLE + "_" + fxhash + "_" + getTimestamp() + ".svg";
             // alert("oida is going down");
             // downloadString(drawing.svg(), "image/svg+xml", filename);
 
             saveSvg(svgNode, filename);
-
         }
 
         // Alert the key name and key code on keydown
@@ -180,7 +134,6 @@ SVG.on(document, 'DOMContentLoaded', function () {
         // alert(`Key pressed ${name} \r\n Key code value: ${code}`);
 
     }, false);
-
 })
 
 
@@ -200,7 +153,6 @@ function fireTrigger(drawing) {
         shortBoxCount: 160,
         overshoot: OVERSHOOT,
     });
-
 }
 
 
@@ -213,9 +165,7 @@ function timeChecker() {
     let currentHour = today.getHours();
     let currentMinute = today.getMinutes();
     // console.log(today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds());
-
     // console.log("listening to: " + switchHour + ":" + switchMinute);
-
 
     if (currentHour >= switchHour || (currentHour == switchHour && currentMinute >= switchMinute)) {
         if (OVERSHOOT == false || OVERSHOOT == "start") {

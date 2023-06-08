@@ -9,24 +9,39 @@ class digi {
         this.group = data.group;
         this.noiseAngle = data.noiseAngle;
         this.drawing = data.drawing;
-        this.noiseValueMin = data.noiseValueMin;
-        this.noiseValueMax = data.noiseValueMax;
         this.horizonRow = data.horizonRow;
         this.i = data.i;
         this.longBoxCount = data.longBoxCount;
 
         this.angle = 0;
         this.revert = data.revert;
+
+        this.colorNoise = data.colorNoise;
+        this.colorNoiseMin = data.colorNoiseMin;
+        this.colorNoiseMax = data.colorNoiseMax;
+
         this.noiseValue = data.noiseValue;
+        this.noiseValueMin = data.noiseValueMin;
+        this.noiseValueMax = data.noiseValueMax;
+
         this.cutOutValue = data.cutOutValue;
         this.colorList = data.colorList;
         this.angleMean = data.angleMean;
         this.angleSTD = data.angleSTD;
 
-        this.noiseDistance = this.noiseValueMax - this.noiseValueMin;
-        // console.log(this.noiseDistance);
+        // this.noiseDistance = this.noiseValueMax - this.noiseValueMin;
+        // this.colorStep = this.noiseDistance / this.colorList.length;
+
+        this.noiseDistance = this.colorNoiseMax - this.colorNoiseMin;
         this.colorStep = this.noiseDistance / this.colorList.length;
+
+        // console.log(this.colorNoiseMax);
+        // console.log(this.colorNoiseMin);
         // console.log(this.colorStep);
+        // console.log(this.colorNoise);
+
+        // console.log(this.colorList.length);
+
     }
 
     draw() {
@@ -38,14 +53,22 @@ class digi {
 
             let colorSelect = 0
 
-            // console.log("noisevalue:" + this.noiseValue);
+            // for (var i = 1; i < (this.colorList.length + 1); i++) {
+            //     // console.log("step: " + (this.noiseValueMin + this.colorStep * i))
+            //     if (this.noiseValue < this.noiseValueMin + this.colorStep * i) {
+            //         colorSelect = i;
+            //         break;
+            //     }
+            // }
+
             for (var i = 1; i < (this.colorList.length + 1); i++) {
                 // console.log("step: " + (this.noiseValueMin + this.colorStep * i))
-                if (this.noiseValue < this.noiseValueMin + this.colorStep * i) {
+                if (this.colorNoise < this.colorNoiseMin + this.colorStep * i) {
                     colorSelect = i;
                     break;
                 }
             }
+            // console.log(colorSelect);
 
             let color_d = this.colorList[colorSelect]
             // let color_d = tinycolor(colorList[colorSelect]).spin(getRandomFromInterval(-20, 20)).darken(getRandomFromInterval(-5, 5)).desaturate(getRandomFromInterval(-10, 10)).toHexString();
@@ -59,7 +82,8 @@ class digi {
             for (var i = 0; i < this.loopCount; i++) {
 
                 if (this.noiseAngle) {
-                    this.angle = map(this.noiseValue, this.noiseValueMin, this.noiseValueMax, 0, 2 * Math.PI) + getRandomFromInterval(-0.5, 0.5);
+                    // this.angle = map(this.noiseValue, this.noiseValueMin, this.noiseValueMax, 0, 2 * Math.PI) + getRandomFromInterval(-0.5, 0.5);
+                    this.angle = map(this.noiseValue, this.noiseValueMin, this.noiseValueMax, 0, 2 * Math.PI) + getNormallyDistributedRandomNumber(0, 0.3);
                 } else {
                     // this.angle = getRandomFromInterval(this.angleMin, this.angleMax);
                     this.angle = getNormallyDistributedRandomNumber(this.angleMean, this.angleSTD);

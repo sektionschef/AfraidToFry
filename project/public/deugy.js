@@ -35,9 +35,9 @@ class deugy {
             }
         }
 
-        let color_d = this.colorList[colorSelect]
+        // let color_d = this.colorList[colorSelect]
 
-        // var color_d = tinycolor({ h: 100, s: 50, l: 50 }).lighten(map(this.noiseValue, this.noiseValueMin, this.noiseValueMax, -50, 50)).toHexString()
+        var color_d = tinycolor({ h: 100, s: 50, l: 50 }).lighten(map(this.noiseValue, this.noiseValueMin, this.noiseValueMax, -50, 50)).toHexString()
 
         // without svg.js
         const svgNode = document.getElementById('svgNode');

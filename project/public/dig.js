@@ -123,14 +123,32 @@ class digi {
 
             // without svg.js
             const svgNode = document.getElementById('svgNode');
-            const polyNode = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
-            polyNode.setAttributeNS(null, 'points', polyLineString);
-            polyNode.setAttributeNS(null, 'fill', 'none');
-            // polyNode.setAttributeNS(null, 'stroke', color_d);
-            polyNode.setAttributeNS(null, 'stroke', color_);
-            polyNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
-            // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
-            svgNode.appendChild(polyNode);
+
+            if (fxrand() > 0.1) {
+                const polyNode = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+                polyNode.setAttributeNS(null, 'points', polyLineString);
+                polyNode.setAttributeNS(null, 'fill', 'none');
+                // polyNode.setAttributeNS(null, 'stroke', color_d);
+                polyNode.setAttributeNS(null, 'stroke', color_);
+                polyNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
+                // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
+                svgNode.appendChild(polyNode);
+            } else {
+
+                for (var i = 0; i < this.loopCount; i++) {
+                    const circleNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    circleNode.setAttributeNS(null, 'cx', this.center.x + getNormallyDistributedRandomNumber(0, 5));
+                    circleNode.setAttributeNS(null, 'cy', this.center.y + getNormallyDistributedRandomNumber(0, 5));
+                    circleNode.setAttributeNS(null, 'r', 4);
+                    circleNode.setAttributeNS(null, 'fill', 'none');
+                    circleNode.setAttributeNS(null, 'stroke', color_);
+                    // circleNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
+                    circleNode.setAttributeNS(null, 'stroke-width', 0.01);
+                    svgNode.appendChild(circleNode);
+                    // <circle cx="50" cy="50" r="50" />
+                }
+            }
+
         }
 
     }

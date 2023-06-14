@@ -77,7 +77,7 @@ class Grid {
         // this.noiseSA = new noiseAggregator(155, 50, 80, 10, 20, 50);
         // this.noiseSA = new noiseAggregator(230, 38, 90, 4, 4, 5);  // klaas
         // this.noiseSA = new noiseAggregator(130, 158, 120, 28, 18, 9);  // klaas2
-        this.noiseSA = new noiseAggregator(3130, 15, 120, 28, 4, 1);  // klaas3
+        this.noiseSA = new noiseAggregator(190, 5, 120, 28, 4, 1);  // klaas3
 
         this.noiseMucho = new noiseAggregator(100, 38, 60, 10, 8, 2);  // mucho
 
@@ -809,40 +809,40 @@ class Grid {
                 continue;
             }
 
-            // if (this.boxes[i].aboveHorizon) {
-            //     new deugy({
-            //         x: this.boxes[i].A.x,
-            //         y: this.boxes[i].A.y,
-            //         width: this.boxSize,
-            //         height: this.boxSize,
-            //         colorList: this.paletteRA.palette,
-            //         noiseValue: this.boxes[i].noiseValueRA,
-            //         noiseValueMin: this.noiseRAMin,
-            //         noiseValueMax: this.noiseRAMax,
-            //     }).draw();
-            // } else {
-            //     new deugy({
-            //         x: this.boxes[i].A.x,
-            //         y: this.boxes[i].A.y,
-            //         width: this.boxSize,
-            //         height: this.boxSize,
-            //         colorList: this.paletteRB.palette,
-            //         noiseValue: this.boxes[i].noiseValueSA,
-            //         noiseValueMin: this.noiseSAMin,
-            //         noiseValueMax: this.noiseSAMax,
-            //     }).draw();
-            // }
+            if (this.boxes[i].aboveHorizon) {
+                new deugy({
+                    x: this.boxes[i].A.x,
+                    y: this.boxes[i].A.y,
+                    width: this.boxSize,
+                    height: this.boxSize,
+                    colorList: this.paletteRA.palette,
+                    noiseValue: this.boxes[i].noiseValueRA,
+                    noiseValueMin: this.noiseRAMin,
+                    noiseValueMax: this.noiseRAMax,
+                }).draw();
+            } else {
+                new deugy({
+                    x: this.boxes[i].A.x,
+                    y: this.boxes[i].A.y,
+                    width: this.boxSize,
+                    height: this.boxSize,
+                    colorList: this.paletteRB.palette,
+                    noiseValue: this.boxes[i].noiseValueSA,
+                    noiseValueMin: this.noiseSAMin,
+                    noiseValueMax: this.noiseSAMax,
+                }).draw();
+            }
 
-            new deugy({
-                x: this.boxes[i].A.x,
-                y: this.boxes[i].A.y,
-                width: this.boxSize,
-                height: this.boxSize,
-                colorList: this.paletteRA.palette,
-                noiseValue: this.boxes[i].noiseValueMucho,
-                noiseValueMin: this.noiseMuchoMin,
-                noiseValueMax: this.noiseMuchoMax,
-            }).draw();
+            // new deugy({
+            //     x: this.boxes[i].A.x,
+            //     y: this.boxes[i].A.y,
+            //     width: this.boxSize,
+            //     height: this.boxSize,
+            //     colorList: this.paletteRA.palette,
+            //     noiseValue: this.boxes[i].noiseValueMucho,
+            //     noiseValueMin: this.noiseMuchoMin,
+            //     noiseValueMax: this.noiseMuchoMax,
+            // }).draw();
 
         }
 

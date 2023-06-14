@@ -124,32 +124,53 @@ class digi {
             // without svg.js
             const svgNode = document.getElementById('svgNode');
 
-            if (fxrand() > 0.1) {
-                const polyNode = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
-                polyNode.setAttributeNS(null, 'points', polyLineString);
-                polyNode.setAttributeNS(null, 'fill', 'none');
-                // polyNode.setAttributeNS(null, 'stroke', color_d);
-                polyNode.setAttributeNS(null, 'stroke', color_);
-                polyNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
-                // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
-                svgNode.appendChild(polyNode);
-            } else {
+            var shapeSelector = fxrand();
+            var lowThres = map(this.noiseValue, this.noiseValueMin, this.noiseValueMax, 0, 0.3);
+            var highThres = map(this.noiseValue, this.noiseValueMin, this.noiseValueMax, 0.3, 1);
 
-                for (var i = 0; i < this.loopCount; i++) {
+            if (shapeSelector < lowThres) {
+                for (var i = 0; i < 3; i++) {
+                    const rectNode = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                    rectNode.setAttributeNS(null, 'x', this.center.x + getNormallyDistributedRandomNumber(0, 5));
+                    rectNode.setAttributeNS(null, 'y', this.center.y + getNormallyDistributedRandomNumber(0, 5));
+                    rectNode.setAttributeNS(null, 'width', 6);
+                    rectNode.setAttributeNS(null, 'height', 6);
+                    rectNode.setAttributeNS(null, 'fill', 'none');
+                    // rectNode.setAttributeNS(null, 'fill', color_);
+                    rectNode.setAttributeNS(null, 'stroke', color_);
+                    // rectNode.setAttributeNS(null, 'stroke', "none");
+                    // circleNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
+                    rectNode.setAttributeNS(null, 'stroke-width', 0.1);
+                    svgNode.appendChild(rectNode);
+                }
+            } else if (shapeSelector > highThres) {
+                for (var i = 0; i < 3; i++) {
+                    // for (var i = 0; i < this.loopCount; i++) {
                     const circleNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
                     circleNode.setAttributeNS(null, 'cx', this.center.x + getNormallyDistributedRandomNumber(0, 5));
                     circleNode.setAttributeNS(null, 'cy', this.center.y + getNormallyDistributedRandomNumber(0, 5));
-                    circleNode.setAttributeNS(null, 'r', 4);
+                    circleNode.setAttributeNS(null, 'r', 6);
                     circleNode.setAttributeNS(null, 'fill', 'none');
                     circleNode.setAttributeNS(null, 'stroke', color_);
                     // circleNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
-                    circleNode.setAttributeNS(null, 'stroke-width', 0.01);
+                    circleNode.setAttributeNS(null, 'stroke-width', 0.1);
                     svgNode.appendChild(circleNode);
                     // <circle cx="50" cy="50" r="50" />
                 }
+            } else {
+
+
             }
+            // skip loop if not polyline
+            const polyNode = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+            polyNode.setAttributeNS(null, 'points', polyLineString);
+            polyNode.setAttributeNS(null, 'fill', 'none');
+            // polyNode.setAttributeNS(null, 'stroke', color_d);
+            polyNode.setAttributeNS(null, 'stroke', color_);
+            polyNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
+            // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
+            svgNode.appendChild(polyNode);
 
         }
-
     }
 }

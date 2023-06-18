@@ -1,4 +1,4 @@
-class deugy {
+class digRect {
     constructor(data) {
         this.A = { x: data.x, y: data.y };
         this.width = data.width;
@@ -35,9 +35,9 @@ class deugy {
             }
         }
 
-        // let color_d = this.colorList[colorSelect]
+        let color_d = this.colorList[colorSelect]
 
-        var color_d = tinycolor({ h: 100, s: 50, l: 50 }).lighten(map(this.noiseValue, this.noiseValueMin, this.noiseValueMax, -50, 50)).toHexString()
+        // var color_d = tinycolor({ h: 100, s: 50, l: 50 }).lighten(map(this.noiseValue, this.noiseValueMin, this.noiseValueMax, -50, 50)).toHexString()
 
         // without svg.js
         const svgNode = document.getElementById('svgNode');
@@ -49,6 +49,9 @@ class deugy {
         rect.setAttributeNS(null, 'width', this.width);
         // rect.setAttributeNS(null, 'fill', '#' + Math.round(0xffffff * Math.random()).toString(16));
         rect.setAttributeNS(null, 'fill', color_d);
+        // rect.setAttributeNS(null, 'stroke', "none");
+        rect.setAttributeNS(null, 'stroke', "black");
+        rect.setAttributeNS(null, 'stroke-width', "0.001");
 
         svgNode.appendChild(rect);
     }

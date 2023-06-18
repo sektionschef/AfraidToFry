@@ -99,6 +99,8 @@ class Grid {
             // this.loop4();  // noisy space
 
             // this.loop5();  // canvas dots
+
+            this.loopBase();
             this.loop6();  // half - ganz nicer effect
             this.loop7();  // neuer grid - 20230529
 
@@ -845,8 +847,59 @@ class Grid {
             // }).draw();
 
         }
+    }
+
+    loopBase() {
+        let randomIndex = getRandomIndex(this.boxes.length);
+
+        let i = 0;
+
+        // console.log("RAMin: " + this.noiseRAMin);
+        // console.log("RAMax: " + this.noiseRAMax);
+
+        // console.log("SAMin: " + this.noiseSAMin);
+        // console.log("SAMax: " + this.noiseSAMax);
+
+        for (var v = 0; v < randomIndex.length; v++) {
+
+            i = randomIndex[v];
+
+            if (this.drawSkipMargin(this.boxes[i])) {
+                continue;
+            }
+
+            if (fxrand() > 0.2) { this.paletteA = this.paletteRA } else { this.paletteA = this.paletteOne }
+            if (fxrand() > 0.2) { this.paletteB = this.paletteRB } else { this.paletteB = this.paletteOne }
+
+
+            if (this.boxes[i].aboveHorizon) {
+                new digRect({
+                    x: this.boxes[i].A.x,
+                    y: this.boxes[i].A.y,
+                    width: (this.boxSize + 1),  // +1 to avoid strokes
+                    height: (this.boxSize + 1),
+                    colorList: this.paletteA.palette,
+                    noiseValue: this.boxes[i].noiseValueRA,
+                    noiseValueMin: this.noiseRAMin,
+                    noiseValueMax: this.noiseRAMax,
+                }).draw();
+            } else {
+                new digRect({
+                    x: this.boxes[i].A.x,
+                    y: this.boxes[i].A.y,
+                    width: (this.boxSize + 1),
+                    height: (this.boxSize + 1),
+                    colorList: this.paletteB.palette,
+                    noiseValue: this.boxes[i].noiseValueSA,
+                    noiseValueMin: this.noiseSAMin,
+                    noiseValueMax: this.noiseSAMax,
+                }).draw();
+            }
+
+        }
 
     }
+
 
     loop6() {
         let randomIndex = getRandomIndex(this.boxes.length);

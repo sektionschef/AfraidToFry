@@ -36,7 +36,7 @@ class digi {
         this.colorStep = this.noiseDistance / this.colorList.length;
 
         this.noiseValueDistance = this.noiseValueMax - this.noiseValueMin;
-        this.textureStep = this.noiseValueDistance / 3;
+        this.textureStep = this.noiseValueDistance / 2;
 
         // console.log(this.colorNoiseMax);
         // console.log(this.colorNoiseMin);
@@ -74,7 +74,7 @@ class digi {
             }
             // console.log(colorSelect);
 
-            for (var i = 1; i <= 3; i++) {
+            for (var i = 1; i <= 2; i++) {
                 // console.log("step: " + (this.noiseValueMin + this.colorStep * i))
                 if (this.noiseValue < this.noiseValueMin + this.textureStep * i) {
                     textureSelect = i;
@@ -140,8 +140,8 @@ class digi {
             // var loopRect = map(this.noiseValue, this.noiseValueMin, this.noiseValueMax, 0, 5);
 
             // var loopCircle = map(this.noiseValue, this.noiseValueMax, this.noiseValueMin, 0, 5);
-            var loopRect = 5;
-            var loopCircle = 5;
+            var loopRect = 1;
+            var loopCircle = 1;
 
             if (textureSelect == 1) {
 
@@ -152,46 +152,43 @@ class digi {
                     rectNode.setAttributeNS(null, 'width', 4);
                     rectNode.setAttributeNS(null, 'height', 4);
                     rectNode.setAttributeNS(null, 'fill', 'none');
-                    rectNode.setAttributeNS(null, 'fill', color_);
-                    // rectNode.setAttributeNS(null, 'stroke', color_);
-                    rectNode.setAttributeNS(null, 'stroke', "none");
+                    // rectNode.setAttributeNS(null, 'fill', color_);
+                    rectNode.setAttributeNS(null, 'stroke', color_);
+                    // rectNode.setAttributeNS(null, 'stroke', "none");
                     // circleNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
-                    // rectNode.setAttributeNS(null, 'stroke-width', 0.1);
+                    rectNode.setAttributeNS(null, 'stroke-width', 0.3);
                     svgNode.appendChild(rectNode);
-                    // }
-                }
-            } else if (textureSelect == 2) {
-                for (var i = 0; i < loopCircle; i++) {
-                    // for (var i = 0; i < this.loopCount; i++) {
+
                     const circleNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
                     circleNode.setAttributeNS(null, 'cx', this.center.x + getNormallyDistributedRandomNumber(0, 5));
                     circleNode.setAttributeNS(null, 'cy', this.center.y + getNormallyDistributedRandomNumber(0, 5));
-                    circleNode.setAttributeNS(null, 'r', 4);
-                    // circleNode.setAttributeNS(null, 'fill', 'none');
-                    circleNode.setAttributeNS(null, 'fill', color_);
-                    // circleNode.setAttributeNS(null, 'stroke', color_);
-                    circleNode.setAttributeNS(null, 'stroke', "none");
+                    circleNode.setAttributeNS(null, 'r', 2);
+                    circleNode.setAttributeNS(null, 'fill', 'none');
+                    // circleNode.setAttributeNS(null, 'fill', color_);
+                    circleNode.setAttributeNS(null, 'stroke', color_);
+                    // circleNode.setAttributeNS(null, 'stroke', "none");
                     // circleNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
-                    // circleNode.setAttributeNS(null, 'stroke-width', 0.1);
+                    circleNode.setAttributeNS(null, 'stroke-width', 0.3);
                     svgNode.appendChild(circleNode);
-                    // <circle cx="50" cy="50" r="50" />
-                    //     }
-                    // } else {
                 }
-
-
-            } else {
-                // skip loop if not polyline
-                const polyNode = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
-                polyNode.setAttributeNS(null, 'points', polyLineString);
-                polyNode.setAttributeNS(null, 'fill', 'none');
-                // polyNode.setAttributeNS(null, 'stroke', color_d);
-                polyNode.setAttributeNS(null, 'stroke', color_);
-                polyNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
-                // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
-                svgNode.appendChild(polyNode);
             }
+            // } else if (textureSelect == 2) {
+            // for (var i = 0; i < loopCircle; i++) {
+            // }
 
+
+            // } else {
+            // skip loop if not polyline
+            const polyNode = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+            polyNode.setAttributeNS(null, 'points', polyLineString);
+            polyNode.setAttributeNS(null, 'fill', 'none');
+            // polyNode.setAttributeNS(null, 'stroke', color_d);
+            polyNode.setAttributeNS(null, 'stroke', color_);
+            polyNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
+            // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
+            svgNode.appendChild(polyNode);
         }
+
+        // }
     }
 }

@@ -64,9 +64,13 @@ class Grid {
         // this.paletteRBbby = new dynamicPalette("#a4cca4", 15, 25, 10);  // klaas
         // this.paletteLoop8B = new dynamicPalette("#718571", 55, 15, 10);  // klaas
 
-        this.paletteRA = new dynamicPalette(this.aboveTone, 25, 15, 8);
-        this.paletteRB = new dynamicPalette(this.underneathTone, 25, 15, 8);
-        this.paletteOne = new dynamicPalette("#adb8be", 15, 15, 8);
+        // this.paletteRA = new dynamicPalette(this.aboveTone, 15, 15, 8);
+        // this.paletteRB = new dynamicPalette(this.underneathTone, 15, 15, 8);
+        // this.paletteOne = new dynamicPalette("#adb8be", 15, 15, 8);
+
+        this.paletteRA = new dynamicPalette(this.aboveTone, 5, 15, 18);
+        this.paletteRB = new dynamicPalette(this.underneathTone, 5, 15, 18);
+        this.paletteOne = new dynamicPalette("#adb8be", 0, 0, 0);
 
         // if (fxrand() > 0.2) {this.paletteA = this.paletteRA} else {this.paletteB = this.paletteRB}
 
@@ -104,7 +108,7 @@ class Grid {
             this.loop6();  // half - ganz nicer effect
             this.loop7();  // neuer grid - 20230529
 
-            this.loop8();
+            // this.loop8();
         }
     }
 
@@ -1023,9 +1027,13 @@ class Grid {
                     strokeWeighty: map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, 0.05, 0.25), // 0.1,
                     angleMean: Math.PI / 1,
                     angleSTD: Math.PI / 56,
-                    circleRadius: 15,
+                    circleRadius: 10,
                     circleStroke: 0.25,
                     loopCircle: map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, 3, 20),
+                    loopRect: 10,
+                    rectWidth: 12,
+                    rectHeight: 6,
+                    rectStroke: 0.4,
                     revert: true,
                     cutOutValue: -1,
                     loopCount: map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, 20, 50), // 20,
@@ -1052,9 +1060,13 @@ class Grid {
                     strokeWeighty: map(this.boxes[i].noiseValueSA, this.noiseSAMin, this.noiseSAMax, 0.05, 0.25), // 0.1,
                     angleMean: Math.PI / 1,
                     angleSTD: Math.PI / 56,
-                    circleRadius: 15,
+                    circleRadius: 10,
                     circleStroke: 0.25,
                     loopCircle: map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, 3, 20),
+                    loopRect: 10,
+                    rectWidth: 12,
+                    rectHeight: 6,
+                    rectStroke: 0.4,
                     revert: true,
                     cutOutValue: -1,
                     loopCount: map(this.boxes[i].noiseValueSA, this.noiseSAMin, this.noiseSAMax, 20, 50), // 20,
@@ -1105,6 +1117,10 @@ class Grid {
                     circleRadius: 2,
                     circleStroke: 0.075,
                     loopCircle: 5,
+                    loopRect: 10,
+                    rectWidth: 6,
+                    rectHeight: 3,
+                    rectStroke: 0.075,
                     revert: true,
                     cutOutValue: -1,
                     loopCount: 25,
@@ -1133,6 +1149,10 @@ class Grid {
                     circleRadius: 2,
                     circleStroke: 0.075,
                     loopCircle: 5,
+                    loopRect: 10,
+                    rectWidth: 6,
+                    rectHeight: 3,
+                    rectStroke: 0.075,
                     revert: true,
                     cutOutValue: -1,
                     loopCount: 25,

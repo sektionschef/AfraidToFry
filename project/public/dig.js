@@ -17,6 +17,11 @@ class digi {
         this.circleStroke = data.circleStroke;
         this.loopCircle = data.loopCircle;
 
+        this.loopRect = data.loopRect;
+        this.rectWidth = data.rectWidth;
+        this.rectHeight = data.rectHeight;
+        this.rectStroke = data.rectStroke;
+
         this.angle = 0;
         this.revert = data.revert;
 
@@ -142,28 +147,27 @@ class digi {
             const svgNode = document.getElementById('svgNode');
 
 
-            // var loopRect = map(this.noiseValue, this.noiseValueMin, this.noiseValueMax, 0, 5);
+            if (textureSelect == 2) {
 
-            // var loopCircle = map(this.noiseValue, this.noiseValueMax, this.noiseValueMin, 0, 5);
-            var loopRect = 0;
+                for (var i = 0; i < this.loopRect; i++) {
+                    var rectX = this.center.x + getNormallyDistributedRandomNumber(0, 5);
+                    var rectY = this.center.y + getNormallyDistributedRandomNumber(0, 5);
 
-            if (textureSelect <= 2) {
-
-                for (var i = 0; i < loopRect; i++) {
-                    // const rectNode = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-                    // rectNode.setAttributeNS(null, 'x', this.center.x + getNormallyDistributedRandomNumber(0, 5));
-                    // rectNode.setAttributeNS(null, 'y', this.center.y + getNormallyDistributedRandomNumber(0, 5));
-                    // rectNode.setAttributeNS(null, 'width', 4);
-                    // rectNode.setAttributeNS(null, 'height', 4);
-                    // rectNode.setAttributeNS(null, 'fill', 'none');
-                    // // rectNode.setAttributeNS(null, 'fill', color_);
-                    // rectNode.setAttributeNS(null, 'stroke', color_);
-                    // // rectNode.setAttributeNS(null, 'stroke', "red");
-                    // // rectNode.setAttributeNS(null, 'stroke', "none");
-                    // // circleNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
-                    // rectNode.setAttributeNS(null, 'stroke-width', 0.1);
-                    // svgNode.appendChild(rectNode);
+                    const rectNode = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                    rectNode.setAttributeNS(null, 'x', 0);
+                    rectNode.setAttributeNS(null, 'y', 0);
+                    rectNode.setAttributeNS(null, 'width', this.rectWidth);
+                    rectNode.setAttributeNS(null, 'height', this.rectHeight);
+                    rectNode.setAttributeNS(null, 'transform', "translate(" + rectX + "," + rectY + "), rotate(" + this.angle * (180 / Math.PI) + ")");
+                    rectNode.setAttributeNS(null, 'fill', 'none');
+                    // rectNode.setAttributeNS(null, 'fill', color_);
+                    rectNode.setAttributeNS(null, 'stroke', color_);
+                    // rectNode.setAttributeNS(null, 'stroke', "none");
+                    rectNode.setAttributeNS(null, 'stroke-width', this.rectStroke);
+                    svgNode.appendChild(rectNode);
                 }
+
+            } else if (textureSelect == 3) {
 
                 for (var i = 0; i < this.loopCircle; i++) {
 
@@ -174,17 +178,11 @@ class digi {
                     circleNode.setAttributeNS(null, 'fill', 'none');
                     // circleNode.setAttributeNS(null, 'fill', color_);
                     circleNode.setAttributeNS(null, 'stroke', color_);
-                    // rectNode.setAttributeNS(null, 'stroke', "red");
                     // circleNode.setAttributeNS(null, 'stroke', "none");
                     // circleNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
                     circleNode.setAttributeNS(null, 'stroke-width', this.circleStroke);
                     svgNode.appendChild(circleNode);
                 }
-                // } 
-                // } else if (textureSelect == 2) {
-                // for (var i = 0; i < loopCircle; i++) {
-                // }
-
 
             } else {
                 // skip loop if not polyline

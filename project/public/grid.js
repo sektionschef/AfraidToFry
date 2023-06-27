@@ -100,11 +100,11 @@ class Grid {
 
             // this.loop5();  // canvas dots
 
-            this.loopBase();
+            // this.loopBase();
             this.loop6();  // half - ganz nicer effect
             this.loop7();  // neuer grid - 20230529
 
-            // this.loop8();
+            this.loop8();
         }
     }
 
@@ -872,6 +872,7 @@ class Grid {
             if (fxrand() > 0.2) { this.paletteB = this.paletteRB } else { this.paletteB = this.paletteOne }
 
 
+            // NOISE pattern with rects
             if (this.boxes[i].aboveHorizon) {
                 new digRect({
                     x: this.boxes[i].A.x,
@@ -1022,6 +1023,9 @@ class Grid {
                     strokeWeighty: map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, 0.05, 0.25), // 0.1,
                     angleMean: Math.PI / 1,
                     angleSTD: Math.PI / 56,
+                    circleRadius: 15,
+                    circleStroke: 0.25,
+                    loopCircle: map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, 3, 20),
                     revert: true,
                     cutOutValue: -1,
                     loopCount: map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, 20, 50), // 20,
@@ -1048,6 +1052,9 @@ class Grid {
                     strokeWeighty: map(this.boxes[i].noiseValueSA, this.noiseSAMin, this.noiseSAMax, 0.05, 0.25), // 0.1,
                     angleMean: Math.PI / 1,
                     angleSTD: Math.PI / 56,
+                    circleRadius: 15,
+                    circleStroke: 0.25,
+                    loopCircle: map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, 3, 20),
                     revert: true,
                     cutOutValue: -1,
                     loopCount: map(this.boxes[i].noiseValueSA, this.noiseSAMin, this.noiseSAMax, 20, 50), // 20,
@@ -1095,6 +1102,9 @@ class Grid {
                     strokeWeighty: 0.075, //map(this.boxes[i].noiseValueRA, -1, 1, 0.05, 0.25), // 0.1,
                     angleMean: Math.PI / 1,
                     angleSTD: Math.PI / 56,
+                    circleRadius: 2,
+                    circleStroke: 0.075,
+                    loopCircle: 5,
                     revert: true,
                     cutOutValue: -1,
                     loopCount: 25,
@@ -1120,6 +1130,9 @@ class Grid {
                     strokeWeighty: 0.075, // map(this.boxes[i].noiseValueSA, -1, 1, 0.05, 0.25), // 0.1,
                     angleMean: Math.PI / 1,
                     angleSTD: Math.PI / 56,
+                    circleRadius: 2,
+                    circleStroke: 0.075,
+                    loopCircle: 5,
                     revert: true,
                     cutOutValue: -1,
                     loopCount: 25,

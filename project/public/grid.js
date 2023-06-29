@@ -51,8 +51,9 @@ class Grid {
             // this.underneathTone = "#b4a1a0";
             // this.aboveTone = "#d4cab3";
             // this.underneathTone = "#b6a2a1";
-            this.aboveTone = "#848ea1";
-            this.underneathTone = "#8d917d";
+
+            this.aboveTone = "#8b94a3";
+            this.underneathTone = "#504e45";
         } else {
             this.aboveTone = "#cdd7df";
             this.underneathTone = "#6e8578";
@@ -70,8 +71,8 @@ class Grid {
         // this.paletteRB = new dynamicPalette(this.underneathTone, 15, 15, 8);
         // this.paletteOne = new dynamicPalette("#adb8be", 15, 15, 8);
 
-        this.paletteRA = new dynamicPalette(this.aboveTone, 15, 10, 8);
-        this.paletteRB = new dynamicPalette(this.underneathTone, 15, 10, 8);
+        this.paletteRA = new dynamicPalette(this.aboveTone, 15, 15, 8);
+        this.paletteRB = new dynamicPalette(this.underneathTone, 15, 15, 8);
         this.paletteOne = new dynamicPalette("#adb8be", 0, 0, 0);
 
         // if (fxrand() > 0.2) {this.paletteA = this.paletteRA} else {this.paletteB = this.paletteRB}
@@ -79,11 +80,11 @@ class Grid {
         // this.noiseRA = new noiseAggregator(135, 50, 110, 10, 4, 5);
         // this.noiseRA = new noiseAggregator(235, 50, 110, 4, 4, 5);  // klaas
         // this.noiseRA = new noiseAggregator(135, 150, 110, 24, 14, 10); // klaa2
-        this.noiseRA = new noiseAggregator(235, 20, 110, 24, 5, 5); // klaa3
+        this.noiseRA = new noiseAggregator(235, 20, 110, 74, 45, 45); // klaa3
         // this.noiseSA = new noiseAggregator(155, 50, 80, 10, 20, 50);
         // this.noiseSA = new noiseAggregator(230, 38, 90, 4, 4, 5);  // klaas
         // this.noiseSA = new noiseAggregator(130, 158, 120, 28, 18, 9);  // klaas2
-        this.noiseSA = new noiseAggregator(190, 5, 120, 28, 4, 1);  // klaas3
+        this.noiseSA = new noiseAggregator(190, 5, 120, 28, 40, 10);  // klaas3
 
         this.noiseMucho = new noiseAggregator(100, 38, 60, 10, 8, 2);  // mucho
 

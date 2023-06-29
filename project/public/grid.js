@@ -89,6 +89,8 @@ class Grid {
 
         this.createBoxes();
 
+        this.normalizeNoises();
+
         if (this.DEBUG) {
             // this.showDebug();
             this.loopDEBUG();
@@ -106,7 +108,7 @@ class Grid {
 
             // this.loop5();  // canvas dots
 
-            this.loopBase();
+            // this.loopBase();
             this.loop6();  // half - ganz nicer effect
             this.loop7();  // neuer grid - 20230529
 
@@ -216,6 +218,14 @@ class Grid {
         // console.log(this.noiseMuchoMax);
         // console.log(this.noiseMuchoMin);
 
+    }
+
+    normalizeNoises() {
+        for (var i = 0; i < this.boxes.length; i++) {
+            this.boxes[i].noiseValueMucho = map(this.boxes[i].noiseValueMucho, this.noiseMuchoMin, this.noiseMuchoMax, -1, 1);
+            this.boxes[i].noiseValueRA = map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, -1, 1);
+            this.boxes[i].noiseValueSA = map(this.boxes[i].noiseValueSA, this.noiseSAMin, this.noiseSAMax, -1, 1);
+        }
     }
 
     showDebug() {
@@ -970,34 +980,34 @@ class Grid {
             if (fxrand() > 0) { this.paletteB = this.paletteRB } else { this.paletteB = this.paletteOne }
 
 
-            if (this.boxes[i].horizon) {
-                new digi({
-                    x: this.boxes[i].center.x,
-                    y: this.boxes[i].center.y,
-                    noiseValue: this.boxes[i].noiseValueRA,
-                    noiseValueMin: this.noiseRAMin,
-                    noiseValueMax: this.noiseRAMax,
-                    colorNoise: this.boxes[i].noiseValueMucho,
-                    colorNoiseMin: this.noiseMuchoMin,
-                    colorNoiseMax: this.noiseMuchoMax,
-                    vertexLength: 20, // map(this.boxes[i].noiseValue2, -1, 1, 5, 15),
-                    strokeWeighty: 0.5, // map(this.boxes[i].noiseValue9, this.noise9.noiseValueMin, this.noise9.noiseValueMax, 0.3, 1), //0.5,
-                    // angleMin: 2 * Math.PI / 12 * 2.5,
-                    // angleMax: 2 * Math.PI / 12 * 3.5,
-                    angleMean: Math.PI / 1,
-                    angleSTD: Math.PI / 56,
-                    revert: true,
-                    cutOutValue: -1,
-                    loopCount: 20,
-                    colorList: new dynamicPalette("#979797", 5, 25, 10).palette,
-                    noiseAngle: false,
-                    group: "",
-                    drawing: drawing,
-                    horizonRow: this.horizonRow,
-                    i: i,
-                    longBoxCount: this.longBoxCount,
-                }).draw();
-            }
+            // if (this.boxes[i].horizon) {
+            //     new digi({
+            //         x: this.boxes[i].center.x,
+            //         y: this.boxes[i].center.y,
+            //         noiseValue: this.boxes[i].noiseValueRA,
+            //         noiseValueMin: this.noiseRAMin,
+            //         noiseValueMax: this.noiseRAMax,
+            //         colorNoise: this.boxes[i].noiseValueMucho,
+            //         colorNoiseMin: this.noiseMuchoMin,
+            //         colorNoiseMax: this.noiseMuchoMax,
+            //         vertexLength: 20, // map(this.boxes[i].noiseValue2, -1, 1, 5, 15),
+            //         strokeWeighty: 0.5, // map(this.boxes[i].noiseValue9, this.noise9.noiseValueMin, this.noise9.noiseValueMax, 0.3, 1), //0.5,
+            //         // angleMin: 2 * Math.PI / 12 * 2.5,
+            //         // angleMax: 2 * Math.PI / 12 * 3.5,
+            //         angleMean: Math.PI / 1,
+            //         angleSTD: Math.PI / 56,
+            //         revert: true,
+            //         cutOutValue: -1,
+            //         loopCount: 20,
+            //         colorList: new dynamicPalette("#979797", 5, 25, 10).palette,
+            //         noiseAngle: false,
+            //         group: "",
+            //         drawing: drawing,
+            //         horizonRow: this.horizonRow,
+            //         i: i,
+            //         longBoxCount: this.longBoxCount,
+            //     }).draw();
+            // }
 
             // some Shapes
             // if (this.boxes[i].center.y >= 440 && this.boxes[i].center.y <= 640) {
@@ -1046,14 +1056,14 @@ class Grid {
                     angleSTD: Math.PI / 56,
                     circleRadius: 10,
                     circleStroke: 0.25,
-                    loopCircle: map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, 3, 20),
+                    loopCircle: map(this.boxes[i].noiseValueRA, -1, 1, 3, 20),
                     loopRect: 1,
-                    rectWidth: map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, 5, 30), // 12,
+                    rectWidth: map(this.boxes[i].noiseValueRA, -1, 1, 5, 30), // 12,
                     rectHeight: 6,
                     rectStroke: 0.4,
                     revert: true,
                     cutOutValue: -1,
-                    loopCount: map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, 20, 50), // 20,
+                    loopCount: map(this.boxes[i].noiseValueRA, -1, 1, 20, 50), // 20,
                     colorList: this.paletteA.palette,
                     // colorList: patty,
                     noiseAngle: false,
@@ -1079,14 +1089,14 @@ class Grid {
                     angleSTD: Math.PI / 56,
                     circleRadius: 10,
                     circleStroke: 0.25,
-                    loopCircle: map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, 3, 20),
+                    loopCircle: map(this.boxes[i].noiseValueRA, -1, 1, 3, 20),
                     loopRect: 2,
                     rectWidth: 12,
                     rectHeight: 6,
                     rectStroke: 0.4,
                     revert: true,
                     cutOutValue: -1,
-                    loopCount: map(this.boxes[i].noiseValueSA, this.noiseSAMin, this.noiseSAMax, 20, 50), // 20,
+                    loopCount: map(this.boxes[i].noiseValueSA, -1, 1, 20, 50), // 20,
                     colorList: this.paletteB.palette,
                     noiseAngle: false,
                     group: "",

@@ -110,10 +110,10 @@ class Grid {
             // this.loop5();  // canvas dots
 
             // this.loopBase();
-            this.loop6();  // half - ganz nicer effect
-            this.loop7();  // neuer grid - 20230529
+            this.loop6();
+            this.loop8();
+            this.loop7();
 
-            // this.loop8();
         }
     }
 
@@ -1226,9 +1226,9 @@ class Grid {
                         angleMin: 0,
                         angleMax: Math.PI,
                         cutOutValue: -1,
-                        loopCount: map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, 1, 10),
+                        loopCount: map(this.boxes[i].noiseValueRA, -1, 1, 1, 10),
                         // colorList: this.paletteRA.palette,
-                        colorList: ["#414141"],
+                        colorList: ["#161616", "#353535", "#727272", "#8d8c8c", "#adadad", "#c7c7c7"],
                         group: "",
                     }
                 ).draw();
@@ -1248,9 +1248,9 @@ class Grid {
                         angleMin: 0,
                         angleMax: Math.PI,
                         cutOutValue: -1,
-                        loopCount: map(this.boxes[i].noiseValueSA, this.noiseSAMin, this.noiseSAMax, 1, 10),
+                        loopCount: map(this.boxes[i].noiseValueSA, -1, 1, 1, 10),
                         // colorList: this.paletteRB.palette,
-                        colorList: ["#414141"],
+                        colorList: ["#161616", "#353535", "#727272", "#8d8c8c", "#adadad", "#c7c7c7"],
                         group: "",
                     }
                 ).draw();

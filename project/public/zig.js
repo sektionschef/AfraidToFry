@@ -27,7 +27,7 @@ class zigi {
         let colorSelect = 0
 
         // console.log("noisevalue:" + this.noiseValue);
-        for (var i = 1; i < (this.colorList.length + 1); i++) {
+        for (var i = 0; i < (this.colorList.length); i++) {
             // console.log("step: " + (this.noiseValueMin + this.colorStep * i))
             if (this.noiseValue < this.noiseValueMin + this.colorStep * i) {
                 colorSelect = i;
@@ -40,7 +40,8 @@ class zigi {
 
         for (var i = 0; i < this.loopCount; i++) {
 
-            this.angle = getRandomFromInterval(this.angleMin, this.angleMax);
+            // this.angle = getRandomFromInterval(this.angleMin, this.angleMax);
+            this.angle = getNormallyDistributedRandomNumber((this.angleMax - this.angleMin) / 2, (this.angleMax - this.angleMin) / 2);
 
             var newPoint = vectorAdd(this.center, vectorFromAngle(this.angle, this.vertexLength * getRandomFromInterval(0.9, 1.1)));
             polyLineString = polyLineString.concat(" ", createCoordString(newPoint));

@@ -52,8 +52,11 @@ class Grid {
             // this.aboveTone = "#d4cab3";
             // this.underneathTone = "#b6a2a1";
 
-            this.aboveTone = "#8b94a3";
-            this.underneathTone = "#504e45";
+            // this.aboveTone = "#8b94a3";
+            // this.underneathTone = "#504e45";
+
+            this.aboveTone = "#717d92";
+            this.underneathTone = "#69654f";
         } else {
             this.aboveTone = "#cdd7df";
             this.underneathTone = "#6e8578";
@@ -80,7 +83,9 @@ class Grid {
         // this.noiseRA = new noiseAggregator(135, 50, 110, 10, 4, 5);
         // this.noiseRA = new noiseAggregator(235, 50, 110, 4, 4, 5);  // klaas
         // this.noiseRA = new noiseAggregator(135, 150, 110, 24, 14, 10); // klaa2
-        this.noiseRA = new noiseAggregator(235, 20, 110, 74, 45, 45); // klaa3
+        // this.noiseRA = new noiseAggregator(335, 60, 210, 24, 65, 65); // klaa3
+        this.noiseRA = new noiseAggregator(135, 40, 60, 14, 45, 5); // klaa3
+
         // this.noiseSA = new noiseAggregator(155, 50, 80, 10, 20, 50);
         // this.noiseSA = new noiseAggregator(230, 38, 90, 4, 4, 5);  // klaas
         // this.noiseSA = new noiseAggregator(130, 158, 120, 28, 18, 9);  // klaas2
@@ -1138,14 +1143,14 @@ class Grid {
                     colorNoise: this.boxes[i].noiseValueMucho,
                     colorNoiseMin: this.noiseMuchoMin,
                     colorNoiseMax: this.noiseMuchoMax,
-                    vertexLength: 15, // map(this.boxes[i].noiseValueRA, -1, 1, 5, 20), // 15,
+                    vertexLength: map(this.boxes[i].noiseValueRA, -1, 1, 5, 30), // 15,
                     strokeWeighty: 0.1, //map(this.boxes[i].noiseValueRA, -1, 1, 0.05, 0.25), // 0.1,
                     angleMean: Math.PI / 1,
                     angleSTD: Math.PI / 56,
                     circleRadius: 2,
-                    circleStroke: 0.1, //0.075,
-                    loopCircle: 5,
-                    loopRect: 10,
+                    circleStroke: 0.1, //map(this.boxes[i].noiseValueRA, -1, 1, 0.75, 0.15), //0.1
+                    loopCircle: map(this.boxes[i].noiseValueRA, -1, 1, 3, 15), // 5,
+                    loopRect: map(this.boxes[i].noiseValueRA, -1, 1, 3, 10), //10,
                     rectWidth: 6,
                     rectHeight: 2,
                     rectStroke: 0.1,

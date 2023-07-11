@@ -148,8 +148,10 @@ function fireTrigger(drawing) {
     let grid = new Grid({
         drawing: drawing,
         // marginBoxCount: 5,
-        marginBoxCount: 15,
         // shortBoxCount: 80,
+        // marginBoxCount: 7,
+        // shortBoxCount: 100,
+        marginBoxCount: 15,
         shortBoxCount: 160,
         overshoot: OVERSHOOT,
     });

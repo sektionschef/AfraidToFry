@@ -115,26 +115,27 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
 
 
-SVG.on(document, 'DOMContentLoaded', function () {
+// REALLY SVG.on ??
+// SVG.on(document, 'DOMContentLoaded', function () {
 
-    // Add event listener on keydown -  https://www.section.io/engineering-education/keyboard-events-in-javascript/ 
-    document.addEventListener('keydown', (event) => {
+// Add event listener on keydown -  https://www.section.io/engineering-education/keyboard-events-in-javascript/ 
+document.addEventListener('keydown', (event) => {
 
-        if (event.code == "KeyE") {
-            var filename = TITLE + "_" + fxhash + "_" + getTimestamp() + ".svg";
-            // alert("oida is going down");
-            // downloadString(drawing.svg(), "image/svg+xml", filename);
+    if (event.code == "KeyE") {
+        var filename = TITLE + "_" + fxhash + "_" + getTimestamp() + ".svg";
+        // alert("oida is going down");
+        // downloadString(drawing.svg(), "image/svg+xml", filename);
 
-            saveSvg(svgNode, filename);
-        }
+        saveSvg(svgNode, filename);
+    }
 
-        // Alert the key name and key code on keydown
-        // var name = event.key;
-        // var code = event.code;
-        // alert(`Key pressed ${name} \r\n Key code value: ${code}`);
+    // Alert the key name and key code on keydown
+    // var name = event.key;
+    // var code = event.code;
+    // alert(`Key pressed ${name} \r\n Key code value: ${code}`);
 
-    }, false);
-})
+}, false);
+// })
 
 
 function fireTrigger(drawing) {
@@ -147,12 +148,9 @@ function fireTrigger(drawing) {
 
     let grid = new Grid({
         drawing: drawing,
-        // marginBoxCount: 5,
-        // shortBoxCount: 80,
-        // marginBoxCount: 7,
+        shortBoxCount: 40,
         // shortBoxCount: 100,
-        marginBoxCount: 15,
-        shortBoxCount: 160,
+        // shortBoxCount: 160,
         overshoot: OVERSHOOT,
     });
 }

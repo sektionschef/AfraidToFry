@@ -12,6 +12,9 @@ class digi {
         this.horizonRow = data.horizonRow;
         this.i = data.i;
         this.longBoxCount = data.longBoxCount;
+        this.polyLineAngleDist = data.polyLineAngleDist;
+        this.polyLinePointMean = data.polyLinePointMean;
+        this.polyLinePointStd = data.polyLinePointStd;
 
         this.circle = data.circle;
         this.circleRadius = data.circleRadius;
@@ -108,7 +111,7 @@ class digi {
 
                 if (this.noiseAngle) {
                     // this.angle = map(this.noiseValue, this.noiseValueMin, this.noiseValueMax, 0, 2 * Math.PI) + getRandomFromInterval(-0.5, 0.5);
-                    this.angle = map(this.noiseValue, -1, 1, 0, 2 * Math.PI) + getNormallyDistributedRandomNumber(0, 0.3);
+                    this.angle = map(this.noiseValue, -1, 1, 0, 2 * Math.PI) + getNormallyDistributedRandomNumber(0, this.polyLineAngleDist);
                 } else {
                     // this.angle = getRandomFromInterval(this.angleMin, this.angleMax);
                     this.angle = getNormallyDistributedRandomNumber(this.angleMean, this.angleSTD);
@@ -122,7 +125,7 @@ class digi {
                 }
 
                 // var newPoint = vectorAdd(newPoint, vectorFromAngle(this.angle, this.vertexLength * getRandomFromInterval(0.9, 1.1)));
-                var newPoint = vectorAdd(newPoint, vectorFromAngle(this.angle, this.vertexLength * getNormallyDistributedRandomNumber(0.9, 0.05)));
+                var newPoint = vectorAdd(newPoint, vectorFromAngle(this.angle, this.vertexLength * getNormallyDistributedRandomNumber(this.polyLinePointMean, this.polyLinePointStd)));
 
                 polyLineString = polyLineString.concat(" ", createCoordString(newPoint));
             }

@@ -86,10 +86,10 @@ class Grid {
 
             // this.loop5();  // canvas dots
 
+            // this.loopBaseVis();
             // this.loopBase();
-            this.loopBase();
             // this.loop8();
-            // this.loop7();
+            this.loopDetail();
 
         }
     }
@@ -843,7 +843,7 @@ class Grid {
         }
     }
 
-    loopBase() {
+    loopBaseVis() {
         let randomIndex = getRandomIndex(this.boxes.length);
 
         let i = 0;
@@ -1023,20 +1023,19 @@ class Grid {
                     x: this.boxes[i].center.x,
                     y: this.boxes[i].center.y,
                     noiseValue: this.boxes[i].noiseValueRA,
-                    // noiseValueMin: this.noiseRAMin,
-                    // noiseValueMax: this.noiseRAMax,
                     colorNoise: this.boxes[i].noiseValueMucho,
-                    // colorNoiseMin: this.noiseMuchoMin,
-                    // colorNoiseMax: this.noiseMuchoMax,
                     vertexLength: 160 / this.shortBoxCount * 30, // map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, 10, 30), // 30,
                     strokeWeighty: 160 / this.shortBoxCount * 0.3, //map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, 0.05, 0.25), // 0.3,
                     angleMean: Math.PI / 1,
                     angleSTD: Math.PI / 56,
-                    circle: true,
+                    polyLineAngleDist: 0.3,
+                    polyLinePointMean: 0.9,
+                    polyLinePointStd: 0.05,
+                    circle: false,
                     circleRadius: 160 / this.shortBoxCount * 10,
                     circleStroke: 160 / this.shortBoxCount * 0.25,
                     loopCircle: map(this.boxes[i].noiseValueRA, -1, 1, 3, 20),
-                    rect: true,
+                    rect: false,
                     loopRect: 1,
                     rectWidth: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 1, 5, 30), // 12,
                     rectHeight: 160 / this.shortBoxCount * 6,
@@ -1058,20 +1057,19 @@ class Grid {
                     x: this.boxes[i].center.x,
                     y: this.boxes[i].center.y,
                     noiseValue: this.boxes[i].noiseValueSA,
-                    noiseValueMin: this.noiseSAMin,
-                    noiseValueMax: this.noiseSAMax,
                     colorNoise: this.boxes[i].noiseValueMucho,
-                    colorNoiseMin: this.noiseMuchoMin,
-                    colorNoiseMax: this.noiseMuchoMax,
                     vertexLength: 160 / this.shortBoxCount * 30, // map(this.boxes[i].noiseValueSA, -1, 1, 30, 50), // 30, // sau
                     strokeWeighty: 160 / this.shortBoxCount * 0.3, //map(this.boxes[i].noiseValueSA, this.noiseSAMin, this.noiseSAMax, 0.05, 0.25), // 0.3,
                     angleMean: Math.PI / 1,
                     angleSTD: Math.PI / 56,
-                    circle: true,
+                    polyLineAngleDist: 0.3,
+                    polyLinePointMean: 0.9,
+                    polyLinePointStd: 0.05,
+                    circle: false,
                     circleRadius: 160 / this.shortBoxCount * 10,
                     circleStroke: 160 / this.shortBoxCount * 0.25,
                     loopCircle: map(this.boxes[i].noiseValueRA, -1, 1, 3, 20),
-                    rect: true,
+                    rect: false,
                     loopRect: 10,
                     rectWidth: 160 / this.shortBoxCount * 12,
                     rectHeight: 160 / this.shortBoxCount * 6,
@@ -1093,7 +1091,7 @@ class Grid {
 
     }
 
-    loop7() {
+    loopDetail() {
         let randomIndex = getRandomIndex(this.boxes.length);
 
         let i = 0;
@@ -1114,24 +1112,23 @@ class Grid {
                     x: this.boxes[i].center.x + getNormallyDistributedRandomNumber(3, 1),
                     y: this.boxes[i].center.y + getNormallyDistributedRandomNumber(3, 1),
                     noiseValue: this.boxes[i].noiseValueRA,
-                    noiseValueMin: this.noiseRAMin,
-                    noiseValueMax: this.noiseRAMax,
                     colorNoise: this.boxes[i].noiseValueMucho,
-                    colorNoiseMin: this.noiseMuchoMin,
-                    colorNoiseMax: this.noiseMuchoMax,
-                    vertexLength: map(this.boxes[i].noiseValueRA, -1, 1, 5, 30), // 15,
-                    strokeWeighty: 0.1, //map(this.boxes[i].noiseValueRA, -1, 1, 0.05, 0.25), // 0.1,
+                    vertexLength: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 1, 5, 30), // 15,
+                    strokeWeighty: 160 / this.shortBoxCount * 0.1, //map(this.boxes[i].noiseValueRA, -1, 1, 0.05, 0.25), // 0.1,
                     angleMean: Math.PI / 1,
                     angleSTD: Math.PI / 56,
+                    polyLineAngleDist: 0.3,
+                    polyLinePointMean: 0.9,
+                    polyLinePointStd: 0.05,
                     circle: true,
-                    circleRadius: 2,
-                    circleStroke: 0.1, //map(this.boxes[i].noiseValueRA, -1, 1, 0.75, 0.15), //0.1
+                    circleRadius: 160 / this.shortBoxCount * 2,
+                    circleStroke: 160 / this.shortBoxCount * 0.1, //map(this.boxes[i].noiseValueRA, -1, 1, 0.75, 0.15), //0.1
                     loopCircle: map(this.boxes[i].noiseValueRA, -1, 1, 3, 15), // 5,
                     rect: true,
                     loopRect: map(this.boxes[i].noiseValueRA, -1, 1, 3, 10), //10,
-                    rectWidth: 6,
-                    rectHeight: 2,
-                    rectStroke: 0.1,
+                    rectWidth: 160 / this.shortBoxCount * 6,
+                    rectHeight: 160 / this.shortBoxCount * 2,
+                    rectStroke: 160 / this.shortBoxCount * 0.1,
                     revert: true,
                     cutOutValue: -1,
                     loopCount: 25,
@@ -1148,24 +1145,23 @@ class Grid {
                     x: this.boxes[i].center.x + getNormallyDistributedRandomNumber(3, 1),
                     y: this.boxes[i].center.y + getNormallyDistributedRandomNumber(3, 1),
                     noiseValue: this.boxes[i].noiseValueSA,
-                    noiseValueMin: this.noiseSAMin,
-                    noiseValueMax: this.noiseSAMax,
                     colorNoise: this.boxes[i].noiseValueMucho,
-                    colorNoiseMin: this.noiseMuchoMin,
-                    colorNoiseMax: this.noiseMuchoMax,
-                    vertexLength: 15, //map(this.boxes[i].noiseValueRA, -1, 1, 5, 20), // 15,
-                    strokeWeighty: 0.075, // map(this.boxes[i].noiseValueSA, -1, 1, 0.05, 0.25), // 0.1,
+                    vertexLength: 160 / this.shortBoxCount * 15, //map(this.boxes[i].noiseValueRA, -1, 1, 5, 20), // 15,
+                    strokeWeighty: 160 / this.shortBoxCount * 0.075, // map(this.boxes[i].noiseValueSA, -1, 1, 0.05, 0.25), // 0.1,
                     angleMean: Math.PI / 1,
                     angleSTD: Math.PI / 56,
+                    polyLineAngleDist: 0.3,
+                    polyLinePointMean: 0.9,
+                    polyLinePointStd: 0.05,
                     circle: true,
-                    circleRadius: 2,
-                    circleStroke: 0.075,
+                    circleRadius: 160 / this.shortBoxCount * 2,
+                    circleStroke: 160 / this.shortBoxCount * 0.075,
                     loopCircle: 5,
                     rect: true,
                     loopRect: 10,
-                    rectWidth: 6,
-                    rectHeight: 2,
-                    rectStroke: 0.2,
+                    rectWidth: 160 / this.shortBoxCount * 6,
+                    rectHeight: 160 / this.shortBoxCount * 2,
+                    rectStroke: 160 / this.shortBoxCount * 0.2,
                     revert: true,
                     cutOutValue: -1,
                     loopCount: 25,

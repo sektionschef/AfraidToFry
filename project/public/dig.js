@@ -13,19 +13,21 @@ class digi {
         this.i = data.i;
         this.longBoxCount = data.longBoxCount;
         this.polyLineAngleDist = data.polyLineAngleDist;
-        this.polyLinePointMean = data.polyLinePointMean;
-        this.polyLinePointStd = data.polyLinePointStd;
+        this.polyLineVLenMean = data.polyLineVLenMean;
+        this.polyLineVLenStd = data.polyLineVLenStd;
 
         this.circle = data.circle;
         this.circleRadius = data.circleRadius;
         this.circleStroke = data.circleStroke;
         this.loopCircle = data.loopCircle;
+        this.circlePosDistStd = data.circlePosDistStd;
 
         this.rect = data.rect;
         this.loopRect = data.loopRect;
         this.rectWidth = data.rectWidth;
         this.rectHeight = data.rectHeight;
         this.rectStroke = data.rectStroke;
+        this.rectPosDistStd = data.rectPosDistStd;
 
         this.angle = 0;
         this.revert = data.revert;
@@ -125,7 +127,7 @@ class digi {
                 }
 
                 // var newPoint = vectorAdd(newPoint, vectorFromAngle(this.angle, this.vertexLength * getRandomFromInterval(0.9, 1.1)));
-                var newPoint = vectorAdd(newPoint, vectorFromAngle(this.angle, this.vertexLength * getNormallyDistributedRandomNumber(this.polyLinePointMean, this.polyLinePointStd)));
+                var newPoint = vectorAdd(newPoint, vectorFromAngle(this.angle, this.vertexLength * getNormallyDistributedRandomNumber(this.polyLineVLenMean, this.polyLineVLenStd)));
 
                 polyLineString = polyLineString.concat(" ", createCoordString(newPoint));
             }
@@ -156,8 +158,8 @@ class digi {
             if (textureSelect == 2 && this.rect) {
 
                 for (var i = 0; i < this.loopRect; i++) {
-                    var rectX = this.center.x + getNormallyDistributedRandomNumber(0, 5);
-                    var rectY = this.center.y + getNormallyDistributedRandomNumber(0, 5);
+                    var rectX = this.center.x * getNormallyDistributedRandomNumber(1, this.rectPosDistStd);
+                    var rectY = this.center.y * getNormallyDistributedRandomNumber(1, this.rectPosDistStd);
 
                     const rectNode = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
                     rectNode.setAttributeNS(null, 'x', 0);
@@ -178,8 +180,8 @@ class digi {
                 for (var i = 0; i < this.loopCircle; i++) {
 
                     const circleNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-                    circleNode.setAttributeNS(null, 'cx', this.center.x + getNormallyDistributedRandomNumber(0, 5));
-                    circleNode.setAttributeNS(null, 'cy', this.center.y + getNormallyDistributedRandomNumber(0, 5));
+                    circleNode.setAttributeNS(null, 'cx', this.center.x * getNormallyDistributedRandomNumber(1, this.circlePosDistStd));
+                    circleNode.setAttributeNS(null, 'cy', this.center.y * getNormallyDistributedRandomNumber(1, this.circlePosDistStd));
                     circleNode.setAttributeNS(null, 'r', this.circleRadius);
                     circleNode.setAttributeNS(null, 'fill', 'none');
                     // circleNode.setAttributeNS(null, 'fill', color_);

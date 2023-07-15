@@ -158,8 +158,8 @@ class digi {
             if (textureSelect == 2 && this.rect) {
 
                 for (var i = 0; i < this.loopRect; i++) {
-                    var rectX = this.center.x * getNormallyDistributedRandomNumber(1, this.rectPosDistStd);
-                    var rectY = this.center.y * getNormallyDistributedRandomNumber(1, this.rectPosDistStd);
+                    var rectX = this.center.x + getNormallyDistributedRandomNumber(0, this.rectPosDistStd);
+                    var rectY = this.center.y + getNormallyDistributedRandomNumber(0, this.rectPosDistStd);
 
                     const rectNode = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
                     rectNode.setAttributeNS(null, 'x', 0);
@@ -180,8 +180,8 @@ class digi {
                 for (var i = 0; i < this.loopCircle; i++) {
 
                     const circleNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-                    circleNode.setAttributeNS(null, 'cx', this.center.x * getNormallyDistributedRandomNumber(1, this.circlePosDistStd));
-                    circleNode.setAttributeNS(null, 'cy', this.center.y * getNormallyDistributedRandomNumber(1, this.circlePosDistStd));
+                    circleNode.setAttributeNS(null, 'cx', this.center.x + getNormallyDistributedRandomNumber(0, this.circlePosDistStd));
+                    circleNode.setAttributeNS(null, 'cy', this.center.y + getNormallyDistributedRandomNumber(0, this.circlePosDistStd));
                     circleNode.setAttributeNS(null, 'r', this.circleRadius);
                     circleNode.setAttributeNS(null, 'fill', 'none');
                     // circleNode.setAttributeNS(null, 'fill', color_);
@@ -203,6 +203,17 @@ class digi {
                 // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
                 svgNode.appendChild(polyNode);
             }
+
+
+            // DEBUG VIEW CENTER
+            // const circleNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            // circleNode.setAttributeNS(null, 'cx', this.center.x);
+            // circleNode.setAttributeNS(null, 'cy', this.center.y);
+            // circleNode.setAttributeNS(null, 'r', 3);
+            // circleNode.setAttributeNS(null, 'fill', 'none');
+            // circleNode.setAttributeNS(null, 'fill', "red");
+            // circleNode.setAttributeNS(null, 'stroke', "none");
+            // svgNode.appendChild(circleNode);
 
         }
     }

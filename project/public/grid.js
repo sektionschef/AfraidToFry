@@ -40,16 +40,16 @@ class Grid {
 
         if (this.overshoot == true) {
 
-            this.aboveTone = "#717d92";
-            this.underneathTone = "#69654f";
+            this.aboveTone = "#93a2bd";
+            this.underneathTone = "#889987";
         } else {
             this.aboveTone = "#cdd7df";
             this.underneathTone = "#6e8578";
         }
 
-        this.paletteRA = new dynamicPalette(this.aboveTone, 15, 15, 8);
-        this.paletteRB = new dynamicPalette(this.underneathTone, 15, 15, 8);
-        this.paletteOne = new dynamicPalette("#adb8be", 0, 0, 0);
+        this.paletteRA = new dynamicPalette(this.aboveTone, 5, 15, 8);
+        this.paletteRB = new dynamicPalette(this.underneathTone, 5, 15, 8);
+        this.paletteOne = new dynamicPalette("#869196", 0, 5, 5);
 
         // if (fxrand() > 0.2) {this.paletteA = this.paletteRA} else {this.paletteB = this.paletteRB}
 
@@ -87,7 +87,7 @@ class Grid {
             // this.loop5();  // canvas dots
 
             // this.loopBaseVis();
-            // this.loopBase();
+            this.loopBase();
             // this.loop8();
             this.loopDetail();
 
@@ -864,8 +864,8 @@ class Grid {
                 continue;
             }
 
-            // if (fxrand() > 0.2) { this.paletteA = this.paletteRA } else { this.paletteA = this.paletteOne }
-            // if (fxrand() > 0.2) { this.paletteB = this.paletteRB } else { this.paletteB = this.paletteOne }
+            if (fxrand() > 0.2) { this.paletteA = this.paletteRA } else { this.paletteA = this.paletteOne }
+            if (fxrand() > 0.2) { this.paletteB = this.paletteRB } else { this.paletteB = this.paletteOne }
 
 
             // // NOISE pattern with rects
@@ -954,8 +954,8 @@ class Grid {
             // }
 
             // gescccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccheiter
-            if (fxrand() > 0) { this.paletteA = this.paletteRA } else { this.paletteA = this.paletteOne }
-            if (fxrand() > 0) { this.paletteB = this.paletteRB } else { this.paletteB = this.paletteOne }
+            if (fxrand() > 0.2) { this.paletteA = this.paletteRA } else { this.paletteA = this.paletteOne }
+            if (fxrand() > 0.2) { this.paletteB = this.paletteRB } else { this.paletteB = this.paletteOne }
 
 
             // if (this.boxes[i].horizon) {
@@ -1035,13 +1035,13 @@ class Grid {
                     circleRadius: 160 / this.shortBoxCount * 10,
                     circleStroke: 160 / this.shortBoxCount * 0.25,
                     loopCircle: map(this.boxes[i].noiseValueRA, -1, 1, 3, 20),
-                    circlePosDistStd: 0.05,
+                    circlePosDistStd: 160 / this.shortBoxCount * 5,
                     rect: false,
                     loopRect: 1,
                     rectWidth: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 1, 5, 30), // 12,
                     rectHeight: 160 / this.shortBoxCount * 6,
                     rectStroke: 160 / this.shortBoxCount * 0.4,
-                    rectPosDistStd: 0.05,
+                    rectPosDistStd: 160 / this.shortBoxCount * 5,
                     revert: true,
                     cutOutValue: -1,
                     loopCount: map(this.boxes[i].noiseValueRA, -1, 1, 20, 50), // 20,
@@ -1071,13 +1071,13 @@ class Grid {
                     circleRadius: 160 / this.shortBoxCount * 10,
                     circleStroke: 160 / this.shortBoxCount * 0.25,
                     loopCircle: map(this.boxes[i].noiseValueRA, -1, 1, 3, 20),
-                    circlePosDistStd: 0.05,
+                    circlePosDistStd: 160 / this.shortBoxCount * 5,
                     rect: false,
                     loopRect: 10,
                     rectWidth: 160 / this.shortBoxCount * 12,
                     rectHeight: 160 / this.shortBoxCount * 6,
                     rectStroke: 160 / this.shortBoxCount * 0.4,
-                    rectPosDistStd: 0.05,
+                    rectPosDistStd: 160 / this.shortBoxCount * 5,
                     revert: true,
                     cutOutValue: -1,
                     loopCount: map(this.boxes[i].noiseValueSA, -1, 1, 20, 50), // 20,
@@ -1113,31 +1113,31 @@ class Grid {
 
             if (this.boxes[i].aboveHorizon) {
                 new digi({
-                    x: this.boxes[i].center.x + getNormallyDistributedRandomNumber(3, 1),
-                    y: this.boxes[i].center.y + getNormallyDistributedRandomNumber(3, 1),
+                    x: this.boxes[i].center.x * getNormallyDistributedRandomNumber(1, 0),
+                    y: this.boxes[i].center.y * getNormallyDistributedRandomNumber(1, 0),
                     noiseValue: this.boxes[i].noiseValueRA,
                     colorNoise: this.boxes[i].noiseValueMucho,
-                    vertexLength: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 1, 5, 30), // 15,
+                    vertexLength: 160 / this.shortBoxCount * 15, // map(this.boxes[i].noiseValueRA, -1, 1, 5, 30), // 15,
                     strokeWeighty: 160 / this.shortBoxCount * 0.1, //map(this.boxes[i].noiseValueRA, -1, 1, 0.05, 0.25), // 0.1,
                     angleMean: Math.PI / 1,
                     angleSTD: Math.PI / 56,
-                    polyLineAngleDist: 0.2,
+                    polyLineAngleDist: 0.1,
                     polyLineVLenMean: 1,
-                    polyLineVLenStd: 0.01,
+                    polyLineVLenStd: 0.05,
                     circle: true,
                     circleRadius: 160 / this.shortBoxCount * 2,
                     circleStroke: 160 / this.shortBoxCount * 0.1, //map(this.boxes[i].noiseValueRA, -1, 1, 0.75, 0.15), //0.1
-                    loopCircle: map(this.boxes[i].noiseValueRA, -1, 1, 3, 15), // 5,
-                    circlePosDistStd: 0.05,
+                    loopCircle: 20, // map(this.boxes[i].noiseValueRA, -1, 1, 3, 15), // 5,
+                    circlePosDistStd: 160 / this.shortBoxCount * 5,
                     rect: true,
-                    loopRect: map(this.boxes[i].noiseValueRA, -1, 1, 3, 10), //10,
+                    loopRect: 20, // map(this.boxes[i].noiseValueRA, -1, 1, 3, 10), //10,
                     rectWidth: 160 / this.shortBoxCount * 6,
                     rectHeight: 160 / this.shortBoxCount * 2,
                     rectStroke: 160 / this.shortBoxCount * 0.1,
-                    rectPosDistStd: 0.05,
+                    rectPosDistStd: 160 / this.shortBoxCount * 5,
                     revert: true,
                     cutOutValue: -1,
-                    loopCount: 25,
+                    loopCount: 20,
                     colorList: this.paletteA.palette,
                     noiseAngle: true,
                     group: "",
@@ -1148,8 +1148,8 @@ class Grid {
                 }).draw();
             } else {
                 new digi({
-                    x: this.boxes[i].center.x + getNormallyDistributedRandomNumber(3, 1),
-                    y: this.boxes[i].center.y + getNormallyDistributedRandomNumber(3, 1),
+                    x: this.boxes[i].center.x * getNormallyDistributedRandomNumber(1, 0),
+                    y: this.boxes[i].center.y * getNormallyDistributedRandomNumber(1, 0),
                     noiseValue: this.boxes[i].noiseValueSA,
                     colorNoise: this.boxes[i].noiseValueMucho,
                     vertexLength: 160 / this.shortBoxCount * 15, //map(this.boxes[i].noiseValueRA, -1, 1, 5, 20), // 15,
@@ -1163,13 +1163,13 @@ class Grid {
                     circleRadius: 160 / this.shortBoxCount * 2,
                     circleStroke: 160 / this.shortBoxCount * 0.075,
                     loopCircle: 5,
-                    circlePosDistStd: 0.05,
+                    circlePosDistStd: 160 / this.shortBoxCount * 5,
                     rect: true,
                     loopRect: 10,
                     rectWidth: 160 / this.shortBoxCount * 6,
                     rectHeight: 160 / this.shortBoxCount * 2,
                     rectStroke: 160 / this.shortBoxCount * 0.2,
-                    rectPosDistStd: 0.05,
+                    rectPosDistStd: 160 / this.shortBoxCount * 5,
                     revert: true,
                     cutOutValue: -1,
                     loopCount: 25,

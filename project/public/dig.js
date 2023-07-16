@@ -103,10 +103,16 @@ class digi {
             let color_d = this.colorList[colorSelect]
             // let color_d = tinycolor(colorList[colorSelect]).spin(getRandomFromInterval(-20, 20)).darken(getRandomFromInterval(-5, 5)).desaturate(getRandomFromInterval(-10, 10)).toHexString();
 
-            // point and add new point
-            var oldPoint = this.center;
-            var newPoint = oldPoint;
             // console.log(angleBetweenPoints(pointA, pointB));
+
+            // point and add new point
+            // var oldPoint = this.center;
+            var oldPoint = {};
+            Object.assign(oldPoint, this.center);
+            // correct for offset of center
+            oldPoint.x = oldPoint.x + this.vertexLength / 2
+            oldPoint.y = oldPoint.y + this.vertexLength / 2
+            var newPoint = oldPoint;
             var polyLineString = createCoordString(oldPoint);
 
             for (var i = 0; i < this.loopCount; i++) {

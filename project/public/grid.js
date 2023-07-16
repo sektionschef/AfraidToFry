@@ -86,8 +86,8 @@ class Grid {
 
             // this.loop5();  // canvas dots
 
-            // this.loopBaseVis();
-            this.loopBase();
+            this.loopBaseVis();
+            // this.loopBase();
             // this.loop8();
             this.loopDetail();
 
@@ -864,8 +864,8 @@ class Grid {
                 continue;
             }
 
-            if (fxrand() > 0.2) { this.paletteA = this.paletteRA } else { this.paletteA = this.paletteOne }
-            if (fxrand() > 0.2) { this.paletteB = this.paletteRB } else { this.paletteB = this.paletteOne }
+            if (fxrand() > 0) { this.paletteA = this.paletteRA } else { this.paletteA = this.paletteOne }
+            if (fxrand() > 0) { this.paletteB = this.paletteRB } else { this.paletteB = this.paletteOne }
 
 
             // // NOISE pattern with rects
@@ -954,8 +954,8 @@ class Grid {
             // }
 
             // gescccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccheiter
-            if (fxrand() > 0.2) { this.paletteA = this.paletteRA } else { this.paletteA = this.paletteOne }
-            if (fxrand() > 0.2) { this.paletteB = this.paletteRB } else { this.paletteB = this.paletteOne }
+            if (fxrand() > 0) { this.paletteA = this.paletteRA } else { this.paletteA = this.paletteOne }
+            if (fxrand() > 0) { this.paletteB = this.paletteRB } else { this.paletteB = this.paletteOne }
 
 
             // if (this.boxes[i].horizon) {
@@ -1126,14 +1126,14 @@ class Grid {
                     polyLineVLenStd: 0.05,
                     circle: true,
                     circleRadius: 160 / this.shortBoxCount * 2,
-                    circleStroke: 160 / this.shortBoxCount * 0.1, //map(this.boxes[i].noiseValueRA, -1, 1, 0.75, 0.15), //0.1
-                    loopCircle: 20, // map(this.boxes[i].noiseValueRA, -1, 1, 3, 15), // 5,
+                    circleStroke: 160 / this.shortBoxCount * 0.08, //map(this.boxes[i].noiseValueRA, -1, 1, 0.75, 0.15), //0.1
+                    loopCircle: 40, // map(this.boxes[i].noiseValueRA, -1, 1, 3, 15), // 5,
                     circlePosDistStd: 160 / this.shortBoxCount * 5,
                     rect: true,
-                    loopRect: 20, // map(this.boxes[i].noiseValueRA, -1, 1, 3, 10), //10,
+                    loopRect: 30, // map(this.boxes[i].noiseValueRA, -1, 1, 3, 10), //10,
                     rectWidth: 160 / this.shortBoxCount * 6,
                     rectHeight: 160 / this.shortBoxCount * 2,
-                    rectStroke: 160 / this.shortBoxCount * 0.1,
+                    rectStroke: 160 / this.shortBoxCount * 0.08,
                     rectPosDistStd: 160 / this.shortBoxCount * 5,
                     revert: true,
                     cutOutValue: -1,
@@ -1161,14 +1161,14 @@ class Grid {
                     polyLineVLenStd: 0.05,
                     circle: true,
                     circleRadius: 160 / this.shortBoxCount * 2,
-                    circleStroke: 160 / this.shortBoxCount * 0.075,
-                    loopCircle: 5,
+                    circleStroke: 160 / this.shortBoxCount * 0.08,
+                    loopCircle: 40,
                     circlePosDistStd: 160 / this.shortBoxCount * 5,
                     rect: true,
-                    loopRect: 10,
+                    loopRect: 30,
                     rectWidth: 160 / this.shortBoxCount * 6,
                     rectHeight: 160 / this.shortBoxCount * 2,
-                    rectStroke: 160 / this.shortBoxCount * 0.2,
+                    rectStroke: 160 / this.shortBoxCount * 0.08,
                     rectPosDistStd: 160 / this.shortBoxCount * 5,
                     revert: true,
                     cutOutValue: -1,

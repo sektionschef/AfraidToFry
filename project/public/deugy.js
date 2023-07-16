@@ -10,8 +10,6 @@ class deugy {
         // this.loopCount = data.loopCount;
         // this.group = data.group;
         this.noiseValue = data.noiseValue;
-        this.noiseValueMin = data.noiseValueMin;
-        this.noiseValueMax = data.noiseValueMax;
         this.colorList = data.colorList;
         // this.angle = 0;
 
@@ -27,9 +25,9 @@ class deugy {
         let colorSelect = 0
 
         // console.log("noisevalue:" + this.noiseValue);
-        for (var i = 1; i < (this.colorList.length + 1); i++) {
+        for (var i = 0; i < this.colorList.length; i++) {
             // console.log("step: " + (this.noiseValueMin + this.colorStep * i))
-            if (this.noiseValue < this.noiseValueMin + this.colorStep * i) {
+            if (this.noiseValue < -1 + this.colorStep * i) {
                 colorSelect = i;
                 break;
             }
@@ -37,7 +35,7 @@ class deugy {
 
         // let color_d = this.colorList[colorSelect]
 
-        var color_d = tinycolor({ h: 100, s: 50, l: 50 }).lighten(map(this.noiseValue, this.noiseValueMin, this.noiseValueMax, -50, 50)).toHexString()
+        var color_d = tinycolor({ h: 100, s: 50, l: 50 }).lighten(map(this.noiseValue, -1, 1, -50, 50)).toHexString()
 
         // without svg.js
         const svgNode = document.getElementById('svgNode');

@@ -71,7 +71,6 @@ class Grid {
 
         if (this.DEBUG) {
             // this.showDebug();
-            this.loopDEBUG();
         } else {
 
             // setTimeout(() => {
@@ -86,10 +85,11 @@ class Grid {
 
             // this.loop5();  // canvas dots
 
-            this.loopBaseVis();
+            // this.loopBaseVis();
+            this.loopDEBUG();
             // this.loopBase();
             // this.loop8();
-            this.loopDetail();
+            // this.loopDetail();
 
         }
     }
@@ -813,8 +813,6 @@ class Grid {
                     height: this.boxSize,
                     colorList: this.paletteRA.palette,
                     noiseValue: this.boxes[i].noiseValueRA,
-                    noiseValueMin: this.noiseRAMin,
-                    noiseValueMax: this.noiseRAMax,
                 }).draw();
             } else {
                 new deugy({
@@ -824,22 +822,8 @@ class Grid {
                     height: this.boxSize,
                     colorList: this.paletteRB.palette,
                     noiseValue: this.boxes[i].noiseValueSA,
-                    noiseValueMin: this.noiseSAMin,
-                    noiseValueMax: this.noiseSAMax,
                 }).draw();
             }
-
-            // new deugy({
-            //     x: this.boxes[i].A.x,
-            //     y: this.boxes[i].A.y,
-            //     width: this.boxSize,
-            //     height: this.boxSize,
-            //     colorList: this.paletteRA.palette,
-            //     noiseValue: this.boxes[i].noiseValueMucho,
-            //     noiseValueMin: this.noiseMuchoMin,
-            //     noiseValueMax: this.noiseMuchoMax,
-            // }).draw();
-
         }
     }
 

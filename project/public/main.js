@@ -20,6 +20,8 @@ let EDITIONS = "100 editions";
 let OVERSHOOT = "start";
 var drawing = "";
 
+let RESOLUTIONBOXCOUNT = 80
+
 setTagsHTML();
 
 let BULK = false;  // bulk export images
@@ -149,7 +151,8 @@ function fireTrigger(drawing) {
     let grid = new Grid({
         drawing: drawing,
         // shortBoxCount: 40,
-        shortBoxCount: 80,
+        // shortBoxCount: 80,
+        shortBoxCount: RESOLUTIONBOXCOUNT,
         // shortBoxCount: 100,
         // shortBoxCount: 160,
         overshoot: OVERSHOOT,

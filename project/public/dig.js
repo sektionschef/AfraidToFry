@@ -111,7 +111,7 @@ class digi {
             Object.assign(oldPoint, this.center);
             // correct for offset of center
             oldPoint.x = oldPoint.x + this.vertexLength / 2
-            oldPoint.y = oldPoint.y + this.vertexLength / 2
+            // oldPoint.y = oldPoint.y + this.vertexLength / 2
             var newPoint = oldPoint;
             var polyLineString = createCoordString(oldPoint);
 

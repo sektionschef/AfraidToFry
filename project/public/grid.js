@@ -40,15 +40,15 @@ class Grid {
 
         if (this.overshoot == true) {
 
-            this.aboveTone = "#93a2bd";
-            this.underneathTone = "#889987";
+            this.aboveTone = "#9eaecc";
+            this.underneathTone = "#585f56";
         } else {
             this.aboveTone = "#cdd7df";
             this.underneathTone = "#6e8578";
         }
 
-        this.paletteRA = new dynamicPalette(this.aboveTone, 5, 15, 8);
-        this.paletteRB = new dynamicPalette(this.underneathTone, 5, 15, 8);
+        this.paletteRA = new dynamicPalette(this.aboveTone, 2, 15, 2);
+        this.paletteRB = new dynamicPalette(this.underneathTone, 2, 15, 2);
         this.paletteOne = new dynamicPalette("#869196", 0, 5, 5);
 
         // if (fxrand() > 0.2) {this.paletteA = this.paletteRA} else {this.paletteB = this.paletteRB}
@@ -57,7 +57,7 @@ class Grid {
         // this.noiseRA = new noiseAggregator(235, 50, 110, 4, 4, 5);  // klaas
         // this.noiseRA = new noiseAggregator(135, 150, 110, 24, 14, 10); // klaa2
         // this.noiseRA = new noiseAggregator(335, 60, 210, 24, 65, 65); // klaa3
-        this.noiseRA = new noiseAggregator(135, 30, 90, 24, 65, 5); // klaa3
+        this.noiseRA = new noiseAggregator(235, 10, 40, 8, 65, 5); // klaa3
 
         // this.noiseSA = new noiseAggregator(155, 50, 80, 10, 20, 50);
         // this.noiseSA = new noiseAggregator(230, 38, 90, 4, 4, 5);  // klaas
@@ -1113,14 +1113,14 @@ class Grid {
                     polyLineVLenStd: 0.05,
                     circle: true,
                     circleRadius: 160 / this.shortBoxCount * 2,
-                    circleStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 0, 0.2, 0.1), // 0.08
+                    circleStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 0, 0.4, 0.1), // 0.08
                     loopCircle: map(this.boxes[i].noiseValueRA, -1, 0, 40, 10), // 40,
                     circlePosDistStd: 160 / this.shortBoxCount * 5,
                     rect: true,
                     loopRect: map(this.boxes[i].noiseValueRA, 0, 1, 10, 40), //30,
                     rectWidth: 160 / this.shortBoxCount * 6,
                     rectHeight: 160 / this.shortBoxCount * 2,
-                    rectStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 0.2, 0.1), // 0.08
+                    rectStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 0.4, 0.1), // 0.08
                     rectPosDistStd: 160 / this.shortBoxCount * 5,
                     revert: true,
                     cutOutValue: -1,

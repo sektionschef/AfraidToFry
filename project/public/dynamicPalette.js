@@ -43,6 +43,7 @@ class dynamicPalette {
 
 
         // DYNAMIC
+        // this.length = 60;
         this.length = 60;
         this.palette = [];
         // this.palette = Array(this.length);

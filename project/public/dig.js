@@ -161,8 +161,11 @@ class digi {
             var h = Math.floor(this.i / this.longBoxCount);
             var distanceFromHorizon = Math.abs(this.horizonRow - h);
 
-            var criticalDistance = 35;
-            var darknessBoost = 25;
+            // var criticalDistance = 35;
+            // var darknessBoost = 25;
+            // var desaturationBoost = 20;
+            var criticalDistance = 0;//30;
+            var darknessBoost = 35;
             var desaturationBoost = 20;
 
             if (distanceFromHorizon < criticalDistance) {
@@ -173,6 +176,17 @@ class digi {
 
             // without svg.js
             const svgNode = document.getElementById('svgNode');
+
+
+            // skip loop if not polyline
+            const polyNode = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+            polyNode.setAttributeNS(null, 'points', polyLineString);
+            polyNode.setAttributeNS(null, 'fill', 'none');
+            // polyNode.setAttributeNS(null, 'stroke', color_d);
+            polyNode.setAttributeNS(null, 'stroke', color_);
+            polyNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
+            // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
+            svgNode.appendChild(polyNode);
 
 
             // if (textureSelect == 2 && this.rect) {
@@ -215,17 +229,7 @@ class digi {
                 }
 
             }
-            // } else {
-            // skip loop if not polyline
-            const polyNode = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
-            polyNode.setAttributeNS(null, 'points', polyLineString);
-            polyNode.setAttributeNS(null, 'fill', 'none');
-            // polyNode.setAttributeNS(null, 'stroke', color_d);
-            polyNode.setAttributeNS(null, 'stroke', color_);
-            polyNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
-            // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
-            svgNode.appendChild(polyNode);
-            // }
+
 
 
             // DEBUG VIEW CENTER

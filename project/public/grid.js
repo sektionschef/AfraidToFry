@@ -62,7 +62,7 @@ class Grid {
         // this.noiseSA = new noiseAggregator(155, 50, 80, 10, 20, 50);
         // this.noiseSA = new noiseAggregator(230, 38, 90, 4, 4, 5);  // klaas
         // this.noiseSA = new noiseAggregator(130, 158, 120, 28, 18, 9);  // klaas2
-        this.noiseSA = new noiseAggregator(190, 5, 120, 28, 40, 10);  // klaas3
+        this.noiseSA = new noiseAggregator(190, 145, 120, 28, 40, 10);  // klaas3
 
         this.noiseMucho = new noiseAggregator(100, 38, 60, 10, 8, 2);  // mucho
 
@@ -86,7 +86,8 @@ class Grid {
             // this.loop5();  // canvas dots
 
             // this.loopBaseVis();
-            // this.loopDEBUG();
+            // this.loopShowNoise();
+
             this.loopBase();
             // this.loop8();
             this.loopDetail();
@@ -134,7 +135,7 @@ class Grid {
                 var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 1, 1, 0.7, 0, 0.5, 0.2);
                 // var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 1, 1, 0, 0.5, 0);
                 // var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 1, 1, 0, 0.25, 0.25);
-                var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 1, 1, 0, 0, 1, 1);
+                var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 1, 1, 1, 0.5, 1, 1);
 
                 // var noiseValueMucho = this.noiseMucho.createNoiseValue(w, h, 0, this.heightBoxCount, 1, 0.5, 0.5, 1, 0.5, 0.5);
                 // var noiseValueMucho = this.noiseMucho.createNoiseValue(w, h, 0, this.heightBoxCount, 0, 0, 0, 0, 1, 1);
@@ -793,7 +794,7 @@ class Grid {
     }
 
 
-    loopDEBUG() {
+    loopShowNoise() {
         let randomIndex = getRandomIndex(this.boxes.length);
 
         let i = 0;
@@ -1096,6 +1097,7 @@ class Grid {
             if (fxrand() > 0) { this.paletteA = this.paletteRA } else { this.paletteA = this.paletteOne }
             if (fxrand() > 0) { this.paletteB = this.paletteRB } else { this.paletteB = this.paletteOne }
 
+            // ONON
             if (this.boxes[i].aboveHorizon) {
                 new digi({
                     x: this.boxes[i].center.x * getNormallyDistributedRandomNumber(1, 0),
@@ -1103,7 +1105,7 @@ class Grid {
                     noiseValue: this.boxes[i].noiseValueRA,
                     colorNoise: this.boxes[i].noiseValueMucho,
                     vertexLength: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 1, 5, 15), // 15,
-                    strokeWeighty: 160 / this.shortBoxCount * 0.1, //map(this.boxes[i].noiseValueRA, -1, 1, 0.05, 0.25), // 0.1,
+                    strokeWeighty: 160 / this.shortBoxCount * 0.2, //map(this.boxes[i].noiseValueRA, -1, 1, 0.05, 0.25), // 0.1,
                     angleMean: Math.PI / 1,
                     angleSTD: Math.PI / 56,
                     polyLineAngleDist: 0.1,
@@ -1111,18 +1113,18 @@ class Grid {
                     polyLineVLenStd: 0.05,
                     circle: true,
                     circleRadius: 160 / this.shortBoxCount * 2,
-                    circleStroke: 160 / this.shortBoxCount * 0.08, //map(this.boxes[i].noiseValueRA, -1, 1, 0.75, 0.15), //0.1
-                    loopCircle: map(this.boxes[i].noiseValueRA, -1, 0, 30, 10), // 40,
+                    circleStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 0, 0.2, 0.1), // 0.08
+                    loopCircle: map(this.boxes[i].noiseValueRA, -1, 0, 40, 10), // 40,
                     circlePosDistStd: 160 / this.shortBoxCount * 5,
                     rect: true,
-                    loopRect: map(this.boxes[i].noiseValueRA, 0, 1, 10, 30), //30,
+                    loopRect: map(this.boxes[i].noiseValueRA, 0, 1, 10, 40), //30,
                     rectWidth: 160 / this.shortBoxCount * 6,
                     rectHeight: 160 / this.shortBoxCount * 2,
-                    rectStroke: 160 / this.shortBoxCount * 0.08,
+                    rectStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 0.2, 0.1), // 0.08
                     rectPosDistStd: 160 / this.shortBoxCount * 5,
                     revert: true,
                     cutOutValue: -1,
-                    loopCount: map(this.boxes[i].noiseValueRA, -0.5, 0.5, 10, 30), // 20,
+                    loopCount: 20, // map(this.boxes[i].noiseValueRA, -0.5, 0.5, 10, 40), // 20,
                     colorList: this.paletteA.palette,
                     noiseAngle: true,
                     group: "",
@@ -1130,6 +1132,7 @@ class Grid {
                     horizonRow: this.horizonRow,
                     i: i,
                     longBoxCount: this.longBoxCount,
+                    PolyLineDynamic: true,
                 }).draw();
             } else {
                 new digi({

@@ -15,6 +15,7 @@ class digi {
         this.polyLineAngleDist = data.polyLineAngleDist;
         this.polyLineVLenMean = data.polyLineVLenMean;
         this.polyLineVLenStd = data.polyLineVLenStd;
+        this.PolyLineDynamic = data.PolyLineDynamic;
 
         this.circle = data.circle;
         this.circleRadius = data.circleRadius;
@@ -63,6 +64,19 @@ class digi {
 
         // console.log(this.colorList.length);
 
+        // mapping for center - HACK FOR MIN AND MAX
+        if (this.PolyLineDynamic) {
+
+            if (this.noiseValue <= 0) {
+                this.vertexlength = map(this.noiseValue, -1, 0, 5, 15)
+                this.loopCount = map(this.noiseValue, -1, 0, 40, 10)
+                this.strokeWeighty = map(this.noiseValue, -1, 0, this.strokeWeighty * 4, this.strokeWeighty)
+            } else {
+                this.vertexlength = map(this.noiseValue, 0, 1, 15, 5)
+                this.loopCount = map(this.noiseValue, 0, 1, 10, 40)
+                this.strokeWeighty = map(this.noiseValue, -1, 0, this.strokeWeighty * 4, this.strokeWeighty)
+            }
+        }
     }
 
     draw() {

@@ -20,11 +20,19 @@ let EDITIONS = "100 editions";
 let OVERSHOOT = "start";
 var drawing = "";
 
-let RESOLUTIONBOXCOUNT = 80
-// let RESOLUTIONBOXCOUNT = 60
+// let RESOLUTIONBOXCOUNT = 160;
+let RESOLUTIONBOXCOUNT = 80;
+// let RESOLUTIONBOXCOUNT = 60;
 let BACKGROUNDTONE = "#ffffff";
-let ABOVETONE = "#98a0a7";
-let BELOWTONE = "#3c4240";
+// let ABOVETONE = "#a5812f";  // andrea garden book
+// let BELOWTONE = "#ff617b";  // andrea garden book
+let ABOVETONE = "#92a8b4" // blue
+let BELOWTONE = "#6f726b"; // green
+// let ABOVETONE = "#98a0a7";  // good
+// let BELOWTONE = "#515a57";  // good
+// let ABOVETONE = "#8d6f5c";  // overshoot - cool color: d5560c
+// let BELOWTONE = "#4a504b";  // overshoot 
+// oooxQ5kzQd5Yxeoz8Zutf3TrYRKnRDWb1AtirpMM2GCrG4f7cob
 
 setTagsHTML();
 
@@ -41,6 +49,11 @@ canvasFormats = [
         "canvasWidth": 1600,
         "canvasHeight": 900,
     },
+    // {
+    //     "name": "16:9",
+    //     "canvasWidth": 900,
+    //     "canvasHeight": 1600,
+    // },
 ]
 
 canvasFormatChosen = getRandomFromList(canvasFormats);

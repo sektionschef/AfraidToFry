@@ -51,10 +51,12 @@ class Grid {
             this.underneathTone = BELOWTONE;
         }
 
-        this.paletteRA = new dynamicPalette(this.aboveTone, 5, 17, 2);
+        this.paletteRA = new dynamicPalette(this.aboveTone, 5, 15, 4);
         this.paletteRB = new dynamicPalette(this.underneathTone, 5, 27, 2);
-        this.paletteOne = new dynamicPalette("#a3aab4", 5, 15, 2);
-        this.paletteTwo = new dynamicPalette("#495049", 5, 15, 2);
+        // this.paletteRA = new dynamicPalette(this.aboveTone, 15, 37, 2);  // overshoot
+        // this.paletteRB = new dynamicPalette(this.underneathTone, 15, 37, 2);  // overshoot
+        this.paletteOne = new dynamicPalette("#b4aca3", 5, 15, 2);
+        this.paletteTwo = new dynamicPalette("#574f46", 5, 15, 2);
 
         // if (fxrand() > 0.2) {this.paletteA = this.paletteRA} else {this.paletteB = this.paletteRB}
 
@@ -77,21 +79,21 @@ class Grid {
         this.normalizeNoises();
 
         // PALETTE SWAP
-        for (var i = 0; i < this.paletteRA.palette.length; i++) {
-            if (i == 33) {
-                for (var v = 0; v < 3; v++) {
+        // for (var i = 0; i < this.paletteRA.palette.length; i++) {
+        //     if (i == 33) {
+        //         for (var v = 0; v < 3; v++) {
 
-                    // var swapB = this.paletteRA.palette[i + v];
-                    // var swapA = this.paletteRB.palette[i + v];
-                    // this.paletteRA.palette[i + v] = swapA;
-                    // this.paletteRB.palette[i + v] = swapB;
+        //             // var swapB = this.paletteRA.palette[i + v];
+        //             // var swapA = this.paletteRB.palette[i + v];
+        //             // this.paletteRA.palette[i + v] = swapA;
+        //             // this.paletteRB.palette[i + v] = swapB;
 
-                    this.paletteRA.palette[i + v] = this.paletteOne.palette[i + v];
-                    this.paletteRB.palette[i + v] = this.paletteTwo.palette[i + v];
-                }
+        //             this.paletteRA.palette[i + v] = this.paletteOne.palette[i + v];
+        //             this.paletteRB.palette[i + v] = this.paletteTwo.palette[i + v];
+        //         }
 
-            }
-        }
+        //     }
+        // }
 
         if (this.DEBUG) {
             // this.showDebug();

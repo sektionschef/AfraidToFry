@@ -52,7 +52,10 @@ class dynamicPalette {
 
 
         for (var i = 0; i < this.length; i++) {
-            this.palette.push(this.baseColor.clone().spin(getNormallyDistributedRandomNumber(0, cSTD)).lighten(getNormallyDistributedRandomNumber(0, lSTD)).desaturate(getNormallyDistributedRandomNumber(0, sSTD)).toHexString());
+            // this.palette.push(this.baseColor.clone().spin(getNormallyDistributedRandomNumber(0, cSTD)).lighten(getNormallyDistributedRandomNumber(0, lSTD)).desaturate(getNormallyDistributedRandomNumber(0, sSTD)).toHexString());
+
+            // MANUAL OVERWRITE OIDA
+            this.palette.push(this.baseColor.clone().spin(getRandomFromList([0, 1, 2, 5, 10, 20, 30])).lighten(getNormallyDistributedRandomNumber(0, lSTD)).desaturate(getNormallyDistributedRandomNumber(0, sSTD)).toHexString());
         }
 
 

@@ -22,6 +22,9 @@ var drawing = "";
 
 let RESOLUTIONBOXCOUNT = 80
 // let RESOLUTIONBOXCOUNT = 60
+let BACKGROUNDTONE = "#ffffff";
+let ABOVETONE = "#98a0a7";
+let BELOWTONE = "#3c4240";
 
 setTagsHTML();
 
@@ -69,7 +72,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
     var backgroundObj = document.createElementNS("http://www.w3.org/2000/svg", "rect");
     backgroundObj.setAttribute("width", canvasFormatChosen.canvasWidth);
     backgroundObj.setAttribute("height", canvasFormatChosen.canvasHeight);
-    backgroundObj.setAttribute("fill", "#ffffff");
+    // backgroundObj.setAttribute("fill", "#ffffff");
+    backgroundObj.setAttribute("fill", BACKGROUNDTONE);
 
 
     // filter know how: https://stackoverflow.com/questions/10867282/how-can-i-add-a-filter-to-a-svg-object-in-javascript 

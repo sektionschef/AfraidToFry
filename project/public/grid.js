@@ -40,15 +40,19 @@ class Grid {
 
         if (this.overshoot == true) {
 
-            this.aboveTone = "#9eaecc";
-            this.underneathTone = "#30362f";
+            // this.aboveTone = "#9eaecc";
+            // this.underneathTone = "#30362f";
+            this.aboveTone = ABOVETONE;
+            this.underneathTone = BELOWTONE;
         } else {
-            this.aboveTone = "#cdd7df";
-            this.underneathTone = "#6e8578";
+            // this.aboveTone = "#cdd7df";
+            // this.underneathTone = "#6e8578";
+            this.aboveTone = ABOVETONE;
+            this.underneathTone = BELOWTONE;
         }
 
-        this.paletteRA = new dynamicPalette(this.aboveTone, 2, 15, 2);
-        this.paletteRB = new dynamicPalette(this.underneathTone, 2, 25, 2);
+        this.paletteRA = new dynamicPalette(this.aboveTone, 5, 17, 3);
+        this.paletteRB = new dynamicPalette(this.underneathTone, 5, 27, 2);
         this.paletteOne = new dynamicPalette("#899196", 0, 5, 2);
 
         // if (fxrand() > 0.2) {this.paletteA = this.paletteRA} else {this.paletteB = this.paletteRB}
@@ -66,7 +70,7 @@ class Grid {
 
         // this.noiseColorA = new noiseAggregator(100, 38, 60, 10, 8, 2); 
         this.noiseColorA = new noiseAggregator(100, 38, 60, 10, 8, 2);
-        this.noiseColorB = new noiseAggregator(200, 138, 120, 50, 10, 5);
+        this.noiseColorB = new noiseAggregator(200, 30, 90, 10, 10, 2);
 
         this.createBoxes();
         this.normalizeNoises();
@@ -88,10 +92,10 @@ class Grid {
             // this.loop5();  // canvas dots
 
             // this.loopBaseVis();
-            this.loopShowNoise();
+            // this.loopShowNoise();
 
-            // this.loopBase();
-            // this.loopDetail();
+            this.loopBase();
+            this.loopDetail();
             // this.loop8();
 
         }
@@ -145,8 +149,8 @@ class Grid {
                 // var noiseValueColorA = this.noiseColorA.createNoiseValue(w, h, 0, this.heightBoxCount, 0, 0, 0, 0, 1, 1);
                 // var noiseValueColorA = this.noiseColorA.createNoiseValue(w, h, 0, this.heightBoxCount, 1, 1, 0.5, 0.5, 0.15, 0.15);
                 // var noiseValueColorA = this.noiseColorA.createNoiseValue(w, h, 0, this.heightBoxCount, 1, 1, 1, 1, 1, 1);
-                var noiseValueColorA = this.noiseColorA.createNoiseValue(w, h, 0, this.horizonRow, 1, 0, 0.5, 0.5, 0, 1);
-                var noiseValueColorB = this.noiseColorB.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0.5, 0, 0, 0.5, 0, 1);
+                var noiseValueColorA = this.noiseColorA.createNoiseValue(w, h, 0, this.horizonRow, 1, 0, 0.5, 0.5, 0, 0.5);
+                var noiseValueColorB = this.noiseColorB.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0.5, 0.5, 0.5, 0.5, 1, 0);
 
                 if (noiseValueRA < this.noiseRAMin) {
                     this.noiseRAMin = noiseValueRA;

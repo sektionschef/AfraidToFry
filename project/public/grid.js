@@ -64,8 +64,8 @@ class Grid {
         // this.noiseSA = new noiseAggregator(130, 158, 120, 28, 18, 9);  // klaas2
         this.noiseSA = new noiseAggregator(10, 3, 20, 2, 4, 4);  // klaas3
 
-        // this.noiseMucho = new noiseAggregator(100, 38, 60, 10, 8, 2); 
-        this.noiseMucho = new noiseAggregator(100, 38, 60, 10, 8, 2);
+        // this.noiseColorA = new noiseAggregator(100, 38, 60, 10, 8, 2); 
+        this.noiseColorA = new noiseAggregator(100, 38, 60, 10, 8, 2);
         this.noiseColorB = new noiseAggregator(200, 138, 120, 50, 10, 5);
 
         this.createBoxes();
@@ -88,10 +88,10 @@ class Grid {
             // this.loop5();  // canvas dots
 
             // this.loopBaseVis();
-            // this.loopShowNoise();
+            this.loopShowNoise();
 
-            this.loopBase();
-            this.loopDetail();
+            // this.loopBase();
+            // this.loopDetail();
             // this.loop8();
 
         }
@@ -105,8 +105,8 @@ class Grid {
         this.noiseRAMax = -1;
         this.noiseSAMin = 1;
         this.noiseSAMax = -1;
-        this.noiseMuchoMin = 10;
-        this.noiseMuchoMax = -10;
+        this.noiseColorAMin = 10;
+        this.noiseColorAMax = -10;
         this.noiseColorBMin = 10;
         this.noiseColorBMax = -10;
 
@@ -141,11 +141,11 @@ class Grid {
                 // var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 1, 1, 0, 0.25, 0.25);
                 var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 0, 0, 0, 1, 1);
 
-                // var noiseValueMucho = this.noiseMucho.createNoiseValue(w, h, 0, this.heightBoxCount, 1, 0.5, 0.5, 1, 0.5, 0.5);
-                // var noiseValueMucho = this.noiseMucho.createNoiseValue(w, h, 0, this.heightBoxCount, 0, 0, 0, 0, 1, 1);
-                // var noiseValueMucho = this.noiseMucho.createNoiseValue(w, h, 0, this.heightBoxCount, 1, 1, 0.5, 0.5, 0.15, 0.15);
-                // var noiseValueMucho = this.noiseMucho.createNoiseValue(w, h, 0, this.heightBoxCount, 1, 1, 1, 1, 1, 1);
-                var noiseValueMucho = this.noiseMucho.createNoiseValue(w, h, 0, this.horizonRow, 1, 0, 0.5, 0.5, 0, 1);
+                // var noiseValueColorA = this.noiseColorA.createNoiseValue(w, h, 0, this.heightBoxCount, 1, 0.5, 0.5, 1, 0.5, 0.5);
+                // var noiseValueColorA = this.noiseColorA.createNoiseValue(w, h, 0, this.heightBoxCount, 0, 0, 0, 0, 1, 1);
+                // var noiseValueColorA = this.noiseColorA.createNoiseValue(w, h, 0, this.heightBoxCount, 1, 1, 0.5, 0.5, 0.15, 0.15);
+                // var noiseValueColorA = this.noiseColorA.createNoiseValue(w, h, 0, this.heightBoxCount, 1, 1, 1, 1, 1, 1);
+                var noiseValueColorA = this.noiseColorA.createNoiseValue(w, h, 0, this.horizonRow, 1, 0, 0.5, 0.5, 0, 1);
                 var noiseValueColorB = this.noiseColorB.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0.5, 0, 0, 0.5, 0, 1);
 
                 if (noiseValueRA < this.noiseRAMin) {
@@ -161,11 +161,11 @@ class Grid {
                     this.noiseSAMax = noiseValueSA;
                 }
 
-                if (noiseValueMucho < this.noiseMuchoMin) {
-                    this.noiseMuchoMin = noiseValueMucho;
+                if (noiseValueColorA < this.noiseColorAMin) {
+                    this.noiseColorAMin = noiseValueColorA;
                 }
-                if (noiseValueMucho > this.noiseMuchoMax) {
-                    this.noiseMuchoMax = noiseValueMucho;
+                if (noiseValueColorA > this.noiseColorAMax) {
+                    this.noiseColorAMax = noiseValueColorA;
                 }
 
                 if (noiseValueColorB < this.noiseColorBMin) {
@@ -196,7 +196,7 @@ class Grid {
                     // "noiseValue8": this.noise8.createNoiseValue(w, h),
                     "noiseValueRA": noiseValueRA,
                     "noiseValueSA": noiseValueSA,
-                    "noiseValueMucho": noiseValueMucho,
+                    "noiseValueColorA": noiseValueColorA,
                     "noiseValueColorB": noiseValueColorB,
                     // "noiseValue9": this.noise9.createNoiseValue(w, h),
                     // "noiseValue10": this.noise10.createNoiseValue(w, h),
@@ -214,7 +214,7 @@ class Grid {
     normalizeNoises() {
 
         for (var i = 0; i < this.boxes.length; i++) {
-            this.boxes[i].noiseValueMucho = map(this.boxes[i].noiseValueMucho, this.noiseMuchoMin, this.noiseMuchoMax, -1, 1);
+            this.boxes[i].noiseValueColorA = map(this.boxes[i].noiseValueColorA, this.noiseColorAMin, this.noiseColorAMax, -1, 1);
             this.boxes[i].noiseValueColorB = map(this.boxes[i].noiseValueColorB, this.noiseColorBMin, this.noiseColorBMax, -1, 1);
             this.boxes[i].noiseValueRA = map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, -1, 1);
             this.boxes[i].noiseValueSA = map(this.boxes[i].noiseValueSA, this.noiseSAMin, this.noiseSAMax, -1, 1);
@@ -298,7 +298,7 @@ class Grid {
                     width: this.boxSize,
                     height: this.boxSize,
                     colorList: this.paletteRA.palette,
-                    noiseValue: this.boxes[i].noiseValueMucho,
+                    noiseValue: this.boxes[i].noiseValueColorA,
                 }).draw();
             } else {
                 new deugy({
@@ -439,9 +439,9 @@ class Grid {
             //         noiseValue: this.boxes[i].noiseValueRA,
             //         noiseValueMin: this.noiseRAMin,
             //         noiseValueMax: this.noiseRAMax,
-            //         colorNoise: this.boxes[i].noiseValueMucho,
-            //         colorNoiseMin: this.noiseMuchoMin,
-            //         colorNoiseMax: this.noiseMuchoMax,
+            //         colorNoise: this.boxes[i].noiseValueColorA,
+            //         colorNoiseMin: this.noiseColorAMin,
+            //         colorNoiseMax: this.noiseColorAMax,
             //         vertexLength: 20, // map(this.boxes[i].noiseValue2, -1, 1, 5, 15),
             //         strokeWeighty: 0.5, // map(this.boxes[i].noiseValue9, this.noise9.noiseValueMin, this.noise9.noiseValueMax, 0.3, 1), //0.5,
             //         // angleMin: 2 * Math.PI / 12 * 2.5,
@@ -469,9 +469,9 @@ class Grid {
             //         noiseValue: this.boxes[i].noiseValueRA,
             //         noiseValueMin: this.noiseRAMin,
             //         noiseValueMax: this.noiseRAMax,
-            //         colorNoise: this.boxes[i].noiseValueMucho,
-            //         colorNoiseMin: this.noiseMuchoMin,
-            //         colorNoiseMax: this.noiseMuchoMax,
+            //         colorNoise: this.boxes[i].noiseValueColorA,
+            //         colorNoiseMin: this.noiseColorAMin,
+            //         colorNoiseMax: this.noiseColorAMax,
             //         vertexLength: 20, // map(this.boxes[i].noiseValue2, -1, 1, 5, 15),
             //         strokeWeighty: 0.5, // map(this.boxes[i].noiseValue9, this.noise9.noiseValueMin, this.noise9.noiseValueMax, 0.3, 1), //0.5,
             //         // angleMin: 2 * Math.PI / 12 * 2.5,
@@ -497,7 +497,7 @@ class Grid {
                     x: this.boxes[i].center.x,
                     y: this.boxes[i].center.y,
                     noiseValue: this.boxes[i].noiseValueRA,
-                    colorNoise: this.boxes[i].noiseValueMucho,
+                    colorNoise: this.boxes[i].noiseValueColorA,
                     vertexLength: 160 / this.shortBoxCount * 30, // map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, 10, 30), // 30,
                     strokeWeighty: 160 / this.shortBoxCount * 0.3, //map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, 0.05, 0.25), // 0.3,
                     angleMean: Math.PI / 1,
@@ -597,7 +597,7 @@ class Grid {
                     x: this.boxes[i].center.x * getNormallyDistributedRandomNumber(1, 0),
                     y: this.boxes[i].center.y * getNormallyDistributedRandomNumber(1, 0),
                     noiseValue: this.boxes[i].noiseValueRA,
-                    colorNoise: this.boxes[i].noiseValueMucho,
+                    colorNoise: this.boxes[i].noiseValueColorA,
                     vertexLength: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 1, 5, 15), // 15,
                     strokeWeighty: 160 / this.shortBoxCount * 0.2, //map(this.boxes[i].noiseValueRA, -1, 1, 0.05, 0.25), // 0.1,
                     angleMean: Math.PI / 1,
@@ -689,9 +689,9 @@ class Grid {
                         noiseValue: this.boxes[i].noiseValueRA,
                         noiseValueMin: this.noiseRAMin,
                         noiseValueMax: this.noiseRAMax,
-                        colorNoise: this.boxes[i].noiseValueMucho,
-                        colorNoiseMin: this.noiseMuchoMin,
-                        colorNoiseMax: this.noiseMuchoMax,
+                        colorNoise: this.boxes[i].noiseValueColorA,
+                        colorNoiseMin: this.noiseColorAMin,
+                        colorNoiseMax: this.noiseColorAMax,
                         vertexLength: 10, // map(this.boxes[i].noiseValue8, -1, 1, 5, 10), // 15,
                         strokeWeighty: 0.2, // map(this.boxes[i].noiseValue8, -1, 1, 0.1, 0.3), // 1,
                         angleMin: 0,
@@ -711,9 +711,9 @@ class Grid {
                         noiseValue: this.boxes[i].noiseValueSA,
                         noiseValueMin: this.noiseSAMin,
                         noiseValueMax: this.noiseSAMax,
-                        colorNoise: this.boxes[i].noiseValueMucho,
-                        colorNoiseMin: this.noiseMuchoMin,
-                        colorNoiseMax: this.noiseMuchoMax,
+                        colorNoise: this.boxes[i].noiseValueColorA,
+                        colorNoiseMin: this.noiseColorAMin,
+                        colorNoiseMax: this.noiseColorAMax,
                         vertexLength: 10, // map(this.boxes[i].noiseValue8, -1, 1, 5, 10), // 15,
                         strokeWeighty: 0.2, // map(this.boxes[i].noiseValue8, -1, 1, 0.1, 0.3), // 1,
                         angleMin: 0,

@@ -20,8 +20,8 @@ let EDITIONS = "100 editions";
 let OVERSHOOT = "start";
 var drawing = "";
 
-// let RESOLUTIONBOXCOUNT = 80
-let RESOLUTIONBOXCOUNT = 60
+let RESOLUTIONBOXCOUNT = 80
+// let RESOLUTIONBOXCOUNT = 60
 
 setTagsHTML();
 

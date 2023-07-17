@@ -49,7 +49,7 @@ class Grid {
 
         this.paletteRA = new dynamicPalette(this.aboveTone, 2, 15, 2);
         this.paletteRB = new dynamicPalette(this.underneathTone, 2, 25, 2);
-        this.paletteOne = new dynamicPalette("#626668", 0, 5, 5);
+        this.paletteOne = new dynamicPalette("#899196", 0, 5, 2);
 
         // if (fxrand() > 0.2) {this.paletteA = this.paletteRA} else {this.paletteB = this.paletteRB}
 
@@ -64,7 +64,9 @@ class Grid {
         // this.noiseSA = new noiseAggregator(130, 158, 120, 28, 18, 9);  // klaas2
         this.noiseSA = new noiseAggregator(10, 3, 20, 2, 4, 4);  // klaas3
 
-        this.noiseMucho = new noiseAggregator(100, 38, 60, 10, 8, 2);  // mucho
+        // this.noiseMucho = new noiseAggregator(100, 38, 60, 10, 8, 2); 
+        this.noiseMucho = new noiseAggregator(100, 38, 60, 10, 8, 2);
+        this.noiseColorB = new noiseAggregator(200, 138, 120, 50, 10, 5);
 
         this.createBoxes();
         this.normalizeNoises();
@@ -86,10 +88,10 @@ class Grid {
             // this.loop5();  // canvas dots
 
             // this.loopBaseVis();
-            this.loopShowNoise();
+            // this.loopShowNoise();
 
-            // this.loopBase();
-            // this.loopDetail();
+            this.loopBase();
+            this.loopDetail();
             // this.loop8();
 
         }
@@ -105,6 +107,8 @@ class Grid {
         this.noiseSAMax = -1;
         this.noiseMuchoMin = 10;
         this.noiseMuchoMax = -10;
+        this.noiseColorBMin = 10;
+        this.noiseColorBMax = -10;
 
         // console.log(this.heightBoxCount);
         // console.log(this.widthBoxCount);
@@ -140,7 +144,9 @@ class Grid {
                 // var noiseValueMucho = this.noiseMucho.createNoiseValue(w, h, 0, this.heightBoxCount, 1, 0.5, 0.5, 1, 0.5, 0.5);
                 // var noiseValueMucho = this.noiseMucho.createNoiseValue(w, h, 0, this.heightBoxCount, 0, 0, 0, 0, 1, 1);
                 // var noiseValueMucho = this.noiseMucho.createNoiseValue(w, h, 0, this.heightBoxCount, 1, 1, 0.5, 0.5, 0.15, 0.15);
-                var noiseValueMucho = this.noiseMucho.createNoiseValue(w, h, 0, this.heightBoxCount, 1, 1, 1, 1, 1, 1);
+                // var noiseValueMucho = this.noiseMucho.createNoiseValue(w, h, 0, this.heightBoxCount, 1, 1, 1, 1, 1, 1);
+                var noiseValueMucho = this.noiseMucho.createNoiseValue(w, h, 0, this.horizonRow, 1, 0, 0.5, 0.5, 0, 1);
+                var noiseValueColorB = this.noiseColorB.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0.5, 0, 0, 0.5, 0, 1);
 
                 if (noiseValueRA < this.noiseRAMin) {
                     this.noiseRAMin = noiseValueRA;
@@ -160,6 +166,13 @@ class Grid {
                 }
                 if (noiseValueMucho > this.noiseMuchoMax) {
                     this.noiseMuchoMax = noiseValueMucho;
+                }
+
+                if (noiseValueColorB < this.noiseColorBMin) {
+                    this.noiseColorBMin = noiseValueColorB;
+                }
+                if (noiseValueColorB > this.noiseColorBMax) {
+                    this.noiseColorBMax = noiseValueColorB;
                 }
 
                 this.boxes.push({
@@ -184,6 +197,7 @@ class Grid {
                     "noiseValueRA": noiseValueRA,
                     "noiseValueSA": noiseValueSA,
                     "noiseValueMucho": noiseValueMucho,
+                    "noiseValueColorB": noiseValueColorB,
                     // "noiseValue9": this.noise9.createNoiseValue(w, h),
                     // "noiseValue10": this.noise10.createNoiseValue(w, h),
                     // "polygonA": polygonA,
@@ -195,14 +209,13 @@ class Grid {
             }
         }
 
-        // console.log(this.noiseMuchoMax);
-        // console.log(this.noiseMuchoMin);
-
     }
 
     normalizeNoises() {
+
         for (var i = 0; i < this.boxes.length; i++) {
             this.boxes[i].noiseValueMucho = map(this.boxes[i].noiseValueMucho, this.noiseMuchoMin, this.noiseMuchoMax, -1, 1);
+            this.boxes[i].noiseValueColorB = map(this.boxes[i].noiseValueColorB, this.noiseColorBMin, this.noiseColorBMax, -1, 1);
             this.boxes[i].noiseValueRA = map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, -1, 1);
             this.boxes[i].noiseValueSA = map(this.boxes[i].noiseValueSA, this.noiseSAMin, this.noiseSAMax, -1, 1);
         }
@@ -277,14 +290,26 @@ class Grid {
 
 
             // color noise
-            new deugy({
-                x: this.boxes[i].A.x,
-                y: this.boxes[i].A.y,
-                width: this.boxSize,
-                height: this.boxSize,
-                colorList: this.paletteRA.palette,
-                noiseValue: this.boxes[i].noiseValueMucho,
-            }).draw();
+
+            if (this.boxes[i].aboveHorizon) {
+                new deugy({
+                    x: this.boxes[i].A.x,
+                    y: this.boxes[i].A.y,
+                    width: this.boxSize,
+                    height: this.boxSize,
+                    colorList: this.paletteRA.palette,
+                    noiseValue: this.boxes[i].noiseValueMucho,
+                }).draw();
+            } else {
+                new deugy({
+                    x: this.boxes[i].A.x,
+                    y: this.boxes[i].A.y,
+                    width: this.boxSize,
+                    height: this.boxSize,
+                    colorList: this.paletteRB.palette,
+                    noiseValue: this.boxes[i].noiseValueColorB,
+                }).draw();
+            }
         }
     }
 
@@ -309,8 +334,10 @@ class Grid {
                 continue;
             }
 
-            if (fxrand() > 0) { this.paletteA = this.paletteRA } else { this.paletteA = this.paletteOne }
-            if (fxrand() > 0) { this.paletteB = this.paletteRB } else { this.paletteB = this.paletteOne }
+            this.paletteA = this.paletteRA
+            this.paletteB = this.paletteRB
+            // if (fxrand() > 0.01) { this.paletteA = this.paletteRA } else { this.paletteA = this.paletteOne }
+            // if (fxrand() > 0.01) { this.paletteB = this.paletteRB } else { this.paletteB = this.paletteOne }
 
 
             // // NOISE pattern with rects
@@ -399,8 +426,10 @@ class Grid {
             // }
 
             // gescccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccheiter
-            if (fxrand() > 0) { this.paletteA = this.paletteRA } else { this.paletteA = this.paletteOne }
-            if (fxrand() > 0) { this.paletteB = this.paletteRB } else { this.paletteB = this.paletteOne }
+            this.paletteA = this.paletteRA
+            this.paletteB = this.paletteRB
+            // if (fxrand() > 0.02) { this.paletteA = this.paletteRA } else { this.paletteA = this.paletteOne }
+            // if (fxrand() > 0.02) { this.paletteB = this.paletteRB } else { this.paletteB = this.paletteOne }
 
 
             // if (this.boxes[i].horizon) {
@@ -505,7 +534,7 @@ class Grid {
                     x: this.boxes[i].center.x,
                     y: this.boxes[i].center.y,
                     noiseValue: this.boxes[i].noiseValueSA,
-                    colorNoise: this.boxes[i].noiseValueMucho,
+                    colorNoise: this.boxes[i].noiseValueColorB,
                     vertexLength: 160 / this.shortBoxCount * 30, // map(this.boxes[i].noiseValueSA, -1, 1, 30, 50), // 30, // sau
                     strokeWeighty: 160 / this.shortBoxCount * 0.3, //map(this.boxes[i].noiseValueSA, this.noiseSAMin, this.noiseSAMax, 0.05, 0.25), // 0.3,
                     angleMean: Math.PI / 1,
@@ -555,8 +584,12 @@ class Grid {
                 continue;
             }
 
-            if (fxrand() > 0) { this.paletteA = this.paletteRA } else { this.paletteA = this.paletteOne }
-            if (fxrand() > 0) { this.paletteB = this.paletteRB } else { this.paletteB = this.paletteOne }
+            this.paletteA = this.paletteRA
+            this.paletteB = this.paletteRB
+            // if (fxrand() > 0.05) { this.paletteA = this.paletteRA } else { this.paletteA = this.paletteOne }
+            // if (fxrand() > 0.05) { this.paletteA = this.paletteRA } else { this.paletteA = this.paletteRB }
+            // if (fxrand() > 0.05) { this.paletteB = this.paletteRB } else { this.paletteB = this.paletteOne }
+            // if (fxrand() > 0.05) { this.paletteB = this.paletteRB } else { this.paletteB = this.paletteRA }
 
             // ONON
             if (this.boxes[i].aboveHorizon) {
@@ -600,7 +633,7 @@ class Grid {
                     x: this.boxes[i].center.x * getNormallyDistributedRandomNumber(1, 0),
                     y: this.boxes[i].center.y * getNormallyDistributedRandomNumber(1, 0),
                     noiseValue: this.boxes[i].noiseValueSA,
-                    colorNoise: this.boxes[i].noiseValueMucho,
+                    colorNoise: this.boxes[i].noiseValueColorB,
                     vertexLength: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueSA, -1, 1, 5, 15), // 15,
                     strokeWeighty: 160 / this.shortBoxCount * 0.075, // map(this.boxes[i].noiseValueSA, -1, 1, 0.05, 0.25), // 0.1,
                     angleMean: Math.PI / 1,

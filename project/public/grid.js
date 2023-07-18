@@ -630,14 +630,14 @@ class Grid {
                     polyLineVLenMean: 1,
                     polyLineVLenStd: 0.05,
                     circle: true,
-                    circleRadius: 160 / this.shortBoxCount * 2,
+                    circleRadius: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 0, 3, 1), // 2,
                     circleStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 0, 0.2, 0.05), // 0.08
                     loopCircle: map(this.boxes[i].noiseValueRA, -1, 0, 60, 10), // 40,
                     circlePosDistStd: 160 / this.shortBoxCount * 5,
                     rect: true,
                     loopRect: map(this.boxes[i].noiseValueRA, 0, 1, 10, 60), //30,
-                    rectWidth: 160 / this.shortBoxCount * 6,
-                    rectHeight: 160 / this.shortBoxCount * 2,
+                    rectWidth: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 3, 6),// 6,
+                    rectHeight: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 1, 3),// 2,
                     rectStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 0.2, 0.05), // 0.08
                     rectPosDistStd: 160 / this.shortBoxCount * 5,
                     revert: true,

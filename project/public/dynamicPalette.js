@@ -55,7 +55,7 @@ class dynamicPalette {
             // this.palette.push(this.baseColor.clone().spin(getNormallyDistributedRandomNumber(0, cSTD)).lighten(getNormallyDistributedRandomNumber(0, lSTD)).desaturate(getNormallyDistributedRandomNumber(0, sSTD)).toHexString());
 
             // MANUAL OVERWRITE OIDA
-            this.palette.push(this.baseColor.clone().spin(getRandomFromList([0, 1, 2, 5, 10, 20, 30])).lighten(getNormallyDistributedRandomNumber(0, lSTD)).desaturate(getNormallyDistributedRandomNumber(0, sSTD)).toHexString());
+            this.palette.push(this.baseColor.clone().spin(getRandomFromList([0, 1, 2, 5, 10, 20])).lighten(getRandomFromList([-50, -40, -30, -20, -10, -5, 0, 5, 10, 20, 30, 40, 50])).desaturate(getRandomFromList([0, 10])).toHexString());
         }
 
 

@@ -8,12 +8,10 @@ class zigi {
         this.loopCount = data.loopCount;
         this.group = data.group;
         this.noiseValue = data.noiseValue;
-        this.noiseValueMin = data.noiseValueMin;
-        this.noiseValueMax = data.noiseValueMax;
         this.colorList = data.colorList;
         this.angle = 0;
 
-        this.noiseDistance = this.noiseValueMax - this.noiseValueMin;
+        this.noiseDistance = 2; // 1 - (-1)
         // console.log(this.noiseDistance);
         this.colorStep = this.noiseDistance / this.colorList.length;
         // console.log(this.colorStep);
@@ -28,8 +26,7 @@ class zigi {
 
         // console.log("noisevalue:" + this.noiseValue);
         for (var i = 0; i < (this.colorList.length); i++) {
-            // console.log("step: " + (this.noiseValueMin + this.colorStep * i))
-            if (this.noiseValue < this.noiseValueMin + this.colorStep * i) {
+            if (this.noiseValue < -1 + this.colorStep * i) {
                 colorSelect = i;
                 break;
             }

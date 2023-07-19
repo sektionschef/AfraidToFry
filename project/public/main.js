@@ -32,7 +32,6 @@ let BELOWTONE = "#6f726b"; // green
 // let BELOWTONE = "#515a57";  // good
 // let ABOVETONE = "#8d6f5c";  // overshoot - cool color: d5560c
 // let BELOWTONE = "#4a504b";  // overshoot 
-// oooxQ5kzQd5Yxeoz8Zutf3TrYRKnRDWb1AtirpMM2GCrG4f7cob
 
 setTagsHTML();
 

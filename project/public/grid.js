@@ -103,14 +103,6 @@ class Grid {
             //     this.loop1();
             // }, 0);
 
-            // this.loop1()  // initial one with up and down
-
-            // this.loop2(); // combined two
-            // this.loop3();  // combined two
-            // this.loop4();  // noisy space
-
-            // this.loop5();  // canvas dots
-
             // this.loopBaseVis();
             // this.loopShowNoise();
 
@@ -201,7 +193,6 @@ class Grid {
 
                 this.boxes.push({
                     "center": center,
-                    "offset": { x: getRandomFromInterval(-10, 10), y: getRandomFromInterval(-10, 10) },
                     "A": A,
                     "B": B,
                     "C": C,
@@ -615,7 +606,46 @@ class Grid {
             // if (fxrand() > 0.05) { this.paletteB = this.paletteRB } else { this.paletteB = this.paletteOne }
             // if (fxrand() > 0.05) { this.paletteB = this.paletteRB } else { this.paletteB = this.paletteRA }
 
-            // ONON
+            if (this.boxes[i].aboveHorizon) {
+                new zigi(
+                    {
+                        x: this.boxes[i].center.x,
+                        y: this.boxes[i].center.y,
+                        noiseValue: this.boxes[i].noiseValueRA,
+                        colorNoise: this.boxes[i].noiseValueColorA,
+                        vertexLength: 10, // map(this.boxes[i].noiseValue8, -1, 1, 5, 10), // 15,
+                        strokeWeighty: 0.2, // map(this.boxes[i].noiseValue8, -1, 1, 0.1, 0.3), // 0.2,
+                        angleMin: getRandomFromList([Math.PI, Math.PI / 8, Math.PI / 4]),
+                        angleMax: getRandomFromList([0, Math.PI / 2, Math.PI / 6]),
+                        cutOutValue: -1,
+                        loopCount: 10, //map(this.boxes[i].noiseValueRA, -1, 1, 1, 10),
+                        colorList: this.paletteA.palette,
+                        // colorList: ["#161616", "#353535", "#727272", "#8d8c8c", "#adadad", "#c7c7c7"],
+                        // colorList: ["#5f5f5f"],
+                        group: "",
+                    }
+                ).draw();
+            } else {
+                new zigi(
+                    {
+                        x: this.boxes[i].center.x,
+                        y: this.boxes[i].center.y,
+                        noiseValue: this.boxes[i].noiseValueSA,
+                        colorNoise: this.boxes[i].noiseValueColorB,
+                        vertexLength: 10, // map(this.boxes[i].noiseValue8, -1, 1, 5, 10), // 15,
+                        strokeWeighty: 0.2, // map(this.boxes[i].noiseValue8, -1, 1, 0.1, 0.3), // 0.2,
+                        angleMin: getRandomFromList([Math.PI, Math.PI / 8, Math.PI / 4]),
+                        angleMax: getRandomFromList([0, Math.PI / 2, Math.PI / 6]),
+                        cutOutValue: -1,
+                        loopCount: 10, //map(this.boxes[i].noiseValueRA, -1, 1, 1, 10),
+                        colorList: this.paletteB.palette,
+                        // colorList: ["#161616", "#353535", "#727272", "#8d8c8c", "#adadad", "#c7c7c7"],
+                        // colorList: ["#5f5f5f"],
+                        group: "",
+                    }
+                ).draw();
+            }
+
             if (this.boxes[i].aboveHorizon) {
                 new digi({
                     x: this.boxes[i].center.x * getNormallyDistributedRandomNumber(1, 0),
@@ -705,51 +735,66 @@ class Grid {
                 continue;
             }
 
-            if (this.boxes[i].aboveHorizon) {
-                new zigi(
-                    {
-                        x: this.boxes[i].center.x,
-                        y: this.boxes[i].center.y,
-                        noiseValue: this.boxes[i].noiseValueRA,
-                        noiseValueMin: this.noiseRAMin,
-                        noiseValueMax: this.noiseRAMax,
-                        colorNoise: this.boxes[i].noiseValueColorA,
-                        colorNoiseMin: this.noiseColorAMin,
-                        colorNoiseMax: this.noiseColorAMax,
-                        vertexLength: 10, // map(this.boxes[i].noiseValue8, -1, 1, 5, 10), // 15,
-                        strokeWeighty: 0.2, // map(this.boxes[i].noiseValue8, -1, 1, 0.1, 0.3), // 1,
-                        angleMin: 0,
-                        angleMax: Math.PI,
-                        cutOutValue: -1,
-                        loopCount: map(this.boxes[i].noiseValueRA, -1, 1, 1, 10),
-                        colorList: this.paletteRA.palette,
-                        // colorList: ["#161616", "#353535", "#727272", "#8d8c8c", "#adadad", "#c7c7c7"],
-                        group: "",
-                    }
-                ).draw();
-            } else {
-                new zigi(
-                    {
-                        x: this.boxes[i].center.x,
-                        y: this.boxes[i].center.y,
-                        noiseValue: this.boxes[i].noiseValueSA,
-                        noiseValueMin: this.noiseSAMin,
-                        noiseValueMax: this.noiseSAMax,
-                        colorNoise: this.boxes[i].noiseValueColorA,
-                        colorNoiseMin: this.noiseColorAMin,
-                        colorNoiseMax: this.noiseColorAMax,
-                        vertexLength: 10, // map(this.boxes[i].noiseValue8, -1, 1, 5, 10), // 15,
-                        strokeWeighty: 0.2, // map(this.boxes[i].noiseValue8, -1, 1, 0.1, 0.3), // 1,
-                        angleMin: 0,
-                        angleMax: Math.PI,
-                        cutOutValue: -1,
-                        loopCount: map(this.boxes[i].noiseValueSA, -1, 1, 1, 30),
-                        colorList: this.paletteRB.palette,
-                        // colorList: ["#161616", "#353535", "#727272", "#8d8c8c", "#adadad", "#c7c7c7"],
-                        group: "",
-                    }
-                ).draw();
-            }
+            // if (this.boxes[i].aboveHorizon) {
+            //     new zigi(
+            //         {
+            //             x: this.boxes[i].center.x,
+            //             y: this.boxes[i].center.y,
+            //             noiseValue: this.boxes[i].noiseValueRA,
+            //             colorNoise: this.boxes[i].noiseValueColorA,
+            //             vertexLength: 10, // map(this.boxes[i].noiseValue8, -1, 1, 5, 10), // 15,
+            //             strokeWeighty: 0.3, // map(this.boxes[i].noiseValue8, -1, 1, 0.1, 0.3), // 1,
+            //             angleMin: 0,
+            //             angleMax: Math.PI,
+            //             cutOutValue: -1,
+            //             loopCount: map(this.boxes[i].noiseValueRA, -1, 1, 1, 10),
+            //             colorList: this.paletteRA.palette,
+            //             // colorList: ["#161616", "#353535", "#727272", "#8d8c8c", "#adadad", "#c7c7c7"],
+            //             group: "",
+            //         }
+            //     ).draw();
+            // } else {
+            //     new zigi(
+            //         {
+            //             x: this.boxes[i].center.x,
+            //             y: this.boxes[i].center.y,
+            //             noiseValue: this.boxes[i].noiseValueSA,
+            //             colorNoise: this.boxes[i].noiseValueColorA,
+            //             vertexLength: 10, // map(this.boxes[i].noiseValue8, -1, 1, 5, 10), // 15,
+            //             strokeWeighty: 0.2, // map(this.boxes[i].noiseValue8, -1, 1, 0.1, 0.3), // 1,
+            //             angleMin: 0,
+            //             angleMax: Math.PI,
+            //             cutOutValue: -1,
+            //             loopCount: map(this.boxes[i].noiseValueSA, -1, 1, 1, 30),
+            //             colorList: this.paletteRB.palette,
+            //             // colorList: ["#161616", "#353535", "#727272", "#8d8c8c", "#adadad", "#c7c7c7"],
+            //             group: "",
+            //         }
+            //     ).draw();
+            // }
+
+
+            // if (this.boxes[i].horizon) {
+            // if (this.boxes[i].height >= this.horizonRow - 15 && this.boxes[i].height <= this.horizonRow + 15) {
+            // new zigi(
+            //     {
+            //         x: this.boxes[i].center.x,
+            //         y: this.boxes[i].center.y,
+            //         noiseValue: this.boxes[i].noiseValueRA,
+            //         colorNoise: this.boxes[i].noiseValueColorA,
+            //         vertexLength: 10, // map(this.boxes[i].noiseValue8, -1, 1, 5, 10), // 15,
+            //         strokeWeighty: 0.1, // map(this.boxes[i].noiseValue8, -1, 1, 0.1, 0.3), // 1,
+            //         angleMin: 0,
+            //         angleMax: Math.PI / 2,
+            //         cutOutValue: -1,
+            //         loopCount: 20, //map(this.boxes[i].noiseValueRA, -1, 1, 1, 10),
+            //         // colorList: this.paletteRA.palette,
+            //         // colorList: ["#161616", "#353535", "#727272", "#8d8c8c", "#adadad", "#c7c7c7"],
+            //         colorList: ["#474747"],
+            //         group: "",
+            //     }
+            // ).draw();
+            // }
 
         }
 

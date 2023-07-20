@@ -73,7 +73,7 @@ class Grid {
 
         // this.noiseColorA = new noiseAggregator(100, 38, 60, 10, 8, 2); 
         this.noiseColorA = new noiseAggregator(100, 38, 60, 10, 8, 2);
-        this.noiseColorB = new noiseAggregator(180, 5, 40, 5, 8, 5);
+        this.noiseColorB = new noiseAggregator(280, 30, 40, 5, 40, 3);
 
         this.createBoxes();
         this.normalizeNoises();
@@ -163,7 +163,8 @@ class Grid {
                 // var noiseValueColorA = this.noiseColorA.createNoiseValue(w, h, 0, this.heightBoxCount, 1, 1, 1, 1, 1, 1);
                 var noiseValueColorA = this.noiseColorA.createNoiseValue(w, h, 0, this.horizonRow, 1, 0, 0.5, 0.5, 0, 0.5);
                 // var noiseValueColorB = this.noiseColorB.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 1, 1, 1, 0, 0.5, 0);
-                var noiseValueColorB = this.noiseColorB.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 1, 8, 0, 0, 2, 1);
+                // var noiseValueColorB = this.noiseColorB.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 1, 8, 0, 0, 2, 1);
+                var noiseValueColorB = this.noiseColorB.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 4, 8, 0, 0, 8, 4);
 
                 if (noiseValueRA < this.noiseRAMin) {
                     this.noiseRAMin = noiseValueRA;
@@ -741,26 +742,26 @@ class Grid {
                     noiseValue: this.boxes[i].noiseValueSA,
                     colorNoise: this.boxes[i].noiseValueColorB,
                     vertexLength: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueSA, -1, 1, 5, 15), // 15,
-                    strokeWeighty: 160 / this.shortBoxCount * 0.075, // map(this.boxes[i].noiseValueSA, -1, 1, 0.05, 0.25), // 0.1,
+                    strokeWeighty: 160 / this.shortBoxCount * 0.2, // map(this.boxes[i].noiseValueSA, -1, 1, 0.05, 0.25), // 0.1,
                     angleMean: Math.PI / 1,
                     angleSTD: Math.PI / 56,
-                    polyLineAngleDist: 0.3,
-                    polyLineVLenMean: 0.9,
+                    polyLineAngleDist: 0.1,
+                    polyLineVLenMean: 1,
                     polyLineVLenStd: 0.05,
                     circle: true,
-                    circleRadius: 160 / this.shortBoxCount * 2,
+                    circleRadius: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueSA, -1, 0, 3, 1),
                     circleStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueSA, -1, 0, 0.2, 0.05),
                     loopCircle: map(this.boxes[i].noiseValueSA, -1, 0, 60, 10), // 40,,
                     circlePosDistStd: 160 / this.shortBoxCount * 5,
                     rect: true,
                     loopRect: map(this.boxes[i].noiseValueSA, 0, 1, 10, 60), //30,
-                    rectWidth: 160 / this.shortBoxCount * 6,
-                    rectHeight: 160 / this.shortBoxCount * 2,
+                    rectWidth: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueSA, 0, 1, 3, 6),
+                    rectHeight: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueSA, 0, 1, 1, 3),
                     rectStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueSA, 0, 1, 0.2, 0.05), // 0.08
                     rectPosDistStd: 160 / this.shortBoxCount * 5,
                     revert: true,
                     cutOutValue: -1,
-                    loopCount: map(this.boxes[i].noiseValueSA, -0.5, 0.5, 10, 30), // 20,
+                    loopCount: 20, // map(this.boxes[i].noiseValueSA, -0.5, 0.5, 10, 30), // 20,
                     colorList: this.paletteB.palette,
                     noiseAngle: true,
                     group: "",

@@ -178,16 +178,6 @@ class digi {
             const svgNode = document.getElementById('svgNode');
 
 
-            // skip loop if not polyline
-            const polyNode = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
-            polyNode.setAttributeNS(null, 'points', polyLineString);
-            polyNode.setAttributeNS(null, 'fill', 'none');
-            // polyNode.setAttributeNS(null, 'stroke', color_d);
-            polyNode.setAttributeNS(null, 'stroke', color_);
-            polyNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
-            // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
-            svgNode.appendChild(polyNode);
-
 
             // if (textureSelect == 2 && this.rect) {
             if (this.rect) {
@@ -204,7 +194,7 @@ class digi {
                     rectNode.setAttributeNS(null, 'transform', "translate(" + rectX + "," + rectY + "), rotate(" + this.angle * (180 / Math.PI) + ")");
                     rectNode.setAttributeNS(null, 'fill', 'none');
                     // rectNode.setAttributeNS(null, 'fill', color_);
-                    rectNode.setAttributeNS(null, 'stroke', tinycolor(color_).lighten(2).toHexString());
+                    rectNode.setAttributeNS(null, 'stroke', tinycolor(color_).lighten(3).toHexString());
                     // rectNode.setAttributeNS(null, 'stroke', "none");
                     rectNode.setAttributeNS(null, 'stroke-width', this.rectStroke);
                     svgNode.appendChild(rectNode);
@@ -221,7 +211,7 @@ class digi {
                     circleNode.setAttributeNS(null, 'r', this.circleRadius);
                     circleNode.setAttributeNS(null, 'fill', 'none');
                     // circleNode.setAttributeNS(null, 'fill', color_);
-                    circleNode.setAttributeNS(null, 'stroke', tinycolor(color_).darken(2).toHexString());
+                    circleNode.setAttributeNS(null, 'stroke', tinycolor(color_).darken(3).toHexString());
                     // circleNode.setAttributeNS(null, 'stroke', "none");
                     // circleNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
                     circleNode.setAttributeNS(null, 'stroke-width', this.circleStroke);
@@ -230,6 +220,14 @@ class digi {
 
             }
 
+            const polyNode = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+            polyNode.setAttributeNS(null, 'points', polyLineString);
+            polyNode.setAttributeNS(null, 'fill', 'none');
+            // polyNode.setAttributeNS(null, 'stroke', color_d);
+            polyNode.setAttributeNS(null, 'stroke', color_);
+            polyNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
+            // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
+            svgNode.appendChild(polyNode);
 
 
             // DEBUG VIEW CENTER

@@ -54,9 +54,9 @@ class Grid {
         this.paletteRA = new dynamicPalette(
             this.aboveTone,
             // [-1, -2, -5, -10, 0, 1, 2, 5, 10],
-            [0, 5, 10, 20],
-            [-50, -30, -20, -10, -5, 0, 5, 10],
-            [0, 2]
+            [0, 5, 10],
+            [-40, -38, -36, -34, -32, -30, -28, -26, -24, -22, -20, -18, -16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30],
+            [0, 2, 4, 6, 8, 10]
         );
         this.paletteRB = new dynamicPalette(this.underneathTone, [-1, -2, -5, -10, 0, 1, 2, 5, 10], [-30, -20, -10, -5, 0, 5, 10, 20, 30], [0, 2]);
         this.paletteOne = new dynamicPalette("#b4aca3", [-1, -2, -5, -10, 0, 1, 2, 5, 10], [-30, -20, -10, -5, 0, 5, 10, 20, 30], [0, 2]);
@@ -68,7 +68,7 @@ class Grid {
         // this.noiseRA = new noiseAggregator(235, 50, 110, 4, 4, 5);  // klaas
         // this.noiseRA = new noiseAggregator(135, 150, 110, 24, 14, 10); // klaa2
         // this.noiseRA = new noiseAggregator(335, 60, 210, 24, 65, 65); // klaa3
-        this.noiseRA = new noiseAggregator(235, 25, 80, 8, 5, 5); // klaa3
+        this.noiseRA = new noiseAggregator(235, 35, 80, 15, 5, 5); // klaa3
 
         // this.noiseSA = new noiseAggregator(155, 50, 80, 10, 20, 50);
         // this.noiseSA = new noiseAggregator(230, 38, 90, 4, 4, 5);  // klaas
@@ -157,7 +157,7 @@ class Grid {
                 // var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 1, 0, 0, 1, 0.25, 0.25); // not jack johnson
                 // var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 1, 1, 0, 0, 1, 1);
                 // var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 1, 1, 0.7, 0, 0.5, 0.2);
-                var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 8, 4, 4, 8, 4, 4);
+                var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 8, 4, 4, 4, 3, 3);
                 // var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 1, 1, 0, 0.5, 0);
                 // var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 1, 1, 0, 0.25, 0.25);
                 var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 0, 0, 0, 1, 1);
@@ -707,8 +707,8 @@ class Grid {
                     noiseValue: this.boxes[i].noiseValueRA,
                     // colorNoise: this.boxes[i].noiseValueColorA,
                     colorNoise: this.boxes[i].noiseValueRA,
-                    vertexLength: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 1, 5, 15), // 15,
-                    strokeWeighty: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 1, 0.1, 0.25), // 0.1,
+                    vertexLength: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 1, 2, 15), // 15,
+                    strokeWeighty: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 1, 0.1, 0.15), // 0.1,
                     angleMean: Math.PI / 1,
                     angleSTD: Math.PI / 56,
                     polyLineAngleDist: 0.1,

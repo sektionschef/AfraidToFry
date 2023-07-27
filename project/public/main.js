@@ -23,6 +23,7 @@ var drawing = "";
 // let RESOLUTIONBOXCOUNT = 160;
 let RESOLUTIONBOXCOUNT = 80;
 // let RESOLUTIONBOXCOUNT = 60;
+// let RESOLUTIONBOXCOUNT = 40;
 let BACKGROUNDTONE = "#ffffff";
 // let ABOVETONE = "#a5812f";  // andrea garden book
 // let BELOWTONE = "#ff617b";  // andrea garden book

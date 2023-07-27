@@ -54,8 +54,9 @@ class Grid {
         this.paletteRA = new dynamicPalette(
             this.aboveTone,
             // [-1, -2, -5, -10, 0, 1, 2, 5, 10],
-            [0, 5, 10],
-            [-40, -38, -36, -34, -32, -30, -28, -26, -24, -22, -20, -18, -16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30],
+            [-5, 0, 5, 10],
+            // [-34, -32, -30, -28, -26, -24, -22, -20, -18, -16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
+            [-18, -16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12, 14],
             [0, 2, 4, 6, 8, 10]
         );
         this.paletteRB = new dynamicPalette(this.underneathTone, [-1, -2, -5, -10, 0, 1, 2, 5, 10], [-30, -20, -10, -5, 0, 5, 10, 20, 30], [0, 2]);
@@ -68,7 +69,7 @@ class Grid {
         // this.noiseRA = new noiseAggregator(235, 50, 110, 4, 4, 5);  // klaas
         // this.noiseRA = new noiseAggregator(135, 150, 110, 24, 14, 10); // klaa2
         // this.noiseRA = new noiseAggregator(335, 60, 210, 24, 65, 65); // klaa3
-        this.noiseRA = new noiseAggregator(235, 35, 80, 15, 5, 5); // klaa3
+        this.noiseRA = new noiseAggregator(135, 15, 80, 6, 10, 10); // klaa3
 
         // this.noiseSA = new noiseAggregator(155, 50, 80, 10, 20, 50);
         // this.noiseSA = new noiseAggregator(230, 38, 90, 4, 4, 5);  // klaas
@@ -76,7 +77,7 @@ class Grid {
         this.noiseSA = new noiseAggregator(10, 3, 20, 2, 4, 4);  // klaas3
 
         // this.noiseColorA = new noiseAggregator(100, 38, 60, 10, 8, 2); 
-        this.noiseColorA = new noiseAggregator(100, 38, 60, 10, 4, 4);
+        this.noiseColorA = new noiseAggregator(100, 18, 60, 10, 4, 4);
         this.noiseColorB = new noiseAggregator(280, 30, 40, 5, 40, 3);
 
         this.createBoxes();
@@ -157,7 +158,8 @@ class Grid {
                 // var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 1, 0, 0, 1, 0.25, 0.25); // not jack johnson
                 // var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 1, 1, 0, 0, 1, 1);
                 // var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 1, 1, 0.7, 0, 0.5, 0.2);
-                var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 8, 4, 4, 4, 3, 3);
+                // var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 8, 4, 4, 2, 1, 1);
+                var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 6, 3, 4, 3, 1, 1);
                 // var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 1, 1, 0, 0.5, 0);
                 // var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 1, 1, 0, 0.25, 0.25);
                 var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 0, 0, 0, 1, 1);
@@ -626,85 +628,88 @@ class Grid {
             //     ).draw();
             // }
 
-            // if (this.boxes[i].horizon) {
-            //     new digi({
-            //         x: this.boxes[i].center.x * getNormallyDistributedRandomNumber(1, 0),
-            //         y: this.boxes[i].center.y * getNormallyDistributedRandomNumber(1, 0),
-            //         noiseValue: this.boxes[i].noiseValueRA,
-            //         colorNoise: this.boxes[i].noiseValueColorA,
-            //         vertexLength: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 1, 5, 15), // 15,
-            //         strokeWeighty: 160 / this.shortBoxCount * 0.2, //map(this.boxes[i].noiseValueRA, -1, 1, 0.05, 0.25), // 0.1,
-            //         angleMean: Math.PI / 1,
-            //         angleSTD: Math.PI / 56,
-            //         polyLineAngleDist: 0.1,
-            //         polyLineVLenMean: 1,
-            //         polyLineVLenStd: 0.05,
-            //         circle: true,
-            //         circleRadius: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 0, 3, 1), // 2,
-            //         circleStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 0, 0.2, 0.05), // 0.08
-            //         loopCircle: map(this.boxes[i].noiseValueRA, -1, 0, 60, 10), // 40,
-            //         circlePosDistStd: 160 / this.shortBoxCount * 5,
-            //         rect: true,
-            //         loopRect: map(this.boxes[i].noiseValueRA, 0, 1, 10, 60), //30,
-            //         rectWidth: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 3, 6),// 6,
-            //         rectHeight: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 1, 3),// 2,
-            //         rectStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 0.2, 0.05), // 0.08
-            //         rectPosDistStd: 160 / this.shortBoxCount * 5,
-            //         revert: true,
-            //         cutOutValue: -1,
-            //         loopCount: 20, // map(this.boxes[i].noiseValueRA, -0.5, 0.5, 10, 40), // 20,
-            //         colorList: ["#333333"],
-            //         noiseAngle: true,
-            //         group: "",
-            //         drawing: drawing,
-            //         horizonRow: this.horizonRow,
-            //         i: i,
-            //         longBoxCount: this.longBoxCount,
-            //         PolyLineDynamic: true,
-            //     }).draw();
-            // } else if (
-            //     this.boxes[i].height >= (this.horizonRow - 1) &&
-            //     this.boxes[i].height <= (this.horizonRow + 1) &&
-            //     this.boxes[i].noiseValueRA > 0
-            // ) {
-            //     new digi({
-            //         x: this.boxes[i].center.x * getNormallyDistributedRandomNumber(1, 0),
-            //         y: this.boxes[i].center.y * getNormallyDistributedRandomNumber(1, 0),
-            //         noiseValue: this.boxes[i].noiseValueRA,
-            //         colorNoise: this.boxes[i].noiseValueColorA,
-            //         vertexLength: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 1, 5, 15), // 15,
-            //         strokeWeighty: 160 / this.shortBoxCount * 0.2, //map(this.boxes[i].noiseValueRA, -1, 1, 0.05, 0.25), // 0.1,
-            //         angleMean: Math.PI / 1,
-            //         angleSTD: Math.PI / 56,
-            //         polyLineAngleDist: 0.1,
-            //         polyLineVLenMean: 1,
-            //         polyLineVLenStd: 0.05,
-            //         circle: true,
-            //         circleRadius: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 0, 3, 1), // 2,
-            //         circleStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 0, 0.2, 0.05), // 0.08
-            //         loopCircle: map(this.boxes[i].noiseValueRA, -1, 0, 60, 10), // 40,
-            //         circlePosDistStd: 160 / this.shortBoxCount * 5,
-            //         rect: true,
-            //         loopRect: map(this.boxes[i].noiseValueRA, 0, 1, 10, 60), //30,
-            //         rectWidth: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 3, 6),// 6,
-            //         rectHeight: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 1, 3),// 2,
-            //         rectStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 0.2, 0.05), // 0.08
-            //         rectPosDistStd: 160 / this.shortBoxCount * 5,
-            //         revert: true,
-            //         cutOutValue: -1,
-            //         loopCount: 20, // map(this.boxes[i].noiseValueRA, -0.5, 0.5, 10, 40), // 20,
-            //         colorList: ["#d1d1d1"],
-            //         noiseAngle: true,
-            //         group: "",
-            //         drawing: drawing,
-            //         horizonRow: this.horizonRow,
-            //         i: i,
-            //         longBoxCount: this.longBoxCount,
-            //         PolyLineDynamic: true,
-            //     }).draw();
+            if (this.boxes[i].horizon) {
+                new digi({
+                    x: this.boxes[i].center.x * getNormallyDistributedRandomNumber(1, 0),
+                    y: this.boxes[i].center.y * getNormallyDistributedRandomNumber(1, 0),
+                    noiseValue: this.boxes[i].noiseValueRA,
+                    colorNoise: this.boxes[i].noiseValueColorA,
+                    vertexLength: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 1, 5, 15), // 15,
+                    strokeWeighty: 160 / this.shortBoxCount * 0.2, //map(this.boxes[i].noiseValueRA, -1, 1, 0.05, 0.25), // 0.1,
+                    angleMean: Math.PI / 1,
+                    angleSTD: Math.PI / 56,
+                    polyOnly: true,
+                    polyLineAngleDist: 0.1,
+                    polyLineVLenMean: 1,
+                    polyLineVLenStd: 0.05,
+                    circle: true,
+                    circleRadius: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 0, 3, 1), // 2,
+                    circleStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 0, 0.2, 0.05), // 0.08
+                    loopCircle: map(this.boxes[i].noiseValueRA, -1, 0, 60, 10), // 40,
+                    circlePosDistStd: 160 / this.shortBoxCount * 5,
+                    rect: true,
+                    loopRect: map(this.boxes[i].noiseValueRA, 0, 1, 10, 60), //30,
+                    rectWidth: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 3, 6),// 6,
+                    rectHeight: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 1, 3),// 2,
+                    rectStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 0.2, 0.05), // 0.08
+                    rectPosDistStd: 160 / this.shortBoxCount * 5,
+                    revert: true,
+                    cutOutValue: -1,
+                    loopCount: 20, // map(this.boxes[i].noiseValueRA, -0.5, 0.5, 10, 40), // 20,
+                    colorList: ["#333333"],
+                    noiseAngle: true,
+                    group: "",
+                    drawing: drawing,
+                    horizonRow: this.horizonRow,
+                    i: i,
+                    longBoxCount: this.longBoxCount,
+                    PolyLineDynamic: true,
+                }).draw();
+            } else if (
+                this.boxes[i].height >= (this.horizonRow - 1) &&
+                this.boxes[i].height <= (this.horizonRow + 1) &&
+                this.boxes[i].noiseValueRA > 0
+            ) {
+                new digi({
+                    x: this.boxes[i].center.x * getNormallyDistributedRandomNumber(1, 0),
+                    y: this.boxes[i].center.y * getNormallyDistributedRandomNumber(1, 0),
+                    noiseValue: this.boxes[i].noiseValueRA,
+                    colorNoise: this.boxes[i].noiseValueColorA,
+                    vertexLength: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 1, 5, 15), // 15,
+                    strokeWeighty: 160 / this.shortBoxCount * 0.2, //map(this.boxes[i].noiseValueRA, -1, 1, 0.05, 0.25), // 0.1,
+                    angleMean: Math.PI / 1,
+                    angleSTD: Math.PI / 56,
+                    polyOnly: true,
+                    polyLineAngleDist: 0.1,
+                    polyLineVLenMean: 1,
+                    polyLineVLenStd: 0.05,
+                    circle: true,
+                    circleRadius: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 0, 3, 1), // 2,
+                    circleStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 0, 0.2, 0.05), // 0.08
+                    loopCircle: map(this.boxes[i].noiseValueRA, -1, 0, 60, 10), // 40,
+                    circlePosDistStd: 160 / this.shortBoxCount * 5,
+                    rect: true,
+                    loopRect: map(this.boxes[i].noiseValueRA, 0, 1, 10, 60), //30,
+                    rectWidth: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 3, 6),// 6,
+                    rectHeight: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 1, 3),// 2,
+                    rectStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 0.2, 0.05), // 0.08
+                    rectPosDistStd: 160 / this.shortBoxCount * 5,
+                    revert: true,
+                    cutOutValue: -1,
+                    loopCount: 20, // map(this.boxes[i].noiseValueRA, -0.5, 0.5, 10, 40), // 20,
+                    colorList: ["#d1d1d1"],
+                    noiseAngle: true,
+                    group: "",
+                    drawing: drawing,
+                    horizonRow: this.horizonRow,
+                    i: i,
+                    longBoxCount: this.longBoxCount,
+                    PolyLineDynamic: true,
+                }).draw();
 
-            // } else if (this.boxes[i].aboveHorizon) {
-            if (this.boxes[i].aboveHorizon) {
+
+            } else if (this.boxes[i].aboveHorizon) {
+                // if (this.boxes[i].aboveHorizon) {
                 new digi({
                     x: this.boxes[i].center.x * getNormallyDistributedRandomNumber(1, 0),
                     y: this.boxes[i].center.y * getNormallyDistributedRandomNumber(1, 0),

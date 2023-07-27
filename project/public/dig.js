@@ -12,6 +12,8 @@ class digi {
         this.horizonRow = data.horizonRow;
         this.i = data.i;
         this.longBoxCount = data.longBoxCount;
+
+        this.polyOnly = data.polyOnly;
         this.polyLineAngleDist = data.polyLineAngleDist;
         this.polyLineVLenMean = data.polyLineVLenMean;
         this.polyLineVLenStd = data.polyLineVLenStd;
@@ -53,7 +55,7 @@ class digi {
         this.noiseDistance = 2;// (1- -1);
         this.colorStep = this.noiseDistance / this.colorList.length;
 
-        this.textureStepCount = 5
+        this.textureStepCount = 3
         this.noiseValueDistance = 2;//this.noiseValueMax - this.noiseValueMin;
         this.textureStep = this.noiseValueDistance / this.textureStepCount;
 
@@ -106,12 +108,21 @@ class digi {
             }
             // console.log(colorSelect);
 
-            for (var i = 0; i <= this.textureStepCount; i++) {
-                // console.log("step: " + (this.noiseValueMin + this.colorStep * i))
-                if (this.noiseValue < -1 + this.textureStep * i) {
-                    textureSelect = i;
-                    break;
-                }
+            // for (var i = 0; i <= this.textureStepCount; i++) {
+            //     // console.log("step: " + (this.noiseValueMin + this.colorStep * i))
+            //     if (this.noiseValue < -1 + this.textureStep * i) {
+            //         textureSelect = i;
+            //         break;
+            //     }
+            // }
+            if (this.noiseValue < -0.5) {
+                textureSelect = 1;
+            } else if (this.noiseValue < 0) {
+                textureSelect = 2;
+            } else if (this.noiseValue < 0.5) {
+                textureSelect = 3;
+            } else {
+                textureSelect = 4;
             }
 
             let color_d = this.colorList[colorSelect]
@@ -177,11 +188,10 @@ class digi {
             // without svg.js
             const svgNode = document.getElementById('svgNode');
 
+            if (this.noiseValue >= 0 && this.rect) {
+                // if (this.rect) {
 
-
-            // if (textureSelect == 2 && this.rect) {
-            if (this.rect) {
-
+                // for (var i = 0; i < 20; i++) {
                 for (var i = 0; i < this.loopRect; i++) {
                     var rectX = this.center.x + getNormallyDistributedRandomNumber(0, this.rectPosDistStd);
                     var rectY = this.center.y + getNormallyDistributedRandomNumber(0, this.rectPosDistStd);
@@ -199,9 +209,9 @@ class digi {
                     rectNode.setAttributeNS(null, 'stroke-width', this.rectStroke);
                     svgNode.appendChild(rectNode);
                 }
-            }
-            // } else if (textureSelect == 3 && this.circle) {
-            if (this.circle) {
+                // }
+            } else if (this.noiseValue <= 0 && this.circle) {
+                // if (this.circle) {
 
                 for (var i = 0; i < this.loopCircle; i++) {
 
@@ -218,31 +228,33 @@ class digi {
                     svgNode.appendChild(circleNode);
                 }
 
+                // }
+
+                // if high many polylines
+                // if (this.noiseValue > 0) {
+                //     for (var p = 0.5; p < 6; p++) {
+                //         const polyNode = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+                //         polyNode.setAttributeNS(null, 'points', polyLineString);
+                //         polyNode.setAttributeNS(null, 'fill', 'none');
+                //         // polyNode.setAttributeNS(null, 'stroke', color_d);
+                //         polyNode.setAttributeNS(null, 'stroke', tinycolor(color_).desaturate(p * 30).toHexString());
+                //         polyNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
+                //         // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
+                //         svgNode.appendChild(polyNode);
+                //     }
+                // } else {
             }
 
-            // if high many polylines
-            // if (this.noiseValue > 0) {
-            //     for (var p = 0; p < 6; p++) {
-            //         const polyNode = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
-            //         polyNode.setAttributeNS(null, 'points', polyLineString);
-            //         polyNode.setAttributeNS(null, 'fill', 'none');
-            //         // polyNode.setAttributeNS(null, 'stroke', color_d);
-            //         polyNode.setAttributeNS(null, 'stroke', color_);
-            //         polyNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
-            //         // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
-            //         svgNode.appendChild(polyNode);
-            //     }
-            // } else {
-            const polyNode = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
-            polyNode.setAttributeNS(null, 'points', polyLineString);
-            polyNode.setAttributeNS(null, 'fill', 'none');
-            // polyNode.setAttributeNS(null, 'stroke', color_d);
-            polyNode.setAttributeNS(null, 'stroke', color_);
-            polyNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
-            // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
-            svgNode.appendChild(polyNode);
-
-            // }
+            if (this.noiseValue >= -0.5 && this.noiseValue <= 0.5 || this.polyOnly) {
+                const polyNode = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+                polyNode.setAttributeNS(null, 'points', polyLineString);
+                polyNode.setAttributeNS(null, 'fill', 'none');
+                // polyNode.setAttributeNS(null, 'stroke', color_d);
+                polyNode.setAttributeNS(null, 'stroke', color_);
+                polyNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
+                // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
+                svgNode.appendChild(polyNode);
+            }
 
 
             // DEBUG VIEW CENTER

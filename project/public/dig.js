@@ -220,6 +220,19 @@ class digi {
 
             }
 
+            // if high many polylines
+            // if (this.noiseValue > 0) {
+            //     for (var p = 0; p < 6; p++) {
+            //         const polyNode = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+            //         polyNode.setAttributeNS(null, 'points', polyLineString);
+            //         polyNode.setAttributeNS(null, 'fill', 'none');
+            //         // polyNode.setAttributeNS(null, 'stroke', color_d);
+            //         polyNode.setAttributeNS(null, 'stroke', color_);
+            //         polyNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
+            //         // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
+            //         svgNode.appendChild(polyNode);
+            //     }
+            // } else {
             const polyNode = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
             polyNode.setAttributeNS(null, 'points', polyLineString);
             polyNode.setAttributeNS(null, 'fill', 'none');
@@ -228,6 +241,8 @@ class digi {
             polyNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
             // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
             svgNode.appendChild(polyNode);
+
+            // }
 
 
             // DEBUG VIEW CENTER

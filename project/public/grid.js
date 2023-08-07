@@ -57,7 +57,8 @@ class Grid {
             // [0, 4, 8], // good
             [-2, 0, 2],
             // [-10, 0, 10],
-            [-30, -20, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12, 20, 30],
+            [-30, -20, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12, 20, 30],  // harsh
+            // [-30, -20, -12, -10, -8, -6, -4, -2, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 2, 4, 6, 8, 10, 12, 20, 30], // easy
             // [-12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
             // [-6, -4, -2, 0, 2, 4, 6],
             // [-34, -32, -30, -28, -26, -24, -22, -20, -18, -16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
@@ -736,12 +737,12 @@ class Grid {
                     polyLineVLenMean: 1,
                     polyLineVLenStd: map(this.boxes[i].noiseValueRA, -1, 1, 0.2, 0.01), //0.05,
                     circle: true,
-                    circleRadius: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 0, 4, 2), // 2,
-                    circleStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 0, 0.2, 0.05), // 0.08
-                    loopCircle: map(this.boxes[i].noiseValueRA, -1, 0, 60, 20), // 40,
-                    circlePosDistStd: 160 / this.shortBoxCount * 6,
+                    circleRadius: 4, // 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 0, 3, 1.5), // 2,
+                    circleStroke: 0.1, // 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 0, 0.2, 0.05), // 0.08
+                    loopCircle: map(this.boxes[i].noiseValueRA, -1, 0, 60, 10), // 40,
+                    circlePosDistStd: 160 / this.shortBoxCount * 4,
                     rect: true,
-                    loopRect: map(this.boxes[i].noiseValueRA, 0, 1, 10, 40), //30,
+                    loopRect: map(this.boxes[i].noiseValueRA, 0, 1, 10, 60), //30,
                     rectWidth: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 6, 9),// 6,
                     rectHeight: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 2, 3),// 2,
                     rectStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 0.2, 0.05), // 0.08

@@ -63,6 +63,7 @@ class dynamicPalette {
         // this.palette.sort(function (a, b) { return tinycolor(a).getLuminance() - tinycolor(b).getLuminance() });
         // SORT BY HUE
         // this.palette.sort(function (a, b) { return tinycolor(a).toHsl().h - tinycolor(b).toHsl().h });
+        // SORT BY HUE AND LIGHTNESS
         this.palette.sort(function (a, b) { return (tinycolor(a).toHsl().h - tinycolor(b).toHsl().h || tinycolor(a).getBrightness() - tinycolor(b).getBrightness()) });
 
         // console.log(this.palette);

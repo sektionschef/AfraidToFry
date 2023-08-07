@@ -70,11 +70,11 @@ class digi {
         if (this.PolyLineDynamic) {
 
             if (this.noiseValue <= 0) {
-                this.vertexlength = map(this.noiseValue, -1, 0, 5, 15)
+                this.vertexlength = map(this.noiseValue, -1, 0, 5, 25)
                 this.loopCount = map(this.noiseValue, -1, 0, 40, 10)
                 this.strokeWeighty = map(this.noiseValue, -1, 0, this.strokeWeighty * 4, this.strokeWeighty)
             } else {
-                this.vertexlength = map(this.noiseValue, 0, 1, 15, 5)
+                this.vertexlength = map(this.noiseValue, 0, 1, 25, 5)
                 this.loopCount = map(this.noiseValue, 0, 1, 10, 40)
                 this.strokeWeighty = map(this.noiseValue, -1, 0, this.strokeWeighty * 4, this.strokeWeighty)
             }

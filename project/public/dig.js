@@ -176,11 +176,11 @@ class digi {
             // var darknessBoost = 25;
             // var desaturationBoost = 20;
             var criticalDistance = 0;//30;
-            var darknessBoost = 35;
-            var desaturationBoost = 20;
+            var darknessBoost = 20;
+            var desaturationBoost = 15;
 
             if (distanceFromHorizon < criticalDistance) {
-                var color_ = tinycolor(color_d).clone().darken(map(distanceFromHorizon, 0, criticalDistance, darknessBoost, 0)).desaturate(map(distanceFromHorizon, 0, criticalDistance, desaturationBoost, 0)).toHexString();
+                var color_ = tinycolor(color_d).clone().lighten(map(distanceFromHorizon, 0, criticalDistance, darknessBoost, 0)).desaturate(map(distanceFromHorizon, 0, criticalDistance, desaturationBoost, 0)).toHexString();
             } else {
                 var color_ = color_d;
             }
@@ -210,7 +210,8 @@ class digi {
                     svgNode.appendChild(rectNode);
                 }
                 // }
-            } else if (this.noiseValue <= 0 && this.circle) {
+            }
+            if (this.noiseValue <= 0 && this.circle) {
                 // if (this.circle) {
 
                 for (var i = 0; i < this.loopCircle; i++) {

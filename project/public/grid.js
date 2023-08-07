@@ -738,7 +738,7 @@ class Grid {
                     polyLineVLenStd: map(this.boxes[i].noiseValueRA, -1, 1, 0.2, 0.01), //0.05,
                     circle: true,
                     circleRadius: 4, // 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 0, 3, 1.5), // 2,
-                    circleStroke: 0.1, // 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 0, 0.2, 0.05), // 0.08
+                    circleStroke: 0.2, // 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 0, 0.2, 0.05), // 0.08
                     loopCircle: map(this.boxes[i].noiseValueRA, -1, 0, 60, 10), // 40,
                     circlePosDistStd: 160 / this.shortBoxCount * 4,
                     rect: true,
@@ -860,14 +860,15 @@ class Grid {
                     y: this.boxes[i].center.y,
                     noiseValue: this.boxes[i].noiseValueRA,
                     colorNoise: this.boxes[i].noiseValueRA,
-                    vertexLength: 15, // map(this.boxes[i].noiseValue8, -1, 1, 5, 10), // 15,
-                    strokeWeighty: 0.15, ///map(this.boxes[i].noiseValue8, -1, 1, 0.1, 0.3), // 1,
+                    vertexLength: 5, // map(this.boxes[i].noiseValue8, -1, 1, 5, 10), // 15,
+                    strokeWeighty: 0.05, ///map(this.boxes[i].noiseValue8, -1, 1, 0.1, 0.3), // 1,
                     angleMin: 0,
                     angleMax: Math.PI / 2,
                     cutOutValue: -1,
-                    loopCount: map(this.boxes[i].noiseValueRA, -1, 1, 0, 30),
-                    colorList: this.paletteA.palette,
+                    loopCount: map(this.boxes[i].noiseValueRA, -1, 1, 0, 10),
+                    // colorList: this.paletteA.palette,
                     // colorList: ["#353535", "#727272", "#8d8c8c", "#adadad", "#c7c7c7"],
+                    colorList: ["#c7c7c7", "#adadad", "#8d8c8c", "#727272", "#353535"],
                     // colorList: ["#808080"],
                     group: "",
                 }

@@ -175,9 +175,9 @@ class digi {
             // var criticalDistance = 35;
             // var darknessBoost = 25;
             // var desaturationBoost = 20;
-            var criticalDistance = 0;//30;
+            var criticalDistance = 20;//30;
             var darknessBoost = 20;
-            var desaturationBoost = 15;
+            var desaturationBoost = 20;
 
             if (distanceFromHorizon < criticalDistance) {
                 var color_ = tinycolor(color_d).clone().lighten(map(distanceFromHorizon, 0, criticalDistance, darknessBoost, 0)).desaturate(map(distanceFromHorizon, 0, criticalDistance, desaturationBoost, 0)).toHexString();
@@ -216,10 +216,39 @@ class digi {
 
                 for (var i = 0; i < this.loopCircle; i++) {
 
-                    const circleNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-                    circleNode.setAttributeNS(null, 'cx', this.center.x + getNormallyDistributedRandomNumber(0, this.circlePosDistStd));
-                    circleNode.setAttributeNS(null, 'cy', this.center.y + getNormallyDistributedRandomNumber(0, this.circlePosDistStd));
-                    circleNode.setAttributeNS(null, 'r', this.circleRadius);
+                    // const circleNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    // circleNode.setAttributeNS(null, 'cx', this.center.x + getNormallyDistributedRandomNumber(0, this.circlePosDistStd));
+                    // circleNode.setAttributeNS(null, 'cy', this.center.y + getNormallyDistributedRandomNumber(0, this.circlePosDistStd));
+                    // circleNode.setAttributeNS(null, 'r', this.circleRadius);
+                    // circleNode.setAttributeNS(null, 'fill', 'none');
+                    // // circleNode.setAttributeNS(null, 'fill', color_);
+                    // circleNode.setAttributeNS(null, 'stroke', tinycolor(color_).darken(3).toHexString());
+                    // // circleNode.setAttributeNS(null, 'stroke', "none");
+                    // // circleNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
+                    // circleNode.setAttributeNS(null, 'stroke-width', this.circleStroke);
+                    // svgNode.appendChild(circleNode);
+
+                    var centerX = this.center.x + getNormallyDistributedRandomNumber(0, this.circlePosDistStd);
+                    var centerY = this.center.y + getNormallyDistributedRandomNumber(0, this.circlePosDistStd);
+                    // var AX = centerX - 4;
+                    // var AY = centerY + 4;
+                    // var BX = centerX + 4;
+                    // var BY = centerY + 4;
+                    // var CX = centerX;
+                    // var CY = centerY - 6;
+                    var AX = -4;
+                    var AY = +4;
+                    var BX = +4;
+                    var BY = +4;
+                    var CX = 0
+                    var CY = -6;
+
+                    const circleNode = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+                    // circleNode.setAttributeNS(null, 'cx', this.center.x + getNormallyDistributedRandomNumber(0, this.circlePosDistStd));
+                    // circleNode.setAttributeNS(null, 'cy', this.center.y + getNormallyDistributedRandomNumber(0, this.circlePosDistStd));
+                    // circleNode.setAttributeNS(null, 'r', this.circleRadius);
+                    circleNode.setAttributeNS(null, 'points', `${AX}, ${AY} ${BX}, ${BY} ${CX}, ${CY}`);
+                    circleNode.setAttributeNS(null, 'transform', "translate(" + centerX + "," + centerY + "), rotate(" + this.angle * (180 / Math.PI) + ")");
                     circleNode.setAttributeNS(null, 'fill', 'none');
                     // circleNode.setAttributeNS(null, 'fill', color_);
                     circleNode.setAttributeNS(null, 'stroke', tinycolor(color_).darken(3).toHexString());

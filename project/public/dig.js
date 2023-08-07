@@ -236,12 +236,12 @@ class digi {
                     // var BY = centerY + 4;
                     // var CX = centerX;
                     // var CY = centerY - 6;
-                    var AX = -4;
-                    var AY = +4;
-                    var BX = +4;
-                    var BY = +4;
+                    var AX = -3;
+                    var AY = 3;
+                    var BX = 3;
+                    var BY = 3;
                     var CX = 0
-                    var CY = -6;
+                    var CY = -5;
 
                     const circleNode = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
                     // circleNode.setAttributeNS(null, 'cx', this.center.x + getNormallyDistributedRandomNumber(0, this.circlePosDistStd));

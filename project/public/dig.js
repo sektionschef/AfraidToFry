@@ -188,6 +188,15 @@ class digi {
             // without svg.js
             const svgNode = document.getElementById('svgNode');
 
+            const polyNode = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+            polyNode.setAttributeNS(null, 'points', polyLineString);
+            polyNode.setAttributeNS(null, 'fill', 'none');
+            // polyNode.setAttributeNS(null, 'stroke', color_d);
+            polyNode.setAttributeNS(null, 'stroke', color_);
+            polyNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
+            // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
+            svgNode.appendChild(polyNode);
+
             if (this.noiseValue >= 0 && this.rect) {
                 // if (this.rect) {
 
@@ -275,16 +284,16 @@ class digi {
                 // } else {
             }
 
-            if (this.noiseValue >= -0.5 && this.noiseValue <= 0.5 || this.polyOnly) {
-                const polyNode = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
-                polyNode.setAttributeNS(null, 'points', polyLineString);
-                polyNode.setAttributeNS(null, 'fill', 'none');
-                // polyNode.setAttributeNS(null, 'stroke', color_d);
-                polyNode.setAttributeNS(null, 'stroke', color_);
-                polyNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
-                // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
-                svgNode.appendChild(polyNode);
-            }
+            // if (this.noiseValue >= -0.5 && this.noiseValue <= 0.5 || this.polyOnly) {
+            // const polyNode = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+            // polyNode.setAttributeNS(null, 'points', polyLineString);
+            // polyNode.setAttributeNS(null, 'fill', 'none');
+            // // polyNode.setAttributeNS(null, 'stroke', color_d);
+            // polyNode.setAttributeNS(null, 'stroke', color_);
+            // polyNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
+            // // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
+            // svgNode.appendChild(polyNode);
+            // }
 
 
             // DEBUG VIEW CENTER

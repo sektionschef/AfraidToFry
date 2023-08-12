@@ -661,9 +661,9 @@ class Grid {
                     circlePosDistStd: 160 / this.shortBoxCount * 5,
                     rect: true,
                     loopRect: map(this.boxes[i].noiseValueRA, 0, 1, 10, 60), //30,
-                    rectWidth: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 3, 6),// 6,
-                    rectHeight: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 1, 3),// 2,
-                    rectStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 0.2, 0.05), // 0.08
+                    rectWidth: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 2, 5),// 6,
+                    rectHeight: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 1, 2),// 2,
+                    rectStroke: 0.08, // 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 0.1, 0.05), // 0.08
                     rectPosDistStd: 160 / this.shortBoxCount * 5,
                     revert: true,
                     cutOutValue: -1,
@@ -728,8 +728,8 @@ class Grid {
                     noiseValue: this.boxes[i].noiseValueRA,
                     // colorNoise: this.boxes[i].noiseValueColorA,
                     colorNoise: this.boxes[i].noiseValueRA,
-                    vertexLength: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 1, 2, 15), // 15,
-                    strokeWeighty: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 1, 0.1, 0.15), // 0.1,
+                    vertexLength: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 1, 2, 10), // 15,
+                    strokeWeighty: 160 / this.shortBoxCount * 0.2, // map(this.boxes[i].noiseValueRA, -1, 1, 0.1, 0.15), // 0.1,
                     angleMean: Math.PI / 1,
                     angleSTD: Math.PI / 56,
                     polyOnly: false,
@@ -738,18 +738,18 @@ class Grid {
                     polyLineVLenStd: map(this.boxes[i].noiseValueRA, -1, 1, 0.2, 0.01), //0.05,
                     circle: true,
                     circleRadius: 4, // 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 0, 3, 1.5), // 2,
-                    circleStroke: 0.3, // 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 0, 0.2, 0.05), // 0.08
-                    loopCircle: map(this.boxes[i].noiseValueRA, -1, 0, 60, 10), // 40,
-                    circlePosDistStd: 160 / this.shortBoxCount * 4,
+                    circleStroke: 0.2, // 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 0, 0.2, 0.05), // 0.08
+                    loopCircle: map(this.boxes[i].noiseValueRA, -1, 0, 60, 30), // 40,
+                    circlePosDistStd: 160 / this.shortBoxCount * 4, // map(this.boxes[i].noiseValueRA, -1, 0, 2, 5),
                     rect: true,
                     loopRect: map(this.boxes[i].noiseValueRA, 0, 1, 10, 60), //30,
-                    rectWidth: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 6, 9),// 6,
-                    rectHeight: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 2, 3),// 2,
-                    rectStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 0.2, 0.05), // 0.08
-                    rectPosDistStd: 160 / this.shortBoxCount * 5,
+                    rectWidth: 160 / this.shortBoxCount * 6, // map(this.boxes[i].noiseValueRA, 0, 1, 6, 9),// 6,
+                    rectHeight: 160 / this.shortBoxCount * 2, // map(this.boxes[i].noiseValueRA, 0, 1, 2, 3),// 2,
+                    rectStroke: 0.2, // 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 0.2, 0.05), // 0.08
+                    rectPosDistStd: 160 / this.shortBoxCount * 4, // map(this.boxes[i].noiseValueRA, -1, 0, 1, 4), // 5
                     revert: true,
                     cutOutValue: -1,
-                    loopCount: map(this.boxes[i].noiseValueRA, -0.5, 0.5, 10, 40), // 20,
+                    loopCount: 30, // map(this.boxes[i].noiseValueRA, -0.5, 0.5, 10, 40), // 20,
                     colorList: this.paletteA.palette,
                     noiseAngle: true,
                     group: "",

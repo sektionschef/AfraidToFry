@@ -19,11 +19,12 @@ class digi {
         this.polyLineVLenStd = data.polyLineVLenStd;
         this.PolyLineDynamic = data.PolyLineDynamic;
 
-        this.circle = data.circle;
-        this.circleRadius = data.circleRadius;
-        this.circleStroke = data.circleStroke;
-        this.loopCircle = data.loopCircle;
-        this.circlePosDistStd = data.circlePosDistStd;
+        this.triangle = data.triangle;
+        // this.circleRadius = data.circleRadius;
+        this.triangleStroke = data.triangleStroke;
+        this.loopTriangle = data.loopTriangle;
+        this.widthy = data.triangleWidthy;
+        this.trianglePosDistStd = data.trianglePosDistStd;
 
         this.rect = data.rect;
         this.loopRect = data.loopRect;
@@ -220,51 +221,51 @@ class digi {
                 }
                 // }
             }
-            if (this.noiseValue <= 0 && this.circle) {
-                // if (this.circle) {
+            if (this.noiseValue <= 0 && this.triangle) {
+                // if (this.triangle) {
 
-                for (var i = 0; i < this.loopCircle; i++) {
+                for (var i = 0; i < this.loopTriangle; i++) {
 
                     // const circleNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-                    // circleNode.setAttributeNS(null, 'cx', this.center.x + getNormallyDistributedRandomNumber(0, this.circlePosDistStd));
-                    // circleNode.setAttributeNS(null, 'cy', this.center.y + getNormallyDistributedRandomNumber(0, this.circlePosDistStd));
+                    // circleNode.setAttributeNS(null, 'cx', this.center.x + getNormallyDistributedRandomNumber(0, this.trianglePosDistStd));
+                    // circleNode.setAttributeNS(null, 'cy', this.center.y + getNormallyDistributedRandomNumber(0, this.trianglePosDistStd));
                     // circleNode.setAttributeNS(null, 'r', this.circleRadius);
                     // circleNode.setAttributeNS(null, 'fill', 'none');
                     // // circleNode.setAttributeNS(null, 'fill', color_);
                     // circleNode.setAttributeNS(null, 'stroke', tinycolor(color_).darken(3).toHexString());
                     // // circleNode.setAttributeNS(null, 'stroke', "none");
                     // // circleNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
-                    // circleNode.setAttributeNS(null, 'stroke-width', this.circleStroke);
+                    // circleNode.setAttributeNS(null, 'stroke-width', this.triangleStroke);
                     // svgNode.appendChild(circleNode);
 
-                    var centerX = this.center.x + getNormallyDistributedRandomNumber(0, this.circlePosDistStd);
-                    var centerY = this.center.y + getNormallyDistributedRandomNumber(0, this.circlePosDistStd);
+                    var centerX = this.center.x + getNormallyDistributedRandomNumber(0, this.trianglePosDistStd);
+                    var centerY = this.center.y + getNormallyDistributedRandomNumber(0, this.trianglePosDistStd);
                     // var AX = centerX - 4;
                     // var AY = centerY + 4;
                     // var BX = centerX + 4;
                     // var BY = centerY + 4;
                     // var CX = centerX;
                     // var CY = centerY - 6;
-                    var AX = -3;
-                    var AY = 3;
-                    var BX = 3;
-                    var BY = 3;
-                    var CX = 0
-                    var CY = -5;
+                    var AX = -this.widthy;
+                    var AY = this.widthy;
+                    var BX = this.widthy;
+                    var BY = this.widthy;
+                    var CX = 0;
+                    var CY = -this.widthy / 3 * 5;
 
-                    const circleNode = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-                    // circleNode.setAttributeNS(null, 'cx', this.center.x + getNormallyDistributedRandomNumber(0, this.circlePosDistStd));
-                    // circleNode.setAttributeNS(null, 'cy', this.center.y + getNormallyDistributedRandomNumber(0, this.circlePosDistStd));
-                    // circleNode.setAttributeNS(null, 'r', this.circleRadius);
-                    circleNode.setAttributeNS(null, 'points', `${AX}, ${AY} ${BX}, ${BY} ${CX}, ${CY}`);
-                    circleNode.setAttributeNS(null, 'transform', "translate(" + centerX + "," + centerY + "), rotate(" + this.angle * (180 / Math.PI) + ")");
-                    circleNode.setAttributeNS(null, 'fill', 'none');
-                    // circleNode.setAttributeNS(null, 'fill', color_);
-                    circleNode.setAttributeNS(null, 'stroke', tinycolor(color_).darken(3).toHexString());
-                    // circleNode.setAttributeNS(null, 'stroke', "none");
-                    // circleNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
-                    circleNode.setAttributeNS(null, 'stroke-width', this.circleStroke);
-                    svgNode.appendChild(circleNode);
+                    const triangleNode = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+                    // triangleNode.setAttributeNS(null, 'cx', this.center.x + getNormallyDistributedRandomNumber(0, this.trianglePosDistStd));
+                    // triangleNode.setAttributeNS(null, 'cy', this.center.y + getNormallyDistributedRandomNumber(0, this.trianglePosDistStd));
+                    // triangleNode.setAttributeNS(null, 'r', this.circleRadius);
+                    triangleNode.setAttributeNS(null, 'points', `${AX}, ${AY} ${BX}, ${BY} ${CX}, ${CY}`);
+                    triangleNode.setAttributeNS(null, 'transform', "translate(" + centerX + "," + centerY + "), rotate(" + this.angle * (180 / Math.PI) + ")");
+                    triangleNode.setAttributeNS(null, 'fill', 'none');
+                    // triangleNode.setAttributeNS(null, 'fill', color_);
+                    triangleNode.setAttributeNS(null, 'stroke', tinycolor(color_).darken(3).toHexString());
+                    // triangleNode.setAttributeNS(null, 'stroke', "none");
+                    // triangleNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
+                    triangleNode.setAttributeNS(null, 'stroke-width', this.triangleStroke);
+                    svgNode.appendChild(triangleNode);
                 }
 
                 // }

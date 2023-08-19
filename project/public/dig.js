@@ -1,40 +1,37 @@
 class digi {
     constructor(data) {
         this.center = { x: data.x, y: data.y };
-        this.vertexLength = data.vertexLength;
-        this.strokeWeighty = data.strokeWeighty;
+        this.lineVertexLength = data.lineVertexLength;
+        this.lineStrokeWeighty = data.lineStrokeWeighty;
         this.angleMin = data.angleMin;
         this.angleMax = data.angleMax;
-        this.loopCount = data.loopCount;
+        this.lineLoopCount = data.lineLoopCount;
         this.group = data.group;
         this.noiseAngle = data.noiseAngle;
-        this.drawing = data.drawing;
         this.horizonRow = data.horizonRow;
         this.i = data.i;
         this.longBoxCount = data.longBoxCount;
 
-        this.polyOnly = data.polyOnly;
-        this.polyLineAngleDist = data.polyLineAngleDist;
-        this.polyLineVLenMean = data.polyLineVLenMean;
-        this.polyLineVLenStd = data.polyLineVLenStd;
-        this.PolyLineDynamic = data.PolyLineDynamic;
+        this.lineNoiseAngleDist = data.lineNoiseAngleDist;
+        this.lineVertexLengthMean = data.lineVertexLengthMean;
+        this.lineVertexLengthStd = data.lineVertexLengthStd;
+        this.lineNoiseMapDynamic = data.lineNoiseMapDynamic;
 
         this.triangle = data.triangle;
-        // this.circleRadius = data.circleRadius;
         this.triangleStroke = data.triangleStroke;
-        this.loopTriangle = data.loopTriangle;
+        this.triangleLoop = data.triangleLoop;
         this.widthy = data.triangleWidthy;
         this.trianglePosDistStd = data.trianglePosDistStd;
 
         this.rect = data.rect;
-        this.loopRect = data.loopRect;
+        this.rectLoop = data.rectLoop;
         this.rectWidth = data.rectWidth;
         this.rectHeight = data.rectHeight;
         this.rectStroke = data.rectStroke;
         this.rectPosDistStd = data.rectPosDistStd;
 
         this.angle = 0;
-        this.revert = data.revert;
+        this.lineRevert = data.lineRevert;
 
         this.colorNoise = data.colorNoise;
         // this.colorNoiseMin = data.colorNoiseMin;
@@ -46,8 +43,8 @@ class digi {
 
         this.cutOutValue = data.cutOutValue;
         this.colorList = data.colorList;
-        this.angleMean = data.angleMean;
-        this.angleSTD = data.angleSTD;
+        this.lineAngleMean = data.lineAngleMean;
+        this.lineAngleSTD = data.lineAngleSTD;
 
         // this.noiseDistance = this.noiseValueMax - this.noiseValueMin;
         // this.colorStep = this.noiseDistance / this.colorList.length;
@@ -68,16 +65,16 @@ class digi {
         // console.log(this.colorList.length);
 
         // mapping for center - HACK FOR MIN AND MAX
-        if (this.PolyLineDynamic) {
+        if (this.lineNoiseMapDynamic) {
 
             if (this.noiseValue <= 0) {
-                this.vertexlength = map(this.noiseValue, -1, 0, 5, 25)
-                this.loopCount = map(this.noiseValue, -1, 0, 40, 10)
-                this.strokeWeighty = map(this.noiseValue, -1, 0, this.strokeWeighty * 4, this.strokeWeighty)
+                this.lineVertexLength = map(this.noiseValue, -1, 0, 5, 25)
+                this.lineLoopCount = map(this.noiseValue, -1, 0, 40, 10)
+                this.lineStrokeWeighty = map(this.noiseValue, -1, 0, this.lineStrokeWeighty * 4, this.lineStrokeWeighty)
             } else {
-                this.vertexlength = map(this.noiseValue, 0, 1, 25, 5)
-                this.loopCount = map(this.noiseValue, 0, 1, 10, 40)
-                this.strokeWeighty = map(this.noiseValue, -1, 0, this.strokeWeighty * 4, this.strokeWeighty)
+                this.lineVertexLength = map(this.noiseValue, 0, 1, 25, 5)
+                this.lineLoopCount = map(this.noiseValue, 0, 1, 10, 40)
+                this.lineStrokeWeighty = map(this.noiseValue, -1, 0, this.lineStrokeWeighty * 4, this.lineStrokeWeighty)
             }
         }
     }
@@ -136,37 +133,33 @@ class digi {
             var oldPoint = {};
             Object.assign(oldPoint, this.center);
             // correct for offset of center
-            oldPoint.x = oldPoint.x + this.vertexLength / 2
-            // oldPoint.y = oldPoint.y + this.vertexLength / 2
+            oldPoint.x = oldPoint.x + this.lineVertexLength / 2
+            // oldPoint.y = oldPoint.y + this.lineVertexLength / 2
             var newPoint = oldPoint;
             var polyLineString = createCoordString(oldPoint);
 
-            for (var i = 0; i < this.loopCount; i++) {
+            for (var i = 0; i < this.lineLoopCount; i++) {
 
                 if (this.noiseAngle) {
                     // this.angle = map(this.noiseValue, this.noiseValueMin, this.noiseValueMax, 0, 2 * Math.PI) + getRandomFromInterval(-0.5, 0.5);
-                    this.angle = map(this.noiseValue, -1, 1, 0, 2 * Math.PI) + getNormallyDistributedRandomNumber(0, this.polyLineAngleDist);
+                    this.angle = map(this.noiseValue, -1, 1, 0, 2 * Math.PI) + getNormallyDistributedRandomNumber(0, this.lineNoiseAngleDist);
                 } else {
                     // this.angle = getRandomFromInterval(this.angleMin, this.angleMax);
-                    this.angle = getNormallyDistributedRandomNumber(this.angleMean, this.angleSTD);
+                    this.angle = getNormallyDistributedRandomNumber(this.lineAngleMean, this.lineAngleSTD);
                 }
 
                 // make spots not lines
-                if (this.revert) {
+                if (this.lineRevert) {
                     if (i % 2 != 0) {
                         this.angle = this.angle - Math.PI;
                     }
                 }
 
-                // var newPoint = vectorAdd(newPoint, vectorFromAngle(this.angle, this.vertexLength * getRandomFromInterval(0.9, 1.1)));
-                var newPoint = vectorAdd(newPoint, vectorFromAngle(this.angle, this.vertexLength * getNormallyDistributedRandomNumber(this.polyLineVLenMean, this.polyLineVLenStd)));
+                // var newPoint = vectorAdd(newPoint, vectorFromAngle(this.angle, this.lineVertexLength * getRandomFromInterval(0.9, 1.1)));
+                var newPoint = vectorAdd(newPoint, vectorFromAngle(this.angle, this.lineVertexLength * getNormallyDistributedRandomNumber(this.lineVertexLengthMean, this.lineVertexLengthStd)));
 
                 polyLineString = polyLineString.concat(" ", createCoordString(newPoint));
             }
-
-            // which stroke cap?
-            // with svg.js
-            // this.drawing.polyline(polyLineString).fill('none').stroke({ width: this.strokeWeighty, color: color_d });
 
             // color_d = tinycolor(color_d);
 
@@ -195,7 +188,7 @@ class digi {
             // polyNode.setAttributeNS(null, 'fill', 'none');
             // // polyNode.setAttributeNS(null, 'stroke', color_d);
             // polyNode.setAttributeNS(null, 'stroke', color_);
-            // polyNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
+            // polyNode.setAttributeNS(null, 'stroke-width', this.lineStrokeWeighty);
             // // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
             // svgNode.appendChild(polyNode);
 
@@ -203,7 +196,7 @@ class digi {
                 // if (this.rect) {
 
                 // for (var i = 0; i < 20; i++) {
-                for (var i = 0; i < this.loopRect; i++) {
+                for (var i = 0; i < this.rectLoop; i++) {
                     var rectX = this.center.x + getNormallyDistributedRandomNumber(0, this.rectPosDistStd);
                     var rectY = this.center.y + getNormallyDistributedRandomNumber(0, this.rectPosDistStd);
 
@@ -225,7 +218,7 @@ class digi {
             if (this.noiseValue <= 0 && this.triangle) {
                 // if (this.triangle) {
 
-                for (var i = 0; i < this.loopTriangle; i++) {
+                for (var i = 0; i < this.triangleLoop; i++) {
 
                     // const circleNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
                     // circleNode.setAttributeNS(null, 'cx', this.center.x + getNormallyDistributedRandomNumber(0, this.trianglePosDistStd));
@@ -235,7 +228,7 @@ class digi {
                     // // circleNode.setAttributeNS(null, 'fill', color_);
                     // circleNode.setAttributeNS(null, 'stroke', tinycolor(color_).darken(3).toHexString());
                     // // circleNode.setAttributeNS(null, 'stroke', "none");
-                    // // circleNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
+                    // // circleNode.setAttributeNS(null, 'stroke-width', this.lineStrokeWeighty);
                     // circleNode.setAttributeNS(null, 'stroke-width', this.triangleStroke);
                     // svgNode.appendChild(circleNode);
 
@@ -264,7 +257,7 @@ class digi {
                     // triangleNode.setAttributeNS(null, 'fill', color_);
                     triangleNode.setAttributeNS(null, 'stroke', tinycolor(color_).darken(3).toHexString());
                     // triangleNode.setAttributeNS(null, 'stroke', "none");
-                    // triangleNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
+                    // triangleNode.setAttributeNS(null, 'stroke-width', this.lineStrokeWeighty);
                     triangleNode.setAttributeNS(null, 'stroke-width', this.triangleStroke);
                     svgNode.appendChild(triangleNode);
                 }
@@ -279,7 +272,7 @@ class digi {
                 //         polyNode.setAttributeNS(null, 'fill', 'none');
                 //         // polyNode.setAttributeNS(null, 'stroke', color_d);
                 //         polyNode.setAttributeNS(null, 'stroke', tinycolor(color_).desaturate(p * 30).toHexString());
-                //         polyNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
+                //         polyNode.setAttributeNS(null, 'stroke-width', this.lineStrokeWeighty);
                 //         // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
                 //         svgNode.appendChild(polyNode);
                 //     }
@@ -287,16 +280,14 @@ class digi {
             }
 
             // POLYLINE
-            // if (this.noiseValue >= -0.5 && this.noiseValue <= 0.5 || this.polyOnly) {
             const polyNode = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
             polyNode.setAttributeNS(null, 'points', polyLineString);
             polyNode.setAttributeNS(null, 'fill', 'none');
             // polyNode.setAttributeNS(null, 'stroke', color_d);
             polyNode.setAttributeNS(null, 'stroke', color_);
-            polyNode.setAttributeNS(null, 'stroke-width', this.strokeWeighty);
+            polyNode.setAttributeNS(null, 'stroke-width', this.lineStrokeWeighty);
             // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
             svgNode.appendChild(polyNode);
-            // }
 
 
             // DEBUG VIEW CENTER

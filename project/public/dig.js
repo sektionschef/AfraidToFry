@@ -1,11 +1,17 @@
 class digi {
     constructor(data) {
         this.center = { x: data.x, y: data.y };
-        this.lineVertexLength = data.lineVertexLength;
-        this.lineStrokeWeighty = data.lineStrokeWeighty;
+        this.lineVertexLength = 0; // initial.value;
+        this.lineVertexLengthMin = data.lineVertexLengthMin;
+        this.lineVertexLengthMax = data.lineVertexLengthMax;
+        this.lineStrokeWeighty = 0; // inital value
+        this.lineStrokeWeightyMin = data.lineStrokeWeightyMin;
+        this.lineStrokeWeightyMax = data.lineStrokeWeightyMax;
         this.angleMin = data.angleMin;
         this.angleMax = data.angleMax;
-        this.lineLoopCount = data.lineLoopCount;
+        this.lineLoopCount = 0; // initial value;
+        this.lineLoopCountMin = data.lineLoopCountMin;
+        this.lineLoopCountMax = data.lineLoopCountMax;
         this.group = data.group;
         this.noiseAngle = data.noiseAngle;
         this.horizonRow = data.horizonRow;
@@ -68,14 +74,18 @@ class digi {
         if (this.lineNoiseMapDynamic) {
 
             if (this.noiseValue <= 0) {
-                this.lineVertexLength = map(this.noiseValue, -1, 0, 5, 25)
-                this.lineLoopCount = map(this.noiseValue, -1, 0, 40, 10)
-                this.lineStrokeWeighty = map(this.noiseValue, -1, 0, this.lineStrokeWeighty * 4, this.lineStrokeWeighty)
+                this.lineVertexLength = map(this.noiseValue, -1, 0, this.lineVertexLengthMin, this.lineVertexLengthMax);
+                this.lineLoopCount = map(this.noiseValue, -1, 0, this.lineLoopCountMax, this.lineLoopCountMin);
+                this.lineStrokeWeighty = map(this.noiseValue, -1, 0, this.lineStrokeWeightyMax, this.lineStrokeWeightyMin);
             } else {
-                this.lineVertexLength = map(this.noiseValue, 0, 1, 25, 5)
-                this.lineLoopCount = map(this.noiseValue, 0, 1, 10, 40)
-                this.lineStrokeWeighty = map(this.noiseValue, -1, 0, this.lineStrokeWeighty * 4, this.lineStrokeWeighty)
+                this.lineVertexLength = map(this.noiseValue, 0, 1, this.lineVertexLengthMax, this.lineVertexLengthMin);
+                this.lineLoopCount = map(this.noiseValue, 0, 1, this.lineLoopCountMin, this.lineLoopCountMax);
+                this.lineStrokeWeighty = map(this.noiseValue, -1, 0, this.lineStrokeWeightyMax, this.lineStrokeWeightyMin);
             }
+        } else {
+            this.lineVertexLength = map(this.noiseValue, -1, 1, this.lineVertexLengthMin, this.lineVertexLengthMax);
+            this.lineLoopCount = map(this.noiseValue, -1, 1, this.lineLoopCountMin, this.lineLoopCountMax);
+            this.lineStrokeWeighty = map(this.noiseValue, -1, 1, this.lineStrokeWeightyMin, this.lineStrokeWeightyMax);
         }
     }
 

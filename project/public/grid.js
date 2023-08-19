@@ -122,7 +122,7 @@ class Grid {
 
             this.loopBase();
             this.loopDetail();
-            // this.loop8();
+            this.loop8();
 
         }
     }
@@ -493,85 +493,85 @@ class Grid {
             //     }).draw();
             // }
 
-            if (this.boxes[i].aboveHorizon) {
-                // if (fxrand() > 0.05) { var patty = this.paletteRA.palette } else { var patty = this.paletteRAprot.palette };
-                new digi({
-                    x: this.boxes[i].center.x,
-                    y: this.boxes[i].center.y,
-                    noiseValue: this.boxes[i].noiseValueRA,
-                    // colorNoise: this.boxes[i].noiseValueColorA,
-                    colorNoise: this.boxes[i].noiseValueRA,
-                    vertexLength: 160 / this.shortBoxCount * 30, // map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, 10, 30), // 30,
-                    strokeWeighty: 160 / this.shortBoxCount * 0.3, //map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, 0.05, 0.25), // 0.3,
-                    angleMean: Math.PI / 1,
-                    angleSTD: Math.PI / 56,
-                    polyOnly: true,
-                    polyLineAngleDist: 0.3,
-                    polyLineVLenMean: 0.9,
-                    polyLineVLenStd: 0.05,
-                    triangle: false,
-                    // circleRadius: 160 / this.shortBoxCount * 10,
-                    triangleStroke: 160 / this.shortBoxCount * 0.25,
-                    loopTriangle: map(this.boxes[i].noiseValueRA, -1, 1, 3, 20),
-                    trianglePosDistStd: 160 / this.shortBoxCount * 5,
-                    rect: false,
-                    loopRect: 1,
-                    rectWidth: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 1, 5, 30), // 12,
-                    rectHeight: 160 / this.shortBoxCount * 6,
-                    rectStroke: 160 / this.shortBoxCount * 0.4,
-                    rectPosDistStd: 160 / this.shortBoxCount * 5,
-                    revert: true,
-                    cutOutValue: -1,
-                    loopCount: map(this.boxes[i].noiseValueRA, -1, 1, 20, 50), // 20,
-                    colorList: this.paletteA.palette,
-                    // colorList: this.paletteOne.palette,
-                    // colorList: patty,
-                    noiseAngle: false,
-                    group: "",
-                    drawing: drawing,
-                    horizonRow: this.horizonRow,
-                    i: i,
-                    longBoxCount: this.longBoxCount,
-                }).draw();
-            } else {
-                new digi({
-                    x: this.boxes[i].center.x,
-                    y: this.boxes[i].center.y,
-                    noiseValue: this.boxes[i].noiseValueSA,
-                    // colorNoise: this.boxes[i].noiseValueColorB,
-                    colorNoise: this.boxes[i].noiseValueSA,
-                    vertexLength: 160 / this.shortBoxCount * 30, // map(this.boxes[i].noiseValueSA, -1, 1, 30, 50), // 30, // sau
-                    strokeWeighty: 160 / this.shortBoxCount * 0.3, //map(this.boxes[i].noiseValueSA, this.noiseSAMin, this.noiseSAMax, 0.05, 0.25), // 0.3,
-                    angleMean: Math.PI / 1,
-                    angleSTD: Math.PI / 56,
-                    polyOnly: true,
-                    polyLineAngleDist: 0.3,
-                    polyLineVLenMean: 0.9,
-                    polyLineVLenStd: 0.05,
-                    circle: false,
-                    circleRadius: 160 / this.shortBoxCount * 10,
-                    triangleStroke: 160 / this.shortBoxCount * 0.25,
-                    loopCircle: map(this.boxes[i].noiseValueRA, -1, 1, 3, 20),
-                    trianglePosDistStd: 160 / this.shortBoxCount * 5,
-                    rect: false,
-                    loopRect: 10,
-                    rectWidth: 160 / this.shortBoxCount * 12,
-                    rectHeight: 160 / this.shortBoxCount * 6,
-                    rectStroke: 160 / this.shortBoxCount * 0.4,
-                    rectPosDistStd: 160 / this.shortBoxCount * 5,
-                    revert: true,
-                    cutOutValue: -1,
-                    loopCount: map(this.boxes[i].noiseValueSA, -1, 1, 20, 50), // 20,
-                    colorList: this.paletteB.palette,
-                    // colorList: this.paletteOne.palette,
-                    noiseAngle: false,
-                    group: "",
-                    drawing: drawing,
-                    horizonRow: this.horizonRow,
-                    i: i,
-                    longBoxCount: this.longBoxCount,
-                }).draw();
-            }
+            // if (this.boxes[i].aboveHorizon) {
+            // if (fxrand() > 0.05) { var patty = this.paletteRA.palette } else { var patty = this.paletteRAprot.palette };
+            new digi({
+                x: this.boxes[i].center.x,
+                y: this.boxes[i].center.y,
+                noiseValue: this.boxes[i].noiseValueRA,
+                // colorNoise: this.boxes[i].noiseValueColorA,
+                colorNoise: this.boxes[i].noiseValueRA,
+                vertexLength: 160 / this.shortBoxCount * 30, // map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, 10, 30), // 30,
+                strokeWeighty: 160 / this.shortBoxCount * 0.3, //map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, 0.05, 0.25), // 0.3,
+                angleMean: Math.PI / 1,
+                angleSTD: Math.PI / 56,
+                polyOnly: true,
+                polyLineAngleDist: 0.3,
+                polyLineVLenMean: 0.9,
+                polyLineVLenStd: 0.05,
+                triangle: false,
+                // circleRadius: 160 / this.shortBoxCount * 10,
+                triangleStroke: 160 / this.shortBoxCount * 0.25,
+                loopTriangle: map(this.boxes[i].noiseValueRA, -1, 1, 3, 20),
+                trianglePosDistStd: 160 / this.shortBoxCount * 5,
+                rect: false,
+                loopRect: 1,
+                rectWidth: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 1, 5, 30), // 12,
+                rectHeight: 160 / this.shortBoxCount * 6,
+                rectStroke: 160 / this.shortBoxCount * 0.4,
+                rectPosDistStd: 160 / this.shortBoxCount * 5,
+                revert: true,
+                cutOutValue: -1,
+                loopCount: map(this.boxes[i].noiseValueRA, -1, 1, 20, 50), // 20,
+                colorList: this.paletteA.palette,
+                // colorList: this.paletteOne.palette,
+                // colorList: patty,
+                noiseAngle: false,
+                group: "",
+                drawing: drawing,
+                horizonRow: this.horizonRow,
+                i: i,
+                longBoxCount: this.longBoxCount,
+            }).draw();
+            // } else {
+            //     new digi({
+            //         x: this.boxes[i].center.x,
+            //         y: this.boxes[i].center.y,
+            //         noiseValue: this.boxes[i].noiseValueSA,
+            //         // colorNoise: this.boxes[i].noiseValueColorB,
+            //         colorNoise: this.boxes[i].noiseValueSA,
+            //         vertexLength: 160 / this.shortBoxCount * 30, // map(this.boxes[i].noiseValueSA, -1, 1, 30, 50), // 30, // sau
+            //         strokeWeighty: 160 / this.shortBoxCount * 0.3, //map(this.boxes[i].noiseValueSA, this.noiseSAMin, this.noiseSAMax, 0.05, 0.25), // 0.3,
+            //         angleMean: Math.PI / 1,
+            //         angleSTD: Math.PI / 56,
+            //         polyOnly: true,
+            //         polyLineAngleDist: 0.3,
+            //         polyLineVLenMean: 0.9,
+            //         polyLineVLenStd: 0.05,
+            //         circle: false,
+            //         circleRadius: 160 / this.shortBoxCount * 10,
+            //         triangleStroke: 160 / this.shortBoxCount * 0.25,
+            //         loopCircle: map(this.boxes[i].noiseValueRA, -1, 1, 3, 20),
+            //         trianglePosDistStd: 160 / this.shortBoxCount * 5,
+            //         rect: false,
+            //         loopRect: 10,
+            //         rectWidth: 160 / this.shortBoxCount * 12,
+            //         rectHeight: 160 / this.shortBoxCount * 6,
+            //         rectStroke: 160 / this.shortBoxCount * 0.4,
+            //         rectPosDistStd: 160 / this.shortBoxCount * 5,
+            //         revert: true,
+            //         cutOutValue: -1,
+            //         loopCount: map(this.boxes[i].noiseValueSA, -1, 1, 20, 50), // 20,
+            //         colorList: this.paletteB.palette,
+            //         // colorList: this.paletteOne.palette,
+            //         noiseAngle: false,
+            //         group: "",
+            //         drawing: drawing,
+            //         horizonRow: this.horizonRow,
+            //         i: i,
+            //         longBoxCount: this.longBoxCount,
+            //     }).draw();
+            // }
 
 
         }
@@ -593,131 +593,85 @@ class Grid {
 
             this.paletteA = this.paletteRA
             this.paletteB = this.paletteRB
-            // if (fxrand() > 0.05) { this.paletteA = this.paletteRA } else { this.paletteA = this.paletteOne }
-            // if (fxrand() > 0.05) { this.paletteA = this.paletteRA } else { this.paletteA = this.paletteRB }
-            // if (fxrand() > 0.05) { this.paletteB = this.paletteRB } else { this.paletteB = this.paletteOne }
-            // if (fxrand() > 0.05) { this.paletteB = this.paletteRB } else { this.paletteB = this.paletteRA }
-
 
 
             // if (this.boxes[i].aboveHorizon) {
-            //     new zigi(
-            //         {
-            //             x: this.boxes[i].center.x,
-            //             y: this.boxes[i].center.y,
-            //             noiseValue: this.boxes[i].noiseValueRA,
-            //             colorNoise: this.boxes[i].noiseValueColorA,
-            //             vertexLength: 80 / this.shortBoxCount * 10, // map(this.boxes[i].noiseValue8, -1, 1, 5, 10), // 15,
-            //             strokeWeighty: 80 / this.shortBoxCount * 0.2, // map(this.boxes[i].noiseValue8, -1, 1, 0.1, 0.3), // 0.2,
-            //             angleMin: getRandomFromList([Math.PI, Math.PI / 8, Math.PI / 4]),
-            //             angleMax: getRandomFromList([0, Math.PI / 2, Math.PI / 6]),
-            //             cutOutValue: -1,
-            //             loopCount: 10, //map(this.boxes[i].noiseValueRA, -1, 1, 1, 10),
-            //             colorList: this.paletteA.palette,
-            //             // colorList: ["#161616", "#353535", "#727272", "#8d8c8c", "#adadad", "#c7c7c7"],
-            //             // colorList: ["#5f5f5f"],
-            //             group: "",
-            //         }
-            //     ).draw();
+            new digi({
+                x: this.boxes[i].center.x * getNormallyDistributedRandomNumber(1, 0),
+                y: this.boxes[i].center.y * getNormallyDistributedRandomNumber(1, 0),
+                noiseValue: this.boxes[i].noiseValueRA,
+                // colorNoise: this.boxes[i].noiseValueColorA,
+                colorNoise: this.boxes[i].noiseValueRA,
+                vertexLength: 160 / this.shortBoxCount * 8, // map(this.boxes[i].noiseValueRA, -1, 1, 2, 10), // 15,
+                strokeWeighty: 160 / this.shortBoxCount * 0.1, // map(this.boxes[i].noiseValueRA, -1, 1, 0.1, 0.15), // 0.1,
+                angleMean: Math.PI / 1,
+                angleSTD: Math.PI / 56,
+                polyOnly: false,
+                polyLineAngleDist: 0.2,
+                polyLineVLenMean: 1,
+                polyLineVLenStd: map(this.boxes[i].noiseValueRA, -1, 1, 0.15, 0.05), //0.05,
+                triangle: true,
+                // circleRadius: 4, // 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 0, 3, 1.5), // 2,
+                triangleStroke: 160 / this.shortBoxCount * 0.2, // map(this.boxes[i].noiseValueRA, -1, 0, 0.3, 0.1), // 0.08
+                loopTriangle: 40, //map(this.boxes[i].noiseValueRA, -1, 0, 60, 30), // 40,
+                triangleWidthy: 160 / this.shortBoxCount * 1.5,
+                trianglePosDistStd: 160 / this.shortBoxCount * 4, // map(this.boxes[i].noiseValueRA, -1, 0, 2, 5),
+                rect: true,
+                loopRect: 40, // map(this.boxes[i].noiseValueRA, 0, 1, 10, 60), //30,
+                rectWidth: 160 / this.shortBoxCount * 5, // map(this.boxes[i].noiseValueRA, 0, 1, 6, 9),// 6,
+                rectHeight: 160 / this.shortBoxCount * 1.5, // map(this.boxes[i].noiseValueRA, 0, 1, 2, 3),// 2,
+                rectStroke: 0.3, // 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 0.2, 0.05), // 0.08
+                rectPosDistStd: 160 / this.shortBoxCount * 4, // map(this.boxes[i].noiseValueRA, -1, 0, 1, 4), // 5
+                revert: true,
+                cutOutValue: -1,
+                loopCount: map(this.boxes[i].noiseValueRA, -1, 1, 10, 40), // 20,
+                colorList: this.paletteA.palette,
+                noiseAngle: true,
+                group: "",
+                drawing: drawing,
+                horizonRow: this.horizonRow,
+                i: i,
+                longBoxCount: this.longBoxCount,
+                PolyLineDynamic: true,
+            }).draw();
             // } else {
-            //     new zigi(
-            //         {
-            //             x: this.boxes[i].center.x,
-            //             y: this.boxes[i].center.y,
-            //             noiseValue: this.boxes[i].noiseValueSA,
-            //             colorNoise: this.boxes[i].noiseValueColorB,
-            //             vertexLength: 80 / this.shortBoxCount * 10, // map(this.boxes[i].noiseValue8, -1, 1, 5, 10), // 15,
-            //             strokeWeighty: 80 / this.shortBoxCount * 0.2, // map(this.boxes[i].noiseValue8, -1, 1, 0.1, 0.3), // 0.2,
-            //             angleMin: getRandomFromList([Math.PI, Math.PI / 8, Math.PI / 4]),
-            //             angleMax: getRandomFromList([0, Math.PI / 2, Math.PI / 6]),
-            //             cutOutValue: -1,
-            //             loopCount: 10, //map(this.boxes[i].noiseValueRA, -1, 1, 1, 10),
-            //             colorList: this.paletteB.palette,
-            //             // colorList: ["#161616", "#353535", "#727272", "#8d8c8c", "#adadad", "#c7c7c7"],
-            //             // colorList: ["#5f5f5f"],
-            //             group: "",
-            //         }
-            //     ).draw();
+            // new digi({
+            //     x: this.boxes[i].center.x * getNormallyDistributedRandomNumber(1, 0),
+            //     y: this.boxes[i].center.y * getNormallyDistributedRandomNumber(1, 0),
+            //     noiseValue: this.boxes[i].noiseValueSA,
+            //     colorNoise: this.boxes[i].noiseValueColorB,
+            //     vertexLength: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueSA, -1, 1, 5, 15), // 15,
+            //     strokeWeighty: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueSA, -1, 1, 0.1, 0.25), // 0.1,
+            //     angleMean: Math.PI / 1,
+            //     angleSTD: Math.PI / 56,
+            //     polyOnly: false,
+            //     polyLineAngleDist: 0.1,
+            //     polyLineVLenMean: 1,
+            //     polyLineVLenStd: 0.05,
+            //     triangle: true,
+            //     circleRadius: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueSA, -1, 0, 4, 2),
+            //     triangleStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueSA, -1, 0, 0.2, 0.05),
+            //     loopCircle: map(this.boxes[i].noiseValueSA, -1, 0, 60, 10), // 40,,
+            //     triangleWidthy: 3,
+            //     trianglePosDistStd: 160 / this.shortBoxCount * 5,
+            //     rect: true,
+            //     loopRect: map(this.boxes[i].noiseValueSA, 0, 1, 10, 60), //30,
+            //     rectWidth: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueSA, 0, 1, 3, 6),
+            //     rectHeight: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueSA, 0, 1, 1, 3),
+            //     rectStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueSA, 0, 1, 0.2, 0.05), // 0.08
+            //     rectPosDistStd: 160 / this.shortBoxCount * 5,
+            //     revert: true,
+            //     cutOutValue: -1,
+            //     loopCount: 20, // map(this.boxes[i].noiseValueSA, -0.5, 0.5, 10, 30), // 20,
+            //     colorList: this.paletteB.palette,
+            //     noiseAngle: true,
+            //     group: "",
+            //     drawing: drawing,
+            //     horizonRow: this.horizonRow,
+            //     i: i,
+            //     longBoxCount: this.longBoxCount,
+            // }).draw();
             // }
-
-
-            if (this.boxes[i].aboveHorizon) {
-                new digi({
-                    x: this.boxes[i].center.x * getNormallyDistributedRandomNumber(1, 0),
-                    y: this.boxes[i].center.y * getNormallyDistributedRandomNumber(1, 0),
-                    noiseValue: this.boxes[i].noiseValueRA,
-                    // colorNoise: this.boxes[i].noiseValueColorA,
-                    colorNoise: this.boxes[i].noiseValueRA,
-                    vertexLength: 160 / this.shortBoxCount * 8, // map(this.boxes[i].noiseValueRA, -1, 1, 2, 10), // 15,
-                    strokeWeighty: 160 / this.shortBoxCount * 0.1, // map(this.boxes[i].noiseValueRA, -1, 1, 0.1, 0.15), // 0.1,
-                    angleMean: Math.PI / 1,
-                    angleSTD: Math.PI / 56,
-                    polyOnly: false,
-                    polyLineAngleDist: 0.2,
-                    polyLineVLenMean: 1,
-                    polyLineVLenStd: map(this.boxes[i].noiseValueRA, -1, 1, 0.15, 0.05), //0.05,
-                    triangle: true,
-                    // circleRadius: 4, // 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 0, 3, 1.5), // 2,
-                    triangleStroke: 160 / this.shortBoxCount * 0.2, // map(this.boxes[i].noiseValueRA, -1, 0, 0.3, 0.1), // 0.08
-                    loopTriangle: 40, //map(this.boxes[i].noiseValueRA, -1, 0, 60, 30), // 40,
-                    triangleWidthy: 160 / this.shortBoxCount * 1.5,
-                    trianglePosDistStd: 160 / this.shortBoxCount * 4, // map(this.boxes[i].noiseValueRA, -1, 0, 2, 5),
-                    rect: true,
-                    loopRect: 40, // map(this.boxes[i].noiseValueRA, 0, 1, 10, 60), //30,
-                    rectWidth: 160 / this.shortBoxCount * 5, // map(this.boxes[i].noiseValueRA, 0, 1, 6, 9),// 6,
-                    rectHeight: 160 / this.shortBoxCount * 1.5, // map(this.boxes[i].noiseValueRA, 0, 1, 2, 3),// 2,
-                    rectStroke: 0.3, // 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 0.2, 0.05), // 0.08
-                    rectPosDistStd: 160 / this.shortBoxCount * 4, // map(this.boxes[i].noiseValueRA, -1, 0, 1, 4), // 5
-                    revert: true,
-                    cutOutValue: -1,
-                    loopCount: map(this.boxes[i].noiseValueRA, -1, 1, 10, 40), // 20,
-                    colorList: this.paletteA.palette,
-                    noiseAngle: true,
-                    group: "",
-                    drawing: drawing,
-                    horizonRow: this.horizonRow,
-                    i: i,
-                    longBoxCount: this.longBoxCount,
-                    PolyLineDynamic: true,
-                }).draw();
-            } else {
-                new digi({
-                    x: this.boxes[i].center.x * getNormallyDistributedRandomNumber(1, 0),
-                    y: this.boxes[i].center.y * getNormallyDistributedRandomNumber(1, 0),
-                    noiseValue: this.boxes[i].noiseValueSA,
-                    colorNoise: this.boxes[i].noiseValueColorB,
-                    vertexLength: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueSA, -1, 1, 5, 15), // 15,
-                    strokeWeighty: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueSA, -1, 1, 0.1, 0.25), // 0.1,
-                    angleMean: Math.PI / 1,
-                    angleSTD: Math.PI / 56,
-                    polyOnly: false,
-                    polyLineAngleDist: 0.1,
-                    polyLineVLenMean: 1,
-                    polyLineVLenStd: 0.05,
-                    triangle: true,
-                    circleRadius: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueSA, -1, 0, 4, 2),
-                    triangleStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueSA, -1, 0, 0.2, 0.05),
-                    loopCircle: map(this.boxes[i].noiseValueSA, -1, 0, 60, 10), // 40,,
-                    triangleWidthy: 3,
-                    trianglePosDistStd: 160 / this.shortBoxCount * 5,
-                    rect: true,
-                    loopRect: map(this.boxes[i].noiseValueSA, 0, 1, 10, 60), //30,
-                    rectWidth: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueSA, 0, 1, 3, 6),
-                    rectHeight: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueSA, 0, 1, 1, 3),
-                    rectStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueSA, 0, 1, 0.2, 0.05), // 0.08
-                    rectPosDistStd: 160 / this.shortBoxCount * 5,
-                    revert: true,
-                    cutOutValue: -1,
-                    loopCount: 20, // map(this.boxes[i].noiseValueSA, -0.5, 0.5, 10, 30), // 20,
-                    colorList: this.paletteB.palette,
-                    noiseAngle: true,
-                    group: "",
-                    drawing: drawing,
-                    horizonRow: this.horizonRow,
-                    i: i,
-                    longBoxCount: this.longBoxCount,
-                }).draw();
-            }
 
             if (
                 this.boxes[i].height >= (this.horizonRow - 3) &&
@@ -727,9 +681,9 @@ class Grid {
                 new digi({
                     x: this.boxes[i].center.x * getNormallyDistributedRandomNumber(1, 0),
                     y: this.boxes[i].center.y * getNormallyDistributedRandomNumber(1, 0),
-                    noiseValue: this.boxes[i].noiseValueRA,
+                    noiseValue: 0, // this.boxes[i].noiseValueRA,
                     // colorNoise: this.boxes[i].noiseValueColorA,
-                    colorNoise: this.boxes[i].noiseValueRA,
+                    colorNoise: 0, // this.boxes[i].noiseValueRA,
                     vertexLength: 160 / this.shortBoxCount * 15, // map(this.boxes[i].noiseValueRA, -1, 1, 5, 15), // 15,
                     strokeWeighty: 160 / this.shortBoxCount * 0.5, //map(this.boxes[i].noiseValueRA, -1, 1, 0.05, 0.25), // 0.1,
                     angleMean: Math.PI / 1,
@@ -753,7 +707,7 @@ class Grid {
                     revert: true,
                     cutOutValue: -1,
                     loopCount: 50, // map(this.boxes[i].noiseValueRA, -0.5, 0.5, 10, 40), // 20,
-                    colorList: ["#cccccc"],
+                    colorList: ["#ebebeb"],
                     noiseAngle: false,
                     group: "",
                     drawing: drawing,
@@ -764,47 +718,6 @@ class Grid {
                 }).draw();
             }
 
-            if (this.boxes[i].horizon) {
-                new digi({
-                    x: this.boxes[i].center.x * getNormallyDistributedRandomNumber(1, 0),
-                    y: this.boxes[i].center.y * getNormallyDistributedRandomNumber(1, 0),
-                    noiseValue: this.boxes[i].noiseValueRA,
-                    // colorNoise: this.boxes[i].noiseValueColorA,
-                    colorNoise: this.boxes[i].noiseValueRA,
-                    vertexLength: 160 / this.shortBoxCount * 15, //map(this.boxes[i].noiseValueRA, -1, 1, 5, 15), // 15,
-                    strokeWeighty: 160 / this.shortBoxCount * 0.5, //map(this.boxes[i].noiseValueRA, -1, 1, 0.05, 0.25), // 0.1,
-                    angleMean: Math.PI / 1,
-                    angleSTD: map(this.boxes[i].noiseValueRA, -1, 1, Math.PI / 46, Math.PI / 26), // Math.PI / 56, 
-                    polyOnly: true,
-                    polyLineAngleDist: 0.1,
-                    polyLineVLenMean: 1,
-                    polyLineVLenStd: 0.05,
-                    triangle: false,
-                    // circleRadius: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 0, 3, 1), // 2,
-                    triangleStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 0, 0.2, 0.05), // 0.08
-                    loopTriangle: 40, //map(this.boxes[i].noiseValueRA, -1, 0, 60, 30), // 40,
-                    triangleWidthy: 3,
-                    trianglePosDistStd: 160 / this.shortBoxCount * 5,
-                    rect: false,
-                    loopRect: map(this.boxes[i].noiseValueRA, 0, 1, 10, 60), //30,
-                    rectWidth: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 2, 5),// 6,
-                    rectHeight: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 1, 2),// 2,
-                    rectStroke: 0.08, // 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 0.1, 0.05), // 0.08
-                    rectPosDistStd: 160 / this.shortBoxCount * 5,
-                    revert: true,
-                    cutOutValue: -1,
-                    loopCount: 50, // map(this.boxes[i].noiseValueRA, -0.5, 0.5, 10, 40), // 20,
-                    colorList: ["#242424"],
-                    noiseAngle: false,
-                    group: "",
-                    drawing: drawing,
-                    horizonRow: this.horizonRow,
-                    i: i,
-                    longBoxCount: this.longBoxCount,
-                    PolyLineDynamic: false,
-                }).draw();
-
-            }
 
         }
 
@@ -820,6 +733,47 @@ class Grid {
 
             if (this.drawSkipMargin(this.boxes[i])) {
                 continue;
+            }
+
+            if (this.boxes[i].horizon) {
+                new digi({
+                    x: this.boxes[i].center.x * getNormallyDistributedRandomNumber(1, 0),
+                    y: this.boxes[i].center.y * getNormallyDistributedRandomNumber(1, 0),
+                    noiseValue: this.boxes[i].noiseValueRA,
+                    // colorNoise: this.boxes[i].noiseValueColorA,
+                    colorNoise: this.boxes[i].noiseValueRA,
+                    vertexLength: 160 / this.shortBoxCount * 15, //map(this.boxes[i].noiseValueRA, -1, 1, 5, 15), // 15,
+                    strokeWeighty: 160 / this.shortBoxCount * 0.1, //map(this.boxes[i].noiseValueRA, -1, 1, 0.05, 0.25), // 0.1,
+                    angleMean: Math.PI / 1,
+                    angleSTD: map(this.boxes[i].noiseValueRA, -1, 1, Math.PI / 56, Math.PI / 56), // Math.PI / 56, 
+                    polyOnly: true,
+                    polyLineAngleDist: 0.1,
+                    polyLineVLenMean: 1,
+                    polyLineVLenStd: 0.05,
+                    triangle: true,
+                    // circleRadius: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 0, 3, 1), // 2,
+                    triangleStroke: 160 / this.shortBoxCount * 0.2, // map(this.boxes[i].noiseValueRA, -1, 0, 0.2, 0.05), // 0.08
+                    loopTriangle: 40, //map(this.boxes[i].noiseValueRA, -1, 0, 60, 30), // 40,
+                    triangleWidthy: 160 / this.shortBoxCount * 1.5,
+                    trianglePosDistStd: 160 / this.shortBoxCount * 3,
+                    rect: true,
+                    loopRect: 40, //map(this.boxes[i].noiseValueRA, 0, 1, 10, 60), //30,
+                    rectWidth: 160 / this.shortBoxCount * 5, // map(this.boxes[i].noiseValueRA, 0, 1, 2, 5),// 6,
+                    rectHeight: 160 / this.shortBoxCount * 1.5, // map(this.boxes[i].noiseValueRA, 0, 1, 1, 2),// 2,
+                    rectStroke: 0.3, // 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, 0, 1, 0.1, 0.05), // 0.08
+                    rectPosDistStd: 160 / this.shortBoxCount * 3,
+                    revert: true,
+                    cutOutValue: -1,
+                    loopCount: map(this.boxes[i].noiseValueRA, -1, 1, 10, 20), // 20,
+                    colorList: ["#575757", "#3f3f3f", "#575757"],
+                    noiseAngle: false,
+                    group: "",
+                    drawing: drawing,
+                    horizonRow: this.horizonRow,
+                    i: i,
+                    longBoxCount: this.longBoxCount,
+                    PolyLineDynamic: true,
+                }).draw();
             }
 
             // if (this.boxes[i].aboveHorizon) {

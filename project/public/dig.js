@@ -177,14 +177,14 @@ class digi {
             // var darknessBoost = 25;
             // var desaturationBoost = 20;
             var criticalDistance = 20;//30;
-            var darknessBoost = 20;
+            var darknessBoost = 40;
             var desaturationBoost = 20;
 
-            if (distanceFromHorizon < criticalDistance) {
-                var color_ = tinycolor(color_d).clone().lighten(map(distanceFromHorizon, 0, criticalDistance, darknessBoost, 0)).desaturate(map(distanceFromHorizon, 0, criticalDistance, desaturationBoost, 0)).toHexString();
-            } else {
-                var color_ = color_d;
-            }
+            // if (distanceFromHorizon < criticalDistance) {
+            //     var color_ = tinycolor(color_d).clone().lighten(map(distanceFromHorizon, 0, criticalDistance, darknessBoost, 0)).desaturate(map(distanceFromHorizon, 0, criticalDistance, desaturationBoost, 0)).toHexString();
+            // } else {
+            var color_ = color_d;
+            // }
 
             // without svg.js
             const svgNode = document.getElementById('svgNode');

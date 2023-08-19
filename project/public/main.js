@@ -11,7 +11,7 @@ var OVERSHOOTSTATS = {
 
 let TITLE = "afraid to fry";
 let ARTIST = "Stefan Schwaha, @sektionschef";
-let DESCRIPTION = "Javascript on html canvas";
+let DESCRIPTION = "javascript on html canvas";
 let WEBSITE = "https://digitalitility.com";
 let YEAR = "2023";
 let PRICE = "ꜩ 4";

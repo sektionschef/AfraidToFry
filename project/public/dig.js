@@ -93,11 +93,14 @@ class digi {
 
         if (this.noiseValue > this.cutOutValue) {
 
-            // let colorSelect = Math.round(map(this.noiseValue, this.noiseValueMin, this.noiseValueMax, 0, (this.colorList.length - 1)));
+            let colorSelect = Math.round(map(this.noiseValue * 100, -100, 100, 0, (this.colorList.length - 1)));
+            // console.log(this.noiseValue);
+            // console.log(colorSelect);
+
             // let color_d = this.colorList[colorSelect];
 
-            let colorSelect = 0
-            let textureSelect = 0
+            // let colorSelect = 0
+            // let textureSelect = 0
 
             // for (var i = 1; i < (this.colorList.length + 1); i++) {
             //     // console.log("step: " + (this.noiseValueMin + this.colorStep * i))
@@ -107,13 +110,13 @@ class digi {
             //     }
             // }
 
-            for (var i = 0; i < (this.colorList.length); i++) {
-                // console.log("step: " + (this.noiseValueMin + this.colorStep * i))
-                if (this.colorNoise < -1 + this.colorStep * i) {
-                    colorSelect = i;
-                    break;
-                }
-            }
+            // for (var i = 0; i < (this.colorList.length); i++) {
+            //     // console.log("step: " + (this.noiseValueMin + this.colorStep * i))
+            //     if (this.colorNoise < -1 + this.colorStep * i) {
+            //         colorSelect = i;
+            //         break;
+            //     }
+            // }
             // console.log(colorSelect);
 
             // for (var i = 0; i <= this.textureStepCount; i++) {
@@ -123,15 +126,15 @@ class digi {
             //         break;
             //     }
             // }
-            if (this.noiseValue < -0.5) {
-                textureSelect = 1;
-            } else if (this.noiseValue < 0) {
-                textureSelect = 2;
-            } else if (this.noiseValue < 0.5) {
-                textureSelect = 3;
-            } else {
-                textureSelect = 4;
-            }
+            // if (this.noiseValue < -0.5) {
+            //     textureSelect = 1;
+            // } else if (this.noiseValue < 0) {
+            //     textureSelect = 2;
+            // } else if (this.noiseValue < 0.5) {
+            //     textureSelect = 3;
+            // } else {
+            //     textureSelect = 4;
+            // }
 
             let color_d = this.colorList[colorSelect]
             // let color_d = tinycolor(colorList[colorSelect]).spin(getRandomFromInterval(-20, 20)).darken(getRandomFromInterval(-5, 5)).desaturate(getRandomFromInterval(-10, 10)).toHexString();

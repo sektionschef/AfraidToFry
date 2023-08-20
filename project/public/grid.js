@@ -51,21 +51,28 @@ class Grid {
             this.underneathTone = BELOWTONE;
         }
 
+        // this.paletteRA = new dynamicPalette(
+        //     this.aboveTone,
+        //     // [-2, -5, -10, 0, 2, 5, 10],
+        //     // [0, 4, 8], // good
+        //     [-2, 0, 2],
+        //     // [-10, 0, 10],
+        //     [-30, -20, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12, 20, 30],  // harsh
+        //     // [-30, -20, -12, -10, -8, -6, -4, -2, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 2, 4, 6, 8, 10, 12, 20, 30], // easy
+        //     // [-12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        //     // [-6, -4, -2, 0, 2, 4, 6],
+        //     // [-34, -32, -30, -28, -26, -24, -22, -20, -18, -16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
+        //     // [-18, -16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12, 14],
+        //     // [-16, -8, 0, 8, 16],
+        //     // [-16, -8, -4, 0, 4, 8, 16],
+        //     // [-12, -9, -6, -3, 0, 3, 6, 9, 12],
+        //     [3, 0, -3]
+        // );
         this.paletteRA = new dynamicPalette(
             this.aboveTone,
-            // [-2, -5, -10, 0, 2, 5, 10],
-            // [0, 4, 8], // good
-            [-2, 0, 2],
-            // [-10, 0, 10],
-            [-30, -20, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12, 20, 30],  // harsh
-            // [-30, -20, -12, -10, -8, -6, -4, -2, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 2, 4, 6, 8, 10, 12, 20, 30], // easy
-            // [-12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-            // [-6, -4, -2, 0, 2, 4, 6],
-            // [-34, -32, -30, -28, -26, -24, -22, -20, -18, -16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
-            // [-18, -16, -14, -12, -10, -8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12, 14],
-            // [-16, -8, 0, 8, 16],
-            // [-16, -8, -4, 0, 4, 8, 16],
-            // [-12, -9, -6, -3, 0, 3, 6, 9, 12],
+            [2, 0, 2],
+            // [-40, -35, -25, -20, -15, -10, -5, 0, 5, 10, 15, 20, 25, 35, 40],
+            [-40, -35, -25, -15, -5, 0, 5, 15, 25, 35, 40],
             [3, 0, -3]
         );
         this.paletteRB = new dynamicPalette(this.underneathTone, [-1, -2, -5, -10, 0, 1, 2, 5, 10], [-30, -20, -10, -5, 0, 5, 10, 20, 30], [0, 2]);
@@ -78,7 +85,7 @@ class Grid {
         // this.noiseRA = new noiseAggregator(235, 50, 110, 4, 4, 5);  // klaas
         // this.noiseRA = new noiseAggregator(135, 150, 110, 24, 14, 10); // klaa2
         // this.noiseRA = new noiseAggregator(335, 60, 210, 24, 65, 65); // klaa3
-        this.noiseRA = new noiseAggregator(135, 15, 80, 6, 10, 10); // klaa3
+        this.noiseRA = new noiseAggregator(135, 15, 60, 4, 10, 10); // klaa3
 
         // this.noiseSA = new noiseAggregator(155, 50, 80, 10, 20, 50);
         // this.noiseSA = new noiseAggregator(230, 38, 90, 4, 4, 5);  // klaas
@@ -123,7 +130,7 @@ class Grid {
 
             this.loopBase();
             this.loopDetail();
-            this.loop8();
+            // this.loop8();
 
         }
     }
@@ -165,14 +172,8 @@ class Grid {
                 var aboveHorizon = h <= this.horizonRow;
 
                 // REDUCE NOISE TO AREA NOT WHOLE CANVAS
-                // var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 1, 0, 0, 1, 0.25, 0.25); // not jack johnson
-                // var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 1, 1, 0, 0, 1, 1);
-                // var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 1, 1, 0.7, 0, 0.5, 0.2);
-                // var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 8, 4, 4, 2, 1, 1);
-                // var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 46, 23, 3, 12, 3, 3);
-                // var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 46, 23, 12, 20, 6, 6);
-                // var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 40, 40, -10, -10, 10, 10);
-                var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 40, 40, 0, 0, 0, 0);
+                // var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 40, 40, 0, 0, 0, 0);
+                var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 0.1, 1, 1, 0.1, 0.2, 0.2);
                 // var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 1, 1, 0, 0.5, 0);
                 // var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 1, 1, 0, 0.25, 0.25);
                 var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 0, 0, 0, 1, 1);
@@ -300,25 +301,25 @@ class Grid {
                 continue;
             }
 
-            if (this.boxes[i].aboveHorizon) {
-                new deugy({
-                    x: this.boxes[i].A.x,
-                    y: this.boxes[i].A.y,
-                    width: this.boxSize,
-                    height: this.boxSize,
-                    colorList: this.paletteRA.palette,
-                    noiseValue: this.boxes[i].noiseValueRA,
-                }).draw();
-            } else {
-                new deugy({
-                    x: this.boxes[i].A.x,
-                    y: this.boxes[i].A.y,
-                    width: this.boxSize,
-                    height: this.boxSize,
-                    colorList: this.paletteRB.palette,
-                    noiseValue: this.boxes[i].noiseValueSA,
-                }).draw();
-            }
+            // if (this.boxes[i].aboveHorizon) {
+            new deugy({
+                x: this.boxes[i].A.x,
+                y: this.boxes[i].A.y,
+                width: this.boxSize,
+                height: this.boxSize,
+                colorList: this.paletteRA.palette,
+                noiseValue: this.boxes[i].noiseValueRA,
+            }).draw();
+            // } else {
+            //     new deugy({
+            //         x: this.boxes[i].A.x,
+            //         y: this.boxes[i].A.y,
+            //         width: this.boxSize,
+            //         height: this.boxSize,
+            //         colorList: this.paletteRB.palette,
+            //         noiseValue: this.boxes[i].noiseValueSA,
+            //     }).draw();
+            // }
 
 
             // color noise

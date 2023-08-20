@@ -60,13 +60,13 @@ class dynamicPalette {
 
         // SORT BY BRIGHTNESS
         // this.palette.sort(function (a, b) { return tinycolor(a).getBrightness() - tinycolor(b).getBrightness() });
-        // this.palette.sort(function (a, b) { return tinycolor(a).getLuminance() - tinycolor(b).getLuminance() });
+        this.palette.sort(function (a, b) { return tinycolor(a).getLuminance() - tinycolor(b).getLuminance() });
         // SORT BY HUE
         // this.palette.sort(function (a, b) { return tinycolor(a).toHsl().h - tinycolor(b).toHsl().h });
         // SORT BY HUE AND LIGHTNESS
         // this.palette.sort(function (a, b) { return (tinycolor(a).toHsl().h - tinycolor(b).toHsl().h || tinycolor(a).getBrightness() - tinycolor(b).getBrightness()) });
         // SORT BY BRIGHTNESS AND HUE
-        this.palette.sort(function (a, b) { return (tinycolor(a).getBrightness().h - tinycolor(b).getBrightness().h || tinycolor(a).toHsl() - tinycolor(b).toHsl()) });
+        // this.palette.sort(function (a, b) { return (tinycolor(a).getBrightness().h - tinycolor(b).getBrightness().h || tinycolor(a).toHsl() - tinycolor(b).toHsl()) });
 
         // console.log(this.palette);
     }

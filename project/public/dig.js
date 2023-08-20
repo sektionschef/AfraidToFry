@@ -75,12 +75,12 @@ class digi {
 
             if (this.noiseValue <= 0) {
                 this.lineVertexLength = map(this.noiseValue, -1, 0, this.lineVertexLengthMin, this.lineVertexLengthMax);
-                this.lineLoopCount = map(this.noiseValue, -1, 0, this.lineLoopCountMax, this.lineLoopCountMin);
+                this.lineLoopCount = map(this.noiseValue, -1, 0, this.lineLoopCountMin, this.lineLoopCountMax);
                 this.lineStrokeWeighty = map(this.noiseValue, -1, 0, this.lineStrokeWeightyMax, this.lineStrokeWeightyMin);
             } else {
                 this.lineVertexLength = map(this.noiseValue, 0, 1, this.lineVertexLengthMax, this.lineVertexLengthMin);
                 this.lineLoopCount = map(this.noiseValue, 0, 1, this.lineLoopCountMin, this.lineLoopCountMax);
-                this.lineStrokeWeighty = map(this.noiseValue, -1, 0, this.lineStrokeWeightyMax, this.lineStrokeWeightyMin);
+                this.lineStrokeWeighty = map(this.noiseValue, 0, 1, this.lineStrokeWeightyMax, this.lineStrokeWeightyMin);
             }
         } else {
             this.lineVertexLength = map(this.noiseValue, -1, 1, this.lineVertexLengthMin, this.lineVertexLengthMax);
@@ -195,15 +195,23 @@ class digi {
             // without svg.js
             const svgNode = document.getElementById('svgNode');
 
+            // darken or lighten rect and triangle color
+            var effectiveColor = "#000000"
+            if (tinycolor(color_).getBrightness() > 127) {
+                effectiveColor = tinycolor(color_).darken(6).toHexString()
+            } else {
+                effectiveColor = tinycolor(color_).lighten(6).toHexString()
+            }
+
             // POLYLINE
-            // const polyNode = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
-            // polyNode.setAttributeNS(null, 'points', polyLineString);
-            // polyNode.setAttributeNS(null, 'fill', 'none');
-            // // polyNode.setAttributeNS(null, 'stroke', color_d);
-            // polyNode.setAttributeNS(null, 'stroke', color_);
-            // polyNode.setAttributeNS(null, 'stroke-width', this.lineStrokeWeighty);
-            // // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
-            // svgNode.appendChild(polyNode);
+            const polyNode = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+            polyNode.setAttributeNS(null, 'points', polyLineString);
+            polyNode.setAttributeNS(null, 'fill', 'none');
+            // polyNode.setAttributeNS(null, 'stroke', color_d);
+            polyNode.setAttributeNS(null, 'stroke', color_);
+            polyNode.setAttributeNS(null, 'stroke-width', this.lineStrokeWeighty);
+            // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
+            svgNode.appendChild(polyNode);
 
             if (this.noiseValue >= 0 && this.rect) {
                 // if (this.rect) {
@@ -221,7 +229,8 @@ class digi {
                     rectNode.setAttributeNS(null, 'transform', "translate(" + rectX + "," + rectY + "), rotate(" + this.angle * (180 / Math.PI) + ")");
                     rectNode.setAttributeNS(null, 'fill', 'none');
                     // rectNode.setAttributeNS(null, 'fill', color_);
-                    rectNode.setAttributeNS(null, 'stroke', tinycolor(color_).lighten(3).toHexString());
+                    // rectNode.setAttributeNS(null, 'stroke', tinycolor(color_).lighten(6).toHexString());
+                    rectNode.setAttributeNS(null, 'stroke', effectiveColor);
                     // rectNode.setAttributeNS(null, 'stroke', "none");
                     rectNode.setAttributeNS(null, 'stroke-width', this.rectStroke);
                     svgNode.appendChild(rectNode);
@@ -268,7 +277,7 @@ class digi {
                     triangleNode.setAttributeNS(null, 'transform', "translate(" + centerX + "," + centerY + "), rotate(" + this.angle * (180 / Math.PI) + ")");
                     triangleNode.setAttributeNS(null, 'fill', 'none');
                     // triangleNode.setAttributeNS(null, 'fill', color_);
-                    triangleNode.setAttributeNS(null, 'stroke', tinycolor(color_).darken(3).toHexString());
+                    triangleNode.setAttributeNS(null, 'stroke', effectiveColor);
                     // triangleNode.setAttributeNS(null, 'stroke', "none");
                     // triangleNode.setAttributeNS(null, 'stroke-width', this.lineStrokeWeighty);
                     triangleNode.setAttributeNS(null, 'stroke-width', this.triangleStroke);
@@ -292,15 +301,6 @@ class digi {
                 // } else {
             }
 
-            // POLYLINE
-            const polyNode = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
-            polyNode.setAttributeNS(null, 'points', polyLineString);
-            polyNode.setAttributeNS(null, 'fill', 'none');
-            // polyNode.setAttributeNS(null, 'stroke', color_d);
-            polyNode.setAttributeNS(null, 'stroke', color_);
-            polyNode.setAttributeNS(null, 'stroke-width', this.lineStrokeWeighty);
-            // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
-            svgNode.appendChild(polyNode);
 
 
             // DEBUG VIEW CENTER

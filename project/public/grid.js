@@ -78,7 +78,7 @@ class Grid {
             // [-40, -35, -25, -20, -15, -10, -5, 0, 5, 10, 15, 20, 25, 35, 40],
             // [-40, -35, -25, -15, -5, 0, 5, 15, 25, 35, 40],
             [-35, -25, -15, -10, -5, 0, 5, 10, 15, 25, 35],
-            // [-25, -15, -10, -5, , 0, 5, 10, 15, 25],
+            // [-25, -15, -10, -5, 0, 5, 10, 15, 25],
             // [-14, -7, 0, 7, 14],
             [-3, 0, 3, 6],
             // [0],
@@ -181,7 +181,7 @@ class Grid {
 
                 // REDUCE NOISE TO AREA NOT WHOLE CANVAS
                 // var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 40, 40, 0, 0, 0, 0);
-                var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 0.5, 0.5, 0.5, 0.5, 0.1, 0.1);
+                var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 0.5, 0.5, 0.7, 0.7, 0.1, 0.1);
                 // var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 1, 1, 0, 0.5, 0);
                 // var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 1, 1, 0, 0.25, 0.25);
                 var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 0, 0, 0, 1, 1);

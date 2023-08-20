@@ -198,9 +198,9 @@ class digi {
             // darken or lighten rect and triangle color
             var effectiveColor = "#000000"
             if (tinycolor(color_).getBrightness() > 127) {
-                effectiveColor = tinycolor(color_).darken(6).toHexString()
+                effectiveColor = tinycolor(color_).darken(getRandomFromList([3, 6, 9])).toHexString()
             } else {
-                effectiveColor = tinycolor(color_).lighten(6).toHexString()
+                effectiveColor = tinycolor(color_).lighten(getRandomFromList([3, 6, 9])).toHexString()
             }
 
             // POLYLINE

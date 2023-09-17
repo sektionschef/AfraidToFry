@@ -203,20 +203,9 @@ class digi {
                 effectiveColor = tinycolor(color_).lighten(getRandomFromList([3, 6, 9])).toHexString()
             }
 
-            // POLYLINE
-            const polyNode = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
-            polyNode.setAttributeNS(null, 'points', polyLineString);
-            polyNode.setAttributeNS(null, 'fill', 'none');
-            // polyNode.setAttributeNS(null, 'stroke', color_d);
-            polyNode.setAttributeNS(null, 'stroke', color_);
-            polyNode.setAttributeNS(null, 'stroke-width', this.lineStrokeWeighty);
-            // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
-            svgNode.appendChild(polyNode);
-
             if (this.noiseValue >= 0 && this.rect) {
                 // if (this.rect) {
 
-                // for (var i = 0; i < 20; i++) {
                 for (var i = 0; i < this.rectLoop; i++) {
                     var rectX = this.center.x + getNormallyDistributedRandomNumber(0, this.rectPosDistStd);
                     var rectY = this.center.y + getNormallyDistributedRandomNumber(0, this.rectPosDistStd);
@@ -235,33 +224,17 @@ class digi {
                     rectNode.setAttributeNS(null, 'stroke-width', this.rectStroke);
                     svgNode.appendChild(rectNode);
                 }
-                // }
+
             }
+
             if (this.noiseValue <= 0 && this.triangle) {
                 // if (this.triangle) {
 
                 for (var i = 0; i < this.triangleLoop; i++) {
 
-                    // const circleNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-                    // circleNode.setAttributeNS(null, 'cx', this.center.x + getNormallyDistributedRandomNumber(0, this.trianglePosDistStd));
-                    // circleNode.setAttributeNS(null, 'cy', this.center.y + getNormallyDistributedRandomNumber(0, this.trianglePosDistStd));
-                    // circleNode.setAttributeNS(null, 'r', this.circleRadius);
-                    // circleNode.setAttributeNS(null, 'fill', 'none');
-                    // // circleNode.setAttributeNS(null, 'fill', color_);
-                    // circleNode.setAttributeNS(null, 'stroke', tinycolor(color_).darken(3).toHexString());
-                    // // circleNode.setAttributeNS(null, 'stroke', "none");
-                    // // circleNode.setAttributeNS(null, 'stroke-width', this.lineStrokeWeighty);
-                    // circleNode.setAttributeNS(null, 'stroke-width', this.triangleStroke);
-                    // svgNode.appendChild(circleNode);
 
                     var centerX = this.center.x + getNormallyDistributedRandomNumber(0, this.trianglePosDistStd);
                     var centerY = this.center.y + getNormallyDistributedRandomNumber(0, this.trianglePosDistStd);
-                    // var AX = centerX - 4;
-                    // var AY = centerY + 4;
-                    // var BX = centerX + 4;
-                    // var BY = centerY + 4;
-                    // var CX = centerX;
-                    // var CY = centerY - 6;
                     var AX = -this.widthy;
                     var AY = this.widthy;
                     var BX = this.widthy;
@@ -270,9 +243,6 @@ class digi {
                     var CY = -this.widthy / 3 * 5;
 
                     const triangleNode = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-                    // triangleNode.setAttributeNS(null, 'cx', this.center.x + getNormallyDistributedRandomNumber(0, this.trianglePosDistStd));
-                    // triangleNode.setAttributeNS(null, 'cy', this.center.y + getNormallyDistributedRandomNumber(0, this.trianglePosDistStd));
-                    // triangleNode.setAttributeNS(null, 'r', this.circleRadius);
                     triangleNode.setAttributeNS(null, 'points', `${AX}, ${AY} ${BX}, ${BY} ${CX}, ${CY}`);
                     triangleNode.setAttributeNS(null, 'transform', "translate(" + centerX + "," + centerY + "), rotate(" + this.angle * (180 / Math.PI) + ")");
                     triangleNode.setAttributeNS(null, 'fill', 'none');
@@ -283,24 +253,17 @@ class digi {
                     triangleNode.setAttributeNS(null, 'stroke-width', this.triangleStroke);
                     svgNode.appendChild(triangleNode);
                 }
-
-                // }
-
-                // if high many polylines
-                // if (this.noiseValue > 0) {
-                //     for (var p = 0.5; p < 6; p++) {
-                //         const polyNode = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
-                //         polyNode.setAttributeNS(null, 'points', polyLineString);
-                //         polyNode.setAttributeNS(null, 'fill', 'none');
-                //         // polyNode.setAttributeNS(null, 'stroke', color_d);
-                //         polyNode.setAttributeNS(null, 'stroke', tinycolor(color_).desaturate(p * 30).toHexString());
-                //         polyNode.setAttributeNS(null, 'stroke-width', this.lineStrokeWeighty);
-                //         // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
-                //         svgNode.appendChild(polyNode);
-                //     }
-                // } else {
             }
 
+            // POLYLINE
+            const polyNode = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+            polyNode.setAttributeNS(null, 'points', polyLineString);
+            polyNode.setAttributeNS(null, 'fill', 'none');
+            // polyNode.setAttributeNS(null, 'stroke', color_d);
+            polyNode.setAttributeNS(null, 'stroke', color_);
+            polyNode.setAttributeNS(null, 'stroke-width', this.lineStrokeWeighty);
+            // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
+            svgNode.appendChild(polyNode);
 
 
             // DEBUG VIEW CENTER

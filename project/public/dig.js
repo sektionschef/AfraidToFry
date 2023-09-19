@@ -93,7 +93,7 @@ class digi {
 
         if (this.noiseValue > this.cutOutValue) {
 
-            let colorSelect = Math.round(map(this.noiseValue * 100, -100, 100, 0, (this.colorList.length - 1)));
+            let colorSelect = Math.round(map(this.colorNoise * 100, -100, 100, 0, (this.colorList.length - 1)));
             // console.log(this.noiseValue);
             // console.log(colorSelect);
 

@@ -52,8 +52,11 @@ class Grid {
         }
 
         // #PALETTE 
+        // https://rechneronline.de/number-list/
+        this.paletteBase = new dynamicPalette(this.aboveTone, [-3, 0, 3], [-40, -35, -30, -25, -20, -15, -10], [0]);
         this.paletteRA = new dynamicPalette(
-            this.aboveTone,
+            // this.aboveTone,
+            "#8898a8",
             // [30, 0, 0, 0, 60],  // analogous
             // [0, 0, 0, 0, 0, 0, 180],  // analogous
             [-3, 0, 3],
@@ -64,7 +67,8 @@ class Grid {
             // [-40, -35, -25, -15, -5, 0, 5, 15, 25, 35, 40],
             // [-35, -25, -15, -10, -5, 0, 5, 10, 15, 25, 35],  // standards
             // [0, 0, 0, 5, 5, 10],
-            [-10, -5, 0, 5, 10, 15, 20, 25],
+            // [-20, -15, -10, -5, 0, 5, 10, 15, 20],
+            [-1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13, -14, -15, -16, -17, -18, -19, -20, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,],
             // [0],
             // [-25, -15, -10, -5, 0, 5, 10, 15, 25],
             // [-14, -7, 0, 7, 14],
@@ -80,15 +84,11 @@ class Grid {
             // [-6, -3, 0, 3],
             [-6, -3, 0, 3],
         )
-        // this.paletteBase = new dynamicPalette(tinycolor(this.aboveTone).darken(10), [-2, 0, 2], [-30, -20, -10, 0], [0, 5]);
-        this.paletteBase = new dynamicPalette(this.aboveTone, [-2, 0, 2], [-40, -35, -30, -25, -20, -15, -10], [0]);
         this.paletteTwo = new dynamicPalette("#574f46", [-1, -2, -5, -10, 0, 1, 2, 5, 10], [-30, -20, -10, -5, 0, 5, 10, 20, 30], [0, 2]);
 
-        // this.noiseRA = new noiseAggregator(135, 50, 110, 10, 4, 5);
-        // this.noiseRA = new noiseAggregator(235, 50, 110, 4, 4, 5);  // klaas
-        // this.noiseRA = new noiseAggregator(135, 150, 110, 24, 14, 10); // klaa2
-        // this.noiseRA = new noiseAggregator(335, 60, 210, 24, 65, 65); // klaa3
-        this.noiseRA = new noiseAggregator(135, 25, 80, 14, 10, 10); // klaa3
+        this.noiseBase = new noiseAggregator(135, 56, 160, 8, 30, 10);
+        // this.noiseRA = new noiseAggregator(135, 25, 80, 14, 10, 10); // befor bewerbung
+        this.noiseRA = new noiseAggregator(135, 56, 90, 8, 30, 10); // klaa3
 
         // this.noiseSA = new noiseAggregator(155, 50, 80, 10, 20, 50);
         // this.noiseSA = new noiseAggregator(230, 38, 90, 4, 4, 5);  // klaas
@@ -129,6 +129,7 @@ class Grid {
             // }, 0);
 
             this.loopBaseVis();
+
             // this.loopShowNoise();
 
             this.loopBase();
@@ -145,6 +146,8 @@ class Grid {
 
         this.noiseRAMin = 1;
         this.noiseRAMax = -1;
+        this.noiseBaseMin = 1;
+        this.noiseBaseMax = -1;
         this.noiseSAMin = 1;
         this.noiseSAMax = -1;
         this.noiseColorAMin = 10;
@@ -176,8 +179,9 @@ class Grid {
                 var aboveHorizon = h <= this.horizonRow;
 
                 // REDUCE NOISE TO AREA NOT WHOLE CANVAS
+                var noiseValueBase = this.noiseBase.createNoiseValue(w, h, 0, this.horizonRow, 0, 0, 1, 1, 0, 0);
                 // var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 40, 40, 0, 0, 0, 0);
-                var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 0.5, 0.5, 0.7, 0.7, 0.1, 0.1);
+                var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 0.3, 0.3, 0.6, 0.6, 0.1, 0.1);
                 // var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 1, 1, 0, 0.5, 0);
                 // var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 1, 1, 0, 0.25, 0.25);
                 var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0.75, 0.75, 0.5, 0.5, 0.1, 0.1);
@@ -191,6 +195,12 @@ class Grid {
                 }
                 if (noiseValueRA > this.noiseRAMax) {
                     this.noiseRAMax = noiseValueRA;
+                }
+                if (noiseValueBase < this.noiseBaseMin) {
+                    this.noiseBaseMin = noiseValueBase;
+                }
+                if (noiseValueBase > this.noiseBaseMax) {
+                    this.noiseBaseMax = noiseValueBase;
                 }
                 if (noiseValueSA < this.noiseSAMin) {
                     this.noiseSAMin = noiseValueSA;
@@ -232,6 +242,7 @@ class Grid {
                     // "noiseValue7": this.noise7.createNoiseValue(w, h),
                     // "noiseValue8": this.noise8.createNoiseValue(w, h),
                     "noiseValueRA": noiseValueRA,
+                    "noiseValueBase": noiseValueBase,
                     "noiseValueSA": noiseValueSA,
                     "noiseValueColorA": noiseValueColorA,
                     "noiseValueColorB": noiseValueColorB,
@@ -254,6 +265,7 @@ class Grid {
             this.boxes[i].noiseValueColorA = map(this.boxes[i].noiseValueColorA, this.noiseColorAMin, this.noiseColorAMax, -1, 1);
             this.boxes[i].noiseValueColorB = map(this.boxes[i].noiseValueColorB, this.noiseColorBMin, this.noiseColorBMax, -1, 1);
             this.boxes[i].noiseValueRA = map(this.boxes[i].noiseValueRA, this.noiseRAMin, this.noiseRAMax, -1, 1);
+            this.boxes[i].noiseValueBaes = map(this.boxes[i].noiseValueBase, this.noiseBaseMin, this.noiseBaseMax, -1, 1);
             this.boxes[i].noiseValueSA = map(this.boxes[i].noiseValueSA, this.noiseSAMin, this.noiseSAMax, -1, 1);
         }
     }
@@ -306,23 +318,23 @@ class Grid {
             }
 
             // if (this.boxes[i].aboveHorizon) {
-            // new deugy({
-            //     x: this.boxes[i].A.x,
-            //     y: this.boxes[i].A.y,
-            //     width: this.boxSize,
-            //     height: this.boxSize,
-            //     colorList: this.paletteRA.palette,
-            //     noiseValue: this.boxes[i].noiseValueRA,
-            // }).draw();
-            // } else {
             new deugy({
                 x: this.boxes[i].A.x,
                 y: this.boxes[i].A.y,
                 width: this.boxSize,
                 height: this.boxSize,
-                colorList: this.paletteRB.palette,
-                noiseValue: this.boxes[i].noiseValueSA,
+                colorList: this.paletteRA.palette,
+                noiseValue: this.boxes[i].noiseValueRA,
             }).draw();
+            // } else {
+            // new deugy({
+            //     x: this.boxes[i].A.x,
+            //     y: this.boxes[i].A.y,
+            //     width: this.boxSize,
+            //     height: this.boxSize,
+            //     colorList: this.paletteRB.palette,
+            //     noiseValue: this.boxes[i].noiseValueSA,
+            // }).draw();
             // }
 
 
@@ -402,7 +414,7 @@ class Grid {
             rectNode.setAttributeNS(null, 'width', (rescaling_width - marginPix * 2));
             rectNode.setAttributeNS(null, 'height', rescaling_height - marginPix * 2);
             // rectNode.setAttributeNS(null, 'fill', 'none');
-            // rectNode.setAttributeNS(null, 'fill', tinycolor(this.aboveTone).darken(-20));
+            // rectNode.setAttributeNS(null, 'fill', tinycolor(this.aboveTone).darken(20));
             rectNode.setAttributeNS(null, 'fill', this.aboveTone);
             // rectNode.setAttributeNS(null, 'stroke', color_);
             rectNode.setAttributeNS(null, 'stroke', "none");
@@ -462,8 +474,8 @@ class Grid {
                 new digi({
                     x: this.boxes[i].center.x,
                     y: this.boxes[i].center.y,
-                    noiseValue: this.boxes[i].noiseValueRA,
-                    colorNoise: this.boxes[i].noiseValueRA,
+                    noiseValue: this.boxes[i].noiseValueBase,
+                    colorNoise: this.boxes[i].noiseValueBase,
                     // colorList: this.paletteRA.palette,
                     colorList: this.paletteBase.palette,
                     noiseAngle: true,
@@ -489,7 +501,7 @@ class Grid {
                     lineVertexLengthStd: 0.05,
                     lineRevert: true,
                     triangle: true,
-                    triangleStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 1, 0.4, 0.4),
+                    triangleStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueBase, -1, 1, 0.4, 0.4),
                     triangleLoop: map(this.boxes[i].noiseValueRA, -1, 1, 0, 10),
                     triangleWidthy: 160 / this.shortBoxCount * 3,
                     trianglePosDistStd: 160 / this.shortBoxCount * 3,
@@ -497,7 +509,7 @@ class Grid {
                     rectLoop: map(this.boxes[i].noiseValueRA, -1, 1, 0, 10),
                     rectWidth: 160 / this.shortBoxCount * 12, // map(this.boxes[i].noiseValueRA, -1, 1, 5, 30), // 12,
                     rectHeight: 160 / this.shortBoxCount * 6,
-                    rectStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 1, 0.4, 0.4),
+                    rectStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueBase, -1, 1, 0.4, 0.4),
                     rectPosDistStd: 160 / this.shortBoxCount * 3,
                 }).draw();
             } else {
@@ -575,13 +587,13 @@ class Grid {
                     cutOutValue: -1,
                     // lineVertexLength: 160 / this.shortBoxCount * 8, // map(this.boxes[i].noiseValueRA, -1, 1, 2, 10), // 15,
                     lineNoiseMapDynamic: true,
-                    lineVertexLengthMin: 80 / this.shortBoxCount * 20,
-                    lineVertexLengthMax: 80 / this.shortBoxCount * 20,
+                    lineVertexLengthMin: 80 / this.shortBoxCount * 10,
+                    lineVertexLengthMax: 80 / this.shortBoxCount * 15,
                     lineVertexLengthMean: 1,
                     lineVertexLengthStd: 80 / this.shortBoxCount * 0.05, // map(this.boxes[i].noiseValueRA, -1, 1, 0.15, 0.05), //0.05,
                     // lineStrokeWeighty: 160 / this.shortBoxCount * 0.1, // map(this.boxes[i].noiseValueRA, -1, 1, 0.1, 0.15), // 0.1,
-                    lineStrokeWeightyMin: 160 / this.shortBoxCount * 0.05,
-                    lineStrokeWeightyMax: 160 / this.shortBoxCount * 0.4,
+                    lineStrokeWeightyMin: 160 / this.shortBoxCount * 0.2,
+                    lineStrokeWeightyMax: 160 / this.shortBoxCount * 0.2,
                     lineLoopCountMin: 0,
                     lineLoopCountMax: 10,
                     lineAngleMean: Math.PI / 1,
@@ -589,16 +601,16 @@ class Grid {
                     lineNoiseAngleDist: 0.3, // 0.2
                     lineRevert: true,
                     triangle: true,
-                    triangleStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 1, 0.4, 0.05), // 0.2
+                    triangleStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 1, 0.2, 0.2), // 0.2
                     triangleLoop: map(this.boxes[i].noiseValueRA, -1, 1, 10, 0), // 40,
                     triangleWidthy: 160 / this.shortBoxCount * 1.5,
-                    trianglePosDistStd: 160 / this.shortBoxCount * 2, // map(this.boxes[i].noiseValueRA, -1, 0, 2, 5),
+                    trianglePosDistStd: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 1, 5, 1), // 2
                     rect: true,
                     rectLoop: map(this.boxes[i].noiseValueRA, -1, 1, 0, 10), // 40,
                     rectWidth: 160 / this.shortBoxCount * 5, // map(this.boxes[i].noiseValueRA, 0, 1, 6, 9),// 6,
                     rectHeight: 160 / this.shortBoxCount * 1.5, // map(this.boxes[i].noiseValueRA, 0, 1, 2, 3),// 2,
-                    rectStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 1, 0.05, 0.4), // 0.3
-                    rectPosDistStd: 160 / this.shortBoxCount * 2, // map(this.boxes[i].noiseValueRA, -1, 0, 1, 4), // 5
+                    rectStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 1, 0.2, 0.2), // 0.3
+                    rectPosDistStd: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueRA, -1, 1, 1, 5), // 2
                 }).draw();
             } else {
                 // new digi({

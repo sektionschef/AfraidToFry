@@ -53,8 +53,8 @@ class Grid {
 
         // #PALETTE 
         // https://rechneronline.de/number-list/
-        this.paletteBase = new dynamicPalette(this.aboveTone, [-3, 0, 3], [-45, -40, -35, -30, -25, -20, -15, -10], [0]);
-        this.paletteRA = new dynamicPalette(
+        this.paletteBase = new dynamicPalette(this.aboveTone, [-3, 0, 3], [-35, -30, -25, -20, -15, -10], [0]);
+        this.paletteDetail = new dynamicPalette(
             // this.aboveTone,
             "#8898a8",
             // [30, 0, 0, 0, 60],  // analogous
@@ -87,7 +87,7 @@ class Grid {
         )
         this.paletteTwo = new dynamicPalette("#574f46", [-1, -2, -5, -10, 0, 1, 2, 5, 10], [-30, -20, -10, -5, 0, 5, 10, 20, 30], [0, 2]);
 
-        this.noiseBase = new noiseAggregator(135, 56, 160, 8, 30, 10);
+        this.noiseBase = new noiseAggregator(135, 56, 40, 8, 8, 8);
         // this.noiseRA = new noiseAggregator(135, 25, 80, 14, 10, 10); // befor bewerbung
         this.noiseRA = new noiseAggregator(135, 56, 90, 8, 30, 10); // klaa3
 
@@ -97,23 +97,23 @@ class Grid {
         this.noiseSA = new noiseAggregator(120, 36, 15, 20, 6, 6);  // klaas3
 
         // this.noiseColorA = new noiseAggregator(100, 38, 60, 10, 8, 2); 
-        this.noiseColorA = new noiseAggregator(100, 18, 30, 10, 14, 4);
-        this.noiseColorB = new noiseAggregator(280, 30, 40, 5, 40, 3);
+        this.noiseColorA = new noiseAggregator(80, 20, 40, 9, 14, 4);
+        this.noiseColorB = new noiseAggregator(280, 30, 40, 6, 40, 3);
 
         this.createBoxes();
         this.normalizeNoises();
 
         // PALETTE SWAP
-        // for (var i = 0; i < this.paletteRA.palette.length; i++) {
+        // for (var i = 0; i < this.paletteDetail.palette.length; i++) {
         //     if (i == 33) {
         //         for (var v = 0; v < 3; v++) {
 
-        //             // var swapB = this.paletteRA.palette[i + v];
+        //             // var swapB = this.paletteDetail.palette[i + v];
         //             // var swapA = this.paletteRB.palette[i + v];
-        //             // this.paletteRA.palette[i + v] = swapA;
+        //             // this.paletteDetail.palette[i + v] = swapA;
         //             // this.paletteRB.palette[i + v] = swapB;
 
-        //             this.paletteRA.palette[i + v] = this.paletteBase.palette[i + v];
+        //             this.paletteDetail.palette[i + v] = this.paletteBase.palette[i + v];
         //             this.paletteRB.palette[i + v] = this.paletteTwo.palette[i + v];
         //         }
 
@@ -131,10 +131,10 @@ class Grid {
 
             this.loopBaseVis();
 
-            // this.loopShowNoise();
+            this.loopShowNoise();
 
-            this.loopBase();
-            this.loopDetail();
+            // this.loopBase();
+            // this.loopDetail();
 
             // this.loop8();
 
@@ -179,17 +179,19 @@ class Grid {
                 var horizon = h == this.horizonRow;
                 var aboveHorizon = h <= this.horizonRow;
 
-                // REDUCE NOISE TO AREA NOT WHOLE CANVAS
-                var noiseValueBase = this.noiseBase.createNoiseValue(w, h, 0, this.horizonRow, 0, 0, 1, 1, 0, 0);
-                // var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 40, 40, 0, 0, 0, 0);
-                var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 0.3, 0.3, 0.6, 0.6, 0.1, 0.1);
+                // var noiseValueBase = this.noiseBase.createNoiseValue(w, h, 0, this.horizonRow, 0, 0, 1, 1, 0, 0);
+                var noiseValueBase = this.noiseBase.createNoiseValue(w, h, 0, this.horizonRow, 1, 0, 0, 1, 0.1, 0.1);
+
+                // var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 0.3, 0.3, 0.6, 0.6, 0.1, 0.1);
+                var noiseValueRA = this.noiseRA.createNoiseValue(w, h, 0, this.horizonRow, 1, 0, 0, 1, 0.3, 0.3);
+
                 // var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 1, 1, 0, 0.5, 0);
                 // var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 1, 1, 0, 0.25, 0.25);
                 var noiseValueSA = this.noiseSA.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0.75, 0.75, 0.5, 0.5, 0.1, 0.1);
 
                 // var noiseValueColorA = this.noiseColorA.createNoiseValue(w, h, 0, this.horizonRow, 1, 0, 0.5, 0.5, 0, 0.5);
-                var noiseValueColorA = this.noiseColorA.createNoiseValue(w, h, 0, this.horizonRow, 0, 0, 0.7, 0.7, 0.3, 0.3);
-                var noiseValueColorB = this.noiseColorB.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 4, 8, 0, 0, 8, 4);
+                var noiseValueColorA = this.noiseColorA.createNoiseValue(w, h, 0, this.horizonRow, 1, 1, 0, 0, 0, 0);
+                var noiseValueColorB = this.noiseColorB.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 0, 1, 1, 0, 0);
 
                 if (noiseValueRA < this.noiseRAMin) {
                     this.noiseRAMin = noiseValueRA;
@@ -306,11 +308,13 @@ class Grid {
     }
 
     loopShowNoise() {
-        let randomIndex = getRandomIndex(this.boxes.length);
+        // let randomIndex = getRandomIndex(this.boxes.length);
+        let randomIndex = getRandomIndex(this.longBoxCount * this.horizonRow);
 
         let i = 0;
 
-        for (var v = 0; v < randomIndex.length; v++) {
+        // for (var v = 0; v < randomIndex.length; v++) {
+        for (var v = 0; v < (this.longBoxCount * this.horizonRow); v++) {
 
             i = randomIndex[v];
 
@@ -324,8 +328,11 @@ class Grid {
                 y: this.boxes[i].A.y,
                 width: this.boxSize,
                 height: this.boxSize,
-                colorList: this.paletteRA.palette,
-                noiseValue: this.boxes[i].noiseValueRA,
+                // colorList: this.paletteDetail.palette,
+                // noiseValue: this.boxes[i].noiseValueRA,
+                colorList: this.paletteBase.palette,
+                // noiseValue: this.boxes[i].noiseValueBase,
+                noiseValue: this.boxes[i].noiseValueColorA,
             }).draw();
             // } else {
             // new deugy({
@@ -347,7 +354,7 @@ class Grid {
             //         y: this.boxes[i].A.y,
             //         width: this.boxSize,
             //         height: this.boxSize,
-            //         colorList: this.paletteRA.palette,
+            //         colorList: this.paletteDetail.palette,
             //         noiseValue: this.boxes[i].noiseValueColorA,
             //     }).draw();
             // } else {
@@ -391,7 +398,7 @@ class Grid {
             //         y: this.boxes[i].A.y,
             //         width: (this.boxSize + 1),  // +1 to avoid strokes
             //         height: (this.boxSize + 1),
-            //         colorList: this.paletteRA.palette,
+            //         colorList: this.paletteDetail.palette,
             //         noiseValue: this.boxes[i].noiseValueRA,
             //         noiseValueMin: this.noiseRAMin,
             //         noiseValueMax: this.noiseRAMax,
@@ -478,7 +485,7 @@ class Grid {
                     noiseValue: this.boxes[i].noiseValueBase,
                     // colorNoise: this.boxes[i].noiseValueBase,
                     colorNoise: this.boxes[i].noiseValueColorA,
-                    // colorList: this.paletteRA.palette,
+                    // colorList: this.paletteDetail.palette,
                     colorList: this.paletteBase.palette,
                     noiseAngle: true,
                     group: "",
@@ -581,7 +588,7 @@ class Grid {
                     noiseValue: this.boxes[i].noiseValueRA,
                     // colorNoise: this.boxes[i].noiseValueRA,
                     colorNoise: this.boxes[i].noiseValueColorB,
-                    colorList: this.paletteRA.palette,
+                    colorList: this.paletteDetail.palette,
                     noiseAngle: true,
                     group: "",
                     horizonRow: this.horizonRow,
@@ -776,7 +783,7 @@ class Grid {
             //             angleMax: Math.PI,
             //             cutOutValue: -1,
             //             lineLoopCount: map(this.boxes[i].noiseValueRA, -1, 1, 1, 10),
-            //             colorList: this.paletteRA.palette,
+            //             colorList: this.paletteDetail.palette,
             //             // colorList: ["#161616", "#353535", "#727272", "#8d8c8c", "#adadad", "#c7c7c7"],
             //             group: "",
             //         }
@@ -815,7 +822,7 @@ class Grid {
             //         angleMax: Math.PI / 2,
             //         cutOutValue: -1,
             //         lineLoopCount: map(this.boxes[i].noiseValueRA, -1, 1, 0, 10),
-            //         // colorList: this.paletteRA.palette,
+            //         // colorList: this.paletteDetail.palette,
             //         // colorList: ["#353535", "#727272", "#8d8c8c", "#adadad", "#c7c7c7"],
             //         colorList: ["#c7c7c7", "#adadad", "#8d8c8c", "#727272", "#353535"],
             //         // colorList: ["#808080"],

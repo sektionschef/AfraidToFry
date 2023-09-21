@@ -1,3 +1,4 @@
+// oida
 class Grid {
     constructor(data) {
         this.horizonRatio = 4 / 7;

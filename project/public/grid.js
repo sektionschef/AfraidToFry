@@ -1,4 +1,3 @@
-// oida
 class Grid {
     constructor(data) {
         this.horizonRatio = 4 / 7;
@@ -54,13 +53,22 @@ class Grid {
 
         // #PALETTE 
         // https://rechneronline.de/number-list/
-        this.paletteBase = new dynamicPalette(this.aboveTone, [-3, 0, 3], [-35, -30, -25, -20, -15, -10], [0]);
+        this.paletteBase = new dynamicPalette(
+            this.aboveTone,
+            [-3, 0, 3, 5, 7],
+            // [-35, -30, -25, -20, -15, -10],
+            [-35, -30, -25, -20, -15, -10],
+            [0]
+        );
         this.paletteDetail = new dynamicPalette(
             // this.aboveTone,
             "#8898a8",
             // [30, 0, 0, 0, 60],  // analogous
             // [0, 0, 0, 0, 0, 0, 180],  // analogous
-            [0, 0, 0, 0, 30],
+            // [0, 0, 0, 0, 30],
+            // [-10, -5, -5, 0, 0, 0, 5, 5, 10],
+            // [-10, -5, 0, 5, 10],  // last
+            [-1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13, -14, -15, -16, -17, -18, -19, -20, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,],
             // [-10, -5, -5, 0, 0, 0, 5, 5, 10],  // only // standards
             // [-20, -15, -5, 0, 5, 15, 20],
             // [-4, -2, 0, 2, 4],
@@ -68,7 +76,8 @@ class Grid {
             // [-40, -35, -25, -15, -5, 0, 5, 15, 25, 35, 40],
             // [-45, -35, -25, -15, -10, -5, 0, 5, 10, 15, 25, 35, 45],  // standards
             // [0, 0, 0, 5, 5, 10],
-            [-20, -15, -10, -5, 0, 5, 10, 15, 20, 30],
+            // [-20, -15, -10, -5, 0, 5, 10, 15, 20, 30],
+            [-30, -25, -20, -15, -10, -5, 0, 5, 10, 15, 20, 30, 35],
             // [-1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13, -14, -15, -16, -17, -18, -19, -20, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,],
             // [-1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13, -14, -15, -16, -17, -18, -19, -20, -21, -22, -23, -24, -25, -26, -27, -28, -29, -30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,],
             // [0],
@@ -79,10 +88,13 @@ class Grid {
         );
         this.paletteDetailBelow = new dynamicPalette(
             this.underneathTone,
-            // [-10, -5, -5, 0, 0, 0, 5, 5, 10],
-            [-20, -15, -5, 0, 0, 0, 5, 15, 20],
+            // [0],
+            // [-10, -5, 0, 5, 10],  // last
+            [-1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13, -14, -15, -16, -17, -18, -19, -20, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,],
+            // [-20, -15, -5, 0, 0, 0, 5, 15, 20],
             // [-35, -30, -20, -10, -5, 0, 5, 10, 20, 30, 35],
-            [-20, -10, -5, 0, 5, 10, 20],
+            // [-20, -10, -5, 0, 5, 10, 20],
+            [-30, -25, -20, -15, -10, -5, 0, 5, 10, 15, 20, 30, 35],
             // [-6, -3, 0, 3],
             [-6, -3, 0, 3],
         )
@@ -633,10 +645,10 @@ class Grid {
                     lineStrokeWeightyMin: 160 / this.shortBoxCount * 0.1,
                     lineStrokeWeightyMax: 160 / this.shortBoxCount * 0.1,
                     lineLoopCountMin: 0,
-                    lineLoopCountMax: 10,
+                    lineLoopCountMax: 15,
                     lineAngleMean: Math.PI / 1,
                     lineAngleSTD: Math.PI / 56,
-                    lineNoiseAngleDist: 0.2, // 0.2
+                    lineNoiseAngleDist: 0.3, // 0.2
                     lineRevert: true,
                     triangle: true,
                     triangleStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueDetail, -1, 1, 0.1, 0.1), // 0.2
@@ -671,10 +683,10 @@ class Grid {
                     lineStrokeWeightyMin: 160 / this.shortBoxCount * 0.1,
                     lineStrokeWeightyMax: 160 / this.shortBoxCount * 0.1,
                     lineLoopCountMin: 0,
-                    lineLoopCountMax: 10,
+                    lineLoopCountMax: 15,
                     lineAngleMean: Math.PI / 1,
                     lineAngleSTD: Math.PI / 56,
-                    lineNoiseAngleDist: 0.2, // 0.2
+                    lineNoiseAngleDist: 0.3, // 0.2
                     lineRevert: true,
                     triangle: true,
                     triangleStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueDetailBelow, -1, 1, 0.1, 0.1), // 0.2

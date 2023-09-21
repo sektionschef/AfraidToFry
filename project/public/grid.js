@@ -142,10 +142,9 @@ class Grid {
             //     this.loop1();
             // }, 0);
 
-            this.loopBaseVis();
-
             // this.loopShowNoise();
 
+            this.loopBaseVis();
             this.loopBase();
             this.loopDetail();
 
@@ -461,20 +460,27 @@ class Grid {
             //     }).draw();
             // }
 
+        }
+
+        var posStdD = 10;  // standard deviation for position
+        var offset = 30;  // move inward
+        var loopCount = 40;
+
+        for (var o = 0; o < loopCount; o++) {
             const rectNode = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-            rectNode.setAttributeNS(null, 'x', marginPix);
-            rectNode.setAttributeNS(null, 'y', marginPix);
-            rectNode.setAttributeNS(null, 'width', (rescaling_width - marginPix * 2));
-            rectNode.setAttributeNS(null, 'height', rescaling_height - marginPix * 2);
+            rectNode.setAttributeNS(null, 'x', marginPix + getNormallyDistributedRandomNumber(0, posStdD) + offset);
+            rectNode.setAttributeNS(null, 'y', marginPix + getNormallyDistributedRandomNumber(0, posStdD) + offset);
+            rectNode.setAttributeNS(null, 'width', (rescaling_width - marginPix * 2) - offset * 2);
+            rectNode.setAttributeNS(null, 'height', rescaling_height - marginPix * 2 - offset * 2);
             // rectNode.setAttributeNS(null, 'fill', 'none');
             // rectNode.setAttributeNS(null, 'fill', tinycolor(this.aboveTone).darken(20));
-            rectNode.setAttributeNS(null, 'fill', this.aboveTone);
+            rectNode.setAttributeNS(null, 'fill', "#8686861a");
             // rectNode.setAttributeNS(null, 'stroke', color_);
             rectNode.setAttributeNS(null, 'stroke', "none");
             // rectNode.setAttributeNS(null, 'stroke-width', this.rectStroke);
             svgNode.appendChild(rectNode);
-
         }
+
 
     }
 

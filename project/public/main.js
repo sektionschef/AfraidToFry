@@ -25,14 +25,16 @@ let RESOLUTIONBOXCOUNT = 80;
 // let RESOLUTIONBOXCOUNT = 60;
 // let RESOLUTIONBOXCOUNT = 40;
 let BACKGROUNDTONE = "#ffffff";
+let BASETONE = "#6d7077";
 // let ABOVETONE = "#a5812f";  // andrea garden book
 // let BELOWTONE = "#ff617b";  // andrea garden book
 // let ABOVETONE = "#92a8b4" // blue
 // let BELOWTONE = "#8b967d"; // green
-let ABOVETONE = "#98a0a7";  // good
-let BELOWTONE = "#515a57";  // good
-// let ABOVETONE = "#8d6f5c";  // overshoot - cool color: d5560c
-// let BELOWTONE = "#4a504b";  // overshoot 
+
+// let ABOVETONE = "#98a0a7";  // good - twitter
+// let BELOWTONE = "#515a57";  // good - twitter
+let ABOVETONE = "#4b6786";  // overshoot - cool color: d5560c
+let BELOWTONE = "#7e614f";  // overshoot 
 
 setTagsHTML();
 

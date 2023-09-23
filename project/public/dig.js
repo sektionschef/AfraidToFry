@@ -48,27 +48,19 @@ class digi {
         // this.noiseValueMax = data.noiseValueMax;
 
         this.cutOutValue = data.cutOutValue;
-        this.colorList = data.colorList;
+        this.colorListA = data.colorListA;
+        this.colorListB = data.colorListB;
+        this.colorListC = data.colorListC;
+        this.colorListD = data.colorListD;
         this.lineAngleMean = data.lineAngleMean;
         this.lineAngleSTD = data.lineAngleSTD;
 
         // this.noiseDistance = this.noiseValueMax - this.noiseValueMin;
         // this.colorStep = this.noiseDistance / this.colorList.length;
 
-        // this.noiseDistance = this.colorNoiseMax - this.colorNoiseMin;
-        this.noiseDistance = 2;// (1- -1);
-        this.colorStep = this.noiseDistance / this.colorList.length;
-
         this.textureStepCount = 3
         this.noiseValueDistance = 2;//this.noiseValueMax - this.noiseValueMin;
         this.textureStep = this.noiseValueDistance / this.textureStepCount;
-
-        // console.log(this.colorNoiseMax);
-        // console.log(this.colorNoiseMin);
-        // console.log(this.colorStep);
-        // console.log(this.colorNoise);
-
-        // console.log(this.colorList.length);
 
         // mapping for center - HACK FOR MIN AND MAX
         if (this.lineNoiseMapDynamic) {
@@ -92,6 +84,22 @@ class digi {
     draw() {
 
         if (this.noiseValue > this.cutOutValue) {
+
+
+            // PALETTE CHANGE
+            if (this.colorNoise < -0.5) {
+                this.colorList = this.colorListA;
+            } else if (this.noiseValue < 0) {
+                this.colorList = this.colorListB;
+            } else if (this.noiseValue < 0.5) {
+                this.colorList = this.colorListC;
+            } else {
+                this.colorList = this.colorListD;
+            }
+
+            // this.noiseDistance = this.colorNoiseMax - this.colorNoiseMin;
+            this.noiseDistance = 2;// (1- -1);
+            this.colorStep = this.noiseDistance / this.colorList.length;
 
             let colorSelect = Math.round(map(this.colorNoise * 100, -100, 100, 0, (this.colorList.length - 1)));
             // console.log(this.noiseValue);

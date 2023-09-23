@@ -54,15 +54,17 @@ class Grid {
         // #PALETTE 
         // https://rechneronline.de/number-list/
         this.paletteBase = new dynamicPalette(
-            this.aboveTone,
+            // this.aboveTone,
+            BASETONE,
             [-3, 0, 3, 5, 7],
             // [-35, -30, -25, -20, -15, -10],
-            [-35, -30, -25, -20, -15, -10],
+            // [-35, -30, -25, -20, -15, -10],
+            [-25, -20, -15, -10, -5, 0, 5, 10, 15, 20, 25],
             [0]
         );
         this.paletteDetail = new dynamicPalette(
-            // this.aboveTone,
-            "#8898a8",
+            this.aboveTone,
+            // "#8898a8",
             // [30, 0, 0, 0, 60],  // analogous
             // [0, 0, 0, 0, 0, 0, 180],  // analogous
             // [0, 0, 0, 0, 30],
@@ -98,7 +100,14 @@ class Grid {
             // [-6, -3, 0, 3],
             [-6, -3, 0, 3],
         )
-        this.paletteTwo = new dynamicPalette("#574f46", [-1, -2, -5, -10, 0, 1, 2, 5, 10], [-30, -20, -10, -5, 0, 5, 10, 20, 30], [0, 2]);
+        this.paletteFruity = new dynamicPalette(
+            "#b152a1",
+            [-3, 0, 3, 5, 7],
+            // [-35, -30, -25, -20, -15, -10],
+            // [-35, -30, -25, -20, -15, -10],
+            [-25, -20, -15, -10, -5, 0, 5, 10, 15, 20, 25],
+            [0]
+        );
 
         this.noiseBase = new noiseAggregator(60, 20, 20, 6, 8, 8);
         // this.noiseDetail = new noiseAggregator(135, 25, 80, 14, 10, 10); // befor bewerbung
@@ -146,7 +155,7 @@ class Grid {
 
             this.loopBaseVis();
             this.loopBase();
-            this.loopDetail();
+            // this.loopDetail();
 
             // this.loop8();
 
@@ -537,7 +546,10 @@ class Grid {
                     // colorNoise: this.boxes[i].noiseValueBase,
                     colorNoise: this.boxes[i].noiseValueColorB,
                     // colorList: this.paletteDetail.palette,
-                    colorList: this.paletteBase.palette,
+                    colorListA: this.paletteBase.palette,
+                    colorListB: this.paletteDetailBelow.palette,
+                    colorListC: this.paletteDetail.palette,
+                    colorListD: this.paletteFruity.palette,
                     noiseAngle: true,
                     group: "",
                     horizonRow: this.horizonRow,
@@ -578,7 +590,10 @@ class Grid {
                     y: this.boxes[i].center.y,
                     noiseValue: this.boxes[i].noiseValueBaseBelow,
                     colorNoise: this.boxes[i].noiseValueColorB,
-                    colorList: this.paletteBase.palette,
+                    colorListA: this.paletteBase.palette,
+                    colorListB: this.paletteDetailBelow.palette,
+                    colorListC: this.paletteDetail.palette,
+                    colorListD: this.paletteFruity.palette,
                     noiseAngle: true,
                     group: "",
                     horizonRow: this.horizonRow,
@@ -635,6 +650,7 @@ class Grid {
                     // colorNoise: this.boxes[i].noiseValueDetail,
                     colorNoise: this.boxes[i].noiseValueColorA,
                     colorList: this.paletteDetail.palette,
+                    colorListB: this.paletteDetailBelow.palette,
                     noiseAngle: true,
                     group: "",
                     horizonRow: this.horizonRow,
@@ -675,6 +691,7 @@ class Grid {
                     noiseValue: this.boxes[i].noiseValueDetailBelow,
                     colorNoise: this.boxes[i].noiseValueColorDetailBelow,
                     colorList: this.paletteDetailBelow.palette,
+                    colorListB: this.paletteDetail.palette,
                     noiseAngle: true,
                     group: "",
                     horizonRow: this.horizonRow,
@@ -719,6 +736,7 @@ class Grid {
             //         noiseValue: 0, // this.boxes[i].noiseValueDetail,
             //         colorNoise: 0, // this.boxes[i].noiseValueDetail,
             //         colorList: ["#ebebeb"],
+            // colorListB: this.paletteDetailBelow.palette,
             //         noiseAngle: false,
             //         group: "",
             //         horizonRow: this.horizonRow,
@@ -759,6 +777,7 @@ class Grid {
             //         noiseValue: this.boxes[i].noiseValueDetail,
             //         colorNoise: this.boxes[i].noiseValueDetail,
             //         colorList: ["#575757", "#3f3f3f", "#575757"],
+            // colorListB: this.paletteDetailBelow.palette,
             //         noiseAngle: false,
             //         group: "",
             //         horizonRow: this.horizonRow,

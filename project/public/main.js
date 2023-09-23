@@ -36,6 +36,33 @@ let BASETONE = "#6d7077";
 let ABOVETONE = "#4b6786";  // overshoot - cool color: d5560c
 let BELOWTONE = "#7e614f";  // overshoot 
 
+// YELLOW
+let BASETONEA = "#ffdda1";
+let BASETONEB = "#ffd151";
+let BASETONEC = "#f8c537";
+let BASETONED = "#edb230";
+let BASETONEE = "#e77728";
+
+// let ABOVETONEA = tinycolor(BASETONEA).darken(15);
+// let ABOVETONEB = tinycolor(BASETONEB).darken(15);
+// let ABOVETONEC = tinycolor(BASETONEC).darken(15);
+// let ABOVETONED = tinycolor(BASETONED).darken(15);
+// let ABOVETONEE = tinycolor(BASETONEE).darken(15);
+
+let ABOVETONEA = tinycolor(BASETONEE);
+let ABOVETONEB = tinycolor(BASETONED);
+let ABOVETONEC = tinycolor(BASETONEC);
+let ABOVETONED = tinycolor(BASETONEB);
+let ABOVETONEE = tinycolor(BASETONEA);
+
+// BLUE
+// let ABOVETONEA = "#302B27";
+// let ABOVETONEB = "#1B264F";
+// let ABOVETONEC = "#274690";
+// let ABOVETONED = "#576CA8";
+// let ABOVETONEE = "#F5F3F5";
+
+
 setTagsHTML();
 
 let BULK = false;  // bulk export images

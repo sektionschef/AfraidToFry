@@ -52,6 +52,7 @@ class digi {
         this.colorListB = data.colorListB;
         this.colorListC = data.colorListC;
         this.colorListD = data.colorListD;
+        this.colorListE = data.colorListE;
         this.lineAngleMean = data.lineAngleMean;
         this.lineAngleSTD = data.lineAngleSTD;
 
@@ -86,15 +87,17 @@ class digi {
         if (this.noiseValue > this.cutOutValue) {
 
 
-            // PALETTE CHANGE
-            if (this.colorNoise < -0.5) {
+            // PALETTE CHANGE - NOISEVALUE OR COLORNOISE
+            if (this.colorNoise < -0.75) {
                 this.colorList = this.colorListA;
-            } else if (this.noiseValue < 0) {
+            } else if (this.colorNoise < -0.25) {
                 this.colorList = this.colorListB;
-            } else if (this.noiseValue < 0.5) {
+            } else if (this.colorNoise < 0.25) {
                 this.colorList = this.colorListC;
-            } else {
+            } else if (this.colorNoise < 0.75) {
                 this.colorList = this.colorListD;
+            } else {
+                this.colorList = this.colorListE;
             }
 
             // this.noiseDistance = this.colorNoiseMax - this.colorNoiseMin;

@@ -37,7 +37,7 @@ let BASETONE = "#b8b8b8";
 // let BELOWTONE = "#7e614f";  // overshoot 
 // let ABOVETONE = "#8dacc9";  // full blue
 let ABOVETONE = "#b1beca";
-let BELOWTONE = "#a7afb4";  // overshoot 
+let BELOWTONE = "#8ca7b9";  // overshoot 
 
 // TRUE BASE TONE
 let BASETONEA = BASETONE;

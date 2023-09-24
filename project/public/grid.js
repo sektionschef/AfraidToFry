@@ -54,9 +54,9 @@ class Grid {
         // #PALETTES
         // https://rechneronline.de/number-list/
 
-        let profileHue = [-8, -5, -3, 0, 3, 5, 8];
+        let profileHue = [-12, -8, -5, -3, 0, 3, 5, 8, 12, -5, -3, 0, 3, 5];
         let profileSat = [-20, -15, -10, -5, 0, 5, 10, 15, 20, -10, -5, 0, 5, 10];
-        let profileLight = [-3, 0, 3, -3, 0, 3, 10];
+        let profileLight = [-3, 0, 3, -3, 0, 3, 6, -6];
 
         this.paletteBaseA = new dynamicPalette(
             BASETONEA,

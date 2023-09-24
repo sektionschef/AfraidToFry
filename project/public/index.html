@@ -24,7 +24,7 @@
     var fxhash = search.get('fxhash') || "oo" + Array(49).fill(0).map(_ => alphabet[(Math.random() * alphabet.length) | 0]).join('')
 
     // DANGER ZONE
-    // var fxhash = "oodqMWwestJ9zxKjsr8TsojzQifnqgeS3q5C4DwkQbAfTkpCsJN";
+    var fxhash = "oodqMWwestJ9zxKjsr8TsojzQifnqgeS3q5C4DwkQbAfTkpCsJN";
     // DANGER ZONE
 
     let b58dec = str => [...str].reduce((p, c) => p * alphabet.length + alphabet.indexOf(c) | 0, 0)

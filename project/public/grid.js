@@ -54,7 +54,7 @@ class Grid {
         // #PALETTES
         // https://rechneronline.de/number-list/
 
-        let profileHue = [-5, -3, 0, 3, 5];
+        let profileHue = [-8, -5, -3, 0, 3, 5, 8];
         let profileSat = [-20, -15, -10, -5, 0, 5, 10, 15, 20, -10, -5, 0, 5, 10];
         let profileLight = [-3, 0, 3, -3, 0, 3, 10];
 
@@ -93,35 +93,71 @@ class Grid {
         );
 
 
-        this.paletteBaseBelowA = new dynamicPalette(
-            BASETONEBELOWA,
+
+        this.paletteDetailAboveA = new dynamicPalette(
+            DETAILTONEA,
             profileHue,
             profileSat,
             profileLight
         );
 
-        this.paletteBaseBelowB = new dynamicPalette(
-            BASETONEBELOWB,
+        this.paletteDetailAboveB = new dynamicPalette(
+            DETAILTONEB,
             profileHue,
             profileSat,
             profileLight
         );
 
-        this.paletteBaseBelowC = new dynamicPalette(
-            BASETONEBELOWC,
+        this.paletteDetailAboveC = new dynamicPalette(
+            DETAILTONEC,
             profileHue,
             profileSat,
             profileLight
         );
 
-        this.paletteBaseBelowD = new dynamicPalette(
-            BASETONEBELOWD,
+        this.paletteDetailAboveD = new dynamicPalette(
+            DETAILTONED,
             profileHue,
             profileSat,
             profileLight
         );
-        this.paletteBaseBelowE = new dynamicPalette(
-            BASETONEBELOWE,
+        this.paletteDetailAboveE = new dynamicPalette(
+            DETAILTONEE,
+            profileHue,
+            profileSat,
+            profileLight
+        );
+
+
+        this.paletteDetailBelowA = new dynamicPalette(
+            DETAILTONEBELOWA,
+            profileHue,
+            profileSat,
+            profileLight
+        );
+
+        this.paletteDetailBelowB = new dynamicPalette(
+            DETAILTONEBELOWB,
+            profileHue,
+            profileSat,
+            profileLight
+        );
+
+        this.paletteDetailBelowC = new dynamicPalette(
+            DETAILTONEBELOWC,
+            profileHue,
+            profileSat,
+            profileLight
+        );
+
+        this.paletteDetailBelowD = new dynamicPalette(
+            DETAILTONEBELOWD,
+            profileHue,
+            profileSat,
+            profileLight
+        );
+        this.paletteDetailBelowE = new dynamicPalette(
+            DETAILTONEBELOWE,
             profileHue,
             profileSat,
             profileLight
@@ -451,7 +487,7 @@ class Grid {
                 width: this.boxSize,
                 height: this.boxSize,
                 // colorList: this.paletteDetail.palette,
-                colorList: this.paletteBaseA.palette,
+                colorList: this.paletteDetailAboveA.palette,
                 // noiseValue: this.boxes[i].noiseValueDetail,
                 // noiseValue: this.boxes[i].noiseValueBase,
                 noiseValue: this.boxes[i].noiseValueColorA,
@@ -615,11 +651,16 @@ class Grid {
                     noiseValue: this.boxes[i].noiseValueBase,
                     // colorNoise: this.boxes[i].noiseValueBase,
                     colorNoise: this.boxes[i].noiseValueColorB,
-                    colorListA: this.paletteBaseA.palette,
-                    colorListB: this.paletteBaseB.palette,
-                    colorListC: this.paletteBaseC.palette,
-                    colorListD: this.paletteBaseD.palette,
-                    colorListE: this.paletteBaseE.palette,
+                    colorListA: this.paletteDetailAboveA.palette,
+                    colorListB: this.paletteDetailAboveB.palette,
+                    colorListC: this.paletteDetailAboveC.palette,
+                    colorListD: this.paletteDetailAboveD.palette,
+                    colorListE: this.paletteDetailAboveE.palette,
+                    // colorListA: this.paletteBaseA.palette,
+                    // colorListB: this.paletteBaseB.palette,
+                    // colorListC: this.paletteBaseC.palette,
+                    // colorListD: this.paletteBaseD.palette,
+                    // colorListE: this.paletteBaseE.palette,
                     noiseAngle: true,
                     group: "",
                     horizonRow: this.horizonRow,
@@ -660,11 +701,16 @@ class Grid {
                     y: this.boxes[i].center.y,
                     noiseValue: this.boxes[i].noiseValueBaseBelow,
                     colorNoise: this.boxes[i].noiseValueColorB,
-                    colorListA: this.paletteBaseBelowA.palette,
-                    colorListB: this.paletteBaseBelowB.palette,
-                    colorListC: this.paletteBaseBelowC.palette,
-                    colorListD: this.paletteBaseBelowD.palette,
-                    colorListE: this.paletteBaseBelowE.palette,
+                    colorListA: this.paletteDetailBelowA.palette,
+                    colorListB: this.paletteDetailBelowB.palette,
+                    colorListC: this.paletteDetailBelowC.palette,
+                    colorListD: this.paletteDetailBelowD.palette,
+                    colorListE: this.paletteDetailBelowE.palette,
+                    // colorListA: this.paletteBaseA.palette,
+                    // colorListB: this.paletteBaseB.palette,
+                    // colorListC: this.paletteBaseC.palette,
+                    // colorListD: this.paletteBaseD.palette,
+                    // colorListE: this.paletteBaseE.palette,
                     noiseAngle: true,
                     group: "",
                     horizonRow: this.horizonRow,
@@ -720,11 +766,11 @@ class Grid {
                     noiseValue: this.boxes[i].noiseValueDetail,
                     // colorNoise: this.boxes[i].noiseValueDetail,
                     colorNoise: this.boxes[i].noiseValueColorA,
-                    colorListA: this.paletteBaseE.palette,
-                    colorListB: this.paletteBaseD.palette,
-                    colorListC: this.paletteBaseB.palette,
-                    colorListD: this.paletteBaseC.palette,
-                    colorListE: this.paletteBaseA.palette,
+                    colorListA: this.paletteDetailAboveE.palette,
+                    colorListB: this.paletteDetailAboveD.palette,
+                    colorListC: this.paletteDetailAboveB.palette,
+                    colorListD: this.paletteDetailAboveC.palette,
+                    colorListE: this.paletteDetailAboveA.palette,
                     noiseAngle: true,
                     group: "",
                     horizonRow: this.horizonRow,
@@ -764,11 +810,11 @@ class Grid {
                     y: this.boxes[i].center.y * getNormallyDistributedRandomNumber(1, 0),
                     noiseValue: this.boxes[i].noiseValueDetailBelow,
                     colorNoise: this.boxes[i].noiseValueColorDetailBelow,
-                    colorListA: this.paletteBaseBelowE.palette,
-                    colorListB: this.paletteBaseBelowD.palette,
-                    colorListC: this.paletteBaseBelowB.palette,
-                    colorListD: this.paletteBaseBelowC.palette,
-                    colorListE: this.paletteBaseBelowA.palette,  // sau
+                    colorListA: this.paletteDetailBelowE.palette,
+                    colorListB: this.paletteDetailBelowD.palette,
+                    colorListC: this.paletteDetailBelowB.palette,
+                    colorListD: this.paletteDetailBelowC.palette,
+                    colorListE: this.paletteDetailBelowA.palette,
                     noiseAngle: true,
                     group: "",
                     horizonRow: this.horizonRow,

@@ -25,7 +25,7 @@ let RESOLUTIONBOXCOUNT = 80;
 // let RESOLUTIONBOXCOUNT = 60;
 // let RESOLUTIONBOXCOUNT = 40;
 let BACKGROUNDTONE = "#ffffff";
-let BASETONE = "#6d7077";
+let BASETONE = "#b8b8b8";
 // let ABOVETONE = "#a5812f";  // andrea garden book
 // let BELOWTONE = "#ff617b";  // andrea garden book
 // let ABOVETONE = "#92a8b4" // blue
@@ -39,91 +39,103 @@ let BASETONE = "#6d7077";
 let ABOVETONE = "#b1beca";
 let BELOWTONE = "#a7afb4";  // overshoot 
 
-// YELLOW
-// let BASETONEA = "#ffdda1";
-// let BASETONEB = "#ffd151";
-// let BASETONEC = "#f8c537";
-// let BASETONED = "#edb230";
-// let BASETONEE = "#e77728";
+// TRUE BASE TONE
+let BASETONEA = BASETONE;
+let BASETONEB = BASETONE;
+let BASETONEC = BASETONE;
+let BASETONED = BASETONE;
+let BASETONEE = BASETONE;
 
-// let ABOVETONEA = tinycolor(BASETONEA).darken(15);
-// let ABOVETONEB = tinycolor(BASETONEB).darken(15);
-// let ABOVETONEC = tinycolor(BASETONEC).darken(15);
-// let ABOVETONED = tinycolor(BASETONED).darken(15);
-// let ABOVETONEE = tinycolor(BASETONEE).darken(15);
+
+// YELLOW
+// let DETAILTONEA = "#ffdda1";
+// let DETAILTONEB = "#ffd151";
+// let DETAILTONEC = "#f8c537";
+// let DETAILTONED = "#edb230";
+// let DETAILTONEE = "#e77728";
+
+// let ABOVETONEA = tinycolor(DETAILTONEA).darken(15);
+// let ABOVETONEB = tinycolor(DETAILTONEB).darken(15);
+// let ABOVETONEC = tinycolor(DETAILTONEC).darken(15);
+// let ABOVETONED = tinycolor(DETAILTONED).darken(15);
+// let ABOVETONEE = tinycolor(DETAILTONEE).darken(15);
 
 // blue
-// let BASETONEA = "#0f3e50";
-// let BASETONEB = "#1e4e5f";
-// let BASETONEC = "#437080";
-// let BASETONED = "#4f8597";
-// let BASETONEE = "#78a3b1";
+// let DETAILTONEA = "#0f3e50";
+// let DETAILTONEB = "#1e4e5f";
+// let DETAILTONEC = "#437080";
+// let DETAILTONED = "#4f8597";
+// let DETAILTONEE = "#78a3b1";
 
 // blue grey
-// let BASETONEA = "#71a3bd";
-// let BASETONEB = "#557f94";
-// let BASETONEC = "#3c4a52";
-// let BASETONED = "#506b79";
-// let BASETONEE = "#8da1ac";
+// let DETAILTONEA = "#71a3bd";
+// let DETAILTONEB = "#557f94";
+// let DETAILTONEC = "#3c4a52";
+// let DETAILTONED = "#506b79";
+// let DETAILTONEE = "#8da1ac";
 
 // dark blue - A
-let BASETONEA = ABOVETONE;
-let BASETONEB = ABOVETONE;
-let BASETONEC = ABOVETONE;
-let BASETONED = ABOVETONE;
-let BASETONEE = ABOVETONE;
+let DETAILTONEA = ABOVETONE;
+let DETAILTONEB = ABOVETONE;
+let DETAILTONEC = ABOVETONE;
+let DETAILTONED = ABOVETONE;
+let DETAILTONEE = ABOVETONE;
 
 
 // green
-// let BASETONEBELOWA = "#83781B";
-// let BASETONEBELOWB = "#95B46A";
-// let BASETONEBELOWC = "#709255";
-// let BASETONEBELOWD = "#3E5622";
-// let BASETONEBELOWE = "#172815";
+// let DETAILTONEBELOWA = "#83781B";
+// let DETAILTONEBELOWB = "#95B46A";
+// let DETAILTONEBELOWC = "#709255";
+// let DETAILTONEBELOWD = "#3E5622";
+// let DETAILTONEBELOWE = "#172815";
 
 // green - strong
-// let BASETONEBELOWA = "#5aa376";
-// let BASETONEBELOWB = "#79a854";
-// let BASETONEBELOWC = "#659B5E";
-// let BASETONEBELOWD = "#556F44";
-// let BASETONEBELOWE = "#3b6644";
+// let DETAILTONEBELOWA = "#5aa376";
+// let DETAILTONEBELOWB = "#79a854";
+// let DETAILTONEBELOWC = "#659B5E";
+// let DETAILTONEBELOWD = "#556F44";
+// let DETAILTONEBELOWE = "#3b6644";
 
 // green - grey
-// let BASETONEBELOWA = "#7e9e8a";
-// let BASETONEBELOWB = "#889e76";
-// let BASETONEBELOWC = "#758a72";
-// let BASETONEBELOWD = "#58795e";
-// let BASETONEBELOWE = "#565e51";
+// let DETAILTONEBELOWA = "#7e9e8a";
+// let DETAILTONEBELOWB = "#889e76";
+// let DETAILTONEBELOWC = "#758a72";
+// let DETAILTONEBELOWD = "#58795e";
+// let DETAILTONEBELOWE = "#565e51";
 
 // blue grey
-// let BASETONEBELOWA = "#71a3bd";
-// let BASETONEBELOWB = "#557f94";
-// let BASETONEBELOWC = "#3c4a52";
-// let BASETONEBELOWD = "#506b79";
-// let BASETONEBELOWE = "#8da1ac";
+// let DETAILTONEBELOWA = "#71a3bd";
+// let DETAILTONEBELOWB = "#557f94";
+// let DETAILTONEBELOWC = "#3c4a52";
+// let DETAILTONEBELOWD = "#506b79";
+// let DETAILTONEBELOWE = "#8da1ac";
 
 // // yellow
-// let BASETONEBELOWA = "#ffdda1";
-// let BASETONEBELOWB = "#ffd151";
-// let BASETONEBELOWC = "#f8c537";
-// let BASETONEBELOWD = "#edb230";
-// let BASETONEBELOWE = "#e77728";
+// let DETAILTONEBELOWA = "#ffdda1";
+// let DETAILTONEBELOWB = "#ffd151";
+// let DETAILTONEBELOWC = "#f8c537";
+// let DETAILTONEBELOWD = "#edb230";
+// let DETAILTONEBELOWE = "#e77728";
 
 // dark blue - A
-// let BASETONEBELOWA = "#63788d";
-// let BASETONEBELOWB = "#63788d";
-// let BASETONEBELOWC = "#63788d";
-// let BASETONEBELOWD = "#63788d";
-// let BASETONEBELOWE = "#63788d";
+// let DETAILTONEBELOWA = "#63788d";
+// let DETAILTONEBELOWB = "#63788d";
+// let DETAILTONEBELOWC = "#63788d";
+// let DETAILTONEBELOWD = "#63788d";
+// let DETAILTONEBELOWE = "#63788d";
 
 // blue - light as a bird
-let BASETONEBELOWA = BELOWTONE;
-let BASETONEBELOWB = BELOWTONE;
-let BASETONEBELOWC = BELOWTONE;
-let BASETONEBELOWD = BELOWTONE;
-let BASETONEBELOWE = BELOWTONE;
+let DETAILTONEBELOWA = BELOWTONE;
+let DETAILTONEBELOWB = BELOWTONE;
+let DETAILTONEBELOWC = BELOWTONE;
+let DETAILTONEBELOWD = BELOWTONE;
+let DETAILTONEBELOWE = BELOWTONE;
+
 
 setTagsHTML();
+
+Math.random = fxrand;
+noise.seed(fxrand());
 
 let BULK = false;  // bulk export images
 

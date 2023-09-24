@@ -3,8 +3,6 @@ class noiseArea {
 
         this.box_count = 80;
 
-        noise.seed(fxrand());
-
         this.x = x;
         this.y = y;
 

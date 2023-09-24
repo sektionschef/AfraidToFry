@@ -26,6 +26,7 @@ class noiseAggregator {
         var amplitude2 = map(h, startRow, endRow, a2min, a2max); // 0,1
         var amplitude3 = map(h, startRow, endRow, a3min, a3max); // 0,1
 
+        // console.log(amplitude1);
         // map - makes it a difference
         // let noiseValue1 = map(this.noise1.createNoiseValue(w, h), -1, 1, 0, 1);
         // let noiseValue2 = map(this.noise2.createNoiseValue(w, h), -1, 1, 0, 1);

@@ -33,8 +33,11 @@ let BASETONE = "#6d7077";
 
 // let ABOVETONE = "#98a0a7";  // good - twitter
 // let BELOWTONE = "#515a57";  // good - twitter
-let ABOVETONE = "#4b6786";  // overshoot - cool color: d5560c
-let BELOWTONE = "#7e614f";  // overshoot 
+// let ABOVETONE = "#4b6786";  // overshoot - cool color: d5560c
+// let BELOWTONE = "#7e614f";  // overshoot 
+// let ABOVETONE = "#8dacc9";  // full blue
+let ABOVETONE = "#b1beca";
+let BELOWTONE = "#a7afb4";  // overshoot 
 
 // YELLOW
 // let BASETONEA = "#ffdda1";
@@ -64,11 +67,11 @@ let BELOWTONE = "#7e614f";  // overshoot
 // let BASETONEE = "#8da1ac";
 
 // dark blue - A
-let BASETONEA = "#8dacc9";
-let BASETONEB = "#8dacc9";
-let BASETONEC = "#8dacc9";
-let BASETONED = "#8dacc9";
-let BASETONEE = "#8dacc9";
+let BASETONEA = ABOVETONE;
+let BASETONEB = ABOVETONE;
+let BASETONEC = ABOVETONE;
+let BASETONED = ABOVETONE;
+let BASETONEE = ABOVETONE;
 
 
 // green
@@ -107,12 +110,18 @@ let BASETONEE = "#8dacc9";
 // let BASETONEBELOWE = "#e77728";
 
 // dark blue - A
-let BASETONEBELOWA = "#63788d";
-let BASETONEBELOWB = "#63788d";
-let BASETONEBELOWC = "#63788d";
-let BASETONEBELOWD = "#63788d";
-let BASETONEBELOWE = "#63788d";
+// let BASETONEBELOWA = "#63788d";
+// let BASETONEBELOWB = "#63788d";
+// let BASETONEBELOWC = "#63788d";
+// let BASETONEBELOWD = "#63788d";
+// let BASETONEBELOWE = "#63788d";
 
+// blue - light as a bird
+let BASETONEBELOWA = BELOWTONE;
+let BASETONEBELOWB = BELOWTONE;
+let BASETONEBELOWC = BELOWTONE;
+let BASETONEBELOWD = BELOWTONE;
+let BASETONEBELOWE = BELOWTONE;
 
 setTagsHTML();
 

@@ -218,10 +218,9 @@ class Grid {
         this.noiseBaseBelow = new noiseAggregator(120, 36, 15, 20, 6, 6);
         this.noiseDetailBelow = new noiseAggregator(130, 46, 19, 10, 8, 8);
 
-
         this.noiseColorBase = new noiseAggregator(80, 10, 30, 10, 9, 3);
         this.noiseColorDetail = new noiseAggregator(100, 15, 60, 10, 25, 6);
-        this.noiseColorDetailBelow = new noiseAggregator(180, 30, 50, 16, 4, 4);
+        this.noiseColorDetailBelow = new noiseAggregator(80, 15, 40, 15, 13, 4);
 
         this.createBoxes();
         this.normalizeNoises();
@@ -328,11 +327,16 @@ class Grid {
                 // var noiseValueColorA = this.noiseColorDetail.createNoiseValue(w, h, 0, this.horizonRow, 1, 1, 0, 0, 0, 0);
                 // var noiseValueColorA = this.noiseColorDetail.createNoiseValue(w, h, 0, this.horizonRow, 0, 0, 1, 1, 0, 0);
                 // var noiseValueColorA = this.noiseColorDetail.createNoiseValue(w, h, 0, this.horizonRow, 0, 0, 0, 0, 1, 1);
-                var noiseValueColorA = this.noiseColorDetail.createNoiseValue(w, h, 0, this.horizonRow, 1, 1, 0.5, 0, 0, 0.5);
+                var noiseValueColorA = this.noiseColorDetail.createNoiseValue(w, h, 0, this.horizonRow, 1, 1, 1, 0, 0, 1);
 
-                var noiseValueColorB = this.noiseColorBase.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 1, 1, 0.25, 0.5, 0, 0);
+                // var noiseValueColorB = this.noiseColorBase.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 1, 1, 0, 0, 0, 0);
+                var noiseValueColorB = this.noiseColorBase.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 0, 1, 1, 0, 0);
+                // var noiseValueColorB = this.noiseColorBase.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 1, 1, 0.25, 0.5, 1, 1);
 
-                var noiseValueColorDetailBelow = this.noiseColorDetailBelow.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 1, 1, 0.25, 0.5, 0, 0);
+                // var noiseValueColorDetailBelow = this.noiseColorDetailBelow.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 1, 1, 0, 0, 0, 0);
+                // var noiseValueColorDetailBelow = this.noiseColorDetailBelow.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 0, 1, 1, 0, 0);
+                // var noiseValueColorDetailBelow = this.noiseColorDetailBelow.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 0, 0, 0, 1, 1);
+                var noiseValueColorDetailBelow = this.noiseColorDetailBelow.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 1, 1, 0, 1, 1, 0);
 
                 if (noiseValueDetail < this.noiseDetailMin) {
                     this.noiseDetailMin = noiseValueDetail;
@@ -466,66 +470,38 @@ class Grid {
     }
 
     loopShowNoise() {
-        // let randomIndex = getRandomIndex(this.boxes.length);
-        let randomIndex = getRandomIndex(this.longBoxCount * this.horizonRow);
 
-        let i = 0;
-
-        // for (var v = 0; v < randomIndex.length; v++) {
-        for (var v = 0; v < (this.longBoxCount * this.horizonRow); v++) {
-
-            i = randomIndex[v];
-
+        for (var i = 0; i < this.boxes.length; i++) {
             if (this.drawSkipMargin(this.boxes[i])) {
                 continue;
             }
 
-            // if (this.boxes[i].aboveHorizon) {
-            new deugy({
-                x: this.boxes[i].A.x,
-                y: this.boxes[i].A.y,
-                width: this.boxSize,
-                height: this.boxSize,
-                // colorList: this.paletteDetail.palette,
-                colorList: this.paletteDetailAboveA.palette,
-                // noiseValue: this.boxes[i].noiseValueDetail,
-                // noiseValue: this.boxes[i].noiseValueBase,
-                noiseValue: this.boxes[i].noiseValueColorA,
-                // noiseValue: this.boxes[i].noiseValueColorB,
-            }).draw();
-            // } else {
-            // new deugy({
-            //     x: this.boxes[i].A.x,
-            //     y: this.boxes[i].A.y,
-            //     width: this.boxSize,
-            //     height: this.boxSize,
-            //     colorList: this.paletteDetailBelow.palette,
-            //     noiseValue: this.boxes[i].noiseValueBaseBelow,
-            // }).draw();
-            // }
-
-
-            // color noise
-
-            // if (this.boxes[i].aboveHorizon) {
-            //     new deugy({
-            //         x: this.boxes[i].A.x,
-            //         y: this.boxes[i].A.y,
-            //         width: this.boxSize,
-            //         height: this.boxSize,
-            //         colorList: this.paletteDetail.palette,
-            //         noiseValue: this.boxes[i].noiseValueColorA,
-            //     }).draw();
-            // } else {
-            //     new deugy({
-            //         x: this.boxes[i].A.x,
-            //         y: this.boxes[i].A.y,
-            //         width: this.boxSize,
-            //         height: this.boxSize,
-            //         colorList: this.paletteDetailBelow.palette,
-            //         noiseValue: this.boxes[i].noiseValueColorB,
-            //     }).draw();
-            // }
+            if (this.boxes[i].aboveHorizon) {
+                new deugy({
+                    x: this.boxes[i].A.x,
+                    y: this.boxes[i].A.y,
+                    width: this.boxSize,
+                    height: this.boxSize,
+                    // colorList: this.paletteDetail.palette,
+                    colorList: this.paletteDetailAboveA.palette,
+                    // noiseValue: this.boxes[i].noiseValueDetail,
+                    // noiseValue: this.boxes[i].noiseValueBase,
+                    noiseValue: this.boxes[i].noiseValueColorA,
+                    // noiseValue: this.boxes[i].noiseValueColorB,
+                }).draw();
+            } else {
+                new deugy({
+                    x: this.boxes[i].A.x,
+                    y: this.boxes[i].A.y,
+                    width: this.boxSize,
+                    height: this.boxSize,
+                    colorList: this.paletteDetailAboveA.palette,
+                    // noiseValue: this.boxes[i].noiseValueBaseBelow,
+                    // noiseValue: this.boxes[i].noiseValueColorA,
+                    // noiseValue: this.boxes[i].noiseValueColorB,
+                    noiseValue: this.boxes[i].noiseValueColorDetailBelow,
+                }).draw();
+            }
         }
     }
 
@@ -700,7 +676,7 @@ class Grid {
                     x: this.boxes[i].center.x,
                     y: this.boxes[i].center.y,
                     noiseValue: this.boxes[i].noiseValueBaseBelow,
-                    colorNoise: this.boxes[i].noiseValueColorB,
+                    colorNoise: this.boxes[i].noiseValueColorDetailBelow,
                     colorListA: this.paletteDetailBelowA.palette,
                     colorListB: this.paletteDetailBelowB.palette,
                     colorListC: this.paletteDetailBelowC.palette,

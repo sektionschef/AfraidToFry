@@ -88,21 +88,22 @@ class digi {
 
 
             // PALETTE CHANGE - NOISEVALUE OR COLORNOISE
-            if (this.colorNoise < -0.75) {
+            if (this.noiseValue < -0.6) {
                 this.colorList = this.colorListA;
-            } else if (this.colorNoise < -0.25) {
+            } else if (this.noiseValue < -0.2) {
                 this.colorList = this.colorListB;
-            } else if (this.colorNoise < 0.25) {
+            } else if (this.noiseValue < 0.2) {
                 this.colorList = this.colorListC;
-            } else if (this.colorNoise < 0.75) {
+            } else if (this.noiseValue < 0.6) {
                 this.colorList = this.colorListD;
             } else {
                 this.colorList = this.colorListE;
             }
 
             // this.noiseDistance = this.colorNoiseMax - this.colorNoiseMin;
-            this.noiseDistance = 2;// (1- -1);
-            this.colorStep = this.noiseDistance / this.colorList.length;
+            // this.noiseDistance = 2;// (1- -1);
+            // this.noiseDistance = 0.4;// (just the little bit);
+            // this.colorStep = this.noiseDistance / this.colorList.length;
 
             let colorSelect = Math.round(map(this.colorNoise * 100, -100, 100, 0, (this.colorList.length - 1)));
             // console.log(this.noiseValue);

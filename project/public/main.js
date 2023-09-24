@@ -37,11 +37,11 @@ let ABOVETONE = "#4b6786";  // overshoot - cool color: d5560c
 let BELOWTONE = "#7e614f";  // overshoot 
 
 // YELLOW
-let BASETONEA = "#ffdda1";
-let BASETONEB = "#ffd151";
-let BASETONEC = "#f8c537";
-let BASETONED = "#edb230";
-let BASETONEE = "#e77728";
+// let BASETONEA = "#ffdda1";
+// let BASETONEB = "#ffd151";
+// let BASETONEC = "#f8c537";
+// let BASETONED = "#edb230";
+// let BASETONEE = "#e77728";
 
 // let ABOVETONEA = tinycolor(BASETONEA).darken(15);
 // let ABOVETONEB = tinycolor(BASETONEB).darken(15);
@@ -49,18 +49,69 @@ let BASETONEE = "#e77728";
 // let ABOVETONED = tinycolor(BASETONED).darken(15);
 // let ABOVETONEE = tinycolor(BASETONEE).darken(15);
 
-let ABOVETONEA = tinycolor(BASETONEE);
-let ABOVETONEB = tinycolor(BASETONED);
-let ABOVETONEC = tinycolor(BASETONEC);
-let ABOVETONED = tinycolor(BASETONEB);
-let ABOVETONEE = tinycolor(BASETONEA);
+// blue
+// let BASETONEA = "#0f3e50";
+// let BASETONEB = "#1e4e5f";
+// let BASETONEC = "#437080";
+// let BASETONED = "#4f8597";
+// let BASETONEE = "#78a3b1";
 
-// BLUE
-// let ABOVETONEA = "#302B27";
-// let ABOVETONEB = "#1B264F";
-// let ABOVETONEC = "#274690";
-// let ABOVETONED = "#576CA8";
-// let ABOVETONEE = "#F5F3F5";
+// blue grey
+// let BASETONEA = "#71a3bd";
+// let BASETONEB = "#557f94";
+// let BASETONEC = "#3c4a52";
+// let BASETONED = "#506b79";
+// let BASETONEE = "#8da1ac";
+
+// dark blue - A
+let BASETONEA = "#8dacc9";
+let BASETONEB = "#8dacc9";
+let BASETONEC = "#8dacc9";
+let BASETONED = "#8dacc9";
+let BASETONEE = "#8dacc9";
+
+
+// green
+// let BASETONEBELOWA = "#83781B";
+// let BASETONEBELOWB = "#95B46A";
+// let BASETONEBELOWC = "#709255";
+// let BASETONEBELOWD = "#3E5622";
+// let BASETONEBELOWE = "#172815";
+
+// green - strong
+// let BASETONEBELOWA = "#5aa376";
+// let BASETONEBELOWB = "#79a854";
+// let BASETONEBELOWC = "#659B5E";
+// let BASETONEBELOWD = "#556F44";
+// let BASETONEBELOWE = "#3b6644";
+
+// green - grey
+// let BASETONEBELOWA = "#7e9e8a";
+// let BASETONEBELOWB = "#889e76";
+// let BASETONEBELOWC = "#758a72";
+// let BASETONEBELOWD = "#58795e";
+// let BASETONEBELOWE = "#565e51";
+
+// blue grey
+// let BASETONEBELOWA = "#71a3bd";
+// let BASETONEBELOWB = "#557f94";
+// let BASETONEBELOWC = "#3c4a52";
+// let BASETONEBELOWD = "#506b79";
+// let BASETONEBELOWE = "#8da1ac";
+
+// // yellow
+// let BASETONEBELOWA = "#ffdda1";
+// let BASETONEBELOWB = "#ffd151";
+// let BASETONEBELOWC = "#f8c537";
+// let BASETONEBELOWD = "#edb230";
+// let BASETONEBELOWE = "#e77728";
+
+// dark blue - A
+let BASETONEBELOWA = "#63788d";
+let BASETONEBELOWB = "#63788d";
+let BASETONEBELOWC = "#63788d";
+let BASETONEBELOWD = "#63788d";
+let BASETONEBELOWE = "#63788d";
 
 
 setTagsHTML();
@@ -132,10 +183,21 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
     var turbo = document.createElementNS("http://www.w3.org/2000/svg", "feTurbulence");
     turbo.setAttribute("type", "fractalNoise");
-    turbo.setAttribute("baseFrequency", "0.75");
-    turbo.setAttribute("numOctaves", "1");
+    turbo.setAttribute("baseFrequency", "0.102");
+    turbo.setAttribute("numOctaves", "4");
+    // turbo.setAttribute("seed", "15");
     turbo.setAttribute("stitchTiles", "stitch");
-    turbo.setAttribute("result", "NOISE");
+    // turbo.setAttribute("result", "NOISE");
+    turbo.setAttribute("result", "turbulence");
+
+
+    // <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" viewBox="0 0 700 700" width="700" height="700"><defs><filter id="nnnoise-filter" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    // <feTurbulence type="fractalNoise" baseFrequency="0.102" numOctaves="4" seed="15" stitchTiles="stitch" x="0%" y="0%" width="100%" height="100%" result="turbulence"></feTurbulence>
+    // <feSpecularLighting surfaceScale="15" specularConstant="0.75" specularExponent="20" lighting-color="#7957A8" x="0%" y="0%" width="100%" height="100%" in="turbulence" result="specularLighting">
+    // 		<feDistantLight azimuth="3" elevation="100"></feDistantLight>
+    // </feSpecularLighting>
+    // </filter></defs><rect width="700" height="700" fill="transparent"></rect><rect width="700" height="700" fill="#7957a8" filter="url(#nnnoise-filter)"></rect></svg>
+
 
     var blender = document.createElementNS("http://www.w3.org/2000/svg", "feBlend");
     blender.setAttribute("in", "SourceGraphic");
@@ -150,8 +212,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
     defs.appendChild(filter);
     svgNode.appendChild(defs);
 
-    // backgroundObj.setAttribute("filter", "url(#f1)");
-    svgNode.appendChild(backgroundObj);
+    backgroundObj.setAttribute("filter", "url(#f1)");
+    // svgNode.appendChild(backgroundObj);
 
     timeChecker();
 

@@ -44,7 +44,8 @@ class dynamicPalette {
 
         // DYNAMIC
         // this.length = 60;
-        this.length = 160;
+        // this.length = 160;
+        this.length = 10;
         this.palette = [];
         // this.palette = Array(this.length);
         // console.log(getNormallyDistributedRandomNumber(0, 10));

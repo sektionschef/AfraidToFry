@@ -1006,7 +1006,7 @@ class Grid {
         var filterObj = document.createElementNS("http://www.w3.org/2000/svg", "rect");
         filterObj.setAttribute("width", canvasFormatChosen.canvasWidth);
         filterObj.setAttribute("height", canvasFormatChosen.canvasHeight);
-        filterObj.setAttribute("fill", "#9b4e4e");
+        filterObj.setAttribute("fill", "#ffffffff");
 
         // filter know how: https://stackoverflow.com/questions/10867282/how-can-i-add-a-filter-to-a-svg-object-in-javascript 
         var defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
@@ -1038,10 +1038,10 @@ class Grid {
 
 
         var specularLight = document.createElementNS("http://www.w3.org/2000/svg", "feSpecularLighting");
-        specularLight.setAttribute("surfaceScale", "15"); // 1- 40
+        specularLight.setAttribute("surfaceScale", "17"); // 1- 40
         specularLight.setAttribute("specularConstant", "0.75");
-        specularLight.setAttribute("specularExponent", "10");
-        specularLight.setAttribute("lighting-color", "#b4b4b4");
+        specularLight.setAttribute("specularExponent", "20");
+        specularLight.setAttribute("lighting-color", "#3321d4");
         specularLight.setAttribute("x", "0%");
         specularLight.setAttribute("y", "0%");
         specularLight.setAttribute("width", "100%");
@@ -1054,8 +1054,17 @@ class Grid {
         distantLight.setAttribute("elevation", "100");
         specularLight.appendChild(distantLight);
 
+        var colorMatrix = document.createElementNS("http://www.w3.org/2000/svg", "feColorMatrix");
+        colorMatrix.setAttribute("type", "saturate");
+        colorMatrix.setAttribute("values", "0");
+        colorMatrix.setAttribute("x", "0%");
+        colorMatrix.setAttribute("y", "0%");
+        colorMatrix.setAttribute("width", "100%");
+        colorMatrix.setAttribute("height", "100%");
+        colorMatrix.setAttribute("in", "specularLighting");
+        colorMatrix.setAttribute("result", "colormatrix");
 
-
+        // https://fffuel.co/nnnoise/
         // <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns: xlink="http://www.w3.org/1999/xlink" xmlns: svgjs="http://svgjs.dev/svgjs" viewBox="0 0 700 700" width="700" height="700">
         //     <defs>
         //         <filter id="nnnoise-filter" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
@@ -1069,6 +1078,14 @@ class Grid {
         // <rect width="700" height="700" fill="transparent"></rect><rect width="700" height="700" fill="#7957a8" filter="url(#nnnoise-filter)"></rect></svg>
 
 
+        //         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" viewBox="0 0 700 700" width="700" height="700" opacity="1"><defs><filter id="nnnoise-filter" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+        // 	<feTurbulence type="fractalNoise" baseFrequency="0.141" numOctaves="4" seed="15" stitchTiles="stitch" x="0%" y="0%" width="100%" height="100%" result="turbulence"></feTurbulence>
+        // 	<feSpecularLighting surfaceScale="15" specularConstant="3" specularExponent="20" lighting-color="#ff0000" x="0%" y="0%" width="100%" height="100%" in="turbulence" result="specularLighting">
+        //     		<feDistantLight azimuth="3" elevation="120"></feDistantLight>
+        //   	</feSpecularLighting>
+        //   <feColorMatrix type="saturate" values="0" x="0%" y="0%" width="100%" height="100%" in="specularLighting" result="colormatrix"></feColorMatrix>
+        // </filter></defs><rect width="700" height="700" fill="#ffffffff"></rect><rect width="700" height="700" fill="#ff0000" filter="url(#nnnoise-filter)"></rect></svg>
+
         // var blender = document.createElementNS("http://www.w3.org/2000/svg", "feBlend");
         // blender.setAttribute("in", "SourceGraphic");
         // blender.setAttribute("in2", "turbulence");
@@ -1080,6 +1097,7 @@ class Grid {
         // filter.appendChild(blender);
         filter.appendChild(turbulence);
         filter.appendChild(specularLight);
+        filter.appendChild(colorMatrix);
         defs.appendChild(filter);
         svgNode.appendChild(defs);
 

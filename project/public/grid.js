@@ -253,9 +253,9 @@ class Grid {
 
             // this.loopShowNoise();
 
-            this.loopBaseVis();
-            this.loopBase();
-            this.loopDetail();
+            // this.loopBaseVis();
+            // this.loopBase();
+            // this.loopDetail();
 
             // this.loop8();
 

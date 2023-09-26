@@ -188,10 +188,17 @@ window.addEventListener("DOMContentLoaded", (event) => {
     backgroundObj.setAttribute("height", canvasFormatChosen.canvasHeight);
     // backgroundObj.setAttribute("fill", "#ffffff");
     backgroundObj.setAttribute("fill", BACKGROUNDTONE);
-
-
-
     svgNode.appendChild(backgroundObj);
+
+    var innerBackground = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    var marginello = 2.5;
+    innerBackground.setAttribute("x", "2.5%");
+    innerBackground.setAttribute("y", "2.5%");
+    innerBackground.setAttribute("width", canvasFormatChosen.canvasWidth);
+    innerBackground.setAttribute("height", canvasFormatChosen.canvasHeight);
+    innerBackground.setAttribute("fill", "#e6e6e6");
+    svgNode.appendChild(innerBackground);
+
 
     timeChecker();
 

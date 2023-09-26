@@ -1026,7 +1026,7 @@ class Grid {
 
         var turbulence = document.createElementNS("http://www.w3.org/2000/svg", "feTurbulence");
         turbulence.setAttribute("type", "fractalNoise");
-        turbulence.setAttribute("baseFrequency", "0.102");
+        turbulence.setAttribute("baseFrequency", "0.2");  // 0.102
         turbulence.setAttribute("numOctaves", "4");
         // turbulence.setAttribute("seed", "15");
         turbulence.setAttribute("stitchTiles", "stitch");
@@ -1038,10 +1038,10 @@ class Grid {
 
 
         var specularLight = document.createElementNS("http://www.w3.org/2000/svg", "feSpecularLighting");
-        specularLight.setAttribute("surfaceScale", "17"); // 1- 40
+        specularLight.setAttribute("surfaceScale", "7"); // 1- 40, 17
         specularLight.setAttribute("specularConstant", "0.75");
         specularLight.setAttribute("specularExponent", "20");
-        specularLight.setAttribute("lighting-color", "#3321d4");
+        specularLight.setAttribute("lighting-color", "#392bb8");
         specularLight.setAttribute("x", "0%");
         specularLight.setAttribute("y", "0%");
         specularLight.setAttribute("width", "100%");
@@ -1091,6 +1091,18 @@ class Grid {
         // blender.setAttribute("in2", "turbulence");
         // blender.setAttribute("mode", "overlay");
         // blender.setAttribute("result", "BLEND");
+
+
+        // TRY MASK
+        // var maskNoise = document.createElementNS("http://www.w3.org/2000/svg", "mask");
+        // maskNoise.setAttribute("id", "MaskNoise");
+        // maskNoise.setAttribute("maskUnits", "userSpaceOnUse");
+        // maskNoise.setAttribute("x", "0");
+        // maskNoise.setAttribute("y", "0");
+        // maskNoise.setAttribute("width", "100%");
+        // maskNoise.setAttribute("height", "100%");
+        // maskNoise.appendChild()
+        // defs.appendChild(maskNoise);
 
 
         // filter.appendChild(gaussianFilter);

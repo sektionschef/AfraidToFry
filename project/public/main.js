@@ -182,6 +182,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
     svgNode.setAttributeNS(null, 'id', 'svgNode');
     targetDiv.appendChild(svgNode);
 
+    var defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+    svgNode.appendChild(defs);
+
     // draw RECT as background !!
     var backgroundObj = document.createElementNS("http://www.w3.org/2000/svg", "rect");
     backgroundObj.setAttribute("width", canvasFormatChosen.canvasWidth);
@@ -189,15 +192,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
     // backgroundObj.setAttribute("fill", "#ffffff");
     backgroundObj.setAttribute("fill", BACKGROUNDTONE);
     svgNode.appendChild(backgroundObj);
-
-    var innerBackground = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    var marginello = 2.5;
-    innerBackground.setAttribute("x", "2.5%");
-    innerBackground.setAttribute("y", "2.5%");
-    innerBackground.setAttribute("width", canvasFormatChosen.canvasWidth);
-    innerBackground.setAttribute("height", canvasFormatChosen.canvasHeight);
-    innerBackground.setAttribute("fill", "#e6e6e6");
-    svgNode.appendChild(innerBackground);
 
 
     timeChecker();
@@ -207,6 +201,44 @@ window.addEventListener("DOMContentLoaded", (event) => {
     // ELEMENT
     // new dynamicPalette("#617061", 5, 10, 10).show();
     // new dynamicPalette("#7f9189", 5, 25, 10).show();
+
+
+
+    // TRY MASK
+    var maskRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    maskRect.setAttribute('x', "10");
+    maskRect.setAttribute('y', "10");
+    maskRect.setAttribute('height', "400");
+    maskRect.setAttribute('width', "500");
+    maskRect.setAttribute('fill', 'white');
+
+    var maskCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    maskCircle.setAttribute('cx', "100");
+    maskCircle.setAttribute('cy', "100");
+    maskCircle.setAttribute('r', "50");
+    maskCircle.setAttribute('fill', 'black');
+
+    // const defs = document.getElementById('defs');
+    var maskNoise = document.createElementNS("http://www.w3.org/2000/svg", "mask");
+    maskNoise.setAttribute("id", "MaskNoise");
+    // maskNoise.setAttribute("maskUnits", "userSpaceOnUse");
+    maskNoise.setAttribute("x", "0");
+    maskNoise.setAttribute("y", "0");
+    maskNoise.setAttribute("width", "100%");
+    maskNoise.setAttribute("height", "100%");
+    maskNoise.appendChild(maskRect);
+    maskNoise.appendChild(maskCircle);
+    defs.appendChild(maskNoise);
+
+    var toBeMasked = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    toBeMasked.setAttribute("x", "0");
+    toBeMasked.setAttribute("y", "0");
+    toBeMasked.setAttribute("width", "100%");
+    toBeMasked.setAttribute("height", "100%");
+    toBeMasked.setAttribute('fill', 'blue');
+    toBeMasked.setAttribute('mask', "url(#MaskNoise)");
+    svgNode.appendChild(toBeMasked);
+
 });
 
 

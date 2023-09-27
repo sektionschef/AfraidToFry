@@ -253,13 +253,13 @@ class Grid {
 
             // this.loopShowNoise();
 
-            this.loopBaseVis();
-            this.loopBase();
-            this.loopDetail();
+            // this.loopBaseVis();
+            // this.loopBase();
+            // this.loopDetail();
 
             // this.loop8();
 
-            this.addNoiseLayer();
+            // this.addNoiseLayer();
 
         }
     }
@@ -1001,6 +1001,7 @@ class Grid {
     addNoiseLayer() {
 
         const svgNode = document.getElementById('svgNode');
+        const defs = document.getElementById('defs');
 
         // filter object with transparent background
         var filterObj = document.createElementNS("http://www.w3.org/2000/svg", "rect");
@@ -1009,7 +1010,6 @@ class Grid {
         filterObj.setAttribute("fill", "#ffffffff");
 
         // filter know how: https://stackoverflow.com/questions/10867282/how-can-i-add-a-filter-to-a-svg-object-in-javascript 
-        var defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
 
         var filter = document.createElementNS("http://www.w3.org/2000/svg", "filter");
         filter.setAttribute("id", "f1");
@@ -1093,25 +1093,12 @@ class Grid {
         // blender.setAttribute("result", "BLEND");
 
 
-        // TRY MASK
-        // var maskNoise = document.createElementNS("http://www.w3.org/2000/svg", "mask");
-        // maskNoise.setAttribute("id", "MaskNoise");
-        // maskNoise.setAttribute("maskUnits", "userSpaceOnUse");
-        // maskNoise.setAttribute("x", "0");
-        // maskNoise.setAttribute("y", "0");
-        // maskNoise.setAttribute("width", "100%");
-        // maskNoise.setAttribute("height", "100%");
-        // maskNoise.appendChild()
-        // defs.appendChild(maskNoise);
-
-
         // filter.appendChild(gaussianFilter);
         // filter.appendChild(blender);
         filter.appendChild(turbulence);
         filter.appendChild(specularLight);
         filter.appendChild(colorMatrix);
         defs.appendChild(filter);
-        svgNode.appendChild(defs);
 
         // backgroundObj.setAttribute("filter", "url(#f1)");
         filterObj.setAttribute("filter", "url(#f1)");

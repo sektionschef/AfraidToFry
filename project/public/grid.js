@@ -253,13 +253,13 @@ class Grid {
 
             // this.loopShowNoise();
 
-            // this.loopBaseVis();
-            // this.loopBase();
-            // this.loopDetail();
+            this.loopBaseVis();
+            this.loopBase();
+            this.loopDetail();
 
             // this.loop8();
 
-            // this.addNoiseLayer();
+            this.addNoiseLayer();
 
         }
     }
@@ -559,6 +559,8 @@ class Grid {
         var offset = 30;  // move inward
         var loopCount = 40;
 
+        const groupDrawing = document.getElementById('drawing');
+
         for (var o = 0; o < loopCount; o++) {
             const rectNode = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
             rectNode.setAttributeNS(null, 'x', marginPix + getNormallyDistributedRandomNumber(0, posStdD) + offset);
@@ -571,7 +573,9 @@ class Grid {
             // rectNode.setAttributeNS(null, 'stroke', color_);
             rectNode.setAttributeNS(null, 'stroke', "none");
             // rectNode.setAttributeNS(null, 'stroke-width', this.rectStroke);
-            svgNode.appendChild(rectNode);
+
+            // svgNode.appendChild(rectNode);
+            groupDrawing.appendChild(rectNode);
         }
 
 

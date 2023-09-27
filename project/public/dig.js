@@ -204,8 +204,8 @@ class digi {
             var color_ = color_d;
             // }
 
-            // without svg.js
-            const svgNode = document.getElementById('svgNode');
+            // const svgNode = document.getElementById('svgNode');
+            const groupDrawing = document.getElementById('drawing');
 
             // darken or lighten rect and triangle color
             var effectiveColor = "#000000"
@@ -234,7 +234,9 @@ class digi {
                     rectNode.setAttributeNS(null, 'stroke', effectiveColor);
                     // rectNode.setAttributeNS(null, 'stroke', "none");
                     rectNode.setAttributeNS(null, 'stroke-width', this.rectStroke);
-                    svgNode.appendChild(rectNode);
+
+                    // svgNode.appendChild(rectNode);
+                    groupDrawing.appendChild(rectNode);
                 }
 
             }
@@ -263,7 +265,9 @@ class digi {
                     // triangleNode.setAttributeNS(null, 'stroke', "none");
                     // triangleNode.setAttributeNS(null, 'stroke-width', this.lineStrokeWeighty);
                     triangleNode.setAttributeNS(null, 'stroke-width', this.triangleStroke);
-                    svgNode.appendChild(triangleNode);
+
+                    // svgNode.appendChild(triangleNode);
+                    groupDrawing.appendChild(triangleNode);
                 }
             }
 
@@ -275,7 +279,9 @@ class digi {
             polyNode.setAttributeNS(null, 'stroke', color_);
             polyNode.setAttributeNS(null, 'stroke-width', this.lineStrokeWeighty);
             // polyNode.setAttributeNS(null, 'stroke-dasharray', "5, 5");
-            svgNode.appendChild(polyNode);
+
+            // svgNode.appendChild(polyNode);
+            groupDrawing.appendChild(polyNode);
 
 
             // DEBUG VIEW CENTER
@@ -286,6 +292,7 @@ class digi {
             // circleNode.setAttributeNS(null, 'fill', 'none');
             // circleNode.setAttributeNS(null, 'fill', "red");
             // circleNode.setAttributeNS(null, 'stroke', "none");
+
             // svgNode.appendChild(circleNode);
 
         }

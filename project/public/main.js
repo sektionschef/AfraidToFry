@@ -245,6 +245,22 @@ window.addEventListener("DOMContentLoaded", (event) => {
     // toBeMasked.setAttribute('mask', "url(#MaskNoise)");
     // svgNode.appendChild(toBeMasked);
 
+    // TRY Clipping
+    var newGroupDrawing = document.createElementNS("http://www.w3.org/2000/svg", "use");
+    newGroupDrawing.setAttribute("href", "#groupdrawing");
+    newGroupDrawing.setAttribute("id", "newGroupDrawing");
+
+    var maskCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    maskCircle.setAttribute('cx', "100");
+    maskCircle.setAttribute('cy', "100");
+    maskCircle.setAttribute('r', "50");
+    maskCircle.setAttribute('fill', 'black'); // <!-- Everything under a black pixel will be invisible -->
+
+    var clipPath = document.createElementNS("http://www.w3.org/2000/svg", "clipPath");
+    clipPath.setAttribute("id", "clipper");
+    // clipPath.appendChild(newGroupDrawing);
+    clipPath.appendChild(maskCircle);
+    defs.appendChild(clipPath);
 });
 
 

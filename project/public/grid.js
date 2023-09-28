@@ -254,8 +254,8 @@ class Grid {
             // this.loopShowNoise();
 
             this.loopBaseVis();
-            this.loopBase();
-            this.loopDetail();
+            // this.loopBase();
+            // this.loopDetail();
 
             // this.loop8();
 
@@ -1011,7 +1011,7 @@ class Grid {
         var filterObj = document.createElementNS("http://www.w3.org/2000/svg", "rect");
         filterObj.setAttribute("width", canvasFormatChosen.canvasWidth);
         filterObj.setAttribute("height", canvasFormatChosen.canvasHeight);
-        filterObj.setAttribute("fill", "#ffffffff");
+        // filterObj.setAttribute("fill", "#ffffffff");
 
         // filter know how: https://stackoverflow.com/questions/10867282/how-can-i-add-a-filter-to-a-svg-object-in-javascript 
 
@@ -1040,7 +1040,6 @@ class Grid {
         turbulence.setAttribute("height", "100%");
         turbulence.setAttribute("result", "turbulence");
 
-
         var specularLight = document.createElementNS("http://www.w3.org/2000/svg", "feSpecularLighting");
         specularLight.setAttribute("surfaceScale", "7"); // 1- 40, 17
         specularLight.setAttribute("specularConstant", "0.75");
@@ -1058,6 +1057,7 @@ class Grid {
         distantLight.setAttribute("elevation", "100");
         specularLight.appendChild(distantLight);
 
+        // desaturate
         var colorMatrix = document.createElementNS("http://www.w3.org/2000/svg", "feColorMatrix");
         colorMatrix.setAttribute("type", "saturate");
         colorMatrix.setAttribute("values", "0");
@@ -1097,6 +1097,7 @@ class Grid {
         // blender.setAttribute("result", "BLEND");
 
 
+
         // filter.appendChild(gaussianFilter);
         // filter.appendChild(blender);
         filter.appendChild(turbulence);
@@ -1106,6 +1107,7 @@ class Grid {
 
         // backgroundObj.setAttribute("filter", "url(#f1)");
         filterObj.setAttribute("filter", "url(#f1)");
+        filterObj.setAttribute("clip-path", "url(#clipper)");
 
         svgNode.appendChild(filterObj);
     }

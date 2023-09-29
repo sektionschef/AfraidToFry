@@ -194,10 +194,24 @@ window.addEventListener("DOMContentLoaded", (event) => {
     backgroundObj.setAttribute("fill", BACKGROUNDTONE);
     svgNode.appendChild(backgroundObj);
 
-
-    groupDrawing = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    var groupDrawing = document.createElementNS("http://www.w3.org/2000/svg", "g");
     groupDrawing.setAttribute("id", "drawing");
-    svgNode.appendChild(groupDrawing);
+    // svgNode.appendChild(groupDrawing);
+    defs.appendChild(groupDrawing);
+
+
+    var nerdGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    nerdGroup.setAttribute("id", "nerdGroup");
+    defs.appendChild(nerdGroup);
+    var nerdCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    nerdCircle.setAttribute('id', "nerdCircle");
+    nerdCircle.setAttribute('cx', "400");
+    nerdCircle.setAttribute('cy', "400");
+    nerdCircle.setAttribute('r', "150");
+    nerdGroup.appendChild(nerdCircle);
+    var newnerdGroup = document.createElementNS("http://www.w3.org/2000/svg", "use");
+    newnerdGroup.setAttribute("id", "newnerdGroup");
+    newnerdGroup.setAttribute("href", "#nerdCircle");
 
 
     timeChecker();
@@ -246,21 +260,23 @@ window.addEventListener("DOMContentLoaded", (event) => {
     // svgNode.appendChild(toBeMasked);
 
     // TRY Clipping
-    var newGroupDrawing = document.createElementNS("http://www.w3.org/2000/svg", "use");
-    newGroupDrawing.setAttribute("href", "#groupdrawing");
-    newGroupDrawing.setAttribute("id", "newGroupDrawing");
+    var newDrawing = document.createElementNS("http://www.w3.org/2000/svg", "use");
+    newDrawing.setAttribute("id", "newDrawing");
+    // newDrawing.setAttribute("href", "#drawing");
+    newDrawing.setAttribute("href", "#showDrawing");
 
     var maskCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
     maskCircle.setAttribute('cx', "100");
     maskCircle.setAttribute('cy', "100");
     maskCircle.setAttribute('r', "50");
-    maskCircle.setAttribute('fill', 'black'); // <!-- Everything under a black pixel will be invisible -->
 
-    var clipPath = document.createElementNS("http://www.w3.org/2000/svg", "clipPath");
-    clipPath.setAttribute("id", "clipper");
-    // clipPath.appendChild(newGroupDrawing);
-    clipPath.appendChild(maskCircle);
-    defs.appendChild(clipPath);
+    var clipper = document.createElementNS("http://www.w3.org/2000/svg", "clipPath");
+    clipper.setAttribute("id", "clipper");
+    // clipper.appendChild("url(#drawing)");
+    clipper.appendChild(maskCircle);
+    clipper.appendChild(newnerdGroup);
+    clipper.appendChild(newDrawing);
+    defs.appendChild(clipper);
 });
 
 

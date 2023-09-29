@@ -559,7 +559,7 @@ class Grid {
         var offset = 30;  // move inward
         var loopCount = 40;
 
-        const groupDrawing = document.getElementById('drawing');
+        var groupDrawing = document.getElementById('drawing');
 
         for (var o = 0; o < loopCount; o++) {
             const rectNode = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
@@ -1109,6 +1109,19 @@ class Grid {
         filterObj.setAttribute("filter", "url(#f1)");
         filterObj.setAttribute("clip-path", "url(#clipper)");
 
+        // const drawing = document.getElementById('drawing');
+        // svgNode.appendChild(drawing);
+
+        // Test - add drawing to show
+        var showDrawing = document.createElementNS("http://www.w3.org/2000/svg", "use");
+        showDrawing.setAttribute("id", "showDrawing");
+        showDrawing.setAttribute("href", "#drawing");
+        svgNode.appendChild(showDrawing);
+
         svgNode.appendChild(filterObj);
+
+
+
+
     }
 }

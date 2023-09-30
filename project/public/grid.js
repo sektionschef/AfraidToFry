@@ -254,8 +254,8 @@ class Grid {
             // this.loopShowNoise();
 
             this.loopBaseVis();
-            // this.loopBase();
-            // this.loopDetail();
+            this.loopBase();
+            this.loopDetail();
 
             // this.loop8();
 
@@ -1115,8 +1115,8 @@ class Grid {
         // clipping
         // filterObj.setAttribute("clip-path", "url(#clipper)");
 
-        // const drawing = document.getElementById('drawing');
-        // svgNode.appendChild(drawing);
+        const drawing = document.getElementById('drawing');
+        svgNode.appendChild(drawing);
 
         // Test - add drawing to show
         var showDrawing = document.createElementNS("http://www.w3.org/2000/svg", "use");

@@ -1009,9 +1009,10 @@ class Grid {
 
         // filter object with transparent background
         var filterObj = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+        filterObj.setAttribute("id", "filterObj");
         filterObj.setAttribute("width", canvasFormatChosen.canvasWidth);
         filterObj.setAttribute("height", canvasFormatChosen.canvasHeight);
-        // filterObj.setAttribute("fill", "#ffffffff");
+        filterObj.setAttribute("fill", "#ffffffff");
 
         // filter know how: https://stackoverflow.com/questions/10867282/how-can-i-add-a-filter-to-a-svg-object-in-javascript 
 
@@ -1105,9 +1106,14 @@ class Grid {
         filter.appendChild(colorMatrix);
         defs.appendChild(filter);
 
+
         // backgroundObj.setAttribute("filter", "url(#f1)");
         filterObj.setAttribute("filter", "url(#f1)");
-        filterObj.setAttribute("clip-path", "url(#clipper)");
+
+        filterObj.setAttribute("mask", "url(#maskNoise)");
+
+        // clipping
+        // filterObj.setAttribute("clip-path", "url(#clipper)");
 
         // const drawing = document.getElementById('drawing');
         // svgNode.appendChild(drawing);
@@ -1116,12 +1122,9 @@ class Grid {
         var showDrawing = document.createElementNS("http://www.w3.org/2000/svg", "use");
         showDrawing.setAttribute("id", "showDrawing");
         showDrawing.setAttribute("href", "#drawing");
-        svgNode.appendChild(showDrawing);
+        // svgNode.appendChild(showDrawing);
 
         svgNode.appendChild(filterObj);
-
-
-
 
     }
 }

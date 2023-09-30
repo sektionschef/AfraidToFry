@@ -188,6 +188,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
     // draw RECT as background !!
     var backgroundObj = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    backgroundObj.setAttribute("id", "backgroundObj");
     backgroundObj.setAttribute("width", canvasFormatChosen.canvasWidth);
     backgroundObj.setAttribute("height", canvasFormatChosen.canvasHeight);
     // backgroundObj.setAttribute("fill", "#ffffff");
@@ -200,18 +201,18 @@ window.addEventListener("DOMContentLoaded", (event) => {
     defs.appendChild(groupDrawing);
 
 
-    var nerdGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
-    nerdGroup.setAttribute("id", "nerdGroup");
-    defs.appendChild(nerdGroup);
-    var nerdCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    nerdCircle.setAttribute('id', "nerdCircle");
-    nerdCircle.setAttribute('cx', "400");
-    nerdCircle.setAttribute('cy', "400");
-    nerdCircle.setAttribute('r', "150");
-    nerdGroup.appendChild(nerdCircle);
-    var newnerdGroup = document.createElementNS("http://www.w3.org/2000/svg", "use");
-    newnerdGroup.setAttribute("id", "newnerdGroup");
-    newnerdGroup.setAttribute("href", "#nerdCircle");
+    // var nerdGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    // nerdGroup.setAttribute("id", "nerdGroup");
+    // defs.appendChild(nerdGroup);
+    // var nerdCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    // nerdCircle.setAttribute('id', "nerdCircle");
+    // nerdCircle.setAttribute('cx', "400");
+    // nerdCircle.setAttribute('cy', "400");
+    // nerdCircle.setAttribute('r', "150");
+    // nerdGroup.appendChild(nerdCircle);
+    // var newnerdGroup = document.createElementNS("http://www.w3.org/2000/svg", "use");
+    // newnerdGroup.setAttribute("id", "newnerdGroup");
+    // newnerdGroup.setAttribute("href", "#nerdCircle");
 
 
     timeChecker();
@@ -260,24 +261,114 @@ window.addEventListener("DOMContentLoaded", (event) => {
     // svgNode.appendChild(toBeMasked);
 
     // TRY Clipping
-    var newDrawing = document.createElementNS("http://www.w3.org/2000/svg", "use");
-    newDrawing.setAttribute("id", "newDrawing");
-    // newDrawing.setAttribute("href", "#drawing");
-    newDrawing.setAttribute("href", "#showDrawing");
+    // var newDrawing = document.createElementNS("http://www.w3.org/2000/svg", "use");
+    // newDrawing.setAttribute("id", "newDrawing");
+    // // newDrawing.setAttribute("href", "#drawing");
+    // newDrawing.setAttribute("href", "#showDrawing");
 
+    // var maskCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    // maskCircle.setAttribute('cx', "100");
+    // maskCircle.setAttribute('cy', "100");
+    // maskCircle.setAttribute('r', "50");
+
+    // var clipper = document.createElementNS("http://www.w3.org/2000/svg", "clipPath");
+    // clipper.setAttribute("id", "clipper");
+    // // clipper.appendChild("url(#drawing)");
+    // clipper.appendChild(maskCircle);
+    // clipper.appendChild(newnerdGroup);
+    // clipper.appendChild(newDrawing);
+    // defs.appendChild(clipper);
+
+
+    // TRY MASK AND FEMATRIX
+    var filterBlack = document.createElementNS("http://www.w3.org/2000/svg", "filter");
+    filterBlack.setAttribute("id", "filterBlack");
+    filterBlack.setAttribute("x", "0");
+    filterBlack.setAttribute("y", "0");
+    // added
+    // filterBlack.setAttribute("filterUnits", "objectBoundingBox");
+    // filterBlack.setAttribute("primitiveUnits", "userSpaceOnUse");
+    // filterBlack.setAttribute("color-interpolation-filters", "linearRGB");
+
+
+    // desaturate
+    var colorMatrixBlack = document.createElementNS("http://www.w3.org/2000/svg", "feColorMatrix");
+    colorMatrixBlack.setAttribute("type", "matrix");
+    colorMatrixBlack.setAttribute("in", "SourceGraphic");
+    // colorMatrixBlack.setAttribute("values", "1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0");
+    // colorMatrixBlack.setAttribute("values", "100 0 0 0 0 0 100 0 0 0 0 0 100 0 0 0 0 0 1 0");
+    colorMatrixBlack.setAttribute("values", "\
+    200 0 0 0 0 \
+    200 0 0 0 0 \
+    200 0 0 0 0 \
+    0 0 0 1 0");
+    colorMatrixBlack.setAttribute("x", "0%");
+    colorMatrixBlack.setAttribute("y", "0%");
+    colorMatrixBlack.setAttribute("width", "100%");
+    colorMatrixBlack.setAttribute("height", "100%");
+    filterBlack.appendChild(colorMatrixBlack);
+    // kl
+    //     <svg xmlns="http://www.w3.org/2000/svg">
+    //   <filter id="filter">
+    //     <feColorMatrix
+    //       type="matrix"
+    //       values=" 0.000  0.000  0.000  0.000  0.000 
+    //                0.000  0.000  0.000  0.000  0.000 
+    //                0.000  0.000  0.000  0.000  0.000 
+    //                0.000  0.000  0.000  1.000  0.000">
+    //     </feColorMatrix>
+    //   </filter>
+    // </svg>
+    defs.appendChild(filterBlack);
+
+
+
+    // make a group with black background and white shape of drawing for the mask
+    var groupBlackMask = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    groupBlackMask.setAttribute("id", "groupBlackMask");
+
+    var filteredDrawing = document.createElementNS("http://www.w3.org/2000/svg", "use");
+    filteredDrawing.setAttribute("id", "filteredDrawing");
+    filteredDrawing.setAttribute("href", "#drawing");
+    filteredDrawing.setAttribute("filter", "url(#filterBlack)");
+
+    var fillBlack = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    fillBlack.setAttribute("x", "0%");
+    fillBlack.setAttribute("y", "0%");
+    fillBlack.setAttribute("width", "100%");
+    fillBlack.setAttribute("height", "100%");
+    fillBlack.setAttribute("fill", "black");
+
+    groupBlackMask.appendChild(fillBlack);
+    groupBlackMask.appendChild(filteredDrawing);
+    // svgNode.appendChild(groupBlackMask);
+
+    // TEST THE BLACK FILTER 
     var maskCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
     maskCircle.setAttribute('cx', "100");
     maskCircle.setAttribute('cy', "100");
     maskCircle.setAttribute('r', "50");
+    maskCircle.setAttribute('fill', '#ffffff'); // <!-- Everything under a black pixel will be invisible -->
+    // maskCircle.setAttribute("filter", "url(#filterBlack)");
+    // svgNode.appendChild(maskCircle);
 
-    var clipper = document.createElementNS("http://www.w3.org/2000/svg", "clipPath");
-    clipper.setAttribute("id", "clipper");
-    // clipper.appendChild("url(#drawing)");
-    clipper.appendChild(maskCircle);
-    clipper.appendChild(newnerdGroup);
-    clipper.appendChild(newDrawing);
-    defs.appendChild(clipper);
+    // mask for noise
+    var maskNoise = document.createElementNS("http://www.w3.org/2000/svg", "mask");
+    maskNoise.setAttribute("id", "maskNoise");
+    // maskNoise.setAttribute("maskUnits", "userSpaceOnUse");
+    maskNoise.setAttribute("x", "0");
+    maskNoise.setAttribute("y", "0");
+    maskNoise.setAttribute("width", "100%");
+    maskNoise.setAttribute("height", "100%");
+    // maskNoise.appendChild(maskRect);
+    maskNoise.appendChild(maskCircle);
+    maskNoise.appendChild(groupBlackMask);
+    defs.appendChild(maskNoise);
+
+    // show the mask in black and white for the noise
+    // svgNode.appendChild(groupBlackMask)
 });
+
 
 
 

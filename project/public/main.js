@@ -186,187 +186,18 @@ window.addEventListener("DOMContentLoaded", (event) => {
     defs.setAttributeNS(null, 'id', 'defs');
     svgNode.appendChild(defs);
 
-    // draw RECT as background !!
-    var backgroundObj = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    backgroundObj.setAttribute("id", "backgroundObj");
-    backgroundObj.setAttribute("width", canvasFormatChosen.canvasWidth);
-    backgroundObj.setAttribute("height", canvasFormatChosen.canvasHeight);
-    // backgroundObj.setAttribute("fill", "#ffffff");
-    backgroundObj.setAttribute("fill", BACKGROUNDTONE);
-    svgNode.appendChild(backgroundObj);
-
-    var groupDrawing = document.createElementNS("http://www.w3.org/2000/svg", "g");
-    groupDrawing.setAttribute("id", "drawing");
-    // svgNode.appendChild(groupDrawing);
-    defs.appendChild(groupDrawing);
-
-
-    // var nerdGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
-    // nerdGroup.setAttribute("id", "nerdGroup");
-    // defs.appendChild(nerdGroup);
-    // var nerdCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    // nerdCircle.setAttribute('id', "nerdCircle");
-    // nerdCircle.setAttribute('cx', "400");
-    // nerdCircle.setAttribute('cy', "400");
-    // nerdCircle.setAttribute('r', "150");
-    // nerdGroup.appendChild(nerdCircle);
-    // var newnerdGroup = document.createElementNS("http://www.w3.org/2000/svg", "use");
-    // newnerdGroup.setAttribute("id", "newnerdGroup");
-    // newnerdGroup.setAttribute("href", "#nerdCircle");
-
+    createBackground();
+    createDrawingGroup();
 
     timeChecker();
 
-    // svgNode.setAttribute("filter", "url(#f1)");
+    createNoiseLayer();
+    createFilterBlack();
+    createMaskBlack();
 
     // ELEMENT
     // new dynamicPalette("#617061", 5, 10, 10).show();
-    // new dynamicPalette("#7f9189", 5, 25, 10).show();
-
-
-
-    // TRY MASK
-    // var maskRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    // maskRect.setAttribute('x', "10");
-    // maskRect.setAttribute('y', "10");
-    // maskRect.setAttribute('height', "400");
-    // maskRect.setAttribute('width', "500");
-    // maskRect.setAttribute('fill', 'white'); // <!-- Everything under a white pixel will be visible -->
-
-    // var maskCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    // maskCircle.setAttribute('cx', "100");
-    // maskCircle.setAttribute('cy', "100");
-    // maskCircle.setAttribute('r', "50");
-    // maskCircle.setAttribute('fill', 'black'); // <!-- Everything under a black pixel will be invisible -->
-
-    // // const defs = document.getElementById('defs');
-    // var maskNoise = document.createElementNS("http://www.w3.org/2000/svg", "mask");
-    // maskNoise.setAttribute("id", "MaskNoise");
-    // // maskNoise.setAttribute("maskUnits", "userSpaceOnUse");
-    // maskNoise.setAttribute("x", "0");
-    // maskNoise.setAttribute("y", "0");
-    // maskNoise.setAttribute("width", "100%");
-    // maskNoise.setAttribute("height", "100%");
-    // maskNoise.appendChild(maskRect);
-    // maskNoise.appendChild(maskCircle);
-    // defs.appendChild(maskNoise);
-
-    // var toBeMasked = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    // toBeMasked.setAttribute("x", "0");
-    // toBeMasked.setAttribute("y", "0");
-    // toBeMasked.setAttribute("width", "100%");
-    // toBeMasked.setAttribute("height", "100%");
-    // toBeMasked.setAttribute('fill', 'blue');
-    // toBeMasked.setAttribute('mask', "url(#MaskNoise)");
-    // svgNode.appendChild(toBeMasked);
-
-    // TRY Clipping
-    // var newDrawing = document.createElementNS("http://www.w3.org/2000/svg", "use");
-    // newDrawing.setAttribute("id", "newDrawing");
-    // // newDrawing.setAttribute("href", "#drawing");
-    // newDrawing.setAttribute("href", "#showDrawing");
-
-    // var maskCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    // maskCircle.setAttribute('cx', "100");
-    // maskCircle.setAttribute('cy', "100");
-    // maskCircle.setAttribute('r', "50");
-
-    // var clipper = document.createElementNS("http://www.w3.org/2000/svg", "clipPath");
-    // clipper.setAttribute("id", "clipper");
-    // // clipper.appendChild("url(#drawing)");
-    // clipper.appendChild(maskCircle);
-    // clipper.appendChild(newnerdGroup);
-    // clipper.appendChild(newDrawing);
-    // defs.appendChild(clipper);
-
-
-    // TRY MASK AND FEMATRIX
-    var filterBlack = document.createElementNS("http://www.w3.org/2000/svg", "filter");
-    filterBlack.setAttribute("id", "filterBlack");
-    filterBlack.setAttribute("x", "0");
-    filterBlack.setAttribute("y", "0");
-    // added
-    // filterBlack.setAttribute("filterUnits", "objectBoundingBox");
-    // filterBlack.setAttribute("primitiveUnits", "userSpaceOnUse");
-    // filterBlack.setAttribute("color-interpolation-filters", "linearRGB");
-
-
-    // desaturate
-    var colorMatrixBlack = document.createElementNS("http://www.w3.org/2000/svg", "feColorMatrix");
-    colorMatrixBlack.setAttribute("type", "matrix");
-    colorMatrixBlack.setAttribute("in", "SourceGraphic");
-    // colorMatrixBlack.setAttribute("values", "1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0");
-    // colorMatrixBlack.setAttribute("values", "100 0 0 0 0 0 100 0 0 0 0 0 100 0 0 0 0 0 1 0");
-    colorMatrixBlack.setAttribute("values", "\
-    200 0 0 0 0 \
-    200 0 0 0 0 \
-    200 0 0 0 0 \
-    0 0 0 1 0");
-    colorMatrixBlack.setAttribute("x", "0%");
-    colorMatrixBlack.setAttribute("y", "0%");
-    colorMatrixBlack.setAttribute("width", "100%");
-    colorMatrixBlack.setAttribute("height", "100%");
-    filterBlack.appendChild(colorMatrixBlack);
-    // kl
-    //     <svg xmlns="http://www.w3.org/2000/svg">
-    //   <filter id="filter">
-    //     <feColorMatrix
-    //       type="matrix"
-    //       values=" 0.000  0.000  0.000  0.000  0.000 
-    //                0.000  0.000  0.000  0.000  0.000 
-    //                0.000  0.000  0.000  0.000  0.000 
-    //                0.000  0.000  0.000  1.000  0.000">
-    //     </feColorMatrix>
-    //   </filter>
-    // </svg>
-    defs.appendChild(filterBlack);
-
-
-
-    // make a group with black background and white shape of drawing for the mask
-    var groupBlackMask = document.createElementNS("http://www.w3.org/2000/svg", "g");
-    groupBlackMask.setAttribute("id", "groupBlackMask");
-
-    var filteredDrawing = document.createElementNS("http://www.w3.org/2000/svg", "use");
-    filteredDrawing.setAttribute("id", "filteredDrawing");
-    filteredDrawing.setAttribute("href", "#drawing");
-    filteredDrawing.setAttribute("filter", "url(#filterBlack)");
-
-    var fillBlack = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    fillBlack.setAttribute("x", "0%");
-    fillBlack.setAttribute("y", "0%");
-    fillBlack.setAttribute("width", "100%");
-    fillBlack.setAttribute("height", "100%");
-    fillBlack.setAttribute("fill", "black");
-
-    groupBlackMask.appendChild(fillBlack);
-    groupBlackMask.appendChild(filteredDrawing);
-    // svgNode.appendChild(groupBlackMask);
-
-    // TEST THE BLACK FILTER 
-    var maskCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    maskCircle.setAttribute('cx', "100");
-    maskCircle.setAttribute('cy', "100");
-    maskCircle.setAttribute('r', "50");
-    maskCircle.setAttribute('fill', '#ffffff'); // <!-- Everything under a black pixel will be invisible -->
-    // maskCircle.setAttribute("filter", "url(#filterBlack)");
-    // svgNode.appendChild(maskCircle);
-
-    // mask for noise
-    var maskNoise = document.createElementNS("http://www.w3.org/2000/svg", "mask");
-    maskNoise.setAttribute("id", "maskNoise");
-    // maskNoise.setAttribute("maskUnits", "userSpaceOnUse");
-    maskNoise.setAttribute("x", "0");
-    maskNoise.setAttribute("y", "0");
-    maskNoise.setAttribute("width", "100%");
-    maskNoise.setAttribute("height", "100%");
-    // maskNoise.appendChild(maskRect);
-    maskNoise.appendChild(maskCircle);
-    maskNoise.appendChild(groupBlackMask);
-    defs.appendChild(maskNoise);
-
-    // show the mask in black and white for the noise
-    // svgNode.appendChild(groupBlackMask)
+    // new dynamicPalette("hsl(153, 8%, 53%)", 5, 25, 10).show();
 });
 
 
@@ -452,3 +283,189 @@ function timeChecker() {
 
 // setInterval(timeChecker, 1000 * 60 * 1); // every minute check
 // setInterval(timeChecker, 1000); // every second
+
+
+// turn very color in white and transparency in black
+function createFilterBlack() {
+    var filterBlack = document.createElementNS("http://www.w3.org/2000/svg", "filter");
+    filterBlack.setAttribute("id", "filterBlack");
+    filterBlack.setAttribute("x", "0");
+    filterBlack.setAttribute("y", "0");
+    // added
+    // filterBlack.setAttribute("filterUnits", "objectBoundingBox");
+    // filterBlack.setAttribute("primitiveUnits", "userSpaceOnUse");
+    // filterBlack.setAttribute("color-interpolation-filters", "linearRGB");
+
+    var colorMatrixBlack = document.createElementNS("http://www.w3.org/2000/svg", "feColorMatrix");
+    colorMatrixBlack.setAttribute("type", "matrix");
+    colorMatrixBlack.setAttribute("in", "SourceGraphic");
+    // colorMatrixBlack.setAttribute("values", "1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0");
+    colorMatrixBlack.setAttribute("values", "\
+    200 0 0 0 0 \
+    200 0 0 0 0 \
+    200 0 0 0 0 \
+    0 0 0 1 0");
+    colorMatrixBlack.setAttribute("x", "0%");
+    colorMatrixBlack.setAttribute("y", "0%");
+    colorMatrixBlack.setAttribute("width", "100%");
+    colorMatrixBlack.setAttribute("height", "100%");
+    filterBlack.appendChild(colorMatrixBlack);
+    defs.appendChild(filterBlack);
+}
+
+function createMaskBlack() {
+    // make a group with black background and white shape of drawing for the mask
+    var groupBlackMask = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    groupBlackMask.setAttribute("id", "groupBlackMask");
+
+    var fillBlack = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    fillBlack.setAttribute("x", "0%");
+    fillBlack.setAttribute("y", "0%");
+    fillBlack.setAttribute("width", "100%");
+    fillBlack.setAttribute("height", "100%");
+    fillBlack.setAttribute("fill", "black");
+
+    var filteredDrawing = document.createElementNS("http://www.w3.org/2000/svg", "use");
+    filteredDrawing.setAttribute("id", "filteredDrawing");
+    filteredDrawing.setAttribute("href", "#drawing");
+    filteredDrawing.setAttribute("filter", "url(#filterBlack)");
+
+    groupBlackMask.appendChild(fillBlack);
+    groupBlackMask.appendChild(filteredDrawing);
+    // svgNode.appendChild(groupBlackMask);
+    defs.appendChild(groupBlackMask);
+
+    // show the mask in black and white for the noise
+    // svgNode.appendChild(groupBlackMask)
+
+    // var groupBlackMask = document.getElementById('groupBlackMask');
+
+    // mask for noise
+    var maskNoise = document.createElementNS("http://www.w3.org/2000/svg", "mask");
+    maskNoise.setAttribute("id", "maskNoise");
+    // maskNoise.setAttribute("maskUnits", "userSpaceOnUse");
+    maskNoise.setAttribute("x", "0");
+    maskNoise.setAttribute("y", "0");
+    maskNoise.setAttribute("width", "100%");
+    maskNoise.setAttribute("height", "100%");
+    // maskNoise.appendChild(maskRect);
+    maskNoise.appendChild(groupBlackMask);
+    defs.appendChild(maskNoise);
+}
+
+function createBackground() {
+    // create background
+    var backgroundRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    backgroundRect.setAttribute("id", "backgroundRect");
+    backgroundRect.setAttribute("x", "0");
+    backgroundRect.setAttribute("y", "0");
+    backgroundRect.setAttribute("width", "100%");
+    backgroundRect.setAttribute("height", "100%");
+    backgroundRect.setAttribute("fill", BACKGROUNDTONE);
+    svgNode.appendChild(backgroundRect);
+}
+
+function createDrawingGroup() {
+    var groupDrawing = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    groupDrawing.setAttribute("id", "drawing");
+    defs.appendChild(groupDrawing);
+}
+
+function createNoiseLayer() {
+
+    const svgNode = document.getElementById('svgNode');
+    const defs = document.getElementById('defs');
+
+    // filter object with transparent background
+    var filterObj = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    filterObj.setAttribute("id", "filterObj");
+    filterObj.setAttribute("width", "100%");
+    filterObj.setAttribute("height", "100%");
+
+    // filter know how: https://stackoverflow.com/questions/10867282/how-can-i-add-a-filter-to-a-svg-object-in-javascript 
+
+    var filter = document.createElementNS("http://www.w3.org/2000/svg", "filter");
+    filter.setAttribute("id", "f1");
+    filter.setAttribute("x", "0");
+    filter.setAttribute("y", "0");
+    // added
+    filter.setAttribute("filterUnits", "objectBoundingBox");
+    filter.setAttribute("primitiveUnits", "userSpaceOnUse");
+    filter.setAttribute("color-interpolation-filters", "linearRGB");
+
+    // var gaussianFilter = document.createElementNS("http://www.w3.org/2000/svg", "feGaussianBlur");
+    // gaussianFilter.setAttribute("in", "SourceGraphic");
+    // gaussianFilter.setAttribute("stdDeviation", "1");
+
+    // https://fffuel.co/nnnoise/
+
+    var turbulence = document.createElementNS("http://www.w3.org/2000/svg", "feTurbulence");
+    turbulence.setAttribute("type", "fractalNoise");
+    turbulence.setAttribute("baseFrequency", "0.2");  // 0.102
+    turbulence.setAttribute("numOctaves", "4");
+    // turbulence.setAttribute("seed", "15");
+    turbulence.setAttribute("stitchTiles", "stitch");
+    turbulence.setAttribute("x", "0%");
+    turbulence.setAttribute("y", "0%");
+    turbulence.setAttribute("width", "100%");
+    turbulence.setAttribute("height", "100%");
+    turbulence.setAttribute("result", "turbulence");
+
+    var specularLight = document.createElementNS("http://www.w3.org/2000/svg", "feSpecularLighting");
+    specularLight.setAttribute("surfaceScale", "7"); // 1- 40, 17
+    specularLight.setAttribute("specularConstant", "0.75");
+    specularLight.setAttribute("specularExponent", "20");
+    specularLight.setAttribute("lighting-color", "#392bb8");
+    specularLight.setAttribute("x", "0%");
+    specularLight.setAttribute("y", "0%");
+    specularLight.setAttribute("width", "100%");
+    specularLight.setAttribute("height", "100%");
+    specularLight.setAttribute("in", "turbulence");
+    specularLight.setAttribute("result", "specularLighting");
+
+    var distantLight = document.createElementNS("http://www.w3.org/2000/svg", "feDistantLight");
+    distantLight.setAttribute("azimuth", "3");
+    distantLight.setAttribute("elevation", "100");
+    specularLight.appendChild(distantLight);
+
+    // desaturate
+    var colorMatrix = document.createElementNS("http://www.w3.org/2000/svg", "feColorMatrix");
+    colorMatrix.setAttribute("type", "saturate");
+    colorMatrix.setAttribute("values", "0");
+    colorMatrix.setAttribute("x", "0%");
+    colorMatrix.setAttribute("y", "0%");
+    colorMatrix.setAttribute("width", "100%");
+    colorMatrix.setAttribute("height", "100%");
+    colorMatrix.setAttribute("in", "specularLighting");
+    colorMatrix.setAttribute("result", "colormatrix");
+
+
+    // var blender = document.createElementNS("http://www.w3.org/2000/svg", "feBlend");
+    // blender.setAttribute("in", "SourceGraphic");
+    // blender.setAttribute("in2", "turbulence");
+    // blender.setAttribute("mode", "overlay");
+    // blender.setAttribute("result", "BLEND");
+
+
+    // filter.appendChild(gaussianFilter);
+    // filter.appendChild(blender);
+    filter.appendChild(turbulence);
+    filter.appendChild(specularLight);
+    filter.appendChild(colorMatrix);
+    defs.appendChild(filter);
+
+    filterObj.setAttribute("filter", "url(#f1)");
+    filterObj.setAttribute("mask", "url(#maskNoise)");
+
+    const drawing = document.getElementById('drawing');
+    svgNode.appendChild(drawing);
+
+    // Test - add drawing to show
+    var showDrawing = document.createElementNS("http://www.w3.org/2000/svg", "use");
+    showDrawing.setAttribute("id", "showDrawing");
+    showDrawing.setAttribute("href", "#drawing");
+    // svgNode.appendChild(showDrawing);
+
+    svgNode.appendChild(filterObj);
+
+}

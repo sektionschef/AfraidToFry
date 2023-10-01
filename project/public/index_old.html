@@ -22,6 +22,11 @@
     let search = new URLSearchParams(window.location.search)
     let alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
     var fxhash = search.get('fxhash') || "oo" + Array(49).fill(0).map(_ => alphabet[(Math.random() * alphabet.length) | 0]).join('')
+
+    // DANGER ZONE
+    var fxhash = "oodqMWwestJ9zxKjsr8TsojzQifnqgeS3q5C4DwkQbAfTkpCsJN";
+    // DANGER ZONE
+
     let b58dec = str => [...str].reduce((p, c) => p * alphabet.length + alphabet.indexOf(c) | 0, 0)
     let fxhashTrunc = fxhash.slice(2)
     let regex = new RegExp(".{" + ((fxhash.length / 4) | 0) + "}", 'g')
@@ -343,30 +348,37 @@
         }, "*")
       }
     })
-      // END NEW
+    // END NEW
 
-      //---- /do not edit the following code
+    //---- /do not edit the following code
   </script>
 
-  <!-- <link rel="stylesheet" href="./style.css"> -->
+  <link rel="stylesheet" type="text/css" href="./styles.css" />
 
   <!-- if you need to import js scripts do it here -->
 
-  <script type="text/javascript" src="p5.min.js"></script>
-  <!-- <script src="https://unpkg.com/p5.js-svg@1.3.1"></script> -->
-  <script type="text/javascript" src="p5.svg.js"></script>
-  <script type="text/javascript" src='utils.js'></script>
-  <script type="text/javascript" src='Palette.js'></script>
-  <script type="text/javascript" src='Noise.js'></script>
-  <script type="text/javascript" src='Grid2.js'></script>
+  <script type="text/javascript" src='perlin.js'></script>
+  <script type="text/javascript" src='tinycolor.js'></script>
 
-  <script type="text/javascript" src='sketch.js'></script>
+  <script type="text/javascript" src='utilsSVG.js'></script>
+  <script type="text/javascript" src='dynamicPalette.js'></script>
+  <script type="text/javascript" src='noise.js'></script>
+  <script type="text/javascript" src='noiseAggegrator.js'></script>
+  <script type="text/javascript" src='dig.js'></script>
+  <script type="text/javascript" src='zig.js'></script>
+  <script type="text/javascript" src='deugy.js'></script>
+  <script type="text/javascript" src='digRect.js'></script>
+  <script type="text/javascript" src='grid.js'></script>
+
+  <script type="text/javascript" src='main.js'></script>
 
 </head>
 
 <body>
 
-  <div id="Konkas"></div>
+
+  <div id="badAssCanvas"></div>
+
 
   <!-- WEBPACK will inject the bundle.js here -->
 </body>

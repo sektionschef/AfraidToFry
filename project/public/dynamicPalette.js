@@ -45,7 +45,7 @@ class dynamicPalette {
         // DYNAMIC
         // this.length = 60;
         // this.length = 160;
-        this.length = 10;
+        this.length = 100;
         this.palette = [];
         // this.palette = Array(this.length);
         // console.log(getNormallyDistributedRandomNumber(0, 10));
@@ -60,8 +60,8 @@ class dynamicPalette {
         }
 
         // SORT BY BRIGHTNESS
-        this.palette.sort(function (a, b) { return tinycolor(a).getBrightness() - tinycolor(b).getBrightness() });
-        // this.palette.sort(function (a, b) { return tinycolor(a).getLuminance() - tinycolor(b).getLuminance() });
+        // this.palette.sort(function (a, b) { return tinycolor(a).getBrightness() - tinycolor(b).getBrightness() });
+        this.palette.sort(function (a, b) { return tinycolor(a).getLuminance() - tinycolor(b).getLuminance() });
         // SORT BY HUE
         // this.palette.sort(function (a, b) { return tinycolor(a).toHsl().h - tinycolor(b).toHsl().h });
         // SORT BY HUE AND LIGHTNESS

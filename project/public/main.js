@@ -25,7 +25,8 @@ let RESOLUTIONBOXCOUNT = 80;
 // let RESOLUTIONBOXCOUNT = 60;
 // let RESOLUTIONBOXCOUNT = 40;
 let BACKGROUNDTONE = "#ffffff";
-let BASETONE = "#b8b8b8";
+let BASETONE = "#77879c";
+let BASETONEBELOW = "#928470"
 // let ABOVETONE = "#a5812f";  // andrea garden book
 // let BELOWTONE = "#ff617b";  // andrea garden book
 // let ABOVETONE = "#92a8b4" // blue
@@ -36,8 +37,8 @@ let BASETONE = "#b8b8b8";
 // let ABOVETONE = "#4b6786";  // overshoot - cool color: d5560c
 // let BELOWTONE = "#7e614f";  // overshoot 
 // let ABOVETONE = "#8dacc9";  // full blue
-let ABOVETONE = "#b1beca";
-let BELOWTONE = "#8ca7b9";  // overshoot 
+let ABOVETONE = "#8c9cb3";
+let BELOWTONE = "#b3a38c";  // overshoot 
 
 // TRUE BASE TONE
 let BASETONEA = BASETONE;
@@ -401,7 +402,7 @@ function createNoiseLayer() {
 
     var turbulence = document.createElementNS("http://www.w3.org/2000/svg", "feTurbulence");
     turbulence.setAttribute("type", "fractalNoise");
-    turbulence.setAttribute("baseFrequency", "0.2");  // 0.102
+    turbulence.setAttribute("baseFrequency", "0.3");  // 0.102
     turbulence.setAttribute("numOctaves", "4");
     // turbulence.setAttribute("seed", "15");
     turbulence.setAttribute("stitchTiles", "stitch");

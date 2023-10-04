@@ -572,21 +572,45 @@ class Grid {
         var groupDrawing = document.getElementById('drawing');
 
         for (var o = 0; o < loopCount; o++) {
-            const rectNode = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-            rectNode.setAttributeNS(null, 'x', marginPix + getNormallyDistributedRandomNumber(0, posStdD) + offset);
-            rectNode.setAttributeNS(null, 'y', marginPix + getNormallyDistributedRandomNumber(0, posStdD) + offset);
-            rectNode.setAttributeNS(null, 'width', (rescaling_width - marginPix * 2) - offset * 2);
-            rectNode.setAttributeNS(null, 'height', rescaling_height - marginPix * 2 - offset * 2);
-            // rectNode.setAttributeNS(null, 'fill', 'none');
-            // rectNode.setAttributeNS(null, 'fill', tinycolor(this.aboveTone).darken(20));
-            // rectNode.setAttributeNS(null, 'fill', "#9191911a");
-            rectNode.setAttributeNS(null, 'fill', "#808b9b1a");
-            // rectNode.setAttributeNS(null, 'stroke', color_);
-            rectNode.setAttributeNS(null, 'stroke', "none");
-            // rectNode.setAttributeNS(null, 'stroke-width', this.rectStroke);
+            // const rectNode = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            // rectNode.setAttributeNS(null, 'x', marginPix + getNormallyDistributedRandomNumber(0, posStdD) + offset);
+            // rectNode.setAttributeNS(null, 'y', marginPix + getNormallyDistributedRandomNumber(0, posStdD) + offset);
+            // rectNode.setAttributeNS(null, 'width', (rescaling_width - marginPix * 2) - offset * 2);
+            // rectNode.setAttributeNS(null, 'height', rescaling_height - marginPix * 2 - offset * 2);
+            // // rectNode.setAttributeNS(null, 'fill', 'none');
+            // // rectNode.setAttributeNS(null, 'fill', tinycolor(this.aboveTone).darken(20));
+            // // rectNode.setAttributeNS(null, 'fill', "#9191911a");
+            // rectNode.setAttributeNS(null, 'fill', "#808b9b1a");
+            // // rectNode.setAttributeNS(null, 'stroke', color_);
+            // rectNode.setAttributeNS(null, 'stroke', "none");
+            // // rectNode.setAttributeNS(null, 'stroke-width', this.rectStroke);
 
-            // svgNode.appendChild(rectNode);
-            groupDrawing.appendChild(rectNode);
+            // // svgNode.appendChild(rectNode);
+            // groupDrawing.appendChild(rectNode);
+
+
+            const rectNodeAbove = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            rectNodeAbove.setAttributeNS(null, 'x', marginPix + getNormallyDistributedRandomNumber(0, posStdD) + offset);
+            rectNodeAbove.setAttributeNS(null, 'y', marginPix + getNormallyDistributedRandomNumber(0, posStdD) + offset);
+            rectNodeAbove.setAttributeNS(null, 'width', (rescaling_width - marginPix * 2) - offset * 2);
+            rectNodeAbove.setAttributeNS(null, 'height', (rescaling_height * this.horizonRatio) - marginPix - offset);
+            // rectNodeAbove.setAttributeNS(null, 'fill', tinycolor(this.aboveTone).darken(20));
+            rectNodeAbove.setAttributeNS(null, 'fill', RECTBASEABOVE);
+            rectNodeAbove.setAttributeNS(null, 'stroke', "none");
+
+            groupDrawing.appendChild(rectNodeAbove);
+
+
+            const rectNodeBelow = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            rectNodeBelow.setAttributeNS(null, 'x', marginPix + getNormallyDistributedRandomNumber(0, posStdD) + offset);
+            rectNodeBelow.setAttributeNS(null, 'y', (rescaling_height * this.horizonRatio) + getNormallyDistributedRandomNumber(0, posStdD));
+            rectNodeBelow.setAttributeNS(null, 'width', (rescaling_width - marginPix * 2) - offset * 2);
+            rectNodeBelow.setAttributeNS(null, 'height', (rescaling_height - rescaling_height * this.horizonRatio) - marginPix - offset);
+            // rectNodeBelow.setAttributeNS(null, 'fill', tinycolor(this.aboveTone).darken(20));
+            rectNodeBelow.setAttributeNS(null, 'fill', RECTBASEBELOW);
+            rectNodeBelow.setAttributeNS(null, 'stroke', "none");
+
+            groupDrawing.appendChild(rectNodeBelow);
         }
 
 

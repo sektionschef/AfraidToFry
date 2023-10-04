@@ -1,4 +1,6 @@
 
+// weniger farbhelligkeit bei non overshoot
+
 // https://docs.google.com/spreadsheets/d/1vFmPb0Q7fCb5MWL4NTcCh001ABJR2qvu2umFBYY2tfU/edit#gid=0
 var OVERSHOOTSTATS = {
     "Austria": {
@@ -25,8 +27,13 @@ let RESOLUTIONBOXCOUNT = 80;
 // let RESOLUTIONBOXCOUNT = 60;
 // let RESOLUTIONBOXCOUNT = 40;
 let BACKGROUNDTONE = "#ffffff";
+
+let RECTBASEABOVE = "#849bbd1a";
+let RECTBASEBELOW = "#bea8891a";
+
 let BASETONE = "#77879c";
-let BASETONEBELOW = "#928470"
+let BASETONEBELOW = "#867967"
+
 // let ABOVETONE = "#a5812f";  // andrea garden book
 // let BELOWTONE = "#ff617b";  // andrea garden book
 // let ABOVETONE = "#92a8b4" // blue

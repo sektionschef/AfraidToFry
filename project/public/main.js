@@ -28,11 +28,18 @@ let RESOLUTIONBOXCOUNT = 80;
 // let RESOLUTIONBOXCOUNT = 40;
 let BACKGROUNDTONE = "#ffffff";
 
-let RECTBASEABOVE = "#849bbd1a";
-let RECTBASEBELOW = "#bea8891a";
+let ABOVETONE = "#8c9cb3";
+let BELOWTONE = "#b3a38c";
 
-let BASETONE = "#77879c";
-let BASETONEBELOW = "#867967"
+// let BASETONE = "#667b96";
+let BASETONE = tinycolor(ABOVETONE).spin(-1).desaturate(1).darken(14).toHexString();
+// let BASETONEBELOW = "#948269"
+let BASETONEBELOW = tinycolor(BELOWTONE).spin(-1).desaturate(1).darken(14).toHexString();
+
+// let RECTBASEABOVE = "#849bbd1a";
+let RECTBASEABOVE = tinycolor(ABOVETONE).clone().spin(1).saturate(10).darken(0).setAlpha(0.102);
+// let RECTBASEBELOW = "#bea8891a";
+let RECTBASEBELOW = tinycolor(BELOWTONE).clone().spin(1).saturate(10).darken(0).setAlpha(0.102);
 
 // let ABOVETONE = "#a5812f";  // andrea garden book
 // let BELOWTONE = "#ff617b";  // andrea garden book
@@ -44,8 +51,8 @@ let BASETONEBELOW = "#867967"
 // let ABOVETONE = "#4b6786";  // overshoot - cool color: d5560c
 // let BELOWTONE = "#7e614f";  // overshoot 
 // let ABOVETONE = "#8dacc9";  // full blue
-let ABOVETONE = "#8c9cb3";
-let BELOWTONE = "#b3a38c";  // overshoot 
+
+
 
 // TRUE BASE TONE
 let BASETONEA = BASETONE;

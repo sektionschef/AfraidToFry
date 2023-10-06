@@ -29,7 +29,23 @@ let RESOLUTIONBOXCOUNT = 80;
 let BACKGROUNDTONE = "#ffffff";
 
 let ABOVETONE = "#8c9cb3";
-let BELOWTONE = "#b3a38c";
+let BELOWTONE = "#8b7658";
+// let ABOVETONE = "#a5812f";  // andrea garden book
+// let BELOWTONE = "#ff617b";  // andrea garden book
+// let ABOVETONE = "#98a0a7";  // good - twitter
+// let BELOWTONE = "#515a57";  // good - twitter
+
+// let ABOVETONE = "#aeb9c2";
+// let BELOWTONE = "#1e2b26";  // dark
+
+// let ABOVETONE = "#0b2b5c";
+// let BELOWTONE = "#d3b11a";
+
+// triste
+// let ABOVETONE = "#81878f";
+// let BELOWTONE = "#555555";
+
+
 
 // let BASETONE = "#667b96";
 let BASETONE = tinycolor(ABOVETONE).spin(-1).desaturate(1).darken(14).toHexString();
@@ -41,13 +57,11 @@ let RECTBASEABOVE = tinycolor(ABOVETONE).clone().spin(1).saturate(10).darken(0).
 // let RECTBASEBELOW = "#bea8891a";
 let RECTBASEBELOW = tinycolor(BELOWTONE).clone().spin(1).saturate(10).darken(0).setAlpha(0.102);
 
-// let ABOVETONE = "#a5812f";  // andrea garden book
-// let BELOWTONE = "#ff617b";  // andrea garden book
+
 // let ABOVETONE = "#92a8b4" // blue
 // let BELOWTONE = "#8b967d"; // green
 
-// let ABOVETONE = "#98a0a7";  // good - twitter
-// let BELOWTONE = "#515a57";  // good - twitter
+
 // let ABOVETONE = "#4b6786";  // overshoot - cool color: d5560c
 // let BELOWTONE = "#7e614f";  // overshoot 
 // let ABOVETONE = "#8dacc9";  // full blue

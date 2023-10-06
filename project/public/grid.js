@@ -234,6 +234,7 @@ class Grid {
         // this.noiseColorDetail = new noiseAggregator(100, 15, 60, 10, 25, 6);
         this.noiseColorDetail = new noiseAggregator(70, 15, 20, 10, 25, 6);  // biger
         this.noiseColorDetailBelow = new noiseAggregator(80, 15, 40, 3, 13, 4);
+        this.noiseColorBaseBelow = new noiseAggregator(130, 10, 90, 3, 3, 3);
 
         this.createBoxes();
         this.normalizeNoises();
@@ -267,8 +268,8 @@ class Grid {
             // this.loopShowNoise();
 
             this.loopBaseVis();
-            // this.loopBase();
-            // this.loopDetail();
+            this.loopBase();
+            this.loopDetail();
 
             // this.loop8();
         }
@@ -294,6 +295,8 @@ class Grid {
         this.noiseColorBaseMax = -10;
         this.noiseColorDetailBelowMin = 10;
         this.noiseColorDetailBelowMax = -10;
+        this.noiseColorBaseBelowMin = 10;
+        this.noiseColorBaseBelowMax = -10;
 
         // console.log(this.heightBoxCount);
         // console.log(this.widthBoxCount);
@@ -342,13 +345,15 @@ class Grid {
                 var noiseValueColorDetail = this.noiseColorDetail.createNoiseValue(w, h, 0, this.horizonRow, 1, 1, 1, 0, 0, 1);
 
                 // var noiseValueColorBase = this.noiseColorBase.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 1, 1, 0, 0, 0, 0);
-                var noiseValueColorBase = this.noiseColorBase.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 1, 1, 8, 0, 0.5, 0.5);
+                var noiseValueColorBase = this.noiseColorBase.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 1, 1, 0, 0.2, 0.2);
                 // var noiseValueColorBase = this.noiseColorBase.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 1, 1, 0.25, 0.5, 1, 1);
 
                 // var noiseValueColorDetailBelow = this.noiseColorDetailBelow.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 1, 1, 0, 0, 0, 0);
                 // var noiseValueColorDetailBelow = this.noiseColorDetailBelow.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 0, 1, 1, 0, 0);
                 // var noiseValueColorDetailBelow = this.noiseColorDetailBelow.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 0, 0, 0, 1, 1);
                 var noiseValueColorDetailBelow = this.noiseColorDetailBelow.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0.5, 1, 1, 0.5, 0.5, 0.5);
+
+                var noiseValueColorBaseBelow = this.noiseColorBaseBelow.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 1, 1, 0, 0.2, 0.2);
 
                 if (noiseValueDetail < this.noiseDetailMin) {
                     this.noiseDetailMin = noiseValueDetail;
@@ -390,6 +395,13 @@ class Grid {
                     this.noiseColorBaseMax = noiseValueColorBase;
                 }
 
+                if (noiseValueColorBaseBelow < this.noiseColorBaseBelowMin) {
+                    this.noiseColorBaseBelowMin = noiseValueColorBaseBelow;
+                }
+                if (noiseValueColorBaseBelow > this.noiseColorBaseBelowMax) {
+                    this.noiseColorBaseBelowMax = noiseValueColorBaseBelow;
+                }
+
                 if (noiseValueColorDetailBelow < this.noiseColorDetailBelowMin) {
                     this.noiseColorDetailBelowMin = noiseValueColorDetailBelow;
                 }
@@ -422,6 +434,7 @@ class Grid {
                     "noiseValueColorDetail": noiseValueColorDetail,
                     "noiseValueColorBase": noiseValueColorBase,
                     "noiseValueColorDetailBelow": noiseValueColorDetailBelow,
+                    "noiseValueColorBaseBelow": noiseValueColorBaseBelow,
                     // "noiseValue9": this.noise9.createNoiseValue(w, h),
                     // "noiseValue10": this.noise10.createNoiseValue(w, h),
                     // "polygonA": polygonA,
@@ -440,11 +453,14 @@ class Grid {
             this.boxes[i].noiseValueColorDetail = map(this.boxes[i].noiseValueColorDetail, this.noiseColorDetailMin, this.noiseColorDetailMax, -1, 1);
             this.boxes[i].noiseValueColorBase = map(this.boxes[i].noiseValueColorBase, this.noiseColorBaseMin, this.noiseColorBaseMax, -1, 1);
             this.boxes[i].noiseValueColorDetailBelow = map(this.boxes[i].noiseValueColorDetailBelow, this.noiseColorDetailBelowMin, this.noiseColorDetailBelowMax, -1, 1);
+            this.boxes[i].noiseValueColorBaseBelow = map(this.boxes[i].noiseValueColorBaseBelow, this.noiseColorBaseBelowMin, this.noiseColorBaseBelowMax, -1, 1);
             this.boxes[i].noiseValueDetail = map(this.boxes[i].noiseValueDetail, this.noiseDetailMin, this.noiseDetailMax, -1, 1);
-            this.boxes[i].noiseValueBaes = map(this.boxes[i].noiseValueBase, this.noiseBaseMin, this.noiseBaseMax, -1, 1);
-            this.boxes[i].noiseValueBaseBelow = map(this.boxes[i].noiseValueBaseBelow, this.noiseBaseBelowMin, this.noiseBaseBelowMax, -1, 1);
+            this.boxes[i].noiseValueBase = map(this.boxes[i].noiseValueBase, this.noiseBaseMin, this.noiseBaseMax, -1, 1);
             this.boxes[i].noiseValueDetailBelow = map(this.boxes[i].noiseValueDetailBelow, this.noiseDetailBelowMin, this.noiseDetailBelowMax, -1, 1);
+            this.boxes[i].noiseValueBaseBelow = map(this.boxes[i].noiseValueBaseBelow, this.noiseBaseBelowMin, this.noiseBaseBelowMax, -1, 1);
         }
+
+        // console.log(this.noiseDetailBelowMin);
     }
 
     showDebug() {
@@ -711,11 +727,12 @@ class Grid {
                     rectPosDistStd: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueBase, -1, 1, 2, 3),
                 }).draw();
             } else {
+                // console.log(this.boxes[i].noiseValueColorBaseBelow);
                 new digi({
                     x: this.boxes[i].center.x,
                     y: this.boxes[i].center.y,
                     noiseValue: this.boxes[i].noiseValueBaseBelow,
-                    colorNoise: this.boxes[i].noiseValueColorDetailBelow,
+                    colorNoise: this.boxes[i].noiseValueColorBaseBelow,
                     // colorListA: this.paletteDetailBelowA.palette,
                     // colorListB: this.paletteDetailBelowB.palette,
                     // colorListC: this.paletteDetailBelowC.palette,

@@ -26,7 +26,11 @@ class noiseAggregator {
         var amplitude2 = map(h, startRow, endRow, a2min, a2max); // 0,1
         var amplitude3 = map(h, startRow, endRow, a3min, a3max); // 0,1
 
-        // console.log(amplitude1);
+        // var amplitude3 = a3min; // constant
+        // var amplitude2 = map(h, startRow, endRow, a2min, a2max); // 0,1
+        // var amplitude1 = 1 - amplitude3 - amplitude2;
+
+        // console.log(amplitude2);
         // map - makes it a difference
         // let noiseValue1 = map(this.noise1.createNoiseValue(w, h), -1, 1, 0, 1);
         // let noiseValue2 = map(this.noise2.createNoiseValue(w, h), -1, 1, 0, 1);
@@ -41,7 +45,8 @@ class noiseAggregator {
             noiseValue1 * amplitude1 +
             noiseValue2 * amplitude2 +
             noiseValue3 * amplitude3
-        )
+        ) / (amplitude1 + amplitude2 + amplitude3);
+
         // ) / (amplitude1 + amplitude2 + amplitude3);
 
 

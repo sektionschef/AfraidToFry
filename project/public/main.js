@@ -28,8 +28,8 @@ let RESOLUTIONBOXCOUNT = 80;
 // let RESOLUTIONBOXCOUNT = 40;
 let BACKGROUNDTONE = "#ffffff";
 
-let ABOVETONE = "#8c9cb3";
-let BELOWTONE = "#8a7558";
+// let ABOVETONE = "#8c9cb3";
+// let BELOWTONE = "#8a7558";
 // let ABOVETONE = "#a5812f";  // andrea garden book
 // let BELOWTONE = "#ff617b";  // andrea garden book
 // let ABOVETONE = "#98a0a7";  // good - twitter
@@ -46,6 +46,11 @@ let BELOWTONE = "#8a7558";
 // let BELOWTONE = "#555555";
 
 
+let ABOVETONE = "#F87060";
+let BELOWTONE = "#102542";
+
+let ONTOPTONE = "#102542";
+
 
 // let BASETONE = "#667b96";
 let BASETONE = tinycolor(ABOVETONE).spin(-1).desaturate(1).darken(14).toHexString();
@@ -53,9 +58,9 @@ let BASETONE = tinycolor(ABOVETONE).spin(-1).desaturate(1).darken(14).toHexStrin
 let BASETONEBELOW = tinycolor(BELOWTONE).spin(-1).desaturate(1).darken(14).toHexString();
 
 // let RECTBASEABOVE = "#849bbd1a";
-let RECTBASEABOVE = tinycolor(ABOVETONE).clone().spin(1).saturate(10).darken(0).setAlpha(0.102);
+let RECTBASEABOVE = tinycolor(BELOWTONE).clone().spin(1).saturate(10).darken(0).setAlpha(0.102);
 // let RECTBASEBELOW = "#bea8891a";
-let RECTBASEBELOW = tinycolor(BELOWTONE).clone().spin(1).saturate(10).darken(0).setAlpha(0.102);
+let RECTBASEBELOW = tinycolor(ABOVETONE).clone().spin(1).saturate(10).darken(0).setAlpha(0.102);
 
 
 // let ABOVETONE = "#92a8b4" // blue

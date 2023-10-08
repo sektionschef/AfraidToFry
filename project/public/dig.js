@@ -48,6 +48,7 @@ class digi {
         // this.noiseValueMax = data.noiseValueMax;
 
         this.cutOutValue = data.cutOutValue;
+        this.noiseValueCutOut = data.noiseValueCutOut;
         this.colorListA = data.colorListA;
         this.colorListB = data.colorListB;
         this.colorListC = data.colorListC;
@@ -84,7 +85,8 @@ class digi {
 
     draw() {
 
-        if ((this.colorNoise > this.cutOutValue) && (this.colorNoise < (1 + this.cutOutValue))) {
+        // if ((this.noiseValueCutOut > this.cutOutValue) && (this.noiseValueCutOut < (1 + this.cutOutValue))) {
+        if (this.noiseValueCutOut > this.cutOutValue) {
 
 
             // PALETTE CHANGE - NOISEVALUE OR COLORNOISE

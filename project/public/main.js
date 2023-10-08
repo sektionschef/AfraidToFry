@@ -29,7 +29,7 @@ let RESOLUTIONBOXCOUNT = 80;
 let BACKGROUNDTONE = "#ffffff";
 
 let ABOVETONE = "#8c9cb3";
-let BELOWTONE = "#8b7658";
+let BELOWTONE = "#8a7558";
 // let ABOVETONE = "#a5812f";  // andrea garden book
 // let BELOWTONE = "#ff617b";  // andrea garden book
 // let ABOVETONE = "#98a0a7";  // good - twitter

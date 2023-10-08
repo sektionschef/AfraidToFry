@@ -54,12 +54,18 @@ class Grid {
         // #PALETTES
         // https://rechneronline.de/number-list/
 
+        // VAR old school
         // let profileHue = [-12, -8, -5, -3, 0, 3, 5, 8, 12, -5, -3, 0, 3, 5];
         // let profileSat = [-30, -20, -15, -10, -5, 0, 5, 10, 15, 20, 30, -10, -5, 0, 5, 10];
         // let profileLight = [-3, 0, 3, -3, 0, 3, 6, -6];
+        // VAR COOL
+        // let profileHue = [-6, -3, 0, 3, 6];
+        // let profileSat = [-40, -30, -20, -10, 0, 10, 20, 30, 40];
+        // let profileLight = [0];
+        // bambam
         let profileHue = [-6, -3, 0, 3, 6];
-        let profileSat = [-40, -30, -20, -10, 0, 10, 20, 30, 40];
-        let profileLight = [0];
+        let profileSat = [-35, -30, -20, -10, 0, 10, 20, 30, 35];
+        let profileLight = [-6, -3, 0, 3, 6];
 
         this.paletteBaseA = new dynamicPalette(
             BASETONEA,
@@ -342,7 +348,7 @@ class Grid {
                 // var noiseValueColorDetail = this.noiseColorDetail.createNoiseValue(w, h, 0, this.horizonRow, 1, 1, 0, 0, 0, 0);
                 // var noiseValueColorDetail = this.noiseColorDetail.createNoiseValue(w, h, 0, this.horizonRow, 0, 0, 1, 1, 0, 0);
                 // var noiseValueColorDetail = this.noiseColorDetail.createNoiseValue(w, h, 0, this.horizonRow, 0, 0, 0, 0, 1, 1);
-                var noiseValueColorDetail = this.noiseColorDetail.createNoiseValue(w, h, 0, this.horizonRow, 1, 1, 1, 0, 0, 1);
+                var noiseValueColorDetail = this.noiseColorDetail.createNoiseValue(w, h, 0, this.horizonRow, 1, 0, 0, 1, 0, 1);
 
                 // var noiseValueColorBase = this.noiseColorBase.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 1, 1, 0, 0, 0, 0);
                 var noiseValueColorBase = this.noiseColorBase.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 1, 1, 0, 0.2, 0.2);
@@ -699,7 +705,7 @@ class Grid {
                     horizonRow: this.horizonRow,
                     i: i,
                     longBoxCount: this.longBoxCount,
-                    cutOutValue: -1,
+                    cutOutValue: -0.5,
                     lineNoiseMapDynamic: false,
                     lineVertexLengthMin: 160 / this.shortBoxCount * 5,
                     lineVertexLengthMax: 160 / this.shortBoxCount * 6,
@@ -748,7 +754,7 @@ class Grid {
                     horizonRow: this.horizonRow,
                     i: i,
                     longBoxCount: this.longBoxCount,
-                    cutOutValue: -1,
+                    cutOutValue: -0.5,
                     lineNoiseMapDynamic: false,
                     lineVertexLengthMin: 160 / this.shortBoxCount * 5,
                     lineVertexLengthMax: 160 / this.shortBoxCount * 6,
@@ -808,7 +814,7 @@ class Grid {
                     horizonRow: this.horizonRow,
                     i: i,
                     longBoxCount: this.longBoxCount,
-                    cutOutValue: -1,
+                    cutOutValue: -0.5,
                     // lineVertexLength: 160 / this.shortBoxCount * 8, // map(this.boxes[i].noiseValueDetail, -1, 1, 2, 10), // 15,
                     lineNoiseMapDynamic: true,
                     lineVertexLengthMin: 80 / this.shortBoxCount * 10,
@@ -852,7 +858,7 @@ class Grid {
                     horizonRow: this.horizonRow,
                     i: i,
                     longBoxCount: this.longBoxCount,
-                    cutOutValue: -1,
+                    cutOutValue: -0.5,
                     lineNoiseMapDynamic: true,
                     lineVertexLengthMin: 80 / this.shortBoxCount * 10,
                     lineVertexLengthMax: 80 / this.shortBoxCount * 15,

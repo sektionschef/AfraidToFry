@@ -84,7 +84,7 @@ class digi {
 
     draw() {
 
-        if (this.noiseValue > this.cutOutValue) {
+        if ((this.colorNoise > this.cutOutValue) && (this.colorNoise < (1 + this.cutOutValue))) {
 
 
             // PALETTE CHANGE - NOISEVALUE OR COLORNOISE
@@ -295,6 +295,8 @@ class digi {
 
             // svgNode.appendChild(circleNode);
 
+        } else {
+            console.log("peng");
         }
     }
 }

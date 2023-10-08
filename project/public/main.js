@@ -430,7 +430,8 @@ function createNoiseLayer() {
 
     var turbulence = document.createElementNS("http://www.w3.org/2000/svg", "feTurbulence");
     turbulence.setAttribute("type", "fractalNoise");
-    turbulence.setAttribute("baseFrequency", "0.3");  // 0.102
+    // turbulence.setAttribute("baseFrequency", "0.3");  // 0.102
+    turbulence.setAttribute("baseFrequency", "0.061");  // 0.102
     turbulence.setAttribute("numOctaves", "4");
     // turbulence.setAttribute("seed", "15");
     turbulence.setAttribute("stitchTiles", "stitch");
@@ -441,7 +442,7 @@ function createNoiseLayer() {
     turbulence.setAttribute("result", "turbulence");
 
     var specularLight = document.createElementNS("http://www.w3.org/2000/svg", "feSpecularLighting");
-    specularLight.setAttribute("surfaceScale", "7"); // 1- 40, 17
+    specularLight.setAttribute("surfaceScale", "10"); // 1- 40, 17
     specularLight.setAttribute("specularConstant", "0.75");
     specularLight.setAttribute("specularExponent", "20");
     specularLight.setAttribute("lighting-color", "#392bb8");
@@ -496,5 +497,4 @@ function createNoiseLayer() {
     // svgNode.appendChild(showDrawing);
 
     svgNode.appendChild(filterObj);
-
 }

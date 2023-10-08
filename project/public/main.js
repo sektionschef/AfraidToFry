@@ -49,9 +49,7 @@ let BACKGROUNDTONE = "#ffffff";
 let ABOVETONE = "#F87060";
 let BELOWTONE = "#102542";
 
-let ONTOPTONE = "#102542";
-
-
+// TRANSPARENT RECTS
 // let BASETONE = "#667b96";
 let BASETONE = tinycolor(ABOVETONE).spin(-1).desaturate(1).darken(14).toHexString();
 // let BASETONEBELOW = "#948269"

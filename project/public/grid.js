@@ -275,7 +275,7 @@ class Grid {
 
             // this.loopShowNoise();
 
-            this.loopBaseVis();
+            this.loopBaseRect();
             this.loopBase();
             this.loopDetail();
             this.loopOnTop();
@@ -565,7 +565,7 @@ class Grid {
         }
     }
 
-    loopBaseVis() {
+    loopBaseRect() {
         let randomIndex = getRandomIndex(this.boxes.length);
 
         let i = 0;
@@ -613,9 +613,13 @@ class Grid {
 
         }
 
-        var posStdD = 10;  // standard deviation for position
-        var offset = 30;  // move inward
-        var loopCount = 40;
+        // var posStdD = 10;  // standard deviation for position
+        // var offset = 30;  // move inward
+        // var loopCount = 40;
+
+        var posStdD = 0;  // standard deviation for position
+        var offset = 10;  // move inward
+        var loopCount = 1;
 
         var groupDrawing = document.getElementById('drawing');
 
@@ -643,7 +647,8 @@ class Grid {
             rectNodeAbove.setAttributeNS(null, 'width', (rescaling_width - marginPix * 2) - offset * 2);
             rectNodeAbove.setAttributeNS(null, 'height', (rescaling_height * this.horizonRatio) - marginPix - offset);
             // rectNodeAbove.setAttributeNS(null, 'fill', tinycolor(this.aboveTone).darken(20));
-            rectNodeAbove.setAttributeNS(null, 'fill', RECTBASEABOVE);
+            // rectNodeAbove.setAttributeNS(null, 'fill', RECTBASEABOVE);
+            rectNodeAbove.setAttributeNS(null, 'fill', BELOWTONE);
             rectNodeAbove.setAttributeNS(null, 'stroke', "none");
 
             groupDrawing.appendChild(rectNodeAbove);
@@ -655,7 +660,8 @@ class Grid {
             rectNodeBelow.setAttributeNS(null, 'width', (rescaling_width - marginPix * 2) - offset * 2);
             rectNodeBelow.setAttributeNS(null, 'height', (rescaling_height - rescaling_height * this.horizonRatio) - marginPix - offset);
             // rectNodeBelow.setAttributeNS(null, 'fill', tinycolor(this.aboveTone).darken(20));
-            rectNodeBelow.setAttributeNS(null, 'fill', RECTBASEBELOW);
+            // rectNodeBelow.setAttributeNS(null, 'fill', RECTBASEBELOW);
+            rectNodeBelow.setAttributeNS(null, 'fill', ABOVETONE);
             rectNodeBelow.setAttributeNS(null, 'stroke', "none");
 
             groupDrawing.appendChild(rectNodeBelow);

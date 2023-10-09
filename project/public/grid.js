@@ -1,6 +1,6 @@
 class Grid {
     constructor(data) {
-        this.horizonRatio = 4 / 7;
+        this.horizonRatio = HORIZONRATIO;
 
         this.overshoot = data.overshoot;  // time limit reached
         this.finished = false;  // flag for completely drawn
@@ -276,9 +276,9 @@ class Grid {
             // this.loopShowNoise();
 
             this.loopBaseRect();
-            // this.loopBase();
-            // this.loopDetail();
-            // this.loopOnTop();
+            this.loopBase();
+            this.loopDetail();
+            this.loopOnTop();
         }
     }
 

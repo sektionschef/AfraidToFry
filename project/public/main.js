@@ -11,6 +11,8 @@ var OVERSHOOTSTATS = {
     }
 }
 
+var HORIZONRATIO = 4 / 7;
+
 let TITLE = "afraid to fry";
 let ARTIST = "Stefan Schwaha, @sektionschef";
 let DESCRIPTION = "javascript on html canvas";
@@ -488,7 +490,8 @@ function createNoiseLayer() {
     specularLightA.setAttribute("x", "0%");
     specularLightA.setAttribute("y", "0%");
     specularLightA.setAttribute("width", "100%");
-    specularLightA.setAttribute("height", "50%");
+    // specularLightA.setAttribute("height", "50%");
+    specularLightA.setAttribute("height", `${HORIZONRATIO * 100}%`);
     specularLightA.setAttribute("in", "turbulenceA");
     specularLightA.setAttribute("result", "specularLightA");
 
@@ -500,7 +503,8 @@ function createNoiseLayer() {
     specularLightB.setAttribute("lighting-color", "#1900ff");
     // specularLightB.setAttribute("lighting-color", BELOWTONE);
     specularLightB.setAttribute("x", "0%");
-    specularLightB.setAttribute("y", "50%");
+    // specularLightB.setAttribute("y", "50%");
+    specularLightB.setAttribute("y", `${HORIZONRATIO * 100}%`);
     specularLightB.setAttribute("width", "100%");
     specularLightB.setAttribute("height", "100%");
     specularLightB.setAttribute("in", "turbulenceB");

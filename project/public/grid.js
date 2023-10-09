@@ -276,9 +276,9 @@ class Grid {
             // this.loopShowNoise();
 
             this.loopBaseRect();
-            this.loopBase();
-            this.loopDetail();
-            this.loopOnTop();
+            // this.loopBase();
+            // this.loopDetail();
+            // this.loopOnTop();
         }
     }
 
@@ -645,7 +645,7 @@ class Grid {
             rectNodeAbove.setAttributeNS(null, 'x', marginPix + getNormallyDistributedRandomNumber(0, posStdD) + offset);
             rectNodeAbove.setAttributeNS(null, 'y', marginPix + getNormallyDistributedRandomNumber(0, posStdD) + offset);
             rectNodeAbove.setAttributeNS(null, 'width', (rescaling_width - marginPix * 2) - offset * 2);
-            rectNodeAbove.setAttributeNS(null, 'height', (rescaling_height * this.horizonRatio) - marginPix - offset);
+            rectNodeAbove.setAttributeNS(null, 'height', Math.ceil(rescaling_height * this.horizonRatio) - marginPix - offset);
             // rectNodeAbove.setAttributeNS(null, 'fill', tinycolor(this.aboveTone).darken(20));
             // rectNodeAbove.setAttributeNS(null, 'fill', RECTBASEABOVE);
             rectNodeAbove.setAttributeNS(null, 'fill', BELOWTONE);
@@ -656,7 +656,7 @@ class Grid {
 
             const rectNodeBelow = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
             rectNodeBelow.setAttributeNS(null, 'x', marginPix + getNormallyDistributedRandomNumber(0, posStdD) + offset);
-            rectNodeBelow.setAttributeNS(null, 'y', (rescaling_height * this.horizonRatio) + getNormallyDistributedRandomNumber(0, posStdD));
+            rectNodeBelow.setAttributeNS(null, 'y', Math.floor(rescaling_height * this.horizonRatio) + getNormallyDistributedRandomNumber(0, posStdD));
             rectNodeBelow.setAttributeNS(null, 'width', (rescaling_width - marginPix * 2) - offset * 2);
             rectNodeBelow.setAttributeNS(null, 'height', (rescaling_height - rescaling_height * this.horizonRatio) - marginPix - offset);
             // rectNodeBelow.setAttributeNS(null, 'fill', tinycolor(this.aboveTone).darken(20));

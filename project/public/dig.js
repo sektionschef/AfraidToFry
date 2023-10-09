@@ -297,8 +297,6 @@ class digi {
 
             // svgNode.appendChild(circleNode);
 
-        } else {
-            console.log("peng");
         }
     }
 }

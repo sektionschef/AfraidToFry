@@ -276,9 +276,9 @@ class Grid {
             // this.loopShowNoise();
 
             this.loopBaseRect();
-            // this.loopBase();
-            // this.loopDetail();
-            // this.loopOnTop();
+            this.loopBase();
+            this.loopDetail();
+            this.loopOnTop();
         }
     }
 
@@ -618,7 +618,7 @@ class Grid {
         // var loopCount = 40;
 
         var posStdD = 0;  // standard deviation for position
-        var offset = 10;  // move inward
+        var offset = 20;  // move inward
         var loopCount = 1;
 
         var groupDrawing = document.getElementById('drawing');
@@ -646,9 +646,9 @@ class Grid {
             rectNodeAbove.setAttributeNS(null, 'y', marginPix + getNormallyDistributedRandomNumber(0, posStdD) + offset);
             rectNodeAbove.setAttributeNS(null, 'width', (rescaling_width - marginPix * 2) - offset * 2);
             rectNodeAbove.setAttributeNS(null, 'height', Math.ceil(rescaling_height * this.horizonRatio) - marginPix - offset);
-            // rectNodeAbove.setAttributeNS(null, 'fill', tinycolor(this.aboveTone).darken(20));
-            // rectNodeAbove.setAttributeNS(null, 'fill', RECTBASEABOVE);
-            rectNodeAbove.setAttributeNS(null, 'fill', BELOWTONE);
+            // rectNodeAbove.setAttributeNS(null, 'fill', BELOWTONE);
+            // rectNodeAbove.setAttributeNS(null, 'fill', tinycolor(BELOWTONE).clone().setAlpha(0.1).darken(5).desaturate(5));
+            rectNodeAbove.setAttributeNS(null, 'fill', tinycolor(BELOWTONE).darken(5).desaturate(5));
             rectNodeAbove.setAttributeNS(null, 'stroke', "none");
 
             groupDrawing.appendChild(rectNodeAbove);
@@ -659,9 +659,10 @@ class Grid {
             rectNodeBelow.setAttributeNS(null, 'y', Math.floor(rescaling_height * this.horizonRatio) + getNormallyDistributedRandomNumber(0, posStdD));
             rectNodeBelow.setAttributeNS(null, 'width', (rescaling_width - marginPix * 2) - offset * 2);
             rectNodeBelow.setAttributeNS(null, 'height', (rescaling_height - rescaling_height * this.horizonRatio) - marginPix - offset);
-            // rectNodeBelow.setAttributeNS(null, 'fill', tinycolor(this.aboveTone).darken(20));
-            // rectNodeBelow.setAttributeNS(null, 'fill', RECTBASEBELOW);
-            rectNodeBelow.setAttributeNS(null, 'fill', ABOVETONE);
+            // rectNodeBelow.setAttributeNS(null, 'fill', ABOVETONE);
+            // rectNodeBelow.setAttributeNS(null, 'fill', tinycolor(ABOVETONE).clone().setAlpha(0.1).darken(5).desaturate(5));
+            // rectNodeBelow.setAttributeNS(null, 'fill', tinycolor(ABOVETONE).clone().setAlpha(0.1));
+            rectNodeBelow.setAttributeNS(null, 'fill', tinycolor(ABOVETONE).darken(5).desaturate(5));
             rectNodeBelow.setAttributeNS(null, 'stroke', "none");
 
             groupDrawing.appendChild(rectNodeBelow);
@@ -714,7 +715,6 @@ class Grid {
             //     }
             // }
 
-
             if (this.boxes[i].aboveHorizon) {
                 new digi({
                     x: this.boxes[i].center.x,
@@ -737,7 +737,7 @@ class Grid {
                     horizonRow: this.horizonRow,
                     i: i,
                     longBoxCount: this.longBoxCount,
-                    cutOutValue: -0.5,
+                    cutOutValue: -0.8,
                     noiseValueCutOut: this.boxes[i].noiseValueCutOut,
                     lineNoiseMapDynamic: false,
                     lineVertexLengthMin: 160 / this.shortBoxCount * 5,
@@ -787,7 +787,7 @@ class Grid {
                     horizonRow: this.horizonRow,
                     i: i,
                     longBoxCount: this.longBoxCount,
-                    cutOutValue: -0.5,
+                    cutOutValue: -0.8,
                     noiseValueCutOut: this.boxes[i].noiseValueCutOut,
                     lineNoiseMapDynamic: false,
                     lineVertexLengthMin: 160 / this.shortBoxCount * 5,

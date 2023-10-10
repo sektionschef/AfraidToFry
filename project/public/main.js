@@ -29,10 +29,10 @@ let RESOLUTIONBOXCOUNT = 80;
 // let RESOLUTIONBOXCOUNT = 60;
 // let RESOLUTIONBOXCOUNT = 40;
 let BACKGROUNDTONE = "#ffffff";
-let NOISETONE = "#F87060";
 
 // let ABOVETONE = "#8c9cb3";
-// let BELOWTONE = "#8a7558";
+// let BELOWTONE = "#756247";
+
 // let ABOVETONE = "#a5812f";  // andrea garden book
 // let BELOWTONE = "#ff617b";  // andrea garden book
 // let ABOVETONE = "#98a0a7";  // good - twitter
@@ -48,8 +48,34 @@ let NOISETONE = "#F87060";
 // let ABOVETONE = "#81878f";
 // let BELOWTONE = "#555555";
 
-let ABOVETONE = "#F87060";
-let BELOWTONE = "#102542";
+// let ABOVETONE = "#F87060";
+// let BELOWTONE = "#102542";
+
+// let ABOVETONE = "#FCF7F8";
+// let BELOWTONE = "#CED3DC";
+
+// let ABOVETONE = "#171219";
+// let BELOWTONE = "#225560";
+
+// let ABOVETONE = "#86b1d4";
+// let BELOWTONE = "#91816b";
+
+// let ABOVETONE = "#3F4045";
+// let BELOWTONE = "#02111B";
+
+// let ABOVETONE = "#6F1D1B";
+// let BELOWTONE = "#BB9457";
+
+// let ABOVETONE = "#EF767A";
+// let BELOWTONE = "#456990";
+
+let ABOVETONE = "#201E1F";
+let BELOWTONE = "#FF4000";
+
+
+let aboveToneRgb = tinycolor(ABOVETONE).toRgb()
+let belowToneRgb = tinycolor(BELOWTONE).toRgb()
+// sau
 
 
 // TRANSPARENT RECTS
@@ -544,11 +570,11 @@ function createNoiseLayer() {
     var colorMatrixHueA = document.createElementNS("http://www.w3.org/2000/svg", "feColorMatrix");
     colorMatrixHueA.setAttribute("in", "colorMatrixA");
     colorMatrixHueA.setAttribute("type", "matrix");
-    colorMatrixHueA.setAttribute("values", "\
-       0.97 0 0 0 0 \
-       0 0.44 0 0 0 \
-       0 0 0.38 0 0 \
-       0 0 0 1 0"); // red / 255 = 0.06
+    colorMatrixHueA.setAttribute("values", `\
+       ${aboveToneRgb.r / 255} 0 0 0 0 \
+       0 ${aboveToneRgb.g / 255} 0 0 0 \
+       0 0 ${aboveToneRgb.b / 255} 0 0 \
+       0 0 0 1 0`); // red / 255 = 0.06
     colorMatrixHueA.setAttribute("result", "colorMatrixHueA");
 
 
@@ -572,11 +598,11 @@ function createNoiseLayer() {
     var colorMatrixHueB = document.createElementNS("http://www.w3.org/2000/svg", "feColorMatrix");
     colorMatrixHueB.setAttribute("in", "colormatrixB");
     colorMatrixHueB.setAttribute("type", "matrix");
-    colorMatrixHueB.setAttribute("values", "\
-    0.06 0 0 0 0 \
-    0 0.15 0 0 0 \
-    0 0 0.26 0 0 \
-    0 0 0 1 0"); // red / 255 = 0.06
+    colorMatrixHueB.setAttribute("values", `\
+    ${belowToneRgb.r / 255} 0 0 0 0 \
+    0 ${belowToneRgb.g / 255} 0 0 0 \
+    0 0 ${belowToneRgb.b / 255} 0 0 \
+    0 0 0 1 0`); // red / 255 = 0.06
     colorMatrixHueB.setAttribute("result", "colorMatrixHueB");
 
 
@@ -638,3 +664,4 @@ function createNoiseLayer() {
     svgNode.appendChild(filterObjA);
     svgNode.appendChild(filterObjB);
 }
+

@@ -22,6 +22,16 @@ $fx.params([
       options: ["Austria"],
     }
   },
+  {
+    id: "palette_id",
+    name: "Palette",
+    type: "select",
+    default: "Doris",
+    options: {
+      options: ["Boris", "Doris"],
+      // options: ["Boris", "Doris", "Morris", "Harris", "Paris"],
+    }
+  },
   // {
   //   id: "number_id",
   //   name: "A number/float64",
@@ -104,8 +114,9 @@ $fx.features({
 })
 
 console.log($fx.getFeatures());
-
 console.log($fx.getParams())
+
+
 
 function main() {
   // // log the parameters, for debugging purposes, artists won't have to do that

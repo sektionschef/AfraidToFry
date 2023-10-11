@@ -28,7 +28,7 @@ var drawing = "";
 let RESOLUTIONBOXCOUNT = 80;
 // let RESOLUTIONBOXCOUNT = 60;
 // let RESOLUTIONBOXCOUNT = 40;
-let BACKGROUNDTONE = "#ffffff";
+
 
 // let ABOVETONE = "#8c9cb3";
 // let BELOWTONE = "#756247";
@@ -69,13 +69,16 @@ let BACKGROUNDTONE = "#ffffff";
 // let ABOVETONE = "#EF767A";
 // let BELOWTONE = "#456990";
 
-let ABOVETONE = "#201E1F";
-let BELOWTONE = "#FF4000";
+// let ABOVETONE = "#201E1F";
+// let BELOWTONE = "#FF4000";
 
+// console.log($fx.getParam("palette_id"));
+// let ABOVETONE = PALETTE[$fx.getParam("palette_id")].aboveTone;
+// let BELOWTONE = PALETTE[$fx.getParam("palette_id")].belowTone;
 
-let aboveToneRgb = tinycolor(ABOVETONE).toRgb()
-let belowToneRgb = tinycolor(BELOWTONE).toRgb()
-// sau
+console.log($fx.getParam("palette_id"));
+let ABOVETONE = PALETTE[$fx.getParam("palette_id")].aboveTone;
+let BELOWTONE = PALETTE[$fx.getParam("palette_id")].belowTone;
 
 
 // TRANSPARENT RECTS
@@ -193,6 +196,16 @@ let DETAILTONEBELOWD = BELOWTONE;
 let DETAILTONEBELOWE = BELOWTONE;
 
 
+let BACKGROUNDTONE = "#ffffff";
+
+
+var PALETTE = {
+    "Doris": {
+        "aboveTone": "#86b1d4",
+        "belowTone": "#91816b"
+    }
+}
+
 setTagsHTML();
 
 Math.random = fxrand;
@@ -236,6 +249,8 @@ if (rescaling_width <= rescaling_height) {
 
 window.addEventListener("DOMContentLoaded", (event) => {
     // console.log("DOM fully loaded and parsed");
+
+    getColors();
 
     const targetDiv = document.getElementById('badAssCanvas');
     const svgNode = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -433,6 +448,9 @@ function createDrawingGroup() {
 }
 
 function createNoiseLayer() {
+
+    let aboveToneRgb = tinycolor(ABOVETONE).toRgb()
+    let belowToneRgb = tinycolor(BELOWTONE).toRgb()
 
     const svgNode = document.getElementById('svgNode');
     const defs = document.getElementById('defs');

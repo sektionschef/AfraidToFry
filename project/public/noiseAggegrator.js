@@ -1,7 +1,8 @@
 class noiseAggregator {
-    constructor(x1, y1, x2, y2, x3, y3) {
+    constructor(x1, y1, x2, y2, x3, y3, resolutionBoxCount) {
 
-        this.box_count = RESOLUTIONBOXCOUNT; // check if correct - global variable for all noises
+        // this.box_count = RESOLUTIONBOXCOUNT; // check if correct - global variable for all noises
+        this.box_count = resolutionBoxCount; // check if correct - global variable for all noises
 
         this.noise1 = new noiseArea(x1, y1); // good
         this.noise2 = new noiseArea(x2, y2);

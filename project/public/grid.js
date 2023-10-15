@@ -1,6 +1,6 @@
 class Grid {
     constructor(data) {
-        this.horizonRatio = HORIZONRATIO;
+        this.horizonRatio = data.horizonRatio;
 
         this.overshoot = data.overshoot;  // time limit reached
         this.finished = false;  // flag for completely drawn
@@ -24,6 +24,9 @@ class Grid {
         this.longMargin = (LONGSIDE % this.boxSize) / 2;
         // console.log("longMargin: " + this.longMargin);
 
+        this.aboveTone = data.aboveTone;
+        this.belowTone = data.belowTone;
+
         if (LANDSCAPE == false) {
             this.widthBoxCount = this.shortBoxCount;
             this.heightBoxCount = this.longBoxCount;
@@ -38,20 +41,139 @@ class Grid {
 
         this.boxes = [];
 
-        if (this.overshoot == true) {
+        // if (this.overshoot == true) {
 
-            // this.aboveTone = "#9eaecc";
-            // this.underneathTone = "#30362f";
-            this.aboveTone = ABOVETONE;
-            this.underneathTone = BELOWTONE;
-        } else {
-            // this.aboveTone = "#cdd7df";
-            // this.underneathTone = "#6e8578";
-            this.aboveTone = ABOVETONE;
-            this.underneathTone = BELOWTONE;
-        }
+        //     // this.aboveTone = "#9eaecc";
+        //     // this.underneathTone = "#30362f";
+        //     this.aboveTone = ABOVETONE;
+        //     this.underneathTone = BELOWTONE;
+        // } else {
+        //     // this.aboveTone = "#cdd7df";
+        //     // this.underneathTone = "#6e8578";
+        //     this.aboveTone = ABOVETONE;
+        //     this.underneathTone = BELOWTONE;
+        // }
 
         // #PALETTES
+
+
+        // TRANSPARENT RECTS
+        // let BASETONE = "#667b96";
+        let BASETONE = tinycolor(this.aboveTone).spin(-1).desaturate(1).darken(14).toHexString();
+        // let BASETONEBELOW = "#948269"
+        let BASETONEBELOW = tinycolor(this.belowTone).spin(-1).desaturate(1).darken(14).toHexString();
+
+        // let RECTBASEABOVE = "#849bbd1a";
+        let RECTBASEABOVE = tinycolor(this.belowTone).clone().spin(1).saturate(10).darken(0).setAlpha(0.102);
+        // let RECTBASEBELOW = "#bea8891a";
+        let RECTBASEBELOW = tinycolor(this.aboveTone).clone().spin(1).saturate(10).darken(0).setAlpha(0.102);
+
+
+        // let ABOVETONE = "#92a8b4" // blue
+        // let BELOWTONE = "#8b967d"; // green
+
+
+        // let ABOVETONE = "#4b6786";  // overshoot - cool color: d5560c
+        // let BELOWTONE = "#7e614f";  // overshoot 
+        // let ABOVETONE = "#8dacc9";  // full blue
+
+
+
+        // TRUE BASE TONE
+        let BASETONEA = BASETONE;
+        let BASETONEB = BASETONE;
+        let BASETONEC = BASETONE;
+        let BASETONED = BASETONE;
+        let BASETONEE = BASETONE;
+
+
+        // YELLOW
+        // let DETAILTONEA = "#ffdda1";
+        // let DETAILTONEB = "#ffd151";
+        // let DETAILTONEC = "#f8c537";
+        // let DETAILTONED = "#edb230";
+        // let DETAILTONEE = "#e77728";
+
+        // let ABOVETONEA = tinycolor(DETAILTONEA).darken(15);
+        // let ABOVETONEB = tinycolor(DETAILTONEB).darken(15);
+        // let ABOVETONEC = tinycolor(DETAILTONEC).darken(15);
+        // let ABOVETONED = tinycolor(DETAILTONED).darken(15);
+        // let ABOVETONEE = tinycolor(DETAILTONEE).darken(15);
+
+        // blue
+        // let DETAILTONEA = "#0f3e50";
+        // let DETAILTONEB = "#1e4e5f";
+        // let DETAILTONEC = "#437080";
+        // let DETAILTONED = "#4f8597";
+        // let DETAILTONEE = "#78a3b1";
+
+        // blue grey
+        // let DETAILTONEA = "#71a3bd";
+        // let DETAILTONEB = "#557f94";
+        // let DETAILTONEC = "#3c4a52";
+        // let DETAILTONED = "#506b79";
+        // let DETAILTONEE = "#8da1ac";
+
+        // dark blue - A
+        let DETAILTONEA = this.aboveTone;
+        let DETAILTONEB = this.aboveTone;
+        let DETAILTONEC = this.aboveTone;
+        let DETAILTONED = this.aboveTone;
+        let DETAILTONEE = this.aboveTone;
+
+
+        // green
+        // let DETAILTONEBELOWA = "#83781B";
+        // let DETAILTONEBELOWB = "#95B46A";
+        // let DETAILTONEBELOWC = "#709255";
+        // let DETAILTONEBELOWD = "#3E5622";
+        // let DETAILTONEBELOWE = "#172815";
+
+        // green - strong
+        // let DETAILTONEBELOWA = "#5aa376";
+        // let DETAILTONEBELOWB = "#79a854";
+        // let DETAILTONEBELOWC = "#659B5E";
+        // let DETAILTONEBELOWD = "#556F44";
+        // let DETAILTONEBELOWE = "#3b6644";
+
+        // green - grey
+        // let DETAILTONEBELOWA = "#7e9e8a";
+        // let DETAILTONEBELOWB = "#889e76";
+        // let DETAILTONEBELOWC = "#758a72";
+        // let DETAILTONEBELOWD = "#58795e";
+        // let DETAILTONEBELOWE = "#565e51";
+
+        // blue grey
+        // let DETAILTONEBELOWA = "#71a3bd";
+        // let DETAILTONEBELOWB = "#557f94";
+        // let DETAILTONEBELOWC = "#3c4a52";
+        // let DETAILTONEBELOWD = "#506b79";
+        // let DETAILTONEBELOWE = "#8da1ac";
+
+        // // yellow
+        // let DETAILTONEBELOWA = "#ffdda1";
+        // let DETAILTONEBELOWB = "#ffd151";
+        // let DETAILTONEBELOWC = "#f8c537";
+        // let DETAILTONEBELOWD = "#edb230";
+        // let DETAILTONEBELOWE = "#e77728";
+
+        // dark blue - A
+        // let DETAILTONEBELOWA = "#63788d";
+        // let DETAILTONEBELOWB = "#63788d";
+        // let DETAILTONEBELOWC = "#63788d";
+        // let DETAILTONEBELOWD = "#63788d";
+        // let DETAILTONEBELOWE = "#63788d";
+
+        // blue - light as a bird
+        let DETAILTONEBELOWA = this.belowTone;
+        let DETAILTONEBELOWB = this.belowTone;
+        let DETAILTONEBELOWC = this.belowTone;
+        let DETAILTONEBELOWD = this.belowTone;
+        let DETAILTONEBELOWE = this.belowTone;
+
+
+
+
         // https://rechneronline.de/number-list/
 
         // VAR old school
@@ -228,21 +350,21 @@ class Grid {
             [0]
         );
 
-        // this.noiseBase = new noiseAggregator(60, 20, 20, 6, 8, 8);
-        this.noiseBase = new noiseAggregator(190, 170, 20, 6, 8, 8);
-        this.noiseDetail = new noiseAggregator(135, 56, 90, 8, 30, 10);
+        // this.noiseBase = new noiseAggregator(60, 20, 20, 6, 8, 8, this.shortBoxCount);
+        this.noiseBase = new noiseAggregator(190, 170, 20, 6, 8, 8, this.shortBoxCount);
+        this.noiseDetail = new noiseAggregator(135, 56, 90, 8, 30, 10, this.shortBoxCount);
 
-        this.noiseBaseBelow = new noiseAggregator(70, 16, 15, 20, 6, 6);
-        this.noiseDetailBelow = new noiseAggregator(130, 46, 19, 10, 8, 8);
+        this.noiseBaseBelow = new noiseAggregator(70, 16, 15, 20, 6, 6, this.shortBoxCount);
+        this.noiseDetailBelow = new noiseAggregator(130, 46, 19, 10, 8, 8, this.shortBoxCount);
 
-        // this.noiseColorBase = new noiseAggregator(80, 10, 30, 10, 9, 3);
-        this.noiseColorBase = new noiseAggregator(50, 20, 60, 5, 9, 3);
-        // this.noiseColorDetail = new noiseAggregator(100, 15, 60, 10, 25, 6);
-        this.noiseColorDetail = new noiseAggregator(70, 15, 20, 10, 25, 6);  // biger
-        this.noiseColorDetailBelow = new noiseAggregator(80, 15, 40, 3, 13, 4);
-        this.noiseColorBaseBelow = new noiseAggregator(130, 10, 90, 3, 3, 3);
+        // this.noiseColorBase = new noiseAggregator(80, 10, 30, 10, 9, 3, this.shortBoxCount);
+        this.noiseColorBase = new noiseAggregator(50, 20, 60, 5, 9, 3, this.shortBoxCount);
+        // this.noiseColorDetail = new noiseAggregator(100, 15, 60, 10, 25, 6, this.shortBoxCount);
+        this.noiseColorDetail = new noiseAggregator(70, 15, 20, 10, 25, 6, this.shortBoxCount);  // biger
+        this.noiseColorDetailBelow = new noiseAggregator(80, 15, 40, 3, 13, 4, this.shortBoxCount);
+        this.noiseColorBaseBelow = new noiseAggregator(130, 10, 90, 3, 3, 3, this.shortBoxCount);
 
-        this.noiseCutOut = new noiseAggregator(97, 13, 60, 5, 4, 4);
+        this.noiseCutOut = new noiseAggregator(97, 13, 60, 5, 4, 4, this.shortBoxCount);
 
         this.createBoxes();
         this.normalizeNoises();
@@ -276,9 +398,9 @@ class Grid {
             // this.loopShowNoise();
 
             this.loopBaseRect();
-            this.loopBase();
-            this.loopDetail();
-            this.loopOnTop();
+            // this.loopBase();
+            // this.loopDetail();
+            // this.loopOnTop();
         }
     }
 
@@ -648,7 +770,7 @@ class Grid {
             rectNodeAbove.setAttributeNS(null, 'height', Math.ceil(rescaling_height * this.horizonRatio) - marginPix - offset);
             // rectNodeAbove.setAttributeNS(null, 'fill', BELOWTONE);
             // rectNodeAbove.setAttributeNS(null, 'fill', tinycolor(BELOWTONE).clone().setAlpha(0.1).darken(5).desaturate(5));
-            rectNodeAbove.setAttributeNS(null, 'fill', tinycolor(BELOWTONE).darken(5).desaturate(5));
+            rectNodeAbove.setAttributeNS(null, 'fill', tinycolor(this.belowTone).darken(5).desaturate(5));
             rectNodeAbove.setAttributeNS(null, 'stroke', "none");
 
             groupDrawing.appendChild(rectNodeAbove);
@@ -662,7 +784,7 @@ class Grid {
             // rectNodeBelow.setAttributeNS(null, 'fill', ABOVETONE);
             // rectNodeBelow.setAttributeNS(null, 'fill', tinycolor(ABOVETONE).clone().setAlpha(0.1).darken(5).desaturate(5));
             // rectNodeBelow.setAttributeNS(null, 'fill', tinycolor(ABOVETONE).clone().setAlpha(0.1));
-            rectNodeBelow.setAttributeNS(null, 'fill', tinycolor(ABOVETONE).darken(5).desaturate(5));
+            rectNodeBelow.setAttributeNS(null, 'fill', tinycolor(this.aboveTone).darken(5).desaturate(5));
             rectNodeBelow.setAttributeNS(null, 'stroke', "none");
 
             groupDrawing.appendChild(rectNodeBelow);
@@ -954,7 +1076,7 @@ class Grid {
                         loopCount: map(this.boxes[i].noiseValueDetail, -1, 1, 1, 15),
                         // colorList: this.paletteDetail.palette,
                         // colorList: ["#161616", "#353535", "#727272", "#8d8c8c", "#adadad", "#c7c7c7"],
-                        colorList: [BELOWTONE],
+                        colorList: [this.belowTone],
                     }
                 ).draw();
             } else {
@@ -973,7 +1095,7 @@ class Grid {
                         loopCount: map(this.boxes[i].noiseValueDetail, -1, 1, 1, 15),
                         // colorList: this.paletteDetail.palette,
                         // colorList: ["#161616", "#353535", "#727272", "#8d8c8c", "#adadad", "#c7c7c7"],
-                        colorList: [ABOVETONE],
+                        colorList: [this.aboveTone],
                     }
                 ).draw();
             }

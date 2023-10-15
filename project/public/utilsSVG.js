@@ -202,15 +202,15 @@ function saveSvg(svgEl, name) {
 }
 
 
-function setTagsHTML() {
-    document.title = TITLE;
-    document.querySelector('meta[name="description"]').setAttribute("content", DESCRIPTION);
-    document.querySelector('meta[name="author"]').setAttribute("content", ARTIST);
+function setTagsHTML(data) {
+    document.title = data.title;
+    document.querySelector('meta[name="description"]').setAttribute("content", data.description);
+    document.querySelector('meta[name="author"]').setAttribute("content", data.artist);
 
-    document.querySelector('meta[property="og:title"]').setAttribute("content", TITLE);
+    document.querySelector('meta[property="og:title"]').setAttribute("content", data.title);
     document.querySelector('meta[property="og:type"]').setAttribute("content", "website");
-    document.querySelector('meta[property="og:url"]').setAttribute("content", WEBSITE);
-    document.querySelector('meta[property="og:description"]').setAttribute("content", DESCRIPTION);
+    document.querySelector('meta[property="og:url"]').setAttribute("content", data.website);
+    document.querySelector('meta[property="og:description"]').setAttribute("content", data.description);
 }
 
 

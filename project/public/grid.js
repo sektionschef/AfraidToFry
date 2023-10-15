@@ -24,8 +24,10 @@ class Grid {
         this.longMargin = (LONGSIDE % this.boxSize) / 2;
         // console.log("longMargin: " + this.longMargin);
 
-        this.aboveTone = data.aboveTone;
-        this.belowTone = data.belowTone;
+        // this.aboveTone = data.aboveTone;
+        // this.belowTone = data.belowTone;
+        // this.aboveToneOVERSHOOT = data.aboveToneOVERSHOOT;
+        // this.belowToneOVRESHOOT = data.belowToneOVERSHOOT;
 
         if (LANDSCAPE == false) {
             this.widthBoxCount = this.shortBoxCount;
@@ -41,18 +43,13 @@ class Grid {
 
         this.boxes = [];
 
-        // if (this.overshoot == true) {
-
-        //     // this.aboveTone = "#9eaecc";
-        //     // this.underneathTone = "#30362f";
-        //     this.aboveTone = ABOVETONE;
-        //     this.underneathTone = BELOWTONE;
-        // } else {
-        //     // this.aboveTone = "#cdd7df";
-        //     // this.underneathTone = "#6e8578";
-        //     this.aboveTone = ABOVETONE;
-        //     this.underneathTone = BELOWTONE;
-        // }
+        if (this.overshoot == true) {
+            this.aboveTone = data.aboveToneOVERSHOOT;
+            this.belowTone = data.belowToneOVERSHOOT;
+        } else {
+            this.aboveTone = data.aboveTone;
+            this.belowTone = data.belowTone;
+        }
 
         // #PALETTES
 
@@ -330,7 +327,7 @@ class Grid {
             [0, -1],
         );
         this.paletteDetailBelow = new dynamicPalette(
-            this.underneathTone,
+            this.belowTone,
             // [0],
             // [-10, -5, 0, 5, 10],  // last
             [-1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13, -14, -15, -16, -17, -18, -19, -20, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,],
@@ -398,9 +395,10 @@ class Grid {
             // this.loopShowNoise();
 
             this.loopBaseRect();
-            // this.loopBase();
-            // this.loopDetail();
-            // this.loopOnTop();
+            this.loopBase();
+            this.loopDetail();
+            this.loopOnTop();
+            this.createNoiseLayer();
         }
     }
 
@@ -1099,7 +1097,244 @@ class Grid {
                     }
                 ).draw();
             }
-
         }
     }
+
+    createNoiseLayer() {
+
+        let aboveToneRgb = tinycolor(this.aboveTone).toRgb()
+        let belowToneRgb = tinycolor(this.belowTone).toRgb()
+
+        const svgNode = document.getElementById('svgNode');
+        const defs = document.getElementById('defs');
+
+        // filter object with transparent background
+        var filterObjA = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+        filterObjA.setAttribute("id", "filterObjA");
+        filterObjA.setAttribute("width", "100%");
+        filterObjA.setAttribute("height", "100%");
+        filterObjA.setAttribute("opacity", "1");
+
+        var filterObjB = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+        filterObjB.setAttribute("id", "filterObjB");
+        filterObjB.setAttribute("width", "100%");
+        filterObjB.setAttribute("height", "100%");
+        filterObjB.setAttribute("opacity", "1");
+
+        // filter know how: https://stackoverflow.com/questions/10867282/how-can-i-add-a-filter-to-a-svg-object-in-javascript 
+
+        var filterA = document.createElementNS("http://www.w3.org/2000/svg", "filter");
+        filterA.setAttribute("id", "filterA");
+        filterA.setAttribute("x", "0");
+        filterA.setAttribute("y", "0");
+        // added
+        filterA.setAttribute("filterUnits", "objectBoundingBox");
+        filterA.setAttribute("primitiveUnits", "userSpaceOnUse");
+        filterA.setAttribute("color-interpolation-filters", "linearRGB");
+
+        var filterB = document.createElementNS("http://www.w3.org/2000/svg", "filter");
+        filterB.setAttribute("id", "filterB");
+        filterB.setAttribute("x", "0");
+        filterB.setAttribute("y", "0");
+        // added
+        filterB.setAttribute("filterUnits", "objectBoundingBox");
+        filterB.setAttribute("primitiveUnits", "userSpaceOnUse");
+        filterB.setAttribute("color-interpolation-filters", "linearRGB");
+
+        // var gaussianFilter = document.createElementNS("http://www.w3.org/2000/svg", "feGaussianBlur");
+        // gaussianFilter.setAttribute("in", "SourceGraphic");
+        // gaussianFilter.setAttribute("stdDeviation", "1");
+
+        // https://fffuel.co/nnnoise/
+
+        var turbulenceA = document.createElementNS("http://www.w3.org/2000/svg", "feTurbulence");
+        turbulenceA.setAttribute("id", "turbulenceA");
+        turbulenceA.setAttribute("in", "filterObjA");
+        turbulenceA.setAttribute("type", "fractalNoise");
+        // turbulenceA.setAttribute("baseFrequency", "0.3");  // 0.102
+        turbulenceA.setAttribute("baseFrequency", "0.1");  // 0.102, 0.061
+        turbulenceA.setAttribute("numOctaves", "6");
+        // turbulenceA.setAttribute("seed", "15");
+        turbulenceA.setAttribute("stitchTiles", "stitch");
+        turbulenceA.setAttribute("x", "0%");
+        turbulenceA.setAttribute("y", "0%");
+        turbulenceA.setAttribute("width", "100%");
+        turbulenceA.setAttribute("height", "100%");
+        turbulenceA.setAttribute("result", "turbulenceA");
+
+        var turbulenceB = document.createElementNS("http://www.w3.org/2000/svg", "feTurbulence");
+        turbulenceB.setAttribute("id", "turbulenceB");
+        turbulenceB.setAttribute("in", "filterObjB");
+        turbulenceB.setAttribute("type", "fractalNoise");
+        // turbulenceB.setAttribute("baseFrequency", "0.3");  // 0.102
+        turbulenceB.setAttribute("baseFrequency", "0.1");  // 0.102, 0.061
+        turbulenceB.setAttribute("numOctaves", "6");
+        // turbulenceB.setAttribute("seed", "15");
+        turbulenceB.setAttribute("stitchTiles", "stitch");
+        turbulenceB.setAttribute("x", "0%");
+        turbulenceB.setAttribute("y", "0%");
+        turbulenceB.setAttribute("width", "100%");
+        turbulenceB.setAttribute("height", "100%");
+        turbulenceB.setAttribute("result", "turbulenceB");
+
+        var specularLightA = document.createElementNS("http://www.w3.org/2000/svg", "feSpecularLighting");
+        specularLightA.setAttribute("id", "specularLightA");
+        specularLightA.setAttribute("surfaceScale", "10"); // 1- 40, 17
+        specularLightA.setAttribute("specularConstant", "0.75");
+        specularLightA.setAttribute("specularExponent", "20");
+        specularLightA.setAttribute("lighting-color", "#1900ff");
+        // specularLightA.setAttribute("lighting-color", ABOVETONE);
+        specularLightA.setAttribute("x", "0%");
+        specularLightA.setAttribute("y", "0%");
+        specularLightA.setAttribute("width", "100%");
+        // specularLightA.setAttribute("height", "50%");
+        specularLightA.setAttribute("height", `${this.horizonRatio * 100}%`);
+        specularLightA.setAttribute("in", "turbulenceA");
+        specularLightA.setAttribute("result", "specularLightA");
+
+        var specularLightB = document.createElementNS("http://www.w3.org/2000/svg", "feSpecularLighting");
+        specularLightB.setAttribute("id", "specularLightB");
+        specularLightB.setAttribute("surfaceScale", "10"); // 1- 40, 17
+        specularLightB.setAttribute("specularConstant", "0.75");
+        specularLightB.setAttribute("specularExponent", "20");
+        specularLightB.setAttribute("lighting-color", "#1900ff");
+        // specularLightB.setAttribute("lighting-color", BELOWTONE);
+        specularLightB.setAttribute("x", "0%");
+        // specularLightB.setAttribute("y", "50%");
+        specularLightB.setAttribute("y", `${this.horizonRatio * 100}%`);
+        specularLightB.setAttribute("width", "100%");
+        specularLightB.setAttribute("height", "100%");
+        specularLightB.setAttribute("in", "turbulenceB");
+        specularLightB.setAttribute("result", "specularLightB");
+
+        var distantLightA = document.createElementNS("http://www.w3.org/2000/svg", "feDistantLight");
+        distantLightA.setAttribute("id", "distantLightA");
+        distantLightA.setAttribute("azimuth", "3");
+        distantLightA.setAttribute("elevation", "100");
+        specularLightA.appendChild(distantLightA);
+
+        var distantLightB = document.createElementNS("http://www.w3.org/2000/svg", "feDistantLight");
+        distantLightB.setAttribute("id", "distantLightB");
+        distantLightB.setAttribute("azimuth", "3");
+        distantLightB.setAttribute("elevation", "100");
+        specularLightB.appendChild(distantLightB);
+        // specularLightB.appendChild(distantLight);
+
+
+        // desaturate
+        var colorMatrixA = document.createElementNS("http://www.w3.org/2000/svg", "feColorMatrix");
+        colorMatrixA.setAttribute("type", "matrix");
+        colorMatrixA.setAttribute("values", "\
+           200 0 0 0 0 \
+           200 0 0 0 0 \
+           200 0 0 0 0 \
+           0 0 0 1 0");
+        colorMatrixA.setAttribute("x", "0%");
+        colorMatrixA.setAttribute("y", "0%");
+        colorMatrixA.setAttribute("width", "100%");
+        colorMatrixA.setAttribute("height", "100%");
+        // colorMatrixA.setAttribute("in", "specularLightB");
+        colorMatrixA.setAttribute("in", "sourceGraphic");
+        colorMatrixA.setAttribute("result", "colorMatrixA");
+
+        // recolor
+        var colorMatrixHueA = document.createElementNS("http://www.w3.org/2000/svg", "feColorMatrix");
+        colorMatrixHueA.setAttribute("in", "colorMatrixA");
+        colorMatrixHueA.setAttribute("type", "matrix");
+        colorMatrixHueA.setAttribute("values", `\
+           ${aboveToneRgb.r / 255} 0 0 0 0 \
+           0 ${aboveToneRgb.g / 255} 0 0 0 \
+           0 0 ${aboveToneRgb.b / 255} 0 0 \
+           0 0 0 1 0`); // red / 255 = 0.06
+        colorMatrixHueA.setAttribute("result", "colorMatrixHueA");
+
+
+        // desaturate
+        var colorMatrixB = document.createElementNS("http://www.w3.org/2000/svg", "feColorMatrix");
+        colorMatrixB.setAttribute("type", "matrix");
+        colorMatrixB.setAttribute("values", "\
+        200 0 0 0 0 \
+        200 0 0 0 0 \
+        200 0 0 0 0 \
+        0 0 0 1 0");
+        colorMatrixB.setAttribute("x", "0%");
+        colorMatrixB.setAttribute("y", "0%");
+        colorMatrixB.setAttribute("width", "100%");
+        colorMatrixB.setAttribute("height", "100%");
+        // colorMatrixB.setAttribute("in", "specularLightB");
+        colorMatrixB.setAttribute("in", "sourceGraphic");
+        colorMatrixB.setAttribute("result", "colormatrixB");
+
+        // recolor
+        var colorMatrixHueB = document.createElementNS("http://www.w3.org/2000/svg", "feColorMatrix");
+        colorMatrixHueB.setAttribute("in", "colormatrixB");
+        colorMatrixHueB.setAttribute("type", "matrix");
+        colorMatrixHueB.setAttribute("values", `\
+        ${belowToneRgb.r / 255} 0 0 0 0 \
+        0 ${belowToneRgb.g / 255} 0 0 0 \
+        0 0 ${belowToneRgb.b / 255} 0 0 \
+        0 0 0 1 0`); // red / 255 = 0.06
+        colorMatrixHueB.setAttribute("result", "colorMatrixHueB");
+
+
+
+        // var blender = document.createElementNS("http://www.w3.org/2000/svg", "feBlend");
+        // blender.setAttribute("in", "SourceGraphic");
+        // blender.setAttribute("in2", "turbulence");
+        // blender.setAttribute("mode", "overlay");
+        // blender.setAttribute("result", "BLEND");
+
+
+
+        // filter.appendChild(gaussianFilter);
+        // filter.appendChild(blender);
+
+        filterA.appendChild(turbulenceA);
+        filterA.appendChild(specularLightA);
+        filterA.appendChild(colorMatrixA);  // desaturate
+        filterA.appendChild(colorMatrixHueA);
+
+        filterB.appendChild(turbulenceB);
+        filterB.appendChild(specularLightB);
+        filterB.appendChild(colorMatrixB);  // desaturate
+        filterB.appendChild(colorMatrixHueB);
+
+        defs.appendChild(filterA);
+        defs.appendChild(filterB);
+
+        // var feMergeNode0 = document.createElementNS("http://www.w3.org/2000/svg", "feMergeNode");
+        // feMergeNode0.setAttribute("in", "SourceGraphic");
+        // var feMergeNode1 = document.createElementNS("http://www.w3.org/2000/svg", "feMergeNode");
+        // feMergeNode1.setAttribute("in", "turbulenceA");
+        var feMergeNode2 = document.createElementNS("http://www.w3.org/2000/svg", "feMergeNode");
+        feMergeNode2.setAttribute("in", "specularLightA");
+        var feMergeNode3 = document.createElementNS("http://www.w3.org/2000/svg", "feMergeNode");
+        feMergeNode3.setAttribute("in", "specularLightB");
+
+        // var feMerge = document.createElementNS("http://www.w3.org/2000/svg", "feMerge");
+        // feMerge.appendChild(feMergeNode0);
+        // feMerge.appendChild(feMergeNode1);
+        // feMerge.appendChild(feMergeNode2);
+        // feMerge.appendChild(feMergeNode3);
+        // filterA.appendChild(feMerge);
+
+        filterObjA.setAttribute("filter", "url(#filterA)");
+        filterObjA.setAttribute("mask", "url(#maskNoise)");
+        filterObjB.setAttribute("filter", "url(#filterB)");
+        filterObjB.setAttribute("mask", "url(#maskNoise)");
+
+        // const drawing = document.getElementById('drawing');
+        // svgNode.appendChild(drawing);
+
+        // Test - add drawing to show
+        var showDrawing = document.createElementNS("http://www.w3.org/2000/svg", "use");
+        showDrawing.setAttribute("id", "showDrawing");
+        showDrawing.setAttribute("href", "#drawing");
+        svgNode.appendChild(showDrawing);
+
+        svgNode.appendChild(filterObjA);
+        svgNode.appendChild(filterObjB);
+    }
+
+
 }

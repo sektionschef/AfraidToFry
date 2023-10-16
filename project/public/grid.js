@@ -1155,6 +1155,7 @@ class Grid {
         turbulenceA.setAttribute("baseFrequency", "0.1");  // 0.102, 0.061
         turbulenceA.setAttribute("numOctaves", "6");
         // turbulenceA.setAttribute("seed", "15");
+        turbulenceA.setAttribute("seed", `${Math.round(fxrand() * 100)}`);
         turbulenceA.setAttribute("stitchTiles", "stitch");
         turbulenceA.setAttribute("x", "0%");
         turbulenceA.setAttribute("y", "0%");
@@ -1170,6 +1171,7 @@ class Grid {
         turbulenceB.setAttribute("baseFrequency", "0.1");  // 0.102, 0.061
         turbulenceB.setAttribute("numOctaves", "6");
         // turbulenceB.setAttribute("seed", "15");
+        turbulenceB.setAttribute("seed", `${Math.round(fxrand() * 100)}`);
         turbulenceB.setAttribute("stitchTiles", "stitch");
         turbulenceB.setAttribute("x", "0%");
         turbulenceB.setAttribute("y", "0%");
@@ -1183,6 +1185,7 @@ class Grid {
         specularLightA.setAttribute("specularConstant", "0.75");
         specularLightA.setAttribute("specularExponent", "20");
         specularLightA.setAttribute("lighting-color", "#1900ff");
+        // specularLightA.setAttribute("lighting-color", "#1eff00");
         // specularLightA.setAttribute("lighting-color", ABOVETONE);
         specularLightA.setAttribute("x", "0%");
         specularLightA.setAttribute("y", "0%");
@@ -1198,6 +1201,7 @@ class Grid {
         specularLightB.setAttribute("specularConstant", "0.75");
         specularLightB.setAttribute("specularExponent", "20");
         specularLightB.setAttribute("lighting-color", "#1900ff");
+        // specularLightB.setAttribute("lighting-color", "#1eff00");
         // specularLightB.setAttribute("lighting-color", BELOWTONE);
         specularLightB.setAttribute("x", "0%");
         // specularLightB.setAttribute("y", "50%");
@@ -1306,10 +1310,10 @@ class Grid {
         // feMergeNode0.setAttribute("in", "SourceGraphic");
         // var feMergeNode1 = document.createElementNS("http://www.w3.org/2000/svg", "feMergeNode");
         // feMergeNode1.setAttribute("in", "turbulenceA");
-        var feMergeNode2 = document.createElementNS("http://www.w3.org/2000/svg", "feMergeNode");
-        feMergeNode2.setAttribute("in", "specularLightA");
-        var feMergeNode3 = document.createElementNS("http://www.w3.org/2000/svg", "feMergeNode");
-        feMergeNode3.setAttribute("in", "specularLightB");
+        // var feMergeNode2 = document.createElementNS("http://www.w3.org/2000/svg", "feMergeNode");
+        // feMergeNode2.setAttribute("in", "specularLightA");
+        // var feMergeNode3 = document.createElementNS("http://www.w3.org/2000/svg", "feMergeNode");
+        // feMergeNode3.setAttribute("in", "specularLightB");
 
         // var feMerge = document.createElementNS("http://www.w3.org/2000/svg", "feMerge");
         // feMerge.appendChild(feMergeNode0);
@@ -1326,7 +1330,6 @@ class Grid {
         // const drawing = document.getElementById('drawing');
         // svgNode.appendChild(drawing);
 
-        // Test - add drawing to show
         var showDrawing = document.createElementNS("http://www.w3.org/2000/svg", "use");
         showDrawing.setAttribute("id", "showDrawing");
         showDrawing.setAttribute("href", "#drawing");

@@ -136,10 +136,10 @@ var OVERSHOOTSTATS = {
   "Austria": {
     overshootDay: "Apr 6",
     overshootTime: "06:19",
-    timeSwitchHour: 21,
-    timeSwitchMinute: 17,
-    // timeSwitchHour: 6,
-    // timeSwitchMinute: 19,
+    // timeSwitchHour: 20,
+    // timeSwitchMinute: 54,
+    timeSwitchHour: 6,
+    timeSwitchMinute: 19,
   },
   "Iraq": {
     overshootDay: "Nov 25",
@@ -246,9 +246,7 @@ var HORIZONRATIO = {
   "middle": 3.5 / 7,
   "down": 4 / 7
 }
-// var HORIZONRATIO = 3 / 7;
-// var HORIZONRATIO = 3.5 / 7;
-// var HORIZONRATIO = 4 / 7;
+
 var HORIZONRATIO = HORIZONRATIO[$fx.getParam("horizon_id")];
 
 let BACKGROUNDTONE = "#ffffff";
@@ -406,10 +404,25 @@ function main() {
   createBackground();
   createDrawingGroup();
 
-  timeChecker();
-
   createFilterBlack();
   createMaskBlack();
+
+  timeChecker();
+
+  // sau
+  // var dummy = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+  // dummy.setAttribute("x", "0%");
+  // dummy.setAttribute("y", "0%");
+  // dummy.setAttribute("width", "100%");
+  // dummy.setAttribute("height", "100%");
+  // dummy.setAttribute("filter", "url(#maskNoise)");
+  // svgNode.appendChild(dummy);
+
+  // var oida = document.createElementNS("http://www.w3.org/2000/svg", "use");
+  // oida.setAttribute("id", "oida");
+  // oida.setAttribute("href", "#maskNoise");
+  // svgNode.appendChild(oida);
+
 }
 
 main()
@@ -503,16 +516,16 @@ setInterval(timeChecker, 1000 * 60 * 1); // every minute check
 // setInterval(timeChecker, 1000); // every second
 
 
-// turn very color in white and transparency in black
+// turn every color in white and transparency in black
 function createFilterBlack() {
   var filterBlack = document.createElementNS("http://www.w3.org/2000/svg", "filter");
   filterBlack.setAttribute("id", "filterBlack");
   filterBlack.setAttribute("x", "0");
   filterBlack.setAttribute("y", "0");
   // added
-  // filterBlack.setAttribute("filterUnits", "objectBoundingBox");
-  // filterBlack.setAttribute("primitiveUnits", "userSpaceOnUse");
-  // filterBlack.setAttribute("color-interpolation-filters", "linearRGB");
+  filterBlack.setAttribute("filterUnits", "objectBoundingBox");
+  filterBlack.setAttribute("primitiveUnits", "userSpaceOnUse");
+  filterBlack.setAttribute("color-interpolation-filters", "linearRGB");
 
   var colorMatrixBlack = document.createElementNS("http://www.w3.org/2000/svg", "feColorMatrix");
   colorMatrixBlack.setAttribute("type", "matrix");

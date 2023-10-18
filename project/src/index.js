@@ -9,6 +9,9 @@ console.info(`fxhash: %c${fxhash}`, 'font-weight: bold');
 const sp = new URLSearchParams(window.location.search)
 // console.log(sp);
 
+var SHORTSIDE;
+var LONGSIDE;
+var LANDSCAPE;
 
 var TITLE = "afraid to fry";
 var ARTIST = "Stefan Schwaha, @sektionschef";
@@ -181,10 +184,14 @@ var OVERSHOOTSTATS = {
 
 var PALETTE = {
   "Doris": {
+    // "aboveTone": "#86b1d4",
+    // "belowTone": "#91816b",
+    // "aboveToneOVERSHOOT": "#201E1F",
+    // "belowToneOVERSHOOT": "#FF4000",
     "aboveTone": "#86b1d4",
     "belowTone": "#91816b",
-    "aboveToneOVERSHOOT": "#201E1F",
-    "belowToneOVERSHOOT": "#FF4000",
+    "aboveToneOVERSHOOT": "#86b1d4",
+    "belowToneOVERSHOOT": "#91816b",
   },
   "Boris": {
     "aboveTone": "#201E1F",
@@ -461,13 +468,11 @@ function fireTrigger(drawing) {
   console.log("trigger initiated");
 
   let grid = new Grid({
-    drawing: drawing,
     horizonRatio: HORIZONRATIO,
-    // shortBoxCount: 40,
-    // shortBoxCount: 80,
     shortBoxCount: RESOLUTIONBOXCOUNT,
-    // shortBoxCount: 100,
-    // shortBoxCount: 160,
+    longSide: LONGSIDE,
+    shortSide: SHORTSIDE,
+    landscape: LANDSCAPE,
     overshoot: OVERSHOOT,
     aboveTone: ABOVETONE,
     belowTone: BELOWTONE,

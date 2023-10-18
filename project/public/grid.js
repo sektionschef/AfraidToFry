@@ -3,33 +3,27 @@ class Grid {
         this.horizonRatio = data.horizonRatio;
 
         this.overshoot = data.overshoot;  // time limit reached
-        this.finished = false;  // flag for completely drawn
 
         this.DEBUG = false;
         this.shortBoxCount = data.shortBoxCount; // boxes on the shorter side
-        // this.marginBoxCount = data.marginBoxCount;
+        this.longSide = data.longSide;
+        this.shortSide = data.shortSide;
+        this.landscape = data.landscape;
         this.marginBoxCount = Math.round(this.shortBoxCount * 0.1);
-        this.drawing = data.drawing;
-
         this.horizonRow = Math.round(this.shortBoxCount * this.horizonRatio);
-        this.boxSize = SHORTSIDE / this.shortBoxCount;
-        this.longBoxCount = Math.floor(LONGSIDE / this.boxSize);
+        this.boxSize = this.shortSide / this.shortBoxCount;
+        this.longBoxCount = Math.floor(this.longSide / this.boxSize);
 
         // there should be no margin
-        this.shortMargin = SHORTSIDE % this.boxSize;
+        this.shortMargin = this.shortSide % this.boxSize;
         // this.shortMargin = 1
         if (this.shortMargin != 0) {
             throw new Error('wtf, there is a margin!');
         }
-        this.longMargin = (LONGSIDE % this.boxSize) / 2;
+        this.longMargin = (this.longSide % this.boxSize) / 2;
         // console.log("longMargin: " + this.longMargin);
 
-        // this.aboveTone = data.aboveTone;
-        // this.belowTone = data.belowTone;
-        // this.aboveToneOVERSHOOT = data.aboveToneOVERSHOOT;
-        // this.belowToneOVRESHOOT = data.belowToneOVERSHOOT;
-
-        if (LANDSCAPE == false) {
+        if (this.landscape == false) {
             this.widthBoxCount = this.shortBoxCount;
             this.heightBoxCount = this.longBoxCount;
             this.widthMargin = this.shortMargin;
@@ -51,125 +45,8 @@ class Grid {
             this.belowTone = data.belowTone;
         }
 
-        // #PALETTES
-
-
-        // TRANSPARENT RECTS
-        // let BASETONE = "#667b96";
-        let BASETONE = tinycolor(this.aboveTone).spin(-1).desaturate(1).darken(14).toHexString();
-        // let BASETONEBELOW = "#948269"
-        let BASETONEBELOW = tinycolor(this.belowTone).spin(-1).desaturate(1).darken(14).toHexString();
-
-        // let RECTBASEABOVE = "#849bbd1a";
-        let RECTBASEABOVE = tinycolor(this.belowTone).clone().spin(1).saturate(10).darken(0).setAlpha(0.102);
-        // let RECTBASEBELOW = "#bea8891a";
-        let RECTBASEBELOW = tinycolor(this.aboveTone).clone().spin(1).saturate(10).darken(0).setAlpha(0.102);
-
-
-        // let ABOVETONE = "#92a8b4" // blue
-        // let BELOWTONE = "#8b967d"; // green
-
-
-        // let ABOVETONE = "#4b6786";  // overshoot - cool color: d5560c
-        // let BELOWTONE = "#7e614f";  // overshoot 
-        // let ABOVETONE = "#8dacc9";  // full blue
-
-
-
-        // TRUE BASE TONE
-        let BASETONEA = BASETONE;
-        let BASETONEB = BASETONE;
-        let BASETONEC = BASETONE;
-        let BASETONED = BASETONE;
-        let BASETONEE = BASETONE;
-
-
-        // YELLOW
-        // let DETAILTONEA = "#ffdda1";
-        // let DETAILTONEB = "#ffd151";
-        // let DETAILTONEC = "#f8c537";
-        // let DETAILTONED = "#edb230";
-        // let DETAILTONEE = "#e77728";
-
-        // let ABOVETONEA = tinycolor(DETAILTONEA).darken(15);
-        // let ABOVETONEB = tinycolor(DETAILTONEB).darken(15);
-        // let ABOVETONEC = tinycolor(DETAILTONEC).darken(15);
-        // let ABOVETONED = tinycolor(DETAILTONED).darken(15);
-        // let ABOVETONEE = tinycolor(DETAILTONEE).darken(15);
-
-        // blue
-        // let DETAILTONEA = "#0f3e50";
-        // let DETAILTONEB = "#1e4e5f";
-        // let DETAILTONEC = "#437080";
-        // let DETAILTONED = "#4f8597";
-        // let DETAILTONEE = "#78a3b1";
-
-        // blue grey
-        // let DETAILTONEA = "#71a3bd";
-        // let DETAILTONEB = "#557f94";
-        // let DETAILTONEC = "#3c4a52";
-        // let DETAILTONED = "#506b79";
-        // let DETAILTONEE = "#8da1ac";
-
-        // dark blue - A
-        let DETAILTONEA = this.aboveTone;
-        let DETAILTONEB = this.aboveTone;
-        let DETAILTONEC = this.aboveTone;
-        let DETAILTONED = this.aboveTone;
-        let DETAILTONEE = this.aboveTone;
-
-
-        // green
-        // let DETAILTONEBELOWA = "#83781B";
-        // let DETAILTONEBELOWB = "#95B46A";
-        // let DETAILTONEBELOWC = "#709255";
-        // let DETAILTONEBELOWD = "#3E5622";
-        // let DETAILTONEBELOWE = "#172815";
-
-        // green - strong
-        // let DETAILTONEBELOWA = "#5aa376";
-        // let DETAILTONEBELOWB = "#79a854";
-        // let DETAILTONEBELOWC = "#659B5E";
-        // let DETAILTONEBELOWD = "#556F44";
-        // let DETAILTONEBELOWE = "#3b6644";
-
-        // green - grey
-        // let DETAILTONEBELOWA = "#7e9e8a";
-        // let DETAILTONEBELOWB = "#889e76";
-        // let DETAILTONEBELOWC = "#758a72";
-        // let DETAILTONEBELOWD = "#58795e";
-        // let DETAILTONEBELOWE = "#565e51";
-
-        // blue grey
-        // let DETAILTONEBELOWA = "#71a3bd";
-        // let DETAILTONEBELOWB = "#557f94";
-        // let DETAILTONEBELOWC = "#3c4a52";
-        // let DETAILTONEBELOWD = "#506b79";
-        // let DETAILTONEBELOWE = "#8da1ac";
-
-        // // yellow
-        // let DETAILTONEBELOWA = "#ffdda1";
-        // let DETAILTONEBELOWB = "#ffd151";
-        // let DETAILTONEBELOWC = "#f8c537";
-        // let DETAILTONEBELOWD = "#edb230";
-        // let DETAILTONEBELOWE = "#e77728";
-
-        // dark blue - A
-        // let DETAILTONEBELOWA = "#63788d";
-        // let DETAILTONEBELOWB = "#63788d";
-        // let DETAILTONEBELOWC = "#63788d";
-        // let DETAILTONEBELOWD = "#63788d";
-        // let DETAILTONEBELOWE = "#63788d";
-
-        // blue - light as a bird
-        let DETAILTONEBELOWA = this.belowTone;
-        let DETAILTONEBELOWB = this.belowTone;
-        let DETAILTONEBELOWC = this.belowTone;
-        let DETAILTONEBELOWD = this.belowTone;
-        let DETAILTONEBELOWE = this.belowTone;
-
-
-
+        this.baseTone = tinycolor(this.aboveTone).spin(-1).desaturate(1).darken(14).toHexString();
+        this.baseToneBelow = tinycolor(this.belowTone).spin(-1).desaturate(1).darken(14).toHexString();
 
         // https://rechneronline.de/number-list/
 
@@ -187,34 +64,34 @@ class Grid {
         let profileLight = [-6, -3, 0, 3, 6];
 
         this.paletteBaseA = new dynamicPalette(
-            BASETONEA,
+            this.baseTone,
             profileHue,
             profileSat,
             profileLight
         );
 
         this.paletteBaseB = new dynamicPalette(
-            BASETONEB,
+            this.baseTone,
             profileHue,
             profileSat,
             profileLight
         );
 
         this.paletteBaseC = new dynamicPalette(
-            BASETONEC,
+            this.baseTone,
             profileHue,
             profileSat,
             profileLight
         );
 
         this.paletteBaseD = new dynamicPalette(
-            BASETONED,
+            this.baseTone,
             profileHue,
             profileSat,
             profileLight
         );
         this.paletteBaseE = new dynamicPalette(
-            BASETONEE,
+            this.baseTone,
             profileHue,
             profileSat,
             profileLight
@@ -222,43 +99,42 @@ class Grid {
 
 
         this.paletteBaseBelow = new dynamicPalette(
-            BASETONEBELOW,
+            this.baseToneBelow,
             profileHue,
             profileSat,
             profileLight
         );
 
 
-
         this.paletteDetailAboveA = new dynamicPalette(
-            DETAILTONEA,
+            this.aboveTone,
             profileHue,
             profileSat,
             profileLight
         );
 
         this.paletteDetailAboveB = new dynamicPalette(
-            DETAILTONEB,
+            this.aboveTone,
             profileHue,
             profileSat,
             profileLight
         );
 
         this.paletteDetailAboveC = new dynamicPalette(
-            DETAILTONEC,
+            this.aboveTone,
             profileHue,
             profileSat,
             profileLight
         );
 
         this.paletteDetailAboveD = new dynamicPalette(
-            DETAILTONED,
+            this.aboveTone,
             profileHue,
             profileSat,
             profileLight
         );
         this.paletteDetailAboveE = new dynamicPalette(
-            DETAILTONEE,
+            this.aboveTone,
             profileHue,
             profileSat,
             profileLight
@@ -266,88 +142,40 @@ class Grid {
 
 
         this.paletteDetailBelowA = new dynamicPalette(
-            DETAILTONEBELOWA,
+            this.belowTone,
             profileHue,
             profileSat,
             profileLight
         );
 
         this.paletteDetailBelowB = new dynamicPalette(
-            DETAILTONEBELOWB,
+            this.belowTone,
             profileHue,
             profileSat,
             profileLight
         );
 
         this.paletteDetailBelowC = new dynamicPalette(
-            DETAILTONEBELOWC,
+            this.belowTone,
             profileHue,
             profileSat,
             profileLight
         );
 
         this.paletteDetailBelowD = new dynamicPalette(
-            DETAILTONEBELOWD,
+            this.belowTone,
             profileHue,
             profileSat,
             profileLight
         );
         this.paletteDetailBelowE = new dynamicPalette(
-            DETAILTONEBELOWE,
+            this.belowTone,
             profileHue,
             profileSat,
             profileLight
         );
 
 
-        this.paletteDetail = new dynamicPalette(
-            this.aboveTone,
-            // "#8898a8",
-            // [30, 0, 0, 0, 60],  // analogous
-            // [0, 0, 0, 0, 0, 0, 180],  // analogous
-            // [0, 0, 0, 0, 30],
-            // [-10, -5, -5, 0, 0, 0, 5, 5, 10],
-            // [-10, -5, 0, 5, 10],  // last
-            [-1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13, -14, -15, -16, -17, -18, -19, -20, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,],
-            // [-10, -5, -5, 0, 0, 0, 5, 5, 10],  // only // standards
-            // [-20, -15, -5, 0, 5, 15, 20],
-            // [-4, -2, 0, 2, 4],
-            // [-40, -35, -25, -20, -15, -10, -5, 0, 5, 10, 15, 20, 25, 35, 40],
-            // [-40, -35, -25, -15, -5, 0, 5, 15, 25, 35, 40],
-            // [-45, -35, -25, -15, -10, -5, 0, 5, 10, 15, 25, 35, 45],  // standards
-            // [0, 0, 0, 5, 5, 10],
-            // [-20, -15, -10, -5, 0, 5, 10, 15, 20, 30],
-            [-30, -25, -20, -15, -10, -5, 0, 5, 10, 15, 20, 30, 35],
-            // [-1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13, -14, -15, -16, -17, -18, -19, -20, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,],
-            // [-1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13, -14, -15, -16, -17, -18, -19, -20, -21, -22, -23, -24, -25, -26, -27, -28, -29, -30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,],
-            // [0],
-            // [-25, -15, -10, -5, 0, 5, 10, 15, 25],
-            // [-14, -7, 0, 7, 14],
-            // [-6, -3, 0, 3],  // standards
-            [0, -1],
-        );
-        this.paletteDetailBelow = new dynamicPalette(
-            this.belowTone,
-            // [0],
-            // [-10, -5, 0, 5, 10],  // last
-            [-1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13, -14, -15, -16, -17, -18, -19, -20, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,],
-            // [-20, -15, -5, 0, 0, 0, 5, 15, 20],
-            // [-35, -30, -20, -10, -5, 0, 5, 10, 20, 30, 35],
-            // [-20, -10, -5, 0, 5, 10, 20],
-            [-30, -25, -20, -15, -10, -5, 0, 5, 10, 15, 20, 30, 35],
-            // [-6, -3, 0, 3],
-            [-6, -3, 0, 3],
-        )
-        this.paletteFruity = new dynamicPalette(
-            "#b152a1",
-            [-3, 0, 3, 5, 7],
-            // [-35, -30, -25, -20, -15, -10],
-            // [-35, -30, -25, -20, -15, -10],
-            [-25, -20, -15, -10, -5, 0, 5, 10, 15, 20, 25],
-            [0]
-        );
-
-        // this.noiseBase = new noiseAggregator(60, 20, 20, 6, 8, 8, this.shortBoxCount);
         this.noiseBase = new noiseAggregator(190, 170, 20, 6, 8, 8, this.shortBoxCount);
         this.noiseDetail = new noiseAggregator(135, 56, 90, 8, 30, 10, this.shortBoxCount);
 
@@ -366,23 +194,6 @@ class Grid {
         this.createBoxes();
         this.normalizeNoises();
 
-        // PALETTE SWAP
-        // for (var i = 0; i < this.paletteDetail.palette.length; i++) {
-        //     if (i == 33) {
-        //         for (var v = 0; v < 3; v++) {
-
-        //             // var swapB = this.paletteDetail.palette[i + v];
-        //             // var swapA = this.paletteDetailBelow.palette[i + v];
-        //             // this.paletteDetail.palette[i + v] = swapA;
-        //             // this.paletteDetailBelow.palette[i + v] = swapB;
-
-        //             this.paletteDetail.palette[i + v] = this.paletteBase.palette[i + v];
-        //             this.paletteDetailBelow.palette[i + v] = this.paletteTwo.palette[i + v];
-        //         }
-
-        //     }
-        // }
-
 
         if (this.DEBUG) {
             // this.showDebug();
@@ -397,7 +208,7 @@ class Grid {
             this.loopBaseRect();
             this.loopBase();
             this.loopDetail();
-            this.loopOnTop();
+            // this.loopOnTop();
             this.createNoiseLayer();
         }
     }
@@ -426,9 +237,6 @@ class Grid {
         this.noiseColorBaseBelowMax = -10;
         this.noiseCutOutMin = 10;
         this.noiseCutOutMax = -10;
-
-        // console.log(this.heightBoxCount);
-        // console.log(this.widthBoxCount);
 
         // h = long, w = short
 
@@ -787,8 +595,6 @@ class Grid {
 
             groupDrawing.appendChild(rectNodeBelow);
         }
-
-
     }
 
 
@@ -963,6 +769,11 @@ class Grid {
                     colorListC: this.paletteDetailAboveB.palette,
                     colorListD: this.paletteDetailAboveC.palette,
                     colorListE: this.paletteDetailAboveA.palette,
+                    // colorListA: this.paletteDetailAboveA.palette,
+                    // colorListB: this.paletteDetailAboveA.palette,
+                    // colorListC: this.paletteDetailAboveA.palette,
+                    // colorListD: this.paletteDetailAboveA.palette,
+                    // colorListE: this.paletteDetailAboveA.palette,
                     noiseAngle: true,
                     group: "",
                     horizonRow: this.horizonRow,
@@ -972,7 +783,7 @@ class Grid {
                     noiseValueCutOut: this.boxes[i].noiseValueCutOut,
                     // lineVertexLength: 160 / this.shortBoxCount * 8, // map(this.boxes[i].noiseValueDetail, -1, 1, 2, 10), // 15,
                     lineNoiseMapDynamic: true,
-                    lineVertexLengthMin: 80 / this.shortBoxCount * 10,
+                    lineVertexLengthMin: 80 / this.shortBoxCount * 5,
                     lineVertexLengthMax: 80 / this.shortBoxCount * 15,
                     lineVertexLengthMean: 1,
                     lineVertexLengthStd: 80 / this.shortBoxCount * 0.05, // map(this.boxes[i].noiseValueDetail, -1, 1, 0.15, 0.05), //0.05,
@@ -980,13 +791,13 @@ class Grid {
                     lineStrokeWeightyMin: 160 / this.shortBoxCount * 0.1,
                     lineStrokeWeightyMax: 160 / this.shortBoxCount * 0.2,
                     lineLoopCountMin: 0,
-                    lineLoopCountMax: 20,
+                    lineLoopCountMax: 10,  // 20
                     lineAngleMean: Math.PI / 1,
-                    lineAngleSTD: Math.PI / 56,
-                    lineNoiseAngleDist: 0.3, // 0.3
+                    lineAngleSTD: Math.PI / 30,
+                    lineNoiseAngleDist: 0.2, // 0.3
                     lineRevert: true,
                     triangle: true,
-                    triangleStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueDetail, -1, 1, 0.3, 0.1), // 0.2
+                    triangleStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueDetail, -1, 1, 0.2, 0.1), // 0.2
                     triangleLoop: map(this.boxes[i].noiseValueDetail, -1, 1, 6, 0), // 40,
                     triangleWidthy: 160 / this.shortBoxCount * 1.5,
                     trianglePosDistStd: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueDetail, -1, 1, 3, 2), // 2
@@ -994,7 +805,7 @@ class Grid {
                     rectLoop: map(this.boxes[i].noiseValueDetail, -1, 1, 0, 6), // 40,
                     rectWidth: 160 / this.shortBoxCount * 5, // map(this.boxes[i].noiseValueDetail, 0, 1, 6, 9),// 6,
                     rectHeight: 160 / this.shortBoxCount * 1.5, // map(this.boxes[i].noiseValueDetail, 0, 1, 2, 3),// 2,
-                    rectStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueDetail, -1, 1, 0.1, 0.3), // 0.3
+                    rectStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueDetail, -1, 1, 0.1, 0.2), // 0.3
                     rectPosDistStd: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueDetail, -1, 1, 2, 3), // 2
                 }).draw();
             } else {
@@ -1245,10 +1056,15 @@ class Grid {
         var colorMatrixHueA = document.createElementNS("http://www.w3.org/2000/svg", "feColorMatrix");
         colorMatrixHueA.setAttribute("in", "colorMatrixA");
         colorMatrixHueA.setAttribute("type", "matrix");
+        // colorMatrixHueA.setAttribute("values", `\
+        //    ${aboveToneRgb.r / 255} 0 0 0 0 \
+        //    0 ${aboveToneRgb.g / 255} 0 0 0 \
+        //    0 0 ${aboveToneRgb.b / 255} 0 0 \
+        //    0 0 0 1 0`); // red / 255 = 0.06
         colorMatrixHueA.setAttribute("values", `\
-           ${aboveToneRgb.r / 255} 0 0 0 0 \
-           0 ${aboveToneRgb.g / 255} 0 0 0 \
-           0 0 ${aboveToneRgb.b / 255} 0 0 \
+           0.3 0 0 0 0 \
+           0 0.3 0 0 0 \
+           0 0 0.3 0 0 \
            0 0 0 1 0`); // red / 255 = 0.06
         colorMatrixHueA.setAttribute("result", "colorMatrixHueA");
 
@@ -1273,10 +1089,15 @@ class Grid {
         var colorMatrixHueB = document.createElementNS("http://www.w3.org/2000/svg", "feColorMatrix");
         colorMatrixHueB.setAttribute("in", "colormatrixB");
         colorMatrixHueB.setAttribute("type", "matrix");
+        // colorMatrixHueB.setAttribute("values", `\
+        // ${belowToneRgb.r / 255} 0 0 0 0 \
+        // 0 ${belowToneRgb.g / 255} 0 0 0 \
+        // 0 0 ${belowToneRgb.b / 255} 0 0 \
+        // 0 0 0 1 0`); // red / 255 = 0.06
         colorMatrixHueB.setAttribute("values", `\
-        ${belowToneRgb.r / 255} 0 0 0 0 \
-        0 ${belowToneRgb.g / 255} 0 0 0 \
-        0 0 ${belowToneRgb.b / 255} 0 0 \
+        0.6 0 0 0 0 \
+        0 0.6 0 0 0 \
+        0 0 0.6 0 0 \
         0 0 0 1 0`); // red / 255 = 0.06
         colorMatrixHueB.setAttribute("result", "colorMatrixHueB");
 

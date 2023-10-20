@@ -415,19 +415,6 @@ function main() {
 
   timeChecker();
 
-  // sau
-  // var dummy = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-  // dummy.setAttribute("x", "0%");
-  // dummy.setAttribute("y", "0%");
-  // dummy.setAttribute("width", "100%");
-  // dummy.setAttribute("height", "100%");
-  // dummy.setAttribute("filter", "url(#maskNoise)");
-  // svgNode.appendChild(dummy);
-
-  // var oida = document.createElementNS("http://www.w3.org/2000/svg", "use");
-  // oida.setAttribute("id", "oida");
-  // oida.setAttribute("href", "#maskNoise");
-  // svgNode.appendChild(oida);
 }
 
 main()

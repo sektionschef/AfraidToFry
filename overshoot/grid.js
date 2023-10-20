@@ -78,7 +78,7 @@ class Grid {
         );
 
         this.paletteBaseC = new dynamicPalette(
-            this.baseTone,
+            tinycolor(this.baseTone).spin(5).toHexString(),
             profileHue,
             profileSat,
             profileLight
@@ -91,7 +91,7 @@ class Grid {
             profileLight
         );
         this.paletteBaseE = new dynamicPalette(
-            this.baseTone,
+            tinycolor(this.baseTone).spin(-5).toHexString(),
             profileHue,
             profileSat,
             profileLight
@@ -114,7 +114,8 @@ class Grid {
         );
 
         this.paletteDetailAboveB = new dynamicPalette(
-            this.aboveTone,
+            // this.aboveTone,
+            tinycolor(this.aboveTone).spin(3).toHexString(),
             profileHue,
             profileSat,
             profileLight
@@ -128,7 +129,8 @@ class Grid {
         );
 
         this.paletteDetailAboveD = new dynamicPalette(
-            this.aboveTone,
+            // this.aboveTone,
+            tinycolor(this.aboveTone).spin(-3).toHexString(),
             profileHue,
             profileSat,
             profileLight
@@ -149,7 +151,8 @@ class Grid {
         );
 
         this.paletteDetailBelowB = new dynamicPalette(
-            this.belowTone,
+            // this.belowTone,
+            tinycolor(this.belowTone).spin(-7).toHexString(),
             profileHue,
             profileSat,
             profileLight
@@ -169,7 +172,8 @@ class Grid {
             profileLight
         );
         this.paletteDetailBelowE = new dynamicPalette(
-            this.belowTone,
+            // this.belowTone,
+            tinycolor(this.belowTone).spin(7).toHexString(),
             profileHue,
             profileSat,
             profileLight
@@ -582,7 +586,7 @@ class Grid {
             rectNodeAbove.setAttributeNS(null, 'height', Math.ceil(rescaling_height * this.horizonRatio) - marginPix - offset);
             // rectNodeAbove.setAttributeNS(null, 'fill', BELOWTONE);
             // rectNodeAbove.setAttributeNS(null, 'fill', tinycolor(BELOWTONE).clone().setAlpha(0.1).darken(5).desaturate(5));
-            rectNodeAbove.setAttributeNS(null, 'fill', tinycolor(this.belowTone).darken(5).desaturate(5));
+            rectNodeAbove.setAttributeNS(null, 'fill', tinycolor(this.belowTone).clone().darken(15).desaturate(5));
             rectNodeAbove.setAttributeNS(null, 'stroke', "none");
 
             groupDrawing.appendChild(rectNodeAbove);
@@ -596,7 +600,7 @@ class Grid {
             // rectNodeBelow.setAttributeNS(null, 'fill', ABOVETONE);
             // rectNodeBelow.setAttributeNS(null, 'fill', tinycolor(ABOVETONE).clone().setAlpha(0.1).darken(5).desaturate(5));
             // rectNodeBelow.setAttributeNS(null, 'fill', tinycolor(ABOVETONE).clone().setAlpha(0.1));
-            rectNodeBelow.setAttributeNS(null, 'fill', tinycolor(this.aboveTone).darken(5).desaturate(5));
+            rectNodeBelow.setAttributeNS(null, 'fill', tinycolor(this.aboveTone).clone().darken(15).desaturate(5));
             rectNodeBelow.setAttributeNS(null, 'stroke', "none");
 
             groupDrawing.appendChild(rectNodeBelow);
@@ -789,7 +793,7 @@ class Grid {
                     noiseValueCutOut: this.boxes[i].noiseValueCutOut,
                     // lineVertexLength: 160 / this.shortBoxCount * 8, // map(this.boxes[i].noiseValueDetail, -1, 1, 2, 10), // 15,
                     lineNoiseMapDynamic: true,
-                    lineVertexLengthMin: 80 / this.shortBoxCount * 5,
+                    lineVertexLengthMin: 80 / this.shortBoxCount * 10,
                     lineVertexLengthMax: 80 / this.shortBoxCount * 15,
                     lineVertexLengthMean: 1,
                     lineVertexLengthStd: 80 / this.shortBoxCount * 0.05, // map(this.boxes[i].noiseValueDetail, -1, 1, 0.15, 0.05), //0.05,
@@ -797,13 +801,13 @@ class Grid {
                     lineStrokeWeightyMin: 160 / this.shortBoxCount * 0.1,
                     lineStrokeWeightyMax: 160 / this.shortBoxCount * 0.2,
                     lineLoopCountMin: 0,
-                    lineLoopCountMax: 10,  // 20
+                    lineLoopCountMax: 20,  // 20
                     lineAngleMean: Math.PI / 1,
-                    lineAngleSTD: Math.PI / 30,
-                    lineNoiseAngleDist: 0.2, // 0.3
+                    lineAngleSTD: Math.PI / 56,
+                    lineNoiseAngleDist: 0.3, // 0.3
                     lineRevert: true,
                     triangle: true,
-                    triangleStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueDetail, -1, 1, 0.2, 0.1), // 0.2
+                    triangleStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueDetail, -1, 1, 0.3, 0.1), // 0.2
                     triangleLoop: map(this.boxes[i].noiseValueDetail, -1, 1, 6, 0), // 40,
                     triangleWidthy: 160 / this.shortBoxCount * 1.5,
                     trianglePosDistStd: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueDetail, -1, 1, 3, 2), // 2
@@ -811,7 +815,7 @@ class Grid {
                     rectLoop: map(this.boxes[i].noiseValueDetail, -1, 1, 0, 6), // 40,
                     rectWidth: 160 / this.shortBoxCount * 5, // map(this.boxes[i].noiseValueDetail, 0, 1, 6, 9),// 6,
                     rectHeight: 160 / this.shortBoxCount * 1.5, // map(this.boxes[i].noiseValueDetail, 0, 1, 2, 3),// 2,
-                    rectStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueDetail, -1, 1, 0.1, 0.2), // 0.3
+                    rectStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueDetail, -1, 1, 0.1, 0.3), // 0.3
                     rectPosDistStd: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueDetail, -1, 1, 2, 3), // 2
                 }).draw();
             } else {

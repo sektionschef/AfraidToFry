@@ -36,9 +36,11 @@ $fx.params([
     id: "country_id",
     name: "Country",
     type: "select",
-    default: "Austria",
+    // default: "Austria",
+    default: "OVERSHOOTLAND",
     options: {
-      options: ["Austria", "Iraq", "France", "Australia", "Thailand", "Argentina", "Japan"],
+      // options: ["Austria", "Iraq", "France", "Australia", "Thailand", "Argentina", "Japan"],
+      options: ["Austria", "Iraq", "France", "Australia", "Thailand", "Argentina", "Japan", "OVERSHOOTLAND", "UNDERSHOOTLAND"],  // DEBUG
     }
   },
   {
@@ -47,8 +49,8 @@ $fx.params([
     type: "select",
     default: "Doris",
     options: {
-      // options: ["Boris", "Doris"],
-      options: ["Boris", "Doris", "Morris", "Harris", "Paris", "Doloris", "Iris", "Horris", "Faris", "Laris", "Osiris"],
+      // options: ["Boris", "Doris",  "Harris", "Paris", "Doloris", "Iris", "Horris", "Faris", "Laris", "Osiris"],
+      options: ["Boris", "Doris", "Harris", "Iris", "Faris"],
     }
   },
   {
@@ -180,60 +182,78 @@ var OVERSHOOTSTATS = {
     overshootTime: "16:07",
     timeSwitchHour: 8,
     timeSwitchMinute: 13,
+  },
+  "OVERSHOOTLAND": {
+    overshootDay: "xx",
+    overshootTime: "xx",
+    timeSwitchHour: 0,
+    timeSwitchMinute: 1,
+  },
+  "UNDERSHOOTLAND": {
+    overshootDay: "yy",
+    overshootTime: "yy",
+    timeSwitchHour: 23,
+    timeSwitchMinute: 59,
   }
 }
 
 var PALETTE = {
   "Doris": {
-    // "aboveTone": "#86b1d4",
-    // "belowTone": "#91816b",
-    // "aboveToneOVERSHOOT": "#201E1F",
-    // "belowToneOVERSHOOT": "#FF4000",
     "aboveTone": "#86b1d4",
     "belowTone": "#91816b",
-    "aboveToneOVERSHOOT": "#86b1d4",
-    "belowToneOVERSHOOT": "#91816b",
+    "aboveToneOVERSHOOT": "#74a1c5",
+    "belowToneOVERSHOOT": "#70624e",
   },
   "Boris": {
-    "aboveTone": "#201E1F",
-    "belowTone": "#FF4000"
-  },
-  "Morris": {
-    "aboveTone": "#8c9cb3",
-    "belowTone": "#756247"
-  },
-  "Harris": {
-    "aboveTone": "#98a0a7",
-    "belowTone": "#515a57"
-  },
-  "Paris": {
-    "aboveTone": "#aeb9c2",
-    "belowTone": "#1e2b26"
-  },
-  "Doloris": {
-    "aboveTone": "#0b2b5c",
-    "belowTone": "#d3b11a"
+    "aboveTone": "#244577",
+    "belowTone": "#d1be67",
+    "aboveToneOVERSHOOT": "#0b2b5c",
+    "belowToneOVERSHOOT": "#d3b11a",
   },
   "Iris": {
     "aboveTone": "#F87060",
-    "belowTone": "#102542"
+    "belowTone": "#102542",
+    "aboveToneOVERSHOOT": "#FF4000",
+    "belowToneOVERSHOOT": "#201E1F",
   },
-  "Horris": {
-    "aboveTone": "#86b1d4",
-    "belowTone": "#91816b"
+  "Harris": {
+    "aboveTone": "#98a0a7",
+    "belowTone": "#515a57",
+    "aboveToneOVERSHOOT": "#687077",
+    "belowToneOVERSHOOT": "#bdc8d1",
   },
   "Faris": {
     "aboveTone": "#5e4334",
-    "belowTone": "#02111B"
+    "belowTone": "#02111B",
+    "aboveToneOVERSHOOT": "#5e4334",
+    "belowToneOVERSHOOT": "#02111B",
   },
-  "Laris": {
-    "aboveTone": "#6F1D1B",
-    "belowTone": "#BB9457"
-  },
-  "Osiris": {
-    "aboveTone": "#EF767A",
-    "belowTone": "#456990"
-  },
+  // "Morris": {
+  //   "aboveTone": "#8c9cb3",
+  //   "belowTone": "#756247"
+  // },
+  // "Paris": {
+  //   "aboveTone": "#aeb9c2",
+  //   "belowTone": "#1e2b26",
+  //   "aboveToneOVERSHOOT": "#aeb9c2",
+  //   "belowToneOVERSHOOT": "#1e2b26",
+  // },
+  // "Doloris": {
+  //   "aboveToneOVERSHOOT": "#86b1d4",
+  //   "belowToneOVERSHOOT": "#96969b",
+  // },
+  // "Horris": {
+  //   "aboveTone": "#86b1d4",
+  //   "belowTone": "#91816b"
+  // },
+  // "Laris": {
+  //   "aboveTone": "#6F1D1B",
+  //   "belowTone": "#BB9457"
+  // },
+  // "Osiris": {
+  //   "aboveTone": "#EF767A",
+  //   "belowTone": "#456990"
+  // },
 }
 // let ABOVETONE = "#a5812f";  // andrea garden book
 // let BELOWTONE = "#ff617b";  // andrea garden book
@@ -414,6 +434,7 @@ function main() {
   createMaskBlack();
 
   timeChecker();
+  $fx.preview();
 
 }
 
@@ -436,7 +457,7 @@ $fx.on(
 document.addEventListener('keydown', (event) => {
 
   if (event.code == "KeyE") {
-    var filename = TITLE + "_" + fxhash + "_" + getTimestamp() + ".svg";
+    var filename = TITLE + "_" + $fx.hash + "_" + getTimestamp() + ".svg";
     // alert("oida is going down");
 
     saveSvg(svgNode, filename);
@@ -450,7 +471,7 @@ document.addEventListener('keydown', (event) => {
 }, false);
 
 
-function fireTrigger(drawing) {
+function fireTrigger() {
   console.log("trigger initiated");
 
   let grid = new Grid({
@@ -484,7 +505,7 @@ function timeChecker() {
     if (OVERSHOOT == false || OVERSHOOT == "start") {
       console.log("Overshoot!")
       OVERSHOOT = true;
-      fireTrigger(drawing);
+      fireTrigger();
     }
     else {
       // console.log("nothing to do");
@@ -493,7 +514,7 @@ function timeChecker() {
     if (OVERSHOOT == true || OVERSHOOT == "start") {
       console.log("No overshoot!")
       OVERSHOOT = false;
-      fireTrigger(drawing);
+      fireTrigger();
     }
     else {
       // console.log("nothing to do");

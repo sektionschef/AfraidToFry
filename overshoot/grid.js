@@ -51,132 +51,139 @@ class Grid {
         // https://rechneronline.de/number-list/
 
         // VAR old school
-        // let profileHue = [-12, -8, -5, -3, 0, 3, 5, 8, 12, -5, -3, 0, 3, 5];
-        // let profileSat = [-30, -20, -15, -10, -5, 0, 5, 10, 15, 20, 30, -10, -5, 0, 5, 10];
-        // let profileLight = [-3, 0, 3, -3, 0, 3, 6, -6];
+        // let this.profileHue = [-12, -8, -5, -3, 0, 3, 5, 8, 12, -5, -3, 0, 3, 5];
+        // let this.profileSat = [-30, -20, -15, -10, -5, 0, 5, 10, 15, 20, 30, -10, -5, 0, 5, 10];
+        // let this.profileLight = [-3, 0, 3, -3, 0, 3, 6, -6];
         // VAR COOL
-        // let profileHue = [-6, -3, 0, 3, 6];
-        // let profileSat = [-40, -30, -20, -10, 0, 10, 20, 30, 40];
-        // let profileLight = [0];
-        // bambam
-        let profileHue = [-6, -3, 0, 3, 6];
-        let profileSat = [-30, -20, -10, 0, 10, 20, 30];
-        let profileLight = [-6, -3, 0, 3, 6];
+        // let this.profileHue = [-6, -3, 0, 3, 6];
+        // let this.profileSat = [-40, -30, -20, -10, 0, 10, 20, 30, 40];
+        // let this.profileLight = [0];
+
+        // Overshoot
+        if (this.overshoot) {
+            this.profileHue = [-6, -3, 0, 3, 6];
+            this.profileSat = [-50, -40, -30, -20, -10, 0, 10, 20, 30, 40, 50];
+            this.profileLight = [-9, -6, -3, 0, 3, 6, 9];
+        } else {
+            this.profileHue = [-6, -3, 0, 3, 6];
+            this.profileSat = [-20, -10, 0, 10, 20];
+            this.profileLight = [-9, -6, -3, 0, 3, 6, 9];
+        }
 
         this.paletteBaseA = new dynamicPalette(
             this.baseTone,
-            profileHue,
-            profileSat,
-            profileLight
+            this.profileHue,
+            this.profileSat,
+            this.profileLight
         );
 
         this.paletteBaseB = new dynamicPalette(
             this.baseTone,
-            profileHue,
-            profileSat,
-            profileLight
+            this.profileHue,
+            this.profileSat,
+            this.profileLight
         );
 
         this.paletteBaseC = new dynamicPalette(
             tinycolor(this.baseTone).spin(5).toHexString(),
-            profileHue,
-            profileSat,
-            profileLight
+            this.profileHue,
+            this.profileSat,
+            this.profileLight
         );
 
         this.paletteBaseD = new dynamicPalette(
             this.baseTone,
-            profileHue,
-            profileSat,
-            profileLight
+            this.profileHue,
+            this.profileSat,
+            this.profileLight
         );
         this.paletteBaseE = new dynamicPalette(
             tinycolor(this.baseTone).spin(-5).toHexString(),
-            profileHue,
-            profileSat,
-            profileLight
+            this.profileHue,
+            this.profileSat,
+            this.profileLight
         );
 
 
         this.paletteBaseBelow = new dynamicPalette(
             this.baseToneBelow,
-            profileHue,
-            profileSat,
-            profileLight
+            this.profileHue,
+            this.profileSat,
+            this.profileLight
         );
 
 
         this.paletteDetailAboveA = new dynamicPalette(
             this.aboveTone,
-            profileHue,
-            profileSat,
-            profileLight
+            this.profileHue,
+            this.profileSat,
+            this.profileLight
         );
 
         this.paletteDetailAboveB = new dynamicPalette(
             // this.aboveTone,
             tinycolor(this.aboveTone).spin(3).toHexString(),
-            profileHue,
-            profileSat,
-            profileLight
+            this.profileHue,
+            this.profileSat,
+            this.profileLight
         );
 
         this.paletteDetailAboveC = new dynamicPalette(
             this.aboveTone,
-            profileHue,
-            profileSat,
-            profileLight
+            this.profileHue,
+            this.profileSat,
+            this.profileLight
         );
 
         this.paletteDetailAboveD = new dynamicPalette(
             // this.aboveTone,
             tinycolor(this.aboveTone).spin(-3).toHexString(),
-            profileHue,
-            profileSat,
-            profileLight
+            this.profileHue,
+            this.profileSat,
+            this.profileLight
         );
         this.paletteDetailAboveE = new dynamicPalette(
             this.aboveTone,
-            profileHue,
-            profileSat,
-            profileLight
+            this.profileHue,
+            this.profileSat,
+            this.profileLight
         );
 
 
         this.paletteDetailBelowA = new dynamicPalette(
             this.belowTone,
-            profileHue,
-            profileSat,
-            profileLight
+            this.profileHue,
+            this.profileSat,
+            this.profileLight
         );
 
         this.paletteDetailBelowB = new dynamicPalette(
             // this.belowTone,
             tinycolor(this.belowTone).spin(-7).toHexString(),
-            profileHue,
-            profileSat,
-            profileLight
+            this.profileHue,
+            this.profileSat,
+            this.profileLight
         );
 
         this.paletteDetailBelowC = new dynamicPalette(
             this.belowTone,
-            profileHue,
-            profileSat,
-            profileLight
+            this.profileHue,
+            this.profileSat,
+            this.profileLight
         );
 
         this.paletteDetailBelowD = new dynamicPalette(
             this.belowTone,
-            profileHue,
-            profileSat,
-            profileLight
+            this.profileHue,
+            this.profileSat,
+            this.profileLight
         );
         this.paletteDetailBelowE = new dynamicPalette(
             // this.belowTone,
             tinycolor(this.belowTone).spin(7).toHexString(),
-            profileHue,
-            profileSat,
-            profileLight
+            this.profileHue,
+            this.profileSat,
+            this.profileLight
         );
 
 
@@ -682,7 +689,7 @@ class Grid {
                     lineStrokeWeightyMax: 160 / this.shortBoxCount * 0.4,
                     // lineLoopCount: map(this.boxes[i].noiseValueDetail, -1, 1, 20, 50), // 20,
                     lineLoopCountMin: 0,
-                    lineLoopCountMax: 20,
+                    lineLoopCountMax: 25,
                     lineAngleMean: Math.PI / 1,
                     lineAngleSTD: Math.PI / 56,
                     lineNoiseAngleDist: 0.3,
@@ -691,11 +698,11 @@ class Grid {
                     lineRevert: true,
                     triangle: true,
                     triangleStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueBase, -1, 1, 0.4, 0.4),
-                    triangleLoop: map(this.boxes[i].noiseValueDetail, -1, 1, 10, 0),
+                    triangleLoop: map(this.boxes[i].noiseValueDetail, -1, 1, 15, 0),
                     triangleWidthy: 160 / this.shortBoxCount * 3,
                     trianglePosDistStd: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueBase, -1, 1, 2, 3),
                     rect: true,
-                    rectLoop: map(this.boxes[i].noiseValueDetail, -1, 1, 0, 10),
+                    rectLoop: map(this.boxes[i].noiseValueDetail, -1, 1, 0, 15),
                     rectWidth: 160 / this.shortBoxCount * 6, // map(this.boxes[i].noiseValueDetail, -1, 1, 5, 30), // 12,
                     rectHeight: 160 / this.shortBoxCount * 3,
                     rectStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueBase, -1, 1, 0.4, 0.4),
@@ -731,7 +738,7 @@ class Grid {
                     lineStrokeWeightyMin: 160 / this.shortBoxCount * 0.4,
                     lineStrokeWeightyMax: 160 / this.shortBoxCount * 0.4,
                     lineLoopCountMin: 0,
-                    lineLoopCountMax: 20,
+                    lineLoopCountMax: 25,
                     lineAngleMean: Math.PI / 1,
                     lineAngleSTD: Math.PI / 56,
                     lineNoiseAngleDist: 0.3,
@@ -740,7 +747,7 @@ class Grid {
                     lineRevert: true,
                     triangle: true,
                     triangleStroke: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueBase, -1, 1, 0.4, 0.4),
-                    triangleLoop: map(this.boxes[i].noiseValueDetail, -1, 1, 10, 0),
+                    triangleLoop: map(this.boxes[i].noiseValueDetail, -1, 1, 15, 0),
                     triangleWidthy: 160 / this.shortBoxCount * 3,
                     trianglePosDistStd: 160 / this.shortBoxCount * map(this.boxes[i].noiseValueBase, -1, 1, 2, 3),
                     rect: true,
@@ -1212,7 +1219,7 @@ class Grid {
     }
 
     createOtherNoiseLayer() {
-
+        // https://codepen.io/lagats/pen/QpOOVB
         const svgNode = document.getElementById('svgNode');
         const defs = document.getElementById('defs');
 
@@ -1257,13 +1264,6 @@ class Grid {
 
         fueta.appendChild(turbulence);
         fueta.appendChild(deSaturate);
-        // fueta.appendChild(blend);
-
-        // <filter id="noise">
-        // <feTurbulence type="fractalNoise" baseFrequency="30" result="noisy" />
-        // <feColorMatrix type="saturate" values="0"/>
-        // <feBlend in="SourceGraphic" in2="noisy" mode="multiply" />
-        //   </filter>
 
         fuetaObj.setAttribute("filter", "url(#fueta)");
         defs.appendChild(fueta);

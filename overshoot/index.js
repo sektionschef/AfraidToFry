@@ -74,6 +74,17 @@ $fx.params([
       options: ["1:1", "16:9", "9:16", "DIN A0, 84,1 cm x 118,9 cm",],
     }
   },
+  {
+    id: "noiseYParam_id",
+    name: "Noise Y Param",
+    type: "number",
+    default: 6,
+    options: {
+      min: 3,
+      max: 24,
+      step: 3,
+    },
+  },
   // {
   //   id: "number_id",
   //   name: "A number/float64",
@@ -495,6 +506,7 @@ function fireTrigger() {
     belowTone: BELOWTONE,
     aboveToneOVERSHOOT: ABOVETONEOVERSHOOT,
     belowToneOVERSHOOT: BELOWTONEOVERSHOOT,
+    noiseYParam: $fx.getParam("noiseYParam_id"),
   });
 
 }

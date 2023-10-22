@@ -12,7 +12,7 @@ function getRandomFromList(items) {
 // const map = (value, x1, y1, x2, y2) => (value - x1) * (y2 - x2) / (y1 - x1) + x2;
 
 function mapRange(value, inMin, inMax, outMin, outMax) {
-    // with min max limiting and negative growth
+    // with min max limiting and negative growth - https://www.tutorialspoint.com/how-to-create-a-slider-to-map-a-range-of-values-in-javascript#:~:text=In%20JavaScript%2C%20mapping%20a%20range,mapped%20value%20in%20real%2Dtime. 
 
     if ((outMax - outMin) > 0) {
         var result = ((value - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;

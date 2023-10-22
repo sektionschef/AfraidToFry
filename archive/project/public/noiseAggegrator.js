@@ -7,10 +7,12 @@ class noiseAggregator {
         this.noise1 = new noiseArea(x1, y1); // good
         this.noise2 = new noiseArea(x2, y2);
         this.noise3 = new noiseArea(x3, y3); // 22, 5
+
+        console.log("adfaf");
     }
 
     // for use in loop
-    createNoiseValue(w, h, startRow, endRow, a1min, a1max, a2min, a2max, a3min, a3max) {
+    funkchen(w, h, startRow, endRow, a1min, a1max, a2min, a2max, a3min, a3max) {
         // let noiseValue = (
         //     this.noise1.createNoiseValue(w, h) +
         //     this.noise2.createNoiseValue(w, h) +
@@ -23,9 +25,14 @@ class noiseAggregator {
         // var amplitude1 = 1;
         // var amplitude2 = 0.75;
         // var amplitude3 = 0.5;
+
+        // used to be gradient
+        // var amplitude1 = map(h, 0, 50, 0, 1); // 1,0
         var amplitude1 = map(h, startRow, endRow, a1min, a1max); // 1,0
         var amplitude2 = map(h, startRow, endRow, a2min, a2max); // 0,1
         var amplitude3 = map(h, startRow, endRow, a3min, a3max); // 0,1
+
+        console.log(`${h}: ${amplitude1}`);
 
         // var amplitude3 = a3min; // constant
         // var amplitude2 = map(h, startRow, endRow, a2min, a2max); // 0,1
@@ -47,8 +54,6 @@ class noiseAggregator {
             noiseValue2 * amplitude2 +
             noiseValue3 * amplitude3
         ) / (amplitude1 + amplitude2 + amplitude3);
-
-        // ) / (amplitude1 + amplitude2 + amplitude3);
 
 
         // noiseValue = Math.pow(noiseValue, 1.3);

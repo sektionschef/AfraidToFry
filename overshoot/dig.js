@@ -68,18 +68,18 @@ class digi {
         if (this.lineNoiseMapDynamic) {
 
             if (this.noiseValue <= 0) {
-                this.lineVertexLength = map(this.noiseValue, -1, 0, this.lineVertexLengthMin, this.lineVertexLengthMax);
-                this.lineLoopCount = map(this.noiseValue, -1, 0, this.lineLoopCountMin, this.lineLoopCountMax);
-                this.lineStrokeWeighty = map(this.noiseValue, -1, 0, this.lineStrokeWeightyMax, this.lineStrokeWeightyMin);
+                this.lineVertexLength = mapRange(this.noiseValue, -1, 0, this.lineVertexLengthMin, this.lineVertexLengthMax);
+                this.lineLoopCount = mapRange(this.noiseValue, -1, 0, this.lineLoopCountMin, this.lineLoopCountMax);
+                this.lineStrokeWeighty = mapRange(this.noiseValue, -1, 0, this.lineStrokeWeightyMax, this.lineStrokeWeightyMin);
             } else {
-                this.lineVertexLength = map(this.noiseValue, 0, 1, this.lineVertexLengthMax, this.lineVertexLengthMin);
-                this.lineLoopCount = map(this.noiseValue, 0, 1, this.lineLoopCountMin, this.lineLoopCountMax);
-                this.lineStrokeWeighty = map(this.noiseValue, 0, 1, this.lineStrokeWeightyMax, this.lineStrokeWeightyMin);
+                this.lineVertexLength = mapRange(this.noiseValue, 0, 1, this.lineVertexLengthMax, this.lineVertexLengthMin);
+                this.lineLoopCount = mapRange(this.noiseValue, 0, 1, this.lineLoopCountMin, this.lineLoopCountMax);
+                this.lineStrokeWeighty = mapRange(this.noiseValue, 0, 1, this.lineStrokeWeightyMax, this.lineStrokeWeightyMin);
             }
         } else {
-            this.lineVertexLength = map(this.noiseValue, -1, 1, this.lineVertexLengthMin, this.lineVertexLengthMax);
-            this.lineLoopCount = map(this.noiseValue, -1, 1, this.lineLoopCountMin, this.lineLoopCountMax);
-            this.lineStrokeWeighty = map(this.noiseValue, -1, 1, this.lineStrokeWeightyMin, this.lineStrokeWeightyMax);
+            this.lineVertexLength = mapRange(this.noiseValue, -1, 1, this.lineVertexLengthMin, this.lineVertexLengthMax);
+            this.lineLoopCount = mapRange(this.noiseValue, -1, 1, this.lineLoopCountMin, this.lineLoopCountMax);
+            this.lineStrokeWeighty = mapRange(this.noiseValue, -1, 1, this.lineStrokeWeightyMin, this.lineStrokeWeightyMax);
         }
     }
 
@@ -107,7 +107,7 @@ class digi {
             // this.noiseDistance = 0.4;// (just the little bit);
             // this.colorStep = this.noiseDistance / this.colorList.length;
 
-            let colorSelect = Math.round(map(this.colorNoise * 100, -100, 100, 0, (this.colorList.length - 1)));
+            let colorSelect = Math.round(mapRange(this.colorNoise * 100, -100, 100, 0, (this.colorList.length - 1)));
             // console.log(this.noiseValue);
             // console.log(colorSelect);
 
@@ -168,8 +168,8 @@ class digi {
             for (var i = 0; i < this.lineLoopCount; i++) {
 
                 if (this.noiseAngle) {
-                    // this.angle = map(this.noiseValue, this.noiseValueMin, this.noiseValueMax, 0, 2 * Math.PI) + getRandomFromInterval(-0.5, 0.5);
-                    this.angle = map(this.noiseValue, -1, 1, 0, 2 * Math.PI) + getNormallyDistributedRandomNumber(0, this.lineNoiseAngleDist);
+                    // this.angle = mapRange(this.noiseValue, this.noiseValueMin, this.noiseValueMax, 0, 2 * Math.PI) + getRandomFromInterval(-0.5, 0.5);
+                    this.angle = mapRange(this.noiseValue, -1, 1, 0, 2 * Math.PI) + getNormallyDistributedRandomNumber(0, this.lineNoiseAngleDist);
                 } else {
                     // this.angle = getRandomFromInterval(this.angleMin, this.angleMax);
                     this.angle = getNormallyDistributedRandomNumber(this.lineAngleMean, this.lineAngleSTD);
@@ -201,7 +201,7 @@ class digi {
             var desaturationBoost = 20;
 
             // if (distanceFromHorizon < criticalDistance) {
-            //     var color_ = tinycolor(color_d).clone().lighten(map(distanceFromHorizon, 0, criticalDistance, darknessBoost, 0)).desaturate(map(distanceFromHorizon, 0, criticalDistance, desaturationBoost, 0)).toHexString();
+            //     var color_ = tinycolor(color_d).clone().lighten(mapRange(distanceFromHorizon, 0, criticalDistance, darknessBoost, 0)).desaturate(mapRange(distanceFromHorizon, 0, criticalDistance, desaturationBoost, 0)).toHexString();
             // } else {
             var color_ = color_d;
             // }

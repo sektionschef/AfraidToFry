@@ -8,12 +8,37 @@ function getRandomFromList(items) {
 }
 
 
-
-
-
 // comes from https://gist.github.com/xposedbones/75ebaef3c10060a3ee3b246166caab56
-const map = (value, x1, y1, x2, y2) => (value - x1) * (y2 - x2) / (y1 - x1) + x2;
+// const map = (value, x1, y1, x2, y2) => (value - x1) * (y2 - x2) / (y1 - x1) + x2;
 
+function mapRange(value, inMin, inMax, outMin, outMax) {
+    // with min max limiting and negative growth
+
+    if ((outMax - outMin) > 0) {
+        var result = ((value - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
+
+        if (result < outMin) {
+            result = outMin;
+        }
+
+        if (result > outMax) {
+            result = outMax;
+        }
+    } else {
+        var result = ((value - inMin) * (outMin - outMax)) / (inMax - inMin) + outMax;
+        result = outMin - result;
+
+        if (result > outMin) {
+            result = outMin;
+        }
+
+        if (result < outMax) {
+            result = outMax;
+        }
+    }
+
+    return result
+}
 
 
 // VECTOR

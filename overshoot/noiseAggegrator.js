@@ -23,9 +23,13 @@ class noiseAggregator {
         // var amplitude1 = 1;
         // var amplitude2 = 0.75;
         // var amplitude3 = 0.5;
-        var amplitude1 = map(h, startRow, endRow, a1min, a1max); // 1,0
-        var amplitude2 = map(h, startRow, endRow, a2min, a2max); // 0,1
-        var amplitude3 = map(h, startRow, endRow, a3min, a3max); // 0,1
+        // var amplitude1 = map(h, startRow, endRow, a1min, a1max); // 1,0
+        // var amplitude2 = map(h, startRow, endRow, a2min, a2max); // 0,1
+        // var amplitude3 = map(h, startRow, endRow, a3min, a3max); // 0,1
+
+        var amplitude1 = mapRange(h, startRow, endRow, a1min, a1max); // 1,0
+        var amplitude2 = mapRange(h, startRow, endRow, a2min, a2max); // 0,1
+        var amplitude3 = mapRange(h, startRow, endRow, a3min, a3max); // 0,1
 
         // var amplitude3 = a3min; // constant
         // var amplitude2 = map(h, startRow, endRow, a2min, a2max); // 0,1
@@ -36,6 +40,11 @@ class noiseAggregator {
         // let noiseValue1 = map(this.noise1.createNoiseValue(w, h), -1, 1, 0, 1);
         // let noiseValue2 = map(this.noise2.createNoiseValue(w, h), -1, 1, 0, 1);
         // let noiseValue3 = map(this.noise3.createNoiseValue(w, h), -1, 1, 0, 1);
+
+        // if (printy) {
+        // console.log(`${h}: ${amplitude1}`);
+        // console.log(`${startRow} ${h} ${endRow}`);
+        // }
 
         let noiseValue1 = this.noise1.createNoiseValue(w, h);
         let noiseValue2 = this.noise2.createNoiseValue(w, h);

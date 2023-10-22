@@ -30,6 +30,9 @@ let RESOLUTIONBOXCOUNT = 80;
 // let RESOLUTIONBOXCOUNT = 60;
 // let RESOLUTIONBOXCOUNT = 40;
 
+var noiseColorDetail;
+var noiseValueColorDetail;
+
 // this is how to define parameters
 $fx.params([
   {

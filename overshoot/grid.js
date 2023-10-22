@@ -10,7 +10,6 @@ class Grid {
         this.shortSide = data.shortSide;
         this.landscape = data.landscape;
         this.marginBoxCount = Math.round(this.shortBoxCount * 0.1);
-        this.horizonRow = Math.round(this.shortBoxCount * this.horizonRatio);
         this.boxSize = this.shortSide / this.shortBoxCount;
         this.longBoxCount = Math.floor(this.longSide / this.boxSize);
 
@@ -34,6 +33,9 @@ class Grid {
             this.widthMargin = this.longMargin;
             this.heightMargin = this.shortMargin;
         }
+
+        // where is the horizon
+        this.horizonRow = Math.round(this.heightBoxCount * this.horizonRatio);
 
         this.boxes = [];
 

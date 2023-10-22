@@ -59,7 +59,7 @@ $fx.params([
     type: "select",
     default: "up",
     options: {
-      options: ["up", "middle", "down"],
+      options: ["superUp", "up", "middle", "down", "superDown"],
     }
   },
   // {
@@ -270,9 +270,11 @@ let ABOVETONEOVERSHOOT = PALETTE[$fx.getParam("palette_id")].aboveToneOVERSHOOT;
 let BELOWTONEOVERSHOOT = PALETTE[$fx.getParam("palette_id")].belowToneOVERSHOOT;
 
 var HORIZONRATIO = {
+  "superUp": 2 / 7,
   "up": 3 / 7,
   "middle": 3.5 / 7,
-  "down": 4 / 7
+  "down": 4 / 7,
+  "superDown": 5 / 7,
 }
 
 var HORIZONRATIO = HORIZONRATIO[$fx.getParam("horizon_id")];
@@ -291,16 +293,16 @@ canvasFormats = [
   //   "canvasWidth": 900,
   //   "canvasHeight": 900,
   // },
-  {
-    "name": "16:9",
-    "canvasWidth": 1600,
-    "canvasHeight": 900,
-  },
   // {
-  //   "name": "9:16",
-  //   "canvasWidth": 900,
-  //   "canvasHeight": 1600,
+  //   "name": "16:9",
+  //   "canvasWidth": 1600,
+  //   "canvasHeight": 900,
   // },
+  {
+    "name": "9:16",
+    "canvasWidth": 900,
+    "canvasHeight": 1600,
+  },
   // {
   //   "name": "DIN A0, 84,1 cm x 118,9 cm",
   //   "canvasWidth": 1272,

@@ -435,7 +435,6 @@ function main() {
 
   timeChecker();
   $fx.preview();
-
 }
 
 main()

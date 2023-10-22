@@ -296,7 +296,7 @@ class Grid {
                 // var noiseValueColorDetail = this.noiseColorDetail.createNoiseValue(w, h, 0, this.horizonRow, 1, 1, 0, 0, 0, 0);
                 // var noiseValueColorDetail = this.noiseColorDetail.createNoiseValue(w, h, 0, this.horizonRow, 0, 0, 1, 1, 0, 0);
                 // var noiseValueColorDetail = this.noiseColorDetail.createNoiseValue(w, h, 0, this.horizonRow, 0, 0, 0, 0, 1, 1);
-                var noiseValueColorDetail = this.noiseColorDetail.createNoiseValue(w, h, 0, this.horizonRow, 1, 0, 0, 1, 0, 1);
+                var noiseValueColorDetail = this.noiseColorDetail.createNoiseValue(w, h, 0, this.horizonRow, 1, 0.5, 0.5, 1, 0.1, 0.1);
 
                 // var noiseValueColorBase = this.noiseColorBase.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 1, 1, 0, 0, 0, 0);
                 var noiseValueColorBase = this.noiseColorBase.createNoiseValue(w, h, this.horizonRow, this.heightBoxCount, 0, 1, 1, 0, 0.2, 0.2);
@@ -476,9 +476,9 @@ class Grid {
                 height: this.boxSize,
                 // colorList: this.paletteDetail.palette,
                 colorList: this.paletteDetailAboveA.palette,
-                // noiseValue: this.boxes[i].noiseValueDetail,
+                noiseValue: this.boxes[i].noiseValueColorDetail,
                 // noiseValue: this.boxes[i].noiseValueBase,
-                noiseValue: this.boxes[i].noiseValueCutOut,
+                // noiseValue: this.boxes[i].noiseValueCutOut,
             }).draw();
 
             // if (this.boxes[i].aboveHorizon) {

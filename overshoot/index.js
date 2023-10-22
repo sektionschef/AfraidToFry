@@ -13,6 +13,7 @@ const sp = new URLSearchParams(window.location.search)
 var SHORTSIDE;
 var LONGSIDE;
 var LANDSCAPE;
+var BULK = false; // bulk export images
 
 var TITLE = "afraid to fry";
 var ARTIST = "Stefan Schwaha, @sektionschef";
@@ -308,8 +309,6 @@ let BACKGROUNDTONE = "#ffffff";
 Math.random = $fx.rand;
 noise.seed($fx.rand());
 
-let BULK = false;  // bulk export images
-
 CANVASFORMATS = {
   "1:1": {
     "canvasWidth": 900,
@@ -457,6 +456,14 @@ function main() {
 
   timeChecker();
   $fx.preview();
+
+  if (BULK) {
+    var filename = TITLE + "_" + $fx.hash + "_" + getTimestamp() + ".svg";
+
+    saveSvg(svgNode, filename);
+    setTimeout(reloader, 30000)
+  }
+
 }
 
 main()
@@ -471,8 +478,6 @@ $fx.on(
   },
   (optInDefault, newValues) => main()
 )
-
-
 
 // Add event listener on keydown -  https://www.section.io/engineering-education/keyboard-events-in-javascript/ 
 document.addEventListener('keydown', (event) => {
@@ -635,4 +640,6 @@ function createDrawingGroup() {
   groupDrawing.setAttribute("id", "drawing");
   defs.appendChild(groupDrawing);
 }
+
+
 

@@ -255,3 +255,7 @@ function getNormallyDistributedRandomNumber(mean, stddev) {
 
     return z0 * stddev + mean;
 }
+
+function reloader() {
+    window.location.reload();
+}

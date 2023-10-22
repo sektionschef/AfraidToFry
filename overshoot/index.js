@@ -55,11 +55,20 @@ $fx.params([
   },
   {
     id: "horizon_id",
-    name: "position horizon",
+    name: "Horizon",
     type: "select",
     default: "up",
     options: {
       options: ["superUp", "up", "middle", "down", "superDown"],
+    }
+  },
+  {
+    id: "format_id",
+    name: "Format",
+    type: "select",
+    default: "16:9",
+    options: {
+      options: ["1:1", "16:9", "9:16", "DIN A0, 84,1 cm x 118,9 cm",],
     }
   },
   // {
@@ -287,30 +296,27 @@ noise.seed($fx.rand());
 
 let BULK = false;  // bulk export images
 
-canvasFormats = [
-  // {
-  //   "name": "1:1",
-  //   "canvasWidth": 900,
-  //   "canvasHeight": 900,
-  // },
-  // {
-  //   "name": "16:9",
-  //   "canvasWidth": 1600,
-  //   "canvasHeight": 900,
-  // },
-  {
-    "name": "9:16",
+CANVASFORMATS = {
+  "1:1": {
+    "canvasWidth": 900,
+    "canvasHeight": 900,
+  },
+  "16:9": {
+    "canvasWidth": 1600,
+    "canvasHeight": 900,
+  },
+  "9:16": {
     "canvasWidth": 900,
     "canvasHeight": 1600,
   },
-  // {
-  //   "name": "DIN A0, 84,1 cm x 118,9 cm",
-  //   "canvasWidth": 1272,
-  //   "canvasHeight": 900,
-  // },
-]
+  "DIN A0, 84,1 cm x 118,9 cm": {
+    "canvasWidth": 1272,
+    "canvasHeight": 900,
+  },
+}
 
-canvasFormatChosen = getRandomFromList(canvasFormats);
+// canvasFormatChosen = getRandomFromList(CANVASFORMATS);
+var canvasFormatChosen = CANVASFORMATS[$fx.getParam("format_id")];
 // console.log("Canvas Format: " + canvasFormatChosen.name);
 
 rescaling_width = canvasFormatChosen.canvasWidth;

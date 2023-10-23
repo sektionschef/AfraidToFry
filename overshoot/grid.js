@@ -53,15 +53,6 @@ class Grid {
 
         // https://rechneronline.de/number-list/
 
-        // VAR old school
-        // let this.profileHue = [-12, -8, -5, -3, 0, 3, 5, 8, 12, -5, -3, 0, 3, 5];
-        // let this.profileSat = [-30, -20, -15, -10, -5, 0, 5, 10, 15, 20, 30, -10, -5, 0, 5, 10];
-        // let this.profileLight = [-3, 0, 3, -3, 0, 3, 6, -6];
-        // VAR COOL
-        // let this.profileHue = [-6, -3, 0, 3, 6];
-        // let this.profileSat = [-40, -30, -20, -10, 0, 10, 20, 30, 40];
-        // let this.profileLight = [0];
-
         // Overshoot
         if (this.overshoot) {
             this.profileHue = [-6, -3, 0, 3, 6];
@@ -132,7 +123,8 @@ class Grid {
         );
 
         this.paletteDetailAboveC = new dynamicPalette(
-            this.aboveTone,
+            // this.aboveTone,
+            tinycolor(this.aboveTone).spin(6).toHexString(),
             this.profileHue,
             this.profileSat,
             this.profileLight
@@ -169,7 +161,8 @@ class Grid {
         );
 
         this.paletteDetailBelowC = new dynamicPalette(
-            this.belowTone,
+            // this.belowTone,
+            tinycolor(this.belowTone).spin(-17).toHexString(),
             this.profileHue,
             this.profileSat,
             this.profileLight
@@ -188,22 +181,6 @@ class Grid {
             this.profileSat,
             this.profileLight
         );
-
-        // var this.noiseYParam = 3;
-        // var this.noiseYParam = 6;
-        // var this.noiseYParam = 12;
-        // var this.noiseYParam = 24;
-        // var this.noiseYParam = 36;
-
-        // this.noiseBase = new noiseAggregator(80, 19, 35, 11, 5, 5, this.shortBoxCount);
-        // this.noiseDetail = new noiseAggregator(135, 56, 50, 8, 6, 6, this.shortBoxCount);
-        // this.noiseBaseBelow = new noiseAggregator(70, 16, 55, 7, 5, 5, this.shortBoxCount);
-        // this.noiseDetailBelow = new noiseAggregator(100, 16, 49, 6, 4, 4, this.shortBoxCount);
-
-        // this.noiseColorBase = new noiseAggregator(80, 14, 51, 8, 9, 3, this.shortBoxCount);
-        // this.noiseColorDetail = new noiseAggregator(90, 13, 50, 7, 6, 6, this.shortBoxCount);
-        // this.noiseColorBaseBelow = new noiseAggregator(90, 10, 70, 6, 4, 4, this.shortBoxCount);
-        // this.noiseColorDetailBelow = new noiseAggregator(80, 15, 40, 6, 13, 4, this.shortBoxCount);
 
         this.noiseBase = new noiseAggregator(80, 19, 35, this.noiseYParam + 5, 5, 5, this.shortBoxCount);
         this.noiseDetail = new noiseAggregator(135, 56, 50, this.noiseYParam + 2, 6, 6, this.shortBoxCount);
@@ -231,6 +208,7 @@ class Grid {
             //     this.loop1();
             // }, 0);
 
+            // debug
             // this.loopShowNoise();
 
             this.loopBaseRect();
@@ -375,14 +353,6 @@ class Grid {
                     "width": w,
                     "index": index,
                     "mask": false,
-                    // "noiseValue1": this.noise1.createNoiseValue(w, h),
-                    // "noiseValue2": this.noise2.createNoiseValue(w, h),
-                    // "noiseValue3": this.noise3.createNoiseValue(w, h),
-                    // "noiseValue4": this.noise4.createNoiseValue(w, h),
-                    // "noiseValue5": this.noise5.createNoiseValue(w, h),
-                    // "noiseValue6": this.noise6.createNoiseValue(w, h),
-                    // "noiseValue7": this.noise7.createNoiseValue(w, h),
-                    // "noiseValue8": this.noise8.createNoiseValue(w, h),
                     "noiseValueDetail": noiseValueDetail,
                     "noiseValueBase": noiseValueBase,
                     "noiseValueBaseBelow": noiseValueBaseBelow,
@@ -391,10 +361,6 @@ class Grid {
                     "noiseValueColorBase": noiseValueColorBase,
                     "noiseValueColorDetailBelow": noiseValueColorDetailBelow,
                     "noiseValueColorBaseBelow": noiseValueColorBaseBelow,
-                    // "noiseValue9": this.noise9.createNoiseValue(w, h),
-                    // "noiseValue10": this.noise10.createNoiseValue(w, h),
-                    // "polygonA": polygonA,
-                    // "polygonLeft": polygonLeft,
                     "noiseValueCutOut": noiseValueCutOut,
                     "horizon": horizon,
                     "aboveHorizon": aboveHorizon,
@@ -417,8 +383,6 @@ class Grid {
             this.boxes[i].noiseValueBaseBelow = mapRange(this.boxes[i].noiseValueBaseBelow, this.noiseBaseBelowMin, this.noiseBaseBelowMax, -1, 1);
             this.boxes[i].noiseValueCutOut = mapRange(this.boxes[i].noiseValueCutOut, this.noiseCutOutMin, this.noiseCutOutMax, -1, 1);
         }
-
-        // console.log(this.noiseDetailBelowMin);
     }
 
     showDebug() {
@@ -462,6 +426,7 @@ class Grid {
                 continue;
             }
 
+            // FULL IMAGE
             // new deugy({
             //     x: this.boxes[i].A.x,
             //     y: this.boxes[i].A.y,
@@ -511,12 +476,6 @@ class Grid {
 
         var marginPix = this.boxSize * this.marginBoxCount;
 
-        // console.log("RAMin: " + this.noiseDetailMin);
-        // console.log("RAMax: " + this.noiseDetailMax);
-
-        // console.log("SAMin: " + this.noiseBaseBelowMin);
-        // console.log("SAMax: " + this.noiseBaseBelowMax);
-
         for (var v = 0; v < randomIndex.length; v++) {
 
             i = randomIndex[v];
@@ -549,7 +508,6 @@ class Grid {
             //         noiseValueMax: this.noiseBaseBelowMax,
             //     }).draw();
             // }
-
         }
 
         // var posStdD = 10;  // standard deviation for position
@@ -614,12 +572,6 @@ class Grid {
 
         let i = 0;
 
-        // console.log("RAMin: " + this.noiseDetailMin);
-        // console.log("RAMax: " + this.noiseDetailMax);
-
-        // console.log("SAMin: " + this.noiseBaseBelowMin);
-        // console.log("SAMax: " + this.noiseBaseBelowMax);
-
         for (var v = 0; v < randomIndex.length; v++) {
 
             i = randomIndex[v];
@@ -628,30 +580,6 @@ class Grid {
                 continue;
             }
 
-            // if (this.boxes[i].aboveHorizon) {
-            //     for (var o = 0; o <= mapRange(this.boxes[i].noiseValue7, -1, 1, 1, 10); o++) {
-
-            //         this.digndag(
-            //             {
-            //                 centerX: this.boxes[i].center.x + getRandomFromInterval(0, 5),
-            //                 centerY: this.boxes[i].center.y + getRandomFromInterval(0, 5),
-            //                 noiseValue: this.boxes[i].noiseValue7,
-            //                 vertexLength: mapRange(this.boxes[i].noiseValue7, -1, 1, 5, 10),
-            //                 strokeWeighty: 0.1, // mapRange(this.boxes[i].noiseValue12, this.noise11.noiseValueMin, this.noise11.noiseValueMax, 0.3, 0.6),
-            //                 angleMin: 2 * Math.PI / 12 * 0.85,
-            //                 angleMax: 2 * Math.PI / 12 * 3.15,
-            //                 lineRevert: true,
-            //                 cutOutValue: -1,
-            //                 lineLoopCount: 5, // mapRange(this.boxes[i].noiseValue7, -1, 1, 1, 5),
-            //                 // colorList: ["#000000", "#524444", "#8a7878", "#ccb3b3"],
-            //                 colorList: this.palette15.palette,
-            //                 noiseAngle: false,
-            //                 group: "",
-            //             }
-            //         );
-            //     }
-            // }
-
             if (this.boxes[i].aboveHorizon) {
                 new digi({
                     x: this.boxes[i].center.x,
@@ -659,16 +587,16 @@ class Grid {
                     noiseValue: this.boxes[i].noiseValueBase,
                     // colorNoise: this.boxes[i].noiseValueBase,
                     colorNoise: this.boxes[i].noiseValueColorBase,
-                    // colorListA: this.paletteDetailAboveA.palette,
-                    // colorListB: this.paletteDetailAboveB.palette,
-                    // colorListC: this.paletteDetailAboveC.palette,
-                    // colorListD: this.paletteDetailAboveD.palette,
-                    // colorListE: this.paletteDetailAboveE.palette,
-                    colorListA: this.paletteBaseA.palette,
-                    colorListB: this.paletteBaseB.palette,
-                    colorListC: this.paletteBaseC.palette,
-                    colorListD: this.paletteBaseD.palette,
-                    colorListE: this.paletteBaseE.palette,
+                    colorListA: this.paletteDetailAboveA.palette,
+                    colorListB: this.paletteDetailAboveB.palette,
+                    colorListC: this.paletteDetailAboveC.palette,
+                    colorListD: this.paletteDetailAboveD.palette,
+                    colorListE: this.paletteDetailAboveE.palette,
+                    // colorListA: this.paletteBaseA.palette,
+                    // colorListB: this.paletteBaseB.palette,
+                    // colorListC: this.paletteBaseC.palette,
+                    // colorListD: this.paletteBaseD.palette,
+                    // colorListE: this.paletteBaseE.palette,
                     noiseAngle: true,
                     group: "",
                     horizonRow: this.horizonRow,
@@ -681,7 +609,6 @@ class Grid {
                     lineVertexLengthMax: 160 / this.shortBoxCount * 6,
                     lineStrokeWeightyMin: 160 / this.shortBoxCount * 0.4,
                     lineStrokeWeightyMax: 160 / this.shortBoxCount * 0.4,
-                    // lineLoopCount: mapRange(this.boxes[i].noiseValueDetail, -1, 1, 20, 50), // 20,
                     lineLoopCountMin: 0,
                     lineLoopCountMax: 25,
                     lineAngleMean: Math.PI / 1,
@@ -709,16 +636,16 @@ class Grid {
                     y: this.boxes[i].center.y,
                     noiseValue: this.boxes[i].noiseValueBaseBelow,
                     colorNoise: this.boxes[i].noiseValueColorBaseBelow,
-                    // colorListA: this.paletteDetailBelowA.palette,
-                    // colorListB: this.paletteDetailBelowB.palette,
-                    // colorListC: this.paletteDetailBelowC.palette,
-                    // colorListD: this.paletteDetailBelowD.palette,
-                    // colorListE: this.paletteDetailBelowE.palette,
-                    colorListA: this.paletteBaseBelow.palette,
-                    colorListB: this.paletteBaseBelow.palette,
-                    colorListC: this.paletteBaseBelow.palette,
-                    colorListD: this.paletteBaseBelow.palette,
-                    colorListE: this.paletteBaseBelow.palette,
+                    colorListA: this.paletteDetailBelowA.palette,
+                    colorListB: this.paletteDetailBelowB.palette,
+                    colorListC: this.paletteDetailBelowC.palette,
+                    colorListD: this.paletteDetailBelowD.palette,
+                    colorListE: this.paletteDetailBelowE.palette,
+                    // colorListA: this.paletteBaseBelow.palette,
+                    // colorListB: this.paletteBaseBelow.palette,
+                    // colorListC: this.paletteBaseBelow.palette,
+                    // colorListD: this.paletteBaseBelow.palette,
+                    // colorListE: this.paletteBaseBelow.palette,
                     noiseAngle: true,
                     group: "",
                     horizonRow: this.horizonRow,
@@ -863,9 +790,7 @@ class Grid {
                     rectPosDistStd: 160 / this.shortBoxCount * mapRange(this.boxes[i].noiseValueDetailBelow, -1, 1, 2, 3), // 2
                 }).draw();
             }
-
         }
-
     }
     loopOnTop() {
         let randomIndex = getRandomIndex(this.boxes.length);
@@ -888,7 +813,7 @@ class Grid {
                         noiseValue: this.boxes[i].noiseValueBase,
                         colorNoise: this.boxes[i].noiseValueColorDetailBelow,
                         vertexLength: 10, // mapRange(this.boxes[i].noiseValue8, -1, 1, 5, 10), // 15,
-                        strokeWeighty: 0.1, // mapRange(this.boxes[i].noiseValueBase, -1, 1, 0.05, 0.1), // 1,
+                        strokeWeighty: 0.3, // mapRange(this.boxes[i].noiseValueBase, -1, 1, 0.05, 0.1), // 1,
                         angleMin: 0,
                         angleMax: Math.PI,
                         cutOutValue: -0.5,
@@ -896,7 +821,8 @@ class Grid {
                         loopCount: mapRange(this.boxes[i].noiseValueDetail, -1, 1, 1, 15),
                         // colorList: this.paletteDetail.palette,
                         // colorList: ["#161616", "#353535", "#727272", "#8d8c8c", "#adadad", "#c7c7c7"],
-                        colorList: [this.belowTone],
+                        // colorList: [this.belowTone],
+                        colorList: [this.aboveTone],
                     }
                 ).draw();
             } else {
@@ -907,7 +833,7 @@ class Grid {
                         noiseValue: this.boxes[i].noiseValueBase,
                         colorNoise: this.boxes[i].noiseValueColorDetailBelow,
                         vertexLength: 10, // mapRange(this.boxes[i].noiseValue8, -1, 1, 5, 10), // 15,
-                        strokeWeighty: 0.1, // mapRange(this.boxes[i].noiseValueBase, -1, 1, 0.05, 0.1), // 1,
+                        strokeWeighty: 0.3, // mapRange(this.boxes[i].noiseValueBase, -1, 1, 0.05, 0.1), // 1,
                         angleMin: 0,
                         angleMax: Math.PI,
                         cutOutValue: -0.5,
@@ -915,7 +841,8 @@ class Grid {
                         loopCount: mapRange(this.boxes[i].noiseValueDetail, -1, 1, 1, 15),
                         // colorList: this.paletteDetail.palette,
                         // colorList: ["#161616", "#353535", "#727272", "#8d8c8c", "#adadad", "#c7c7c7"],
-                        colorList: [this.aboveTone],
+                        // colorList: [this.aboveTone],
+                        colorList: [this.belowTone],
                     }
                 ).draw();
             }
@@ -1141,13 +1068,11 @@ class Grid {
         colorMatrixHueB.setAttribute("result", "colorMatrixHueB");
 
 
-
         // var blender = document.createElementNS("http://www.w3.org/2000/svg", "feBlend");
         // blender.setAttribute("in", "SourceGraphic");
         // blender.setAttribute("in2", "turbulence");
         // blender.setAttribute("mode", "overlay");
         // blender.setAttribute("result", "BLEND");
-
 
 
         // filter.appendChild(gaussianFilter);

@@ -102,58 +102,10 @@ class digi {
                 this.colorList = this.colorListE;
             }
 
-            // this.noiseDistance = this.colorNoiseMax - this.colorNoiseMin;
-            // this.noiseDistance = 2;// (1- -1);
-            // this.noiseDistance = 0.4;// (just the little bit);
-            // this.colorStep = this.noiseDistance / this.colorList.length;
-
             let colorSelect = Math.round(mapRange(this.colorNoise * 100, -100, 100, 0, (this.colorList.length - 1)));
-            // console.log(this.noiseValue);
-            // console.log(colorSelect);
-
-            // let color_d = this.colorList[colorSelect];
-
-            // let colorSelect = 0
-            // let textureSelect = 0
-
-            // for (var i = 1; i < (this.colorList.length + 1); i++) {
-            //     // console.log("step: " + (this.noiseValueMin + this.colorStep * i))
-            //     if (this.noiseValue < this.noiseValueMin + this.colorStep * i) {
-            //         colorSelect = i;
-            //         break;
-            //     }
-            // }
-
-            // for (var i = 0; i < (this.colorList.length); i++) {
-            //     // console.log("step: " + (this.noiseValueMin + this.colorStep * i))
-            //     if (this.colorNoise < -1 + this.colorStep * i) {
-            //         colorSelect = i;
-            //         break;
-            //     }
-            // }
-            // console.log(colorSelect);
-
-            // for (var i = 0; i <= this.textureStepCount; i++) {
-            //     // console.log("step: " + (this.noiseValueMin + this.colorStep * i))
-            //     if (this.noiseValue < -1 + this.textureStep * i) {
-            //         textureSelect = i;
-            //         break;
-            //     }
-            // }
-            // if (this.noiseValue < -0.5) {
-            //     textureSelect = 1;
-            // } else if (this.noiseValue < 0) {
-            //     textureSelect = 2;
-            // } else if (this.noiseValue < 0.5) {
-            //     textureSelect = 3;
-            // } else {
-            //     textureSelect = 4;
-            // }
 
             let color_d = this.colorList[colorSelect]
             // let color_d = tinycolor(colorList[colorSelect]).spin(getRandomFromInterval(-20, 20)).darken(getRandomFromInterval(-5, 5)).desaturate(getRandomFromInterval(-10, 10)).toHexString();
-
-            // console.log(angleBetweenPoints(pointA, pointB));
 
             // point and add new point
             // var oldPoint = this.center;

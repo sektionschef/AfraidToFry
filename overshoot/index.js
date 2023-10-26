@@ -34,51 +34,63 @@ let RESOLUTIONBOXCOUNT = 80;
 var noiseColorDetail;
 var noiseValueColorDetail;
 
+// var countries = ["Austria", "Iraq", "France", "Australia", "Thailand", "Argentina", "Japan"];
+var countries = ["Austria", "Iraq", "France", "Australia", "Thailand", "Argentina", "Japan", "OVERSHOOTLAND", "UNDERSHOOTLAND"];  // DEBUG
+var palettes = ["Boris", "Doris", "Harris", "Iris", "Faris"];
+var horizons = ["superUp", "up", "middle", "down", "superDown"];
+var formats = ["1:1", "16:9", "9:16", "DIN A0, 84,1 cm x 118,9 cm",];
+
+
 // this is how to define parameters
 $fx.params([
   {
     id: "country_id",
     name: "Country",
     type: "select",
+    // default: getRandomFromList(countries),
+    // default: getRandomFromList(["OVERSHOOTLAND", "UNDERSHOOTLAND"]),
+    // default: "OVERSHOOTLAND",
+    default: "UNDERSHOOTLAND",
     // default: "Austria",
-    default: "OVERSHOOTLAND",
     options: {
-      // options: ["Austria", "Iraq", "France", "Australia", "Thailand", "Argentina", "Japan"],
-      options: ["Austria", "Iraq", "France", "Australia", "Thailand", "Argentina", "Japan", "OVERSHOOTLAND", "UNDERSHOOTLAND"],  // DEBUG
+      options: countries,
     }
   },
   {
     id: "palette_id",
     name: "Palette",
     type: "select",
-    default: "Doris",
+    // default: getRandomFromList(palettes),
+    default: "Harris",
     options: {
-      // options: ["Boris", "Doris",  "Harris", "Paris", "Doloris", "Iris", "Horris", "Faris", "Laris", "Osiris"],
-      options: ["Boris", "Doris", "Harris", "Iris", "Faris"],
+      options: palettes,
     }
   },
   {
     id: "horizon_id",
     name: "Horizon",
     type: "select",
+    // default: getRandomFromList(horizons),
     default: "up",
     options: {
-      options: ["superUp", "up", "middle", "down", "superDown"],
+      options: horizons,
     }
   },
   {
     id: "format_id",
     name: "Format",
     type: "select",
+    // default: getRandomFromList(formats),
     default: "16:9",
     options: {
-      options: ["1:1", "16:9", "9:16", "DIN A0, 84,1 cm x 118,9 cm",],
+      options: formats,
     }
   },
   {
     id: "noiseYParam_id",
     name: "Noise Y Param",
     type: "number",
+    // default: getRandomFromList([3, 6, 9, 12, 15, 18, 21, 24]),
     default: 6,
     options: {
       min: 3,
@@ -241,10 +253,10 @@ var PALETTE = {
     "belowToneOVERSHOOT": "#201E1F",
   },
   "Harris": {
-    "aboveTone": "#98a0a7",
-    "belowTone": "#515a57",
-    "aboveToneOVERSHOOT": "#687077",
-    "belowToneOVERSHOOT": "#bdc8d1",
+    "aboveTone": "#b2bec9",
+    "belowTone": "#484b4a",
+    "aboveToneOVERSHOOT": "#a3b5c5",
+    "belowToneOVERSHOOT": "#434947",
   },
   "Faris": {
     "aboveTone": "#5e4334",
@@ -457,10 +469,18 @@ function main() {
   timeChecker();
   $fx.preview();
 
-  if (BULK) {
-    var filename = TITLE + "_" + $fx.hash + "_" + getTimestamp() + ".svg";
+  // country_id
+  // palette_id
+  // horizon_id
+  // format_id
+  // noiseYParam_id
 
+  if (BULK) {
+    var filename = `${$fx.getParam("country_id")}_${$fx.getParam("palette_id")}_${$fx.getParam("horizon_id")}_${$fx.getParam("format_id")}_${$fx.getParam("noiseYParam_id")}_${$fx.hash}.svg`;
+
+    // SAVE SVG
     saveSvg(svgNode, filename);
+
     setTimeout(reloader, 30000)
   }
 

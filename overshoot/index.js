@@ -1,3 +1,9 @@
+
+// ########################################
+var BULK = false; // bulk export images - and use direct not lense
+// ########################################
+
+
 // demonstrate seed reset
 // for (let i = 0; i < 10; i++) {
 //   console.log(i, $fx.rand(), $fx.randminter())
@@ -13,7 +19,6 @@ const sp = new URLSearchParams(window.location.search)
 var SHORTSIDE;
 var LONGSIDE;
 var LANDSCAPE;
-var BULK = false; // bulk export images
 
 var TITLE = "afraid to fry";
 var ARTIST = "Stefan Schwaha, @sektionschef";
@@ -34,8 +39,7 @@ let RESOLUTIONBOXCOUNT = 80;
 var noiseColorDetail;
 var noiseValueColorDetail;
 
-// var countries = ["Austria", "Iraq", "France", "Australia", "Thailand", "Argentina", "Japan"];
-var countries = ["Austria", "Iraq", "France", "Australia", "Thailand", "Argentina", "Japan", "OVERSHOOTLAND", "UNDERSHOOTLAND"];  // DEBUG
+var countries = ["Austria", "Iraq", "France", "Australia", "Thailand", "Argentina", "Japan"];
 var palettes = ["Boris", "Doris", "Harris", "Iris", "Faris"];
 var horizons = ["superUp", "up", "middle", "down", "superDown"];
 var formats = ["1:1", "16:9", "9:16", "DIN A0, 84,1 cm x 118,9 cm",];
@@ -53,7 +57,8 @@ $fx.params([
     default: "UNDERSHOOTLAND",
     // default: "Austria",
     options: {
-      options: countries,
+      // options: countries,
+      options: ["OVERSHOOTLAND", "UNDERSHOOTLAND"],
     }
   },
   {
@@ -71,7 +76,7 @@ $fx.params([
     name: "Horizon",
     type: "select",
     // default: getRandomFromList(horizons),
-    default: "up",
+    default: "down",
     options: {
       options: horizons,
     }

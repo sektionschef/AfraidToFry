@@ -827,14 +827,14 @@ class Grid {
                         y: this.boxes[i].center.y,
                         noiseValue: this.boxes[i].noiseValueOnTopNoise,
                         colorNoise: this.boxes[i].noiseValueOnTopNoise,
-                        vertexLength: mapRange(this.boxes[i].noiseValueOnTopNoise, -1, 1, 5, 15), // 15,
-                        strokeWeighty: mapRange(this.boxes[i].noiseValueOnTopNoise, -1, 1, 0.05, 0.2), // 0.3,
+                        vertexLength: mapRange(this.boxes[i].noiseValueOnTopNoise, -1, 1, 5, 10), // 15,
+                        strokeWeighty: mapRange(this.boxes[i].noiseValueOnTopNoise, -1, 1, 0.05, 0.1), // 0.3,
                         angleMin: 0,
                         angleMax: Math.PI,
                         cutOutValue: 0.5,
                         noiseValueCutOut: this.boxes[i].noiseValueOnTopNoise,
                         loopCount: mapRange(this.boxes[i].noiseValueOnTopNoise, -1, 1, 1, 15),
-                        colorList: [tinycolor(this.aboveTone).clone().darken(30)],
+                        colorList: [tinycolor(this.aboveTone).clone().darken(40)],
                     }
                 ).draw();
             } else {
@@ -844,14 +844,14 @@ class Grid {
                         y: this.boxes[i].center.y,
                         noiseValue: this.boxes[i].noiseValueOnTopNoise,
                         colorNoise: this.boxes[i].noiseValueOnTopNoise,
-                        vertexLength: mapRange(this.boxes[i].noiseValueOnTopNoise, -1, 1, 5, 15), // 15,
-                        strokeWeighty: mapRange(this.boxes[i].noiseValueOnTopNoise, -1, 1, 0.05, 0.2), // 0.3,
+                        vertexLength: mapRange(this.boxes[i].noiseValueOnTopNoise, -1, 1, 5, 10), // 15,
+                        strokeWeighty: mapRange(this.boxes[i].noiseValueOnTopNoise, -1, 1, 0.05, 0.1), // 0.3,
                         angleMin: 0,
                         angleMax: Math.PI,
                         cutOutValue: 0.5,
                         noiseValueCutOut: this.boxes[i].noiseValueOnTopNoise,
                         loopCount: mapRange(this.boxes[i].noiseValueOnTopNoise, -1, 1, 1, 15),
-                        colorList: [tinycolor(this.belowTone).clone().darken(30)],
+                        colorList: [tinycolor(this.belowTone).clone().darken(40)],
                     }
                 ).draw();
             }

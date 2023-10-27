@@ -820,7 +820,6 @@ class Grid {
             }
 
             if (this.boxes[i].aboveHorizon) {
-                // sau
                 new zigi(
                     {
                         x: this.boxes[i].center.x,

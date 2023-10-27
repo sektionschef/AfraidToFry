@@ -40,7 +40,7 @@ var noiseColorDetail;
 var noiseValueColorDetail;
 
 var countries = ["Austria - 06:19", "Iraq - 21:34", "France - 08:09", "Australia - 05:20", "Thailand - 16:07", "Argentina - 11:26", "Japan - 8:13", "Global - 14:00", "USA - 04:40", "Mexico - 15:55", "China - 10:00"];
-var palettes = ["Boris", "Doris", "Harris", "Iris", "Faris"];
+var palettes = ["Boris", "Doris", "Harris", "Iris", "Faris", "Paris", "Horris"];
 var horizons = ["superUp", "up", "middle", "down", "superDown"];
 var formats = ["1:1", "16:9", "9:16", "DIN A0, 84,1 cm x 118,9 cm",];
 
@@ -66,7 +66,7 @@ $fx.params([
     name: "Palette",
     type: "select",
     // default: getRandomFromList(palettes),
-    default: "Harris",
+    default: "Horris",
     options: {
       options: palettes,
     }
@@ -86,7 +86,8 @@ $fx.params([
     name: "Format",
     type: "select",
     // default: getRandomFromList(formats),
-    default: "16:9",
+    // default: "16:9",
+    default: "1:1",
     options: {
       options: formats,
     }
@@ -248,18 +249,18 @@ var OVERSHOOTSTATS = {
     timeSwitchHour: 10,
     timeSwitchMinute: 0,
   },
-  // "OVERSHOOTLAND": {
-  //   overshootDay: "xx",
-  //   overshootTime: "xx",
-  //   timeSwitchHour: 0,
-  //   timeSwitchMinute: 1,
-  // },
-  // "UNDERSHOOTLAND": {
-  //   overshootDay: "yy",
-  //   overshootTime: "yy",
-  //   timeSwitchHour: 23,
-  //   timeSwitchMinute: 59,
-  // }
+  "OVERSHOOTLAND": {
+    overshootDay: "xx",
+    overshootTime: "xx",
+    timeSwitchHour: 0,
+    timeSwitchMinute: 1,
+  },
+  "UNDERSHOOTLAND": {
+    overshootDay: "yy",
+    overshootTime: "yy",
+    timeSwitchHour: 23,
+    timeSwitchMinute: 59,
+  }
 }
 
 var PALETTE = {
@@ -297,35 +298,27 @@ var PALETTE = {
   //   "aboveTone": "#8c9cb3",
   //   "belowTone": "#756247"
   // },
-  // "Paris": {
-  //   "aboveTone": "#aeb9c2",
-  //   "belowTone": "#1e2b26",
-  //   "aboveToneOVERSHOOT": "#aeb9c2",
-  //   "belowToneOVERSHOOT": "#1e2b26",
-  // },
-  // "Doloris": {
-  //   "aboveToneOVERSHOOT": "#86b1d4",
-  //   "belowToneOVERSHOOT": "#96969b",
-  // },
-  // "Horris": {
-  //   "aboveTone": "#86b1d4",
-  //   "belowTone": "#91816b"
-  // },
+  "Paris": {
+    "aboveTone": "#578bc4",
+    "belowTone": "#db5b5f",
+    "aboveToneOVERSHOOT": "#EF767A",
+    "belowToneOVERSHOOT": "#456990",
+  },
+  "Horris": {
+    "aboveTone": "#728eb6",
+    "belowTone": "#646464",
+    "aboveToneOVERSHOOT": "#81878f",
+    "belowToneOVERSHOOT": "#555555",
+  },
   // "Laris": {
   //   "aboveTone": "#6F1D1B",
   //   "belowTone": "#BB9457"
-  // },
-  // "Osiris": {
-  //   "aboveTone": "#EF767A",
-  //   "belowTone": "#456990"
   // },
 }
 // let ABOVETONE = "#a5812f";  // andrea garden book
 // let BELOWTONE = "#ff617b";  // andrea garden book
 
-// triste
-// let ABOVETONE = "#81878f";
-// let BELOWTONE = "#555555";
+
 
 
 // console.log($fx.getParam("palette_id"));

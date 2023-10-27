@@ -20,13 +20,13 @@ var SHORTSIDE;
 var LONGSIDE;
 var LANDSCAPE;
 
-var TITLE = "afraid to fry";
+var TITLE = "Overshoot";
 var ARTIST = "Stefan Schwaha, @sektionschef";
 var DESCRIPTION = "javascript on html canvas";
 var WEBSITE = "https://digitalitility.com";
 var YEAR = "2023";
-var PRICE = "ꜩ 4";
-var EDITIONS = "100 editions";
+// var PRICE = "ꜩ 4";
+// var EDITIONS = "100 editions";
 
 let OVERSHOOT = "start";
 var drawing = "";
@@ -39,7 +39,7 @@ let RESOLUTIONBOXCOUNT = 80;
 var noiseColorDetail;
 var noiseValueColorDetail;
 
-var countries = ["Austria", "Iraq", "France", "Australia", "Thailand", "Argentina", "Japan"];
+var countries = ["Austria - 06:19", "Iraq - 21:34", "France - 08:09", "Australia - 05:20", "Thailand - 16:07", "Argentina - 11:26", "Japan - 8:13", "Global - 14:00", "USA - 04:40", "Mexico - 15:55", "China - 10:00"];
 var palettes = ["Boris", "Doris", "Harris", "Iris", "Faris"];
 var horizons = ["superUp", "up", "middle", "down", "superDown"];
 var formats = ["1:1", "16:9", "9:16", "DIN A0, 84,1 cm x 118,9 cm",];
@@ -54,11 +54,11 @@ $fx.params([
     // default: getRandomFromList(countries),
     // default: getRandomFromList(["OVERSHOOTLAND", "UNDERSHOOTLAND"]),
     // default: "OVERSHOOTLAND",
-    default: "UNDERSHOOTLAND",
-    // default: "Austria",
+    // default: "UNDERSHOOTLAND",
+    default: "Austria - 06:19",
     options: {
-      // options: countries,
-      options: ["OVERSHOOTLAND", "UNDERSHOOTLAND"],
+      // options: ["OVERSHOOTLAND", "UNDERSHOOTLAND"],
+      options: countries,
     }
   },
   {
@@ -180,7 +180,7 @@ $fx.params([
 
 // https://docs.google.com/spreadsheets/d/1vFmPb0Q7fCb5MWL4NTcCh001ABJR2qvu2umFBYY2tfU/edit#gid=0
 var OVERSHOOTSTATS = {
-  "Austria": {
+  "Austria - 06:19": {
     overshootDay: "Apr 6",
     overshootTime: "06:19",
     // timeSwitchHour: 20,
@@ -188,54 +188,78 @@ var OVERSHOOTSTATS = {
     timeSwitchHour: 6,
     timeSwitchMinute: 19,
   },
-  "Iraq": {
+  "Iraq - 21:34": {
     overshootDay: "Nov 25",
     overshootTime: "21:34",
     timeSwitchHour: 21,
     timeSwitchMinute: 34,
   },
-  "France": {
+  "France - 08:09": {
     overshootDay: "May 5",
     overshootTime: "08:09",
     timeSwitchHour: 8,
     timeSwitchMinute: 9,
   },
-  "Australia": {
+  "Australia - 05:20": {
     overshootDay: "March 23",
     overshootTime: "05:20",
     timeSwitchHour: 5,
     timeSwitchMinute: 20,
   },
-  "Thailand": {
+  "Thailand - 16:07": {
     overshootDay: "September 3",
     overshootTime: "16:07",
     timeSwitchHour: 16,
     timeSwitchMinute: 7,
   },
-  "Argentina": {
+  "Argentina - 11:26": {
     overshootDay: "June 24",
-    overshootTime: "16:07",
+    overshootTime: "11:26",
     timeSwitchHour: 11,
     timeSwitchMinute: 26,
   },
-  "Japan": {
+  "Japan - 8:13": {
     overshootDay: "May 6",
-    overshootTime: "16:07",
+    overshootTime: "8:13",
     timeSwitchHour: 8,
     timeSwitchMinute: 13,
   },
-  "OVERSHOOTLAND": {
-    overshootDay: "xx",
-    overshootTime: "xx",
-    timeSwitchHour: 0,
-    timeSwitchMinute: 1,
+  "Global - 14:00": {
+    overshootDay: "Aug 2",
+    overshootTime: "14:00",
+    timeSwitchHour: 14,
+    timeSwitchMinute: 0,
   },
-  "UNDERSHOOTLAND": {
-    overshootDay: "yy",
-    overshootTime: "yy",
-    timeSwitchHour: 23,
-    timeSwitchMinute: 59,
-  }
+  "USA - 04:40": {
+    overshootDay: "Mar 13",
+    overshootTime: "04:40",
+    timeSwitchHour: 4,
+    timeSwitchMinute: 40,
+  },
+  "Mexico - 15:55": {
+    overshootDay: "Aug 31",
+    overshootTime: "15:55",
+    timeSwitchHour: 15,
+    timeSwitchMinute: 55,
+  },
+  "China - 10:00": {
+    overshootDay: "Jun 2",
+    overshootTime: "10:00",
+    timeSwitchHour: 10,
+    timeSwitchMinute: 0,
+  },
+  // "OVERSHOOTLAND": {
+  //   overshootDay: "xx",
+  //   overshootTime: "xx",
+  //   timeSwitchHour: 0,
+  //   timeSwitchMinute: 1,
+  // },
+  // "UNDERSHOOTLAND": {
+  //   overshootDay: "yy",
+  //   overshootTime: "yy",
+  //   timeSwitchHour: 23,
+  //   timeSwitchMinute: 59,
+  // }
 }
 
 var PALETTE = {
@@ -461,8 +485,8 @@ function main() {
     "description": DESCRIPTION,
     "website": WEBSITE,
     "year": YEAR,
-    "price": PRICE,
-    "editions": EDITIONS,
+    // "price": PRICE,
+    // "editions": EDITIONS,
   });
 
   createBackground();
@@ -523,7 +547,7 @@ document.addEventListener('keydown', (event) => {
 
 
 function fireTrigger() {
-  console.log("trigger initiated");
+  // console.log("trigger initiated");
 
   let grid = new Grid({
     horizonRatio: HORIZONRATIO,
@@ -555,7 +579,7 @@ function timeChecker() {
 
   if (currentHour > switchHour || (currentHour == switchHour && currentMinute >= switchMinute)) {
     if (OVERSHOOT == false || OVERSHOOT == "start") {
-      console.log("Overshoot!")
+      // console.log("Overshoot!")
       OVERSHOOT = true;
       fireTrigger();
     }
@@ -564,7 +588,7 @@ function timeChecker() {
     }
   } else {
     if (OVERSHOOT == true || OVERSHOOT == "start") {
-      console.log("No overshoot!")
+      // console.log("No overshoot!")
       OVERSHOOT = false;
       fireTrigger();
     }
